@@ -44,8 +44,12 @@ public class LogOversigt extends AppCompatActivity implements OnItemClickListene
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(Menu.NONE, 101, Menu.NONE, "Settings").setIcon(android.R.drawable.ic_menu_edit).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        menu.add(Menu.NONE, 101, Menu.NONE, "Togt Oversigt");
+        menu.add(Menu.NONE, 102, Menu.NONE, "NyNote").setIcon(android.R.drawable.ic_menu_edit).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        menu.add(Menu.NONE, 103, Menu.NONE, "Settings").setIcon(android.R.drawable.ic_menu_close_clear_cancel).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
+        //'Inflates' the xml menu I made.
+        //getMenuInflater().inflate(R.menu.usemenu, menu);
         return true;
     }
 
@@ -54,8 +58,15 @@ public class LogOversigt extends AppCompatActivity implements OnItemClickListene
     public boolean onOptionsItemSelected(MenuItem item) {
         //for debugging: textView.append("\nonOptionsItemSelected called with" + item.getTitle());
         if (item.getItemId() == 101) {
-            Intent intent = new Intent(this, MainActivity.class);
+            Toast.makeText(this, "Denne Side tilgår", Toast.LENGTH_LONG).show();
+
+
+        } else if (item.getItemId() == 102) {
+
+            Intent intent = new Intent(this, MainActivity.class); //kan ikke skifte denne ud med settings :/
             startActivity(intent);
+        } else if (item.getItemId() == 103) {
+            Toast.makeText(this, "Denne side tilgår", Toast.LENGTH_LONG).show();
 
         }
         return true;
