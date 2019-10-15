@@ -11,8 +11,7 @@ Togt togt;
     String sejlføring = "";
     String sejlstilling = "";
 
-    LogInstans(String a, String b, String c, String d, Togt x){
-        togt = x;
+    LogInstans(String a, String b, String c, String d){
         this.vindretning = a;
         this.kurs = b;
         this.sejlføring=c;
