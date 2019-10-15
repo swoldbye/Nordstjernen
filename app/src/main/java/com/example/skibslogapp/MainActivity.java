@@ -13,7 +13,6 @@ import android.widget.EditText;
 
 //Developer Branch
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-Togt togt = new Togt();
     String finalVindRetning = "";
     String finalSejlføring = "";
     //button colors:
@@ -153,8 +152,7 @@ Togt togt = new Togt();
                     kursEditText.getText().toString(),
                     finalSejlføring,
                     sejlStillingEditText.getText().toString());
-            togt.addLogPost(nyeste);
-            System.out.println(togt.getTogter().get(0).toString());
+            Togt.addLogPost(nyeste);
             Intent i = new Intent(this, LogOversigt.class);
             startActivity(i);
         }
