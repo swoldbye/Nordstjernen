@@ -15,26 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class LogOversigt extends AppCompatActivity implements OnItemClickListener {
-    Togt togt = new Togt();
+    ArrayList<LogInstans> togt = Togt.getTogter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LogInstans a = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
-        LogInstans b = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
-        LogInstans c = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
-        LogInstans d = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
-        LogInstans e = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
-        LogInstans f = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
-        LogInstans g = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
-        LogInstans h = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
-        LogInstans i = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
-        LogInstans j = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
-        LogInstans k = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
-        LogInstans m = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
-        LogInstans o = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
-        LogInstans p = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
-        LogInstans q = new LogInstans("asd","dsgfdsgds","fff","dsad",togt);
 
         String[] lande = {"Danmark", "Norge", "Sverige", "Finland", "Holland", "Italien", "Tyskland",
                 "Frankrig", "Spanien", "Portugal", "Nepal", "Indien", "Kina", "Japan", "Thailand"};

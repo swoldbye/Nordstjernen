@@ -16,7 +16,7 @@ Togt togt;
         this.kurs = b;
         this.sejlføring=c;
         this.sejlstilling = d;
-        togt.getTogter().add(this);
+
     }
 
 
