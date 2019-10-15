@@ -1,4 +1,4 @@
-package com.example.skibslogapp;
+package com.example.skibslogapp.Model;
 
 import java.util.ArrayList;
 

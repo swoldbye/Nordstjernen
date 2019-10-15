@@ -1,7 +1,6 @@
-package com.example.skibslogapp;
+package com.example.skibslogapp.viewControl;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -11,6 +10,10 @@ import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.skibslogapp.Model.Togt;
+import com.example.skibslogapp.R;
+import com.example.skibslogapp.viewControl.LogInstans;
 
 import java.util.ArrayList;
 

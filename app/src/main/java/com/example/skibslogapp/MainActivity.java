@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.skibslogapp.Model.Togt;
+import com.example.skibslogapp.viewControl.LogInstans;
+import com.example.skibslogapp.viewControl.LogOversigt;
 
 
 //Developer Branch

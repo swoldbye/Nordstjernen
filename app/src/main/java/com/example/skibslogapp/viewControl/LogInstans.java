@@ -1,7 +1,7 @@
-package com.example.skibslogapp;
+package com.example.skibslogapp.viewControl;
 
 
-import androidx.annotation.NonNull;
+import com.example.skibslogapp.Model.Togt;
 
 public class LogInstans {
 Togt togt;
