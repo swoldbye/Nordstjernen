@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class LogOversigt extends AppCompatActivity implements OnItemClickListener {
-    ArrayList<LogInstans> togt = Togt.getTogter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +23,7 @@ public class LogOversigt extends AppCompatActivity implements OnItemClickListene
         String[] lande = {"Danmark", "Norge", "Sverige", "Finland", "Holland", "Italien", "Tyskland",
                 "Frankrig", "Spanien", "Portugal", "Nepal", "Indien", "Kina", "Japan", "Thailand"};
 
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.logoversigt, R.id.overskrift,(ArrayList<LogInstans>) togt.getTogter());
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.logoversigt, R.id.overskrift,(ArrayList<LogInstans>) Togt.getTogter());
 
         ListView logOversigt = new ListView(this);
         logOversigt.setOnItemClickListener(this);

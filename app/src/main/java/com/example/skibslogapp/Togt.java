@@ -3,23 +3,17 @@ package com.example.skibslogapp;
 import java.util.ArrayList;
 
 public class Togt {
-    public static ArrayList togt = new ArrayList<>();
+    static ArrayList togt = new ArrayList<LogInstans>();
 
 
-    Togt(){
+    private Togt() {}
 
-
-    }
-
-    public ArrayList<LogInstans> getTogter(){
+    static ArrayList<LogInstans> getTogter(){
         return togt;
-
     }
 
-    public void addLogPost(LogInstans x){
+    static void addLogPost(LogInstans x){
         togt.add(x);
-
-
     }
 
 }
