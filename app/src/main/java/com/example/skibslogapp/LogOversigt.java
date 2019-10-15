@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class LogOversigt extends AppCompatActivity implements OnItemClickListener {
-    ArrayList<LogInstans> togt = Togt.getTogter
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
