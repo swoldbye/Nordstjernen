@@ -4,19 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.skibslogapp.Model.Togt;
-import com.example.skibslogapp.viewControl.LogInstans;
+import com.example.skibslogapp.Model.LogInstans;
 import com.example.skibslogapp.viewControl.LogOversigt;
-import com.example.skibslogapp.viewControl.Settings;
 
 
 //Developer Branch

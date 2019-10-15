@@ -1,15 +1,13 @@
-package com.example.skibslogapp.viewControl;
+package com.example.skibslogapp.Model;
 
 
-import com.example.skibslogapp.Model.Togt;
-
-public class LogInstans {
+public class LogInstans{
 Togt togt;
 
-    String vindretning = "";
-    String kurs = "";
-    String sejlføring = "";
-    String sejlstilling = "";
+    private String vindretning = "";
+    private String kurs = "";
+    private String sejlføring = "";
+    private String sejlstilling = "";
 
     public LogInstans(String a, String b, String c, String d){
         this.vindretning = a;

@@ -1,7 +1,5 @@
 package com.example.skibslogapp.Model;
 
-import com.example.skibslogapp.viewControl.LogInstans;
-
 import java.util.ArrayList;
 
 public class Togt {
