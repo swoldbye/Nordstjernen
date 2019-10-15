@@ -4,14 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.skibslogapp.Model.Togt;
 import com.example.skibslogapp.viewControl.LogInstans;
 import com.example.skibslogapp.viewControl.LogOversigt;
+import com.example.skibslogapp.viewControl.Settings;
 
 
 //Developer Branch
@@ -159,6 +164,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent i = new Intent(this, LogOversigt.class);
             startActivity(i);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(Menu.NONE, 101, Menu.NONE, "Togt Oversigt");
+        menu.add(Menu.NONE, 102, Menu.NONE, "Settings").setIcon(android.R.drawable.ic_menu_preferences).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        menu.add(Menu.NONE, 103, Menu.NONE, "Luk appen").setIcon(android.R.drawable.ic_menu_close_clear_cancel).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+
+        //'Inflates' the xml menu I made.
+        //getMenuInflater().inflate(R.menu.usemenu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //for debugging: textView.append("\nonOptionsItemSelected called with" + item.getTitle());
+        if (item.getItemId() == 101) {
+            Toast.makeText(this, "Du viderstilles nu", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://javabog.dk"));
+            startActivity(intent);
+
+        } else if (item.getItemId() == 102) {
+
+            Intent intent = new Intent(this, Settings.class);
+            startActivity(intent);
+        } else if (item.getItemId() == 103) {
+            Toast.makeText(this, "Du har valgt at lukke appen.", Toast.LENGTH_LONG).show();
+            finish();
+
+        }
+        return true;
     }
 
 
