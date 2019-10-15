@@ -4,10 +4,10 @@ package com.example.skibslogapp.Model;
 public class LogInstans{
 Togt togt;
 
-    private String vindretning = "";
-    private String kurs = "";
-    private String sejlføring = "";
-    private String sejlstilling = "";
+    String vindretning = "";
+    String kurs = "";
+    String sejlføring = "";
+    String sejlstilling = "";
 
     public LogInstans(String a, String b, String c, String d){
         this.vindretning = a;
