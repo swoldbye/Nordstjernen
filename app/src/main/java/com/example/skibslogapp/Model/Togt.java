@@ -1,4 +1,4 @@
-package com.example.skibslogapp;
+package com.example.skibslogapp.Model;
 
 import java.util.ArrayList;
 
@@ -8,11 +8,11 @@ public class Togt {
 
     private Togt() {}
 
-    static ArrayList<LogInstans> getTogter(){
+    public static ArrayList<LogInstans> getTogter(){
         return togt;
     }
 
-    static void addLogPost(LogInstans x){
+    public static void addLogPost(LogInstans x){
         togt.add(x);
     }
 

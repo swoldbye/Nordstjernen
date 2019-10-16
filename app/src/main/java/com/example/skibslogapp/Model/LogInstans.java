@@ -1,9 +1,7 @@
-package com.example.skibslogapp;
+package com.example.skibslogapp.Model;
 
 
-import androidx.annotation.NonNull;
-
-public class LogInstans {
+public class LogInstans{
 Togt togt;
 
     String vindretning = "";
@@ -11,7 +9,7 @@ Togt togt;
     String sejlføring = "";
     String sejlstilling = "";
 
-    LogInstans(String a, String b, String c, String d){
+    public LogInstans(String a, String b, String c, String d){
         this.vindretning = a;
         this.kurs = b;
         this.sejlføring=c;

@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.skibslogapp.Model.Togt;
+import com.example.skibslogapp.Model.LogInstans;
+import com.example.skibslogapp.viewControl.LogOversigt;
 
 
 //Developer Branch
@@ -157,4 +160,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
         }
     }
+
+
+
+
+
+
+
 }

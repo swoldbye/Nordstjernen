@@ -17,7 +17,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".LogOversigt"></activity>
+        <activity android:name=".viewControl.LogOversigt"></activity>
+        <activity android:name=".viewControl.TogtOversigt"></activity>
+
 
     </application>
 
