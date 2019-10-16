@@ -46,7 +46,7 @@ public class LogOversigt extends AppCompatActivity implements OnItemClickListene
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(Menu.NONE, 101, Menu.NONE, "Togt Oversigt");
         menu.add(Menu.NONE, 102, Menu.NONE, "NyNote").setIcon(android.R.drawable.ic_menu_edit).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        menu.add(Menu.NONE, 103, Menu.NONE, "Settings").setIcon(android.R.drawable.ic_menu_close_clear_cancel).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        menu.add(Menu.NONE, 103, Menu.NONE, "Luk Appen").setIcon(android.R.drawable.ic_menu_close_clear_cancel).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
 
         //'Inflates' the xml menu I made.
         //getMenuInflater().inflate(R.menu.usemenu, menu);
@@ -68,7 +68,7 @@ public class LogOversigt extends AppCompatActivity implements OnItemClickListene
             startActivity(intent);
 
         } else if (item.getItemId() == 103) {
-            Toast.makeText(this, "Denne side tilgår", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Denne Funktion tilgår", Toast.LENGTH_LONG).show();
 
         }
         return true;
