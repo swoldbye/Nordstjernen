@@ -8,12 +8,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.skibslogapp.R;
 
 
-public class Settings extends AppCompatActivity implements View.OnClickListener {
+public class TogtOversigt extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_togtoversigt);
 
     }
 

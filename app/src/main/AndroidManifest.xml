@@ -18,6 +18,8 @@
         </activity>
 
         <activity android:name=".viewControl.LogOversigt"></activity>
+        <activity android:name=".viewControl.TogtOversigt"></activity>
+
 
     </application>
 

@@ -15,7 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.skibslogapp.viewControl.Settings;
+import com.example.skibslogapp.viewControl.TogtOversigt;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -99,7 +99,7 @@ public class LogData extends AppCompatActivity implements View.OnClickListener{
 
         } else if (item.getItemId() == 102) {
 
-            Intent intent = new Intent(this, Settings.class);
+            Intent intent = new Intent(this, TogtOversigt.class);
             startActivity(intent);
         } else if (item.getItemId() == 103) {
             Toast.makeText(this, "Du har valgt at lukke appen.", Toast.LENGTH_LONG).show();

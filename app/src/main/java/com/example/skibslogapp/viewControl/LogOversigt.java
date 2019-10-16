@@ -59,12 +59,14 @@ public class LogOversigt extends AppCompatActivity implements OnItemClickListene
         //for debugging: textView.append("\nonOptionsItemSelected called with" + item.getTitle());
         if (item.getItemId() == 101) {
             Toast.makeText(this, "Denne Side tilgår", Toast.LENGTH_LONG).show();
-
+            Intent intent = new Intent(this, TogtOversigt.class); //kan ikke skifte denne ud med settings :/
+            startActivity(intent);
 
         } else if (item.getItemId() == 102) {
 
             Intent intent = new Intent(this, MainActivity.class); //kan ikke skifte denne ud med settings :/
             startActivity(intent);
+
         } else if (item.getItemId() == 103) {
             Toast.makeText(this, "Denne side tilgår", Toast.LENGTH_LONG).show();
 
