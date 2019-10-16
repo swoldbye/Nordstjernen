@@ -27,8 +27,6 @@ public class LogOversigt extends AppCompatActivity implements OnItemClickListene
         super.onCreate(savedInstanceState);
 
 
-        String[] lande = {"Danmark", "Norge", "Sverige", "Finland", "Holland", "Italien", "Tyskland",
-                "Frankrig", "Spanien", "Portugal", "Nepal", "Indien", "Kina", "Japan", "Thailand"};
 
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.logoversigt, R.id.overskrift,(ArrayList<LogInstans>) Togt.getTogter());
 
