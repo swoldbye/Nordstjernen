@@ -19,12 +19,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String finalVindRetning = "";
     String finalSejlføring = "";
     //button colors:
-    int basicColor = Color.argb(255, 0, 56, 255);
+    int basicColor = Color.argb(255, 255, 255, 255);
     int standOutColor = Color.argb(255, 0, 183, 255);
     Button nordButton, østButton, sydButton, vestButton;
     EditText kursEditText, sejlStillingEditText, antalRoereEditText;
     Button fButton, øButton, n1Button, n2Button, n3Button;
     Button opretButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         antalRoereEditText = (EditText) findViewById(R.id.antalRoereEditText);
 
         //Sejlføring
+
         fButton = (Button) findViewById(R.id.fButton);
         øButton = (Button) findViewById(R.id.øButton);
         n1Button = (Button) findViewById(R.id.n1Button);
@@ -115,41 +117,66 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 østButton.setBackgroundColor(basicColor);
                 sydButton.setBackgroundColor(basicColor);
             }
-        } else if (v == fButton) {                                  //sejlFøring
-            finalSejlføring = "f";
-            fButton.setBackgroundColor(standOutColor);
-            øButton.setBackgroundColor(basicColor);
-            n1Button.setBackgroundColor(basicColor);
-            n2Button.setBackgroundColor(basicColor);
-            n3Button.setBackgroundColor(basicColor);
+        } else if (v == fButton) {                                      //sejlFøring
+            if(finalSejlføring.equals("f")){
+                finalSejlføring = "";
+                fButton.setBackgroundColor(basicColor);
+            }else {
+                finalSejlføring = "f";
+                fButton.setBackgroundColor(standOutColor);
+                øButton.setBackgroundColor(basicColor);
+                n1Button.setBackgroundColor(basicColor);
+                n2Button.setBackgroundColor(basicColor);
+                n3Button.setBackgroundColor(basicColor);
+            }
         } else if (v == øButton) {
-            finalSejlføring = "ø";
-            fButton.setBackgroundColor(basicColor);
-            øButton.setBackgroundColor(standOutColor);
-            n1Button.setBackgroundColor(basicColor);
-            n2Button.setBackgroundColor(basicColor);
-            n3Button.setBackgroundColor(basicColor);
+            if(finalSejlføring.equals("ø")){
+                finalSejlføring = "";
+                øButton.setBackgroundColor(basicColor);
+            }else {
+                finalSejlføring = "ø";
+                fButton.setBackgroundColor(basicColor);
+                øButton.setBackgroundColor(standOutColor);
+                n1Button.setBackgroundColor(basicColor);
+                n2Button.setBackgroundColor(basicColor);
+                n3Button.setBackgroundColor(basicColor);
+            }
         } else if (v == n1Button) {
-            finalSejlføring = "n1";
-            fButton.setBackgroundColor(basicColor);
-            øButton.setBackgroundColor(basicColor);
-            n1Button.setBackgroundColor(standOutColor);
-            n2Button.setBackgroundColor(basicColor);
-            n3Button.setBackgroundColor(basicColor);
+            if(finalSejlføring.equals("n1")){
+                finalSejlføring = "";
+                n1Button.setBackgroundColor(basicColor);
+            }else {
+                finalSejlføring = "n1";
+                fButton.setBackgroundColor(basicColor);
+                øButton.setBackgroundColor(basicColor);
+                n1Button.setBackgroundColor(standOutColor);
+                n2Button.setBackgroundColor(basicColor);
+                n3Button.setBackgroundColor(basicColor);
+            }
         } else if (v == n2Button) {
-            finalSejlføring = "n2";
-            fButton.setBackgroundColor(basicColor);
-            øButton.setBackgroundColor(basicColor);
-            n1Button.setBackgroundColor(basicColor);
-            n2Button.setBackgroundColor(standOutColor);
-            n3Button.setBackgroundColor(basicColor);
+            if(finalSejlføring.equals("n2")){
+                finalSejlføring = "";
+                n2Button.setBackgroundColor(basicColor);
+            }else {
+                finalSejlføring = "n2";
+                fButton.setBackgroundColor(basicColor);
+                øButton.setBackgroundColor(basicColor);
+                n1Button.setBackgroundColor(basicColor);
+                n2Button.setBackgroundColor(standOutColor);
+                n3Button.setBackgroundColor(basicColor);
+            }
         } else if (v == n3Button) {
-            finalSejlføring = "n3";
-            fButton.setBackgroundColor(basicColor);
-            øButton.setBackgroundColor(basicColor);
-            n1Button.setBackgroundColor(basicColor);
-            n2Button.setBackgroundColor(basicColor);
-            n3Button.setBackgroundColor(standOutColor);
+            if(finalSejlføring.equals("n3")){
+                finalSejlføring = "";
+                n3Button.setBackgroundColor(basicColor);
+            }else {
+                finalSejlføring = "n3";
+                fButton.setBackgroundColor(basicColor);
+                øButton.setBackgroundColor(basicColor);
+                n1Button.setBackgroundColor(basicColor);
+                n2Button.setBackgroundColor(basicColor);
+                n3Button.setBackgroundColor(standOutColor);
+            }
         } else if (v == opretButton) {
             LogInstans nyeste = new LogInstans(finalVindRetning,
                     kursEditText.getText().toString(),
