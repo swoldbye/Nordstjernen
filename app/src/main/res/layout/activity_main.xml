@@ -172,7 +172,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="#FFFFFF"
-        android:text="N3"
+        android:text="N2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.73"
