@@ -13,9 +13,8 @@
         android:background="#081874">
 
 
-
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/vindretning_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -26,7 +25,35 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.07999998" />
+            app:layout_constraintVertical_bias="0.08" />
+
+        <TextView
+            android:id="@+id/vindretning_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="PLACEHOLDER"
+            android:textColor="#FFFFFF"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vindretning_text"
+            app:layout_constraintVertical_bias="0.01" />
+
+        <Button
+            android:id="@+id/vindretning_delete"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:backgroundTint="#FFFFFF"
+            android:text="X"
+            android:textColor="#2D2F31"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.08"
+            app:layout_constraintStart_toEndOf="@+id/vindretning_input"
+            app:layout_constraintBottom_toBottomOf="@+id/vindretning_input"/>
 
         <TextView
             android:id="@+id/textView5"
@@ -55,24 +82,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.08"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            app:layout_constraintVertical_bias="0.01999998" />
-
-        <Button
-            android:id="@+id/fButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="#FFFFFF"
-            android:text="F"
-            android:textColor="#001247"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
-            app:layout_constraintVertical_bias="0.07999998" />
+            app:layout_constraintTop_toBottomOf="@+id/vindretning_input"
+            app:layout_constraintVertical_bias="0.02" />
 
         <Button
             android:id="@+id/østButton"
@@ -121,6 +132,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/nordButton"
             app:layout_constraintVertical_bias="0.0" />
+
+
+        <Button
+            android:id="@+id/fButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#FFFFFF"
+            android:text="F"
+            android:textColor="#001247"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:layout_constraintVertical_bias="0.07999998" />
+
 
         <Button
             android:id="@+id/n1Button"

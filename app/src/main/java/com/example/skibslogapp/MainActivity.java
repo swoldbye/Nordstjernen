@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.skibslogapp.Model.Togt;
 import com.example.skibslogapp.Model.LogInstans;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText kursEditText, sejlStillingEditText, antalRoereEditText;
     Button fButton, øButton, n1Button, n2Button, n3Button;
     Button opretButton;
+    TextView vindretning_input;
+    Button vindretning_delete;
 
 
     @Override
@@ -70,54 +74,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         n2Button.setOnClickListener(this);
         n3Button.setOnClickListener(this);
         opretButton.setOnClickListener(this);
+
+        vindretning_delete = findViewById(R.id.vindretning_delete);
+        vindretning_delete.setOnClickListener(this);
+        vindretning_delete.setVisibility(View.INVISIBLE);
+
+        vindretning_input = findViewById(R.id.vindretning_input);
+        vindretning_input.setText("");
     }
 
+
     public void onClick(View v) {
-        if (v == nordButton) {                                    //Vind Retning
-            if (finalVindRetning.equals("nord")) {
-                finalVindRetning = "";
-                nordButton.setBackgroundColor(basicColor);
-            } else {
-                finalVindRetning = "nord";
-                nordButton.setBackgroundColor(standOutColor);
-                østButton.setBackgroundColor(basicColor);
-                sydButton.setBackgroundColor(basicColor);
-                vestButton.setBackgroundColor(basicColor);
-            }
-        } else if (v == østButton) {
-            if(finalVindRetning.equals("øst")){
-                finalVindRetning = "";
-                østButton.setBackgroundColor(basicColor);
-            }else {
-                finalVindRetning = "øst";
-                østButton.setBackgroundColor(standOutColor);
-                nordButton.setBackgroundColor(basicColor);
-                sydButton.setBackgroundColor(basicColor);
-                vestButton.setBackgroundColor(basicColor);
+
+
+
+        if( v == nordButton || v == østButton || v == sydButton || v == vestButton) {
+            String currentInput = vindretning_input.getText().toString();
+
+            if (currentInput.length() < 3) {
+                currentInput += ((Button) v).getText().toString();
+                vindretning_input.setText(currentInput);
+                vindretning_delete.setVisibility(View.VISIBLE);
             }
 
-        } else if (v == sydButton) {
-            if (finalVindRetning.equals("syd")) {
-                finalVindRetning = "";
-                sydButton.setBackgroundColor(basicColor);
-            } else {
-                finalVindRetning = "syd";
-                sydButton.setBackgroundColor(standOutColor);
-                vestButton.setBackgroundColor(basicColor);
-                nordButton.setBackgroundColor(basicColor);
-                østButton.setBackgroundColor(basicColor);
-            }
-        } else if (v == vestButton) {
-            if (finalVindRetning.equals("vest")) {
-                finalVindRetning = "";
-                vestButton.setBackgroundColor(basicColor);
-            } else {
-                finalVindRetning = "vest";
-                vestButton.setBackgroundColor(standOutColor);
-                nordButton.setBackgroundColor(basicColor);
-                østButton.setBackgroundColor(basicColor);
-                sydButton.setBackgroundColor(basicColor);
-            }
+        }else if(v == vindretning_delete){
+            vindretning_input.setText("");
+            vindretning_delete.setVisibility(View.INVISIBLE);
         } else if (v == fButton) {                                      //sejlFøring
             if(finalSejlføring.equals("f")){
                 finalSejlføring = "";
