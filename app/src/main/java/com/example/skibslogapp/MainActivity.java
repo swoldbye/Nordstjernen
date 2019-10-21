@@ -7,7 +7,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import com.example.skibslogapp.Model.Togt;
 import com.example.skibslogapp.Model.LogInstans;
@@ -15,7 +17,7 @@ import com.example.skibslogapp.viewControl.LogOversigt;
 
 
 //Developer Branch
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     String finalVindRetning = "";
     String finalSejlføring = "";
     //button colors:
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText kursEditText, sejlStillingEditText, antalRoereEditText;
     Button fButton, øButton, n1Button, n2Button, n3Button;
     Button opretButton;
+    Switch sbBb;
 
 
     @Override
@@ -55,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         n2Button = (Button) findViewById(R.id.n2Button);
         n3Button = (Button) findViewById(R.id.n3Button);
 
+        sbBb = (Switch) findViewById(R.id.switch1);
+        sbBb.setOnCheckedChangeListener(this);
+
         //Opret Post
         opretButton = (Button) findViewById(R.id.opretButton);
 
@@ -69,9 +75,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         n2Button.setOnClickListener(this);
         n3Button.setOnClickListener(this);
         opretButton.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (sbBb.isChecked()) {
+            finalSejlføring.concat("sb -");
+        }else{
+            finalSejlføring.concat("bb -");
+        }
+
     }
 
     public void onClick(View v) {
+
+
+
         if (v == nordButton) {                                    //Vind Retning
             if (finalVindRetning.equals("nord")) {
                 finalVindRetning = "";
@@ -134,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finalSejlføring = "";
                 øButton.setBackgroundColor(basicColor);
             }else {
-                finalSejlføring = "ø";
+                finalSejlføring.concat("ø");
                 fButton.setBackgroundColor(basicColor);
                 øButton.setBackgroundColor(standOutColor);
                 n1Button.setBackgroundColor(basicColor);
@@ -187,10 +207,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
         }
     }
-
-
-
-
 
 
 
