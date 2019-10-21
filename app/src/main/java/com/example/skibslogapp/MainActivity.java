@@ -20,6 +20,7 @@ import com.example.skibslogapp.viewControl.LogOversigt;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     String finalVindRetning = "";
     String finalSejlføring = "";
+    String styrbordEllerBagbord = "";
     //button colors:
     int basicColor = Color.argb(255, 255, 255, 255);
     int standOutColor = Color.argb(255, 0, 183, 255);
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button fButton, øButton, n1Button, n2Button, n3Button;
     Button opretButton;
     Switch sbBb;
+
 
 
     @Override
@@ -81,9 +83,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (sbBb.isChecked()) {
-            finalSejlføring.concat("sb -");
+            styrbordEllerBagbord = "bb";
         }else{
-            finalSejlføring.concat("bb -");
+            styrbordEllerBagbord = "sb";
         }
 
     }
@@ -154,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finalSejlføring = "";
                 øButton.setBackgroundColor(basicColor);
             }else {
-                finalSejlføring.concat("ø");
+                finalSejlføring = "ø";
                 fButton.setBackgroundColor(basicColor);
                 øButton.setBackgroundColor(standOutColor);
                 n1Button.setBackgroundColor(basicColor);
@@ -200,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v == opretButton) {
             LogInstans nyeste = new LogInstans(finalVindRetning,
                     kursEditText.getText().toString(),
-                    finalSejlføring,
+                    finalSejlføring.concat(" -"+styrbordEllerBagbord),
                     sejlStillingEditText.getText().toString());
             Togt.addLogPost(nyeste);
             Intent i = new Intent(this, LogOversigt.class);
