@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //button colors:
     int basicColor = Color.argb(255, 255, 255, 255);
     int standOutColor = Color.argb(255, 0, 183, 255);
+    Button resetTimeButton;
     Button nordButton, østButton, sydButton, vestButton;
     EditText kursEditText, antalRoereEditText, editTime;
     Button fButton, øButton, n1Button, n2Button, n3Button;
@@ -58,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
         handler.postDelayed(r, 0000);
+
+        //Reset Tidsslet
+        resetTimeButton = (Button) findViewById(R.id.resetTimeButton);
 
         //Vind Retning
         nordButton = (Button) findViewById(R.id.nordButton);
@@ -108,6 +112,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fo.setOnClickListener(this);
         ag.setOnClickListener(this);
         bi.setOnClickListener(this);
+
+        editTime.setOnClickListener(this);
+        resetTimeButton.setOnClickListener(this);
+        resetTimeButton.setVisibility(View.INVISIBLE);
 
         vindretning_delete = findViewById(R.id.vindretning_delete);
         vindretning_delete.setOnClickListener(this);
@@ -276,6 +284,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Togt.addLogPost(nyeste);
             Intent i = new Intent(this, LogOversigt.class);
             startActivity(i);
+
+
+        }else if(v == resetTimeButton){
+            editTime.setText("");
+            resetTimeButton.setVisibility(View.INVISIBLE);
+
+        }else if(v == editTime){
+            if(editTime.getText().toString().length() > 0){
+                resetTimeButton.setVisibility(View.VISIBLE);
+            }
         }
 
     }
