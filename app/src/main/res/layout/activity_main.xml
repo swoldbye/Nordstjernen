@@ -306,24 +306,25 @@
             app:layout_constraintEnd_toStartOf="@+id/n3Button"
             app:layout_constraintStart_toStartOf="@+id/n3Button" />
 
-
-    <!-- OPRET BUTTON =====================================-->
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="29dp" />
-
         <EditText
             android:id="@+id/noteEditText"
-            android:layout_width="375dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#DBDBDB"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="29dp"
             android:ems="10"
             android:hint="Note"
             android:inputType="textMultiLine"
+            android:paddingTop="7sp"
             android:paddingBottom="15sp"
+            android:textSize="22sp"
+            android:paddingHorizontal="10sp"
+            android:background="@drawable/background"
+            android:backgroundTint="#EEEEEE"
             android:textColor="@color/textColor"
             android:textColorHint="#000000" />
 
+        <!-- OPRET BUTTON =====================================-->
         <Button
             android:id="@+id/opretButton"
             android:layout_width="150dp"
