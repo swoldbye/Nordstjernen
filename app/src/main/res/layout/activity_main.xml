@@ -254,6 +254,7 @@
                 <Space style="@style/EvenSpace"/>
                 <Button
                     android:id="@+id/læ"
+                    android:textColor="#000000"
                     style="@style/DefaultButton"
                     android:text="læ"/>
                 <Space style="@style/EvenSpace"/>
