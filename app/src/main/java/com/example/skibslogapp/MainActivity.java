@@ -113,9 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ag.setOnClickListener(this);
         bi.setOnClickListener(this);
 
-        editTime.setOnClickListener(this);
         resetTimeButton.setOnClickListener(this);
-        resetTimeButton.setVisibility(View.INVISIBLE);
 
         vindretning_delete = findViewById(R.id.vindretning_delete);
         vindretning_delete.setOnClickListener(this);
@@ -288,13 +286,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }else if(v == resetTimeButton){
             editTime.setText("");
-            resetTimeButton.setVisibility(View.INVISIBLE);
 
-        }else if(v == editTime){
-            if(editTime.getText().toString().length() > 0){
-                resetTimeButton.setVisibility(View.VISIBLE);
-            }
         }
-
     }
 }
