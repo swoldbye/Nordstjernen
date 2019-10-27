@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,20 +15,26 @@
         tools:context=".MainActivity"
         android:gravity="center_horizontal">
 
-        <!-- VINDRETNING =====================================-->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+        <!-- TID =====================================-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
 
             <EditText
                 android:id="@+id/editTime"
-                android:layout_width="75dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="time"
-                android:textColor="#FF0000"
-                android:textColorHint="#FFFFFF" />
+                android:textColor="#7E0A0A"
+                android:textSize="40sp"
+                android:textAlignment="center"
+                android:textColorHint="@color/textColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/resetTimeButton"
@@ -35,9 +43,14 @@
                 android:layout_weight="1"
                 android:background="#FFFFFF"
                 android:text="NU"
-                android:textSize="24sp" />
-        </LinearLayout>
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/editTime"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+        <!-- VINDRETNING =====================================-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -121,7 +134,8 @@
         </LinearLayout>
 
 
-    <!-- SEJLFØRING =====================================-->
+
+    <!-- VINDHASTIGHED =====================================-->
         <EditText
             android:id="@+id/vindhastighed_edittext"
             android:layout_width="wrap_content"
@@ -286,10 +300,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Styr/-Bagbord"
-            android:textColor="@color/textColor"
-            app:layout_constraintBottom_toBottomOf="@+id/textView5"
-            app:layout_constraintEnd_toStartOf="@+id/n3Button"
-            app:layout_constraintStart_toStartOf="@+id/n3Button" />
+            android:textColor="@color/textColor" />
 
 
     <!-- OPRET BUTTON =====================================-->
