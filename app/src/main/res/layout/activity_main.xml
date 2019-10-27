@@ -14,7 +14,20 @@
         tools:context=".MainActivity"
         android:gravity="center_horizontal">
 
-    <!-- TID =====================================-->
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Det her er en note\nVindretning: Ø\nVindhastighed: 5 m/s\n\ \nDet her er en note\nVindretning: Ø\nVindhastighed: 5 m/s"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
+
+        <!-- TID =====================================-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +46,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:maxLength="5"/>
 
             <Button
                 android:id="@+id/resetTimeButton"
@@ -220,7 +234,6 @@
         <View style="@style/Divider"/>
 
         <!-- SEJLFØRING =====================================-->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
