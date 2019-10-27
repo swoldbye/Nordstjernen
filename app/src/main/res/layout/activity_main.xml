@@ -138,8 +138,9 @@
     <!-- VINDHASTIGHED =====================================-->
         <EditText
             android:id="@+id/vindhastighed_edittext"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="70dp"
             android:ems="10"
             android:hint="Vindhastighed (m/s)"
             android:inputType="numberSigned"
@@ -208,36 +209,24 @@
 
 
     <!-- KURS =====================================-->
+
+
+        <!-- ANTALROERE =====================================-->
         <EditText
-            android:id="@+id/kursEditText"
-            android:layout_width="wrap_content"
+            android:id="@+id/antalRoereEditText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="70dp"
             android:ems="10"
-            android:hint="Kurs"
-            android:inputType="numberDecimal"
-            android:shadowColor="#1AFFFFFF"
+            android:hint="Antal Roere"
+            android:inputType="text"
             android:textColor="@color/textColor"
             android:textColorHint="@color/textColor"
             android:textSize="22sp" />
 
 
+        <!-- SEJLFØRING =====================================-->
 
-
-
-    <!-- ANTALROERE =====================================-->
-        <EditText
-            android:id="@+id/antalRoereEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Antal Roere"
-            android:inputType="text"
-            android:textColor="@color/textColor"
-            android:textColorHint="@color/textColor" />
-
-
-
-    <!-- SEJLFØRING =====================================-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -307,15 +296,25 @@
             app:layout_constraintStart_toStartOf="@+id/n3Button" />
 
 
-    <!-- OPRET BUTTON =====================================-->
-        <Space
+        <EditText
+            android:id="@+id/kursEditText"
             android:layout_width="match_parent"
-            android:layout_height="29dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="70dp"
+            android:ems="10"
+            android:hint="Kurs"
+            android:inputType="numberDecimal"
+            android:shadowColor="#1AFFFFFF"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
+            android:textSize="22sp" />
 
         <EditText
             android:id="@+id/noteEditText"
-            android:layout_width="375dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="25dp"
             android:background="#DBDBDB"
             android:ems="10"
             android:hint="Note"
