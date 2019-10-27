@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void afterTextChanged(Editable s) {
+                if(editTime.getText().toString().length() > 0){
+                    resetTimeButton.setVisibility(View.VISIBLE);
+                } else resetTimeButton.setVisibility(View.INVISIBLE);
                 int timeStringLengthAfter = editTime.getText().toString().length();
                 if(timeStringLengthAfter > timeStringLengthBefore && timeStringLengthAfter == 2) { //Insert colon
                     editTime.setText(getString(R.string.time_colon, editTime.getText()));
@@ -325,12 +328,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if(v == resetTimeButton){
             editTime.setText("");
             resetTimeButton.setVisibility(View.INVISIBLE);
-
-        }else if(v == editTime){
-            if(editTime.getText().toString().length() > 0){
-                resetTimeButton.setVisibility(View.VISIBLE);
-            }
         }
-
     }
 }
