@@ -6,7 +6,6 @@
     android:layout_height="match_parent">
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,8 +14,7 @@
         tools:context=".MainActivity"
         android:gravity="center_horizontal">
 
-        <!-- TID =====================================-->
-
+    <!-- TID =====================================-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,26 +49,26 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+        <View style="@style/Divider"/>
+
         <!-- VINDRETNING =====================================-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
             android:gravity="center_horizontal">
 
             <TextView
                 android:id="@+id/vindretning_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/SmallTitle"
                 android:text="Vindretning"
-                android:textColor="@color/textColor"
-                android:textSize="25sp" />
+                android:layout_marginBottom="15dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
 
                 <TextView
                     android:id="@+id/vindretning_input"
@@ -134,13 +132,13 @@
         </LinearLayout>
 
 
-
     <!-- VINDHASTIGHED =====================================-->
         <EditText
             android:id="@+id/vindhastighed_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="70dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="35dp"
             android:ems="10"
             android:hint="Vindhastighed (m/s)"
             android:inputType="numberSigned"
@@ -149,6 +147,7 @@
             android:textColorHint="@color/textColor"
             android:textSize="22sp" />
 
+        <View style="@style/Divider"/>
 
     <!-- SEJLFØRING =====================================-->
         <LinearLayout
@@ -156,16 +155,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
             android:gravity="center_horizontal">
 
             <TextView
                 android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Sejlstilling"
-                android:textColor="@color/textColor"
-                android:textSize="25sp"/>
+                style="@style/SmallTitle" />
 
 
             <LinearLayout
@@ -208,9 +203,6 @@
         </LinearLayout>
 
 
-    <!-- KURS =====================================-->
-
-
         <!-- ANTALROERE =====================================-->
         <EditText
             android:id="@+id/antalRoereEditText"
@@ -225,6 +217,8 @@
             android:textSize="22sp" />
 
 
+        <View style="@style/Divider"/>
+
         <!-- SEJLFØRING =====================================-->
 
         <LinearLayout
@@ -232,15 +226,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
             android:gravity="center_horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Sejlføring"
-                android:textColor="@color/textColor"
-                android:textSize="25sp"/>
+                style="@style/SmallTitle"/>
 
 
             <LinearLayout
@@ -283,12 +273,14 @@
         </LinearLayout>
 
 
+
+
     <!-- HALS-SWITCH =====================================-->
         <Switch
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Styr/-Bagbord"
+            android:text="Styr-/Bagbord"
             android:textColor="@color/textColor"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
@@ -296,12 +288,13 @@
             app:layout_constraintStart_toStartOf="@+id/n3Button" />
 
 
+        <View style="@style/Divider"/>
+
         <EditText
             android:id="@+id/kursEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="70dp"
-            android:layout_marginTop="15dp"
             android:ems="10"
             android:hint="Kurs"
             android:inputType="numberDecimal"
@@ -310,12 +303,13 @@
             android:textColorHint="@color/textColor"
             android:textSize="22sp" />
 
+        <View style="@style/Divider"/>
+
         <EditText
             android:id="@+id/noteEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="25dp"
             android:ems="10"
             android:hint="Note"
             android:inputType="textMultiLine"
@@ -328,15 +322,12 @@
             android:textColor="@color/textColor"
             android:textColorHint="#000000" />
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_marginTop="15sp"
             android:layout_marginHorizontal="75sp">
-
-
 
             <ImageButton
                 android:id="@+id/imageButton2"
