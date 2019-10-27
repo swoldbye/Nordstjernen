@@ -317,13 +317,18 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
             android:layout_marginTop="25dp"
-            android:background="#DBDBDB"
             android:ems="10"
             android:hint="Note"
             android:inputType="textMultiLine"
+            android:paddingTop="7sp"
             android:paddingBottom="15sp"
+            android:textSize="22sp"
+            android:paddingHorizontal="10sp"
+            android:background="@drawable/background"
+            android:backgroundTint="#EEEEEE"
             android:textColor="@color/textColor"
             android:textColorHint="#000000" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -352,6 +357,7 @@
 
         </LinearLayout>
 
+        <!-- OPRET BUTTON =====================================-->
         <Button
             android:id="@+id/opretButton"
             android:layout_width="150dp"
