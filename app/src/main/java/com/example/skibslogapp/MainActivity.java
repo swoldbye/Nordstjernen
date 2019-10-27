@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -23,6 +25,7 @@ import java.util.Calendar;
 
 //Developer Branch
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+    int timeStringLengthBefore = 0;
     String finalVindRetning = "";
     String finalSejlføring = "";
     String styrbordEllerBagbord = "";
@@ -59,6 +62,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
         handler.postDelayed(r, 0000);
+
+        editTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                String time = editTime.getText().toString();
+                if(time.length() != 5 || time.lastIndexOf(":") != time.indexOf(":") //Control of string
+                    || Integer.parseInt(time.substring(0,2)) > 23 || Integer.parseInt(time.substring(3, 5)) > 59) { //Control of numbers
+                    editTime.setText("");
+                }
+            }
+        });
+
+        editTime.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int timeStringLengthAfter = editTime.getText().toString().length();
+                if(timeStringLengthAfter > timeStringLengthBefore && timeStringLengthAfter == 2) { //Insert colon
+                    editTime.setText(getString(R.string.time_colon, editTime.getText()));
+                    editTime.setSelection(3);
+                }
+                timeStringLengthBefore = timeStringLengthAfter;
+            }
+        });
 
         //Reset Tidsslet
         resetTimeButton = (Button) findViewById(R.id.resetTimeButton);
