@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -15,6 +16,9 @@ import android.widget.Switch;
 import com.example.skibslogapp.Model.Togt;
 import com.example.skibslogapp.Model.LogInstans;
 import com.example.skibslogapp.viewControl.LogOversigt;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 //Developer Branch
@@ -28,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int basicColor = Color.argb(255, 255, 255, 255);
     int standOutColor = Color.argb(255, 0, 183, 255);
     Button nordButton, østButton, sydButton, vestButton;
-    EditText kursEditText, antalRoereEditText;
+    EditText kursEditText, antalRoereEditText, editTime;
     Button fButton, øButton, n1Button, n2Button, n3Button;
     Button læ, ag, ha, fo, bi;
     Button opretButton;
@@ -42,6 +46,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+
+        //Tidsslet
+        editTime = (EditText) findViewById(R.id.editTime);
+        final Handler handler =new Handler();
+        final Runnable r = new Runnable() {
+            public void run() {
+                handler.postDelayed(this, 1000);
+                String simpleDate3 = new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime());
+                editTime.setHint(simpleDate3);
+            }
+        };
+        handler.postDelayed(r, 0000);
 
         //Vind Retning
         nordButton = (Button) findViewById(R.id.nordButton);

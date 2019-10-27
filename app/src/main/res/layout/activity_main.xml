@@ -16,6 +16,21 @@
         <!-- VINDRETNING =====================================-->
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="time"
+                android:textColor="#FF0000"
+                android:textColorHint="#FFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="20dp"
@@ -247,6 +262,17 @@
 
 
     <!-- OPRET BUTTON =====================================-->
+        <EditText
+            android:id="@+id/noteEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFD3D3"
+            android:ems="10"
+            android:hint="Note"
+            android:inputType="textMultiLine"
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
+
         <Button
             android:id="@+id/opretButton"
             android:layout_width="150dp"
