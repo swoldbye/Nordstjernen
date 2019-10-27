@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -16,6 +17,9 @@ import android.widget.Switch;
 import com.example.skibslogapp.Model.Togt;
 import com.example.skibslogapp.Model.LogInstans;
 import com.example.skibslogapp.viewControl.LogOversigt;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 //Developer Branch
@@ -28,8 +32,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //button colors:
     int basicColor;
     int standOutColor;
+    Button resetTimeButton;
     Button nordButton, østButton, sydButton, vestButton;
-    EditText kursEditText, antalRoereEditText;
+    EditText kursEditText, antalRoereEditText, editTime;
     Button fButton, øButton, n1Button, n2Button, n3Button;
     Button læ, ag, ha, fo, bi;
     Button opretButton;
@@ -43,6 +48,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+
+        //Tidsslet
+        editTime = (EditText) findViewById(R.id.editTime);
+        final Handler handler =new Handler();
+        final Runnable r = new Runnable() {
+            public void run() {
+                handler.postDelayed(this, 1000);
+                String simpleDate3 = new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime());
+                editTime.setHint(simpleDate3);
+            }
+        };
+        handler.postDelayed(r, 0000);
+
+        //Reset Tidsslet
+        resetTimeButton = (Button) findViewById(R.id.resetTimeButton);
 
         //Vind Retning
         nordButton = (Button) findViewById(R.id.nordButton);
@@ -93,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fo.setOnClickListener(this);
         ag.setOnClickListener(this);
         bi.setOnClickListener(this);
+
+        resetTimeButton.setOnClickListener(this);
 
         vindretning_delete = findViewById(R.id.vindretning_delete);
         vindretning_delete.setOnClickListener(this);
@@ -265,7 +287,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Togt.addLogPost(nyeste);
             Intent i = new Intent(this, LogOversigt.class);
             startActivity(i);
-        }
 
+
+        }else if(v == resetTimeButton){
+            editTime.setText("");
+
+        }
     }
 }
