@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#081874"
+        android:background="#FFFFFF"
         tools:context=".MainActivity"
         android:gravity="center_horizontal">
 
@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vindretning"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/textColor"
                 android:textSize="25sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,7 +39,7 @@
                     android:layout_width="75sp"
                     android:layout_height="wrap_content"
                     android:text="PLA"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/textColor"
                     android:textSize="25sp"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -106,8 +106,8 @@
             android:hint="Vindhastighed (m/s)"
             android:inputType="numberSigned"
             android:shadowColor="#1AFFFFFF"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
             android:textSize="22sp" />
 
 
@@ -125,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sejlstilling"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/textColor"
                 android:textSize="25sp"/>
 
 
@@ -178,8 +178,8 @@
             android:hint="Kurs"
             android:inputType="numberDecimal"
             android:shadowColor="#1AFFFFFF"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
             android:textSize="22sp" />
 
 
@@ -194,8 +194,8 @@
             android:ems="10"
             android:hint="Antal Roere"
             android:inputType="text"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor" />
 
 
 
@@ -212,7 +212,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sejlføring"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/textColor"
                 android:textSize="25sp"/>
 
 
@@ -262,7 +262,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Styr/-Bagbord"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/textColor"
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
             app:layout_constraintEnd_toStartOf="@+id/n3Button"
             app:layout_constraintStart_toStartOf="@+id/n3Button" />
@@ -275,10 +275,10 @@
             android:layout_height="60dp"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="25dp"
-            android:background="#FFFFFF"
             android:text="Opret"
             android:textAllCaps="false"
-            android:textColor="#000000"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/colorPrimary"
             android:textSize="24sp"
             android:textStyle="bold" />
 

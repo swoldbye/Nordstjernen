@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,8 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String sejlStilling = "";
 
     //button colors:
-    int basicColor = Color.argb(255, 255, 255, 255);
-    int standOutColor = Color.argb(255, 0, 183, 255);
+    int basicColor;
+    int standOutColor;
     Button nordButton, østButton, sydButton, vestButton;
     EditText kursEditText, antalRoereEditText;
     Button fButton, øButton, n1Button, n2Button, n3Button;
@@ -99,6 +100,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         vindretning_input = findViewById(R.id.vindretning_input);
         vindretning_input.setText("");
+
+
+        basicColor = getResources().getColor(R.color.grey);
+        standOutColor = getResources().getColor(R.color.colorPrimary);
 
     }
 
