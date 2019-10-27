@@ -162,122 +162,131 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (finalSejlføring.equals("f")) {
                 finalSejlføring = "";
                 fButton.setBackgroundColor(basicColor);
+                fButton.setTextColor(Color.parseColor("#000000"));
             } else {
                 finalSejlføring = "f";
-                fButton.setBackgroundColor(standOutColor);
-                øButton.setBackgroundColor(basicColor);
-                n1Button.setBackgroundColor(basicColor);
-                n2Button.setBackgroundColor(basicColor);
-                n3Button.setBackgroundColor(basicColor);
+                øButton.setBackgroundColor(basicColor); øButton.setTextColor(Color.parseColor("#000000"));
+                n1Button.setBackgroundColor(basicColor); n1Button.setTextColor(Color.parseColor("#000000"));
+                n2Button.setBackgroundColor(basicColor); n2Button.setTextColor(Color.parseColor("#000000"));
+                n3Button.setBackgroundColor(basicColor); n3Button.setTextColor(Color.parseColor("#000000"));
+                fButton.setBackgroundColor(standOutColor); fButton.setTextColor(Color.parseColor("#FFFFFF"));
             }
         } else if (v == øButton) {
             if (finalSejlføring.equals("ø")) {
                 finalSejlføring = "";
                 øButton.setBackgroundColor(basicColor);
+                øButton.setTextColor(Color.parseColor("#000000"));
             } else {
                 finalSejlføring = "ø";
-                fButton.setBackgroundColor(basicColor);
-                øButton.setBackgroundColor(standOutColor);
-                n1Button.setBackgroundColor(basicColor);
-                n2Button.setBackgroundColor(basicColor);
-                n3Button.setBackgroundColor(basicColor);
+                fButton.setBackgroundColor(basicColor); fButton.setTextColor(Color.parseColor("#000000"));
+                n1Button.setBackgroundColor(basicColor); n1Button.setTextColor(Color.parseColor("#000000"));
+                n2Button.setBackgroundColor(basicColor); n2Button.setTextColor(Color.parseColor("#000000"));
+                n3Button.setBackgroundColor(basicColor); n3Button.setTextColor(Color.parseColor("#000000"));
+                øButton.setBackgroundColor(standOutColor); øButton.setTextColor(Color.parseColor("#FFFFFF"));
             }
         } else if (v == n1Button) {
             if (finalSejlføring.equals("n1")) {
                 finalSejlføring = "";
                 n1Button.setBackgroundColor(basicColor);
+                n1Button.setTextColor(Color.parseColor("#000000"));
             } else {
                 finalSejlføring = "n1";
-                fButton.setBackgroundColor(basicColor);
-                øButton.setBackgroundColor(basicColor);
-                n1Button.setBackgroundColor(standOutColor);
-                n2Button.setBackgroundColor(basicColor);
-                n3Button.setBackgroundColor(basicColor);
+                fButton.setBackgroundColor(basicColor); fButton.setTextColor(Color.parseColor("#000000"));
+                øButton.setBackgroundColor(basicColor); øButton.setTextColor(Color.parseColor("#000000"));
+                n2Button.setBackgroundColor(basicColor); n2Button.setTextColor(Color.parseColor("#000000"));
+                n3Button.setBackgroundColor(basicColor); n3Button.setTextColor(Color.parseColor("#000000"));
+                n1Button.setBackgroundColor(standOutColor); n1Button.setTextColor(Color.parseColor("#FFFFFF"));
             }
         } else if (v == n2Button) {
             if (finalSejlføring.equals("n2")) {
                 finalSejlføring = "";
                 n2Button.setBackgroundColor(basicColor);
+                n2Button.setTextColor(Color.parseColor("#000000"));
             } else {
                 finalSejlføring = "n2";
-                fButton.setBackgroundColor(basicColor);
-                øButton.setBackgroundColor(basicColor);
-                n1Button.setBackgroundColor(basicColor);
-                n2Button.setBackgroundColor(standOutColor);
-                n3Button.setBackgroundColor(basicColor);
+                fButton.setBackgroundColor(basicColor); fButton.setTextColor(Color.parseColor("#000000"));
+                øButton.setBackgroundColor(basicColor); øButton.setTextColor(Color.parseColor("#000000"));
+                n1Button.setBackgroundColor(basicColor); n1Button.setTextColor(Color.parseColor("#000000"));
+                n3Button.setBackgroundColor(basicColor); n3Button.setTextColor(Color.parseColor("#000000"));
+                n2Button.setBackgroundColor(standOutColor); n2Button.setTextColor(Color.parseColor("#FFFFFF"));
             }
         } else if (v == n3Button) {
             if (finalSejlføring.equals("n3")) {
                 finalSejlføring = "";
                 n3Button.setBackgroundColor(basicColor);
+                n3Button.setTextColor(Color.parseColor("#000000"));
             } else {
                 finalSejlføring = "n3";
-                fButton.setBackgroundColor(basicColor);
-                øButton.setBackgroundColor(basicColor);
-                n1Button.setBackgroundColor(basicColor);
-                n2Button.setBackgroundColor(basicColor);
-                n3Button.setBackgroundColor(standOutColor);
+                fButton.setBackgroundColor(basicColor); fButton.setTextColor(Color.parseColor("#000000"));
+                øButton.setBackgroundColor(basicColor); øButton.setTextColor(Color.parseColor("#000000"));
+                n1Button.setBackgroundColor(basicColor); n1Button.setTextColor(Color.parseColor("#000000"));
+                n2Button.setBackgroundColor(basicColor); n2Button.setTextColor(Color.parseColor("#000000"));
+                n3Button.setBackgroundColor(standOutColor); n3Button.setTextColor(Color.parseColor("#FFFFFF"));
             }
         } else if (v == læ) {
             if (sejlStilling.equals("læ")) {
                 sejlStilling = "";
                 læ.setBackgroundColor(basicColor);
+                læ.setTextColor(Color.parseColor("#000000"));
             } else {
                 sejlStilling = "læ";
-                ag.setBackgroundColor(basicColor);
-                ha.setBackgroundColor(basicColor);
-                fo.setBackgroundColor(basicColor);
-                bi.setBackgroundColor(basicColor);
-                læ.setBackgroundColor(standOutColor);
+                ag.setBackgroundColor(basicColor); ag.setTextColor(Color.parseColor("#000000"));
+                ha.setBackgroundColor(basicColor); ha.setTextColor(Color.parseColor("#000000"));
+                fo.setBackgroundColor(basicColor); fo.setTextColor(Color.parseColor("#000000"));
+                bi.setBackgroundColor(basicColor); bi.setTextColor(Color.parseColor("#000000"));
+                læ.setBackgroundColor(standOutColor); læ.setTextColor(Color.parseColor("#FFFFFF"));
             }
         } else if (v == ha) {
             if (sejlStilling.equals("ha")) {
                 sejlStilling = "";
                 ha.setBackgroundColor(basicColor);
+                ha.setTextColor(Color.parseColor("#000000"));
             } else {
                 sejlStilling = "ha";
-                læ.setBackgroundColor(basicColor);
-                ag.setBackgroundColor(basicColor);
-                fo.setBackgroundColor(basicColor);
-                bi.setBackgroundColor(basicColor);
-                ha.setBackgroundColor(standOutColor);
+                læ.setBackgroundColor(basicColor); læ.setTextColor(Color.parseColor("#000000"));
+                ag.setBackgroundColor(basicColor); ag.setTextColor(Color.parseColor("#000000"));
+                fo.setBackgroundColor(basicColor); fo.setTextColor(Color.parseColor("#000000"));
+                bi.setBackgroundColor(basicColor); bi.setTextColor(Color.parseColor("#000000"));
+                ha.setBackgroundColor(standOutColor); ha.setTextColor(Color.parseColor("#FFFFFF"));
             }
         } else if (v == fo) {
             if (sejlStilling.equals("fo")) {
                 sejlStilling = "";
                 fo.setBackgroundColor(basicColor);
+                fo.setTextColor(Color.parseColor("#000000"));
             } else {
                 sejlStilling = "fo";
-                læ.setBackgroundColor(basicColor);
-                ha.setBackgroundColor(basicColor);
-                ag.setBackgroundColor(basicColor);
-                bi.setBackgroundColor(basicColor);
-                fo.setBackgroundColor(standOutColor);
+                læ.setBackgroundColor(basicColor); læ.setTextColor(Color.parseColor("#000000"));
+                ha.setBackgroundColor(basicColor); ha.setTextColor(Color.parseColor("#000000"));
+                ag.setBackgroundColor(basicColor); ag.setTextColor(Color.parseColor("#000000"));
+                bi.setBackgroundColor(basicColor); bi.setTextColor(Color.parseColor("#000000"));
+                fo.setBackgroundColor(standOutColor); fo.setTextColor(Color.parseColor("#FFFFFF"));
             }
         } else if (v == bi) {
             if (sejlStilling.equals("bi")) {
                 sejlStilling = "";
                 bi.setBackgroundColor(basicColor);
+                bi.setTextColor(Color.parseColor("#000000"));
             } else {
                 sejlStilling = "bi";
-                læ.setBackgroundColor(basicColor);
-                ha.setBackgroundColor(basicColor);
-                fo.setBackgroundColor(basicColor);
-                ag.setBackgroundColor(basicColor);
-                bi.setBackgroundColor(standOutColor);
+                læ.setBackgroundColor(basicColor); læ.setTextColor(Color.parseColor("#000000"));
+                ha.setBackgroundColor(basicColor); ha.setTextColor(Color.parseColor("#000000"));
+                fo.setBackgroundColor(basicColor); fo.setTextColor(Color.parseColor("#000000"));
+                ag.setBackgroundColor(basicColor); ag.setTextColor(Color.parseColor("#000000"));
+                bi.setBackgroundColor(standOutColor); bi.setTextColor(Color.parseColor("#FFFFFF"));
             }
-
         } else if (v == ag) {
             if (sejlStilling.equals("ag")) {
                 sejlStilling = "";
                 ag.setBackgroundColor(basicColor);
+                ag.setTextColor(Color.parseColor("#000000"));
             } else {
                 sejlStilling = "ag";
-                læ.setBackgroundColor(basicColor);
-                ha.setBackgroundColor(basicColor);
-                fo.setBackgroundColor(basicColor);
-                bi.setBackgroundColor(basicColor);
-                ag.setBackgroundColor(standOutColor);
+                læ.setBackgroundColor(basicColor); læ.setTextColor(Color.parseColor("#000000"));
+                ha.setBackgroundColor(basicColor); ha.setTextColor(Color.parseColor("#000000"));
+                fo.setBackgroundColor(basicColor); fo.setTextColor(Color.parseColor("#000000"));
+                bi.setBackgroundColor(basicColor); bi.setTextColor(Color.parseColor("#000000"));
+                ag.setBackgroundColor(standOutColor); ag.setTextColor(Color.parseColor("#FFFFFF"));
             }
 
         } else if (v == opretButton) {
