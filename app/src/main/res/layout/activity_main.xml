@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:background="#081874">
 
-
         <TextView
             android:id="@+id/vindretning_text"
             android:layout_width="wrap_content"
@@ -250,39 +249,133 @@
             app:layout_constraintTop_toBottomOf="@+id/nordButton"
             app:layout_constraintVertical_bias="0.07999998" />
 
-        <EditText
-            android:id="@+id/sejlStillingEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:ems="10"
-            android:hint="Sejlstilling"
-            android:inputType="text"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="22sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/kursEditText" />
+    <EditText
+        android:id="@+id/sejlStillingEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Sejl Stilling"
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/antalRoereEditText"
+    <EditText
+        android:id="@+id/antalRoereEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Antal Roere"
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.61" />
+
+
+        <!--Styrbor eller bagbord-->
+        <Switch
+            android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:ems="10"
-            android:hint="Antal roere"
-            android:inputType="numberSigned"
+            android:text="Styr/-Bagbord"
             android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView5"
+            app:layout_constraintEnd_toStartOf="@+id/n3Button"
+            app:layout_constraintStart_toStartOf="@+id/n3Button" />
+
+
+
+        <!--Sejlstilling-->
+        <TextView
+            android:id="@+id/Sejlstilling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sejlstilling"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintHorizontal_bias="0.52"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sejlStillingEditText" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.484" />
+
+
+        <Button
+            android:id="@+id/læ"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#FFFFFF"
+            android:text="læ"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.578" />
+
+        <Button
+            android:id="@+id/ag"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#FFFFFF"
+            android:text="ag"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.27"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.578" />
+
+        <Button
+            android:id="@+id/ha"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#FFFFFF"
+            android:text="ha"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.578" />
+
+        <Button
+            android:id="@+id/fo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#FFFFFF"
+            android:text="fo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.729"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.578" />
+
+        <Button
+            android:id="@+id/bi"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#FFFFFF"
+            android:text="bi"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.954"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.578" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </ScrollView>
