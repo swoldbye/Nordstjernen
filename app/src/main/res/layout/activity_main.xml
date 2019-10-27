@@ -163,7 +163,7 @@
 
         <View style="@style/Divider"/>
 
-    <!-- SEJLFØRING =====================================-->
+        <!-- Sejlstilling =====================================-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -172,79 +172,8 @@
             android:gravity="center_horizontal">
 
             <TextView
-                android:id="@+id/textView5"
                 android:text="Sejlstilling"
-                style="@style/SmallTitle" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Space style="@style/EvenSpace"/>
-                <Button
-                    android:id="@+id/fButton"
-                    style="@style/DefaultButton"
-                    android:text="F"/>
-                <Space style="@style/EvenSpace"/>
-
-                <Button
-                    android:id="@+id/øButton"
-                    style="@style/DefaultButton"
-                    android:text="Ø" />
-                <Space style="@style/EvenSpace"/>
-
-                <Button
-                    android:id="@+id/n1Button"
-                    style="@style/DefaultButton"
-                    android:text="N1" />
-                <Space style="@style/EvenSpace"/>
-
-                <Button
-                    android:id="@+id/n2Button"
-                    style="@style/DefaultButton"
-                    android:text="N2" />
-                <Space style="@style/EvenSpace"/>
-
-                <Button
-                    android:id="@+id/n3Button"
-                    style="@style/DefaultButton"
-                    android:text="N3" />
-                <Space style="@style/EvenSpace"/>
-
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <!-- ANTALROERE =====================================-->
-        <EditText
-            android:id="@+id/antalRoereEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="70dp"
-            android:ems="10"
-            android:hint="Antal Roere"
-            android:inputType="text"
-            android:textColor="@color/textColor"
-            android:textColorHint="@color/textColor"
-            android:textSize="22sp" />
-
-
-        <View style="@style/Divider"/>
-
-        <!-- SEJLFØRING =====================================-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp"
-            android:gravity="center_horizontal">
-
-            <TextView
-                android:text="Sejlføring"
                 style="@style/SmallTitle"/>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -287,6 +216,72 @@
         </LinearLayout>
 
 
+        <!-- ANTALROERE =====================================-->
+        <EditText
+            android:id="@+id/antalRoereEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="70dp"
+            android:ems="10"
+            android:hint="Antal Roere"
+            android:inputType="text"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
+            android:textSize="22sp" />
+
+
+        <View style="@style/Divider"/>
+
+    <!-- SEJLFØRING =====================================-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:text="Sejlføring"
+                style="@style/SmallTitle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space style="@style/EvenSpace"/>
+                <Button
+                    android:id="@+id/fButton"
+                    style="@style/DefaultButton"
+                    android:text="F"/>
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/øButton"
+                    style="@style/DefaultButton"
+                    android:text="Ø" />
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/n1Button"
+                    style="@style/DefaultButton"
+                    android:text="N1" />
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/n2Button"
+                    style="@style/DefaultButton"
+                    android:text="N2" />
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/n3Button"
+                    style="@style/DefaultButton"
+                    android:text="N3" />
+                <Space style="@style/EvenSpace"/>
+
+            </LinearLayout>
+        </LinearLayout>
 
 
     <!-- HALS-SWITCH =====================================-->
@@ -296,10 +291,7 @@
             android:layout_height="wrap_content"
             android:text="Styr-/Bagbord"
             android:textColor="@color/textColor"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView5"
-            app:layout_constraintEnd_toStartOf="@+id/n3Button"
-            app:layout_constraintStart_toStartOf="@+id/n3Button" />
+            android:textSize="30sp" />
 
 
         <View style="@style/Divider"/>
