@@ -3,284 +3,238 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
 
-    tools:context=".MainActivity">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#081874">
+        android:orientation="vertical"
+        android:background="#081874"
+        tools:context=".MainActivity"
+        android:gravity="center_horizontal">
 
-        <TextView
-            android:id="@+id/vindretning_text"
-            android:layout_width="wrap_content"
+        <!-- VINDRETNING =====================================-->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="Vindretning"
-            android:textColor="#FFFFFF"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.08" />
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal">
 
-        <TextView
-            android:id="@+id/vindretning_input"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/vindretning_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vindretning"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/vindretning_input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:text="PLACEHOLDER"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp" />
+
+                <Button
+                    android:id="@+id/vindretning_delete"
+                    android:layout_width="50sp"
+                    android:layout_height="50sp"
+                    android:backgroundTint="#FFFFFF"
+                    android:text="X"
+                    android:textColor="#2D2F31"
+                    android:textSize="24sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space style="@style/EvenSpace"/>
+                <Button
+                    android:id="@+id/nordButton"
+                    style="@style/DefaultButton"
+                    android:text="N"
+                    />
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/østButton"
+                    style="@style/DefaultButton"
+                    android:text="Ø" />
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/sydButton"
+                    style="@style/DefaultButton"
+                    android:text="S" />
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/vestButton"
+                    style="@style/DefaultButton"
+                    android:text="V" />
+                <Space style="@style/EvenSpace"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    <!-- SEJLFØRING =====================================-->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="PLACEHOLDER"
-            android:textColor="#FFFFFF"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/vindretning_text"
-            app:layout_constraintVertical_bias="0.01" />
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/vindretning_delete"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
-            android:backgroundTint="#FFFFFF"
-            android:text="X"
-            android:textColor="#2D2F31"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.08"
-            app:layout_constraintStart_toEndOf="@+id/vindretning_input"
-            app:layout_constraintBottom_toBottomOf="@+id/vindretning_input"/>
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sejlføring"
-            android:textColor="#FFFFFF"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/antalRoereEditText"
-            app:layout_constraintVertical_bias="0.110000014" />
-
-        <Button
-            android:id="@+id/nordButton"
-            android:layout_width="60sp"
-            android:layout_height="60sp"
-            android:background="#FFFFFF"
-            android:text="N"
-            android:textColor="#2D2F31"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.08"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vindretning_input"
-            app:layout_constraintVertical_bias="0.02" />
-
-        <Button
-            android:id="@+id/østButton"
-            android:layout_width="60sp"
-            android:layout_height="60sp"
-            android:background="#FFFFFF"
-            android:text="Ø"
-            android:textColor="#2D2F31"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.36"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/nordButton"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/øButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="#FFFFFF"
-            android:text="Ø"
-            android:textColor="#001247"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.27"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/fButton"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/sydButton"
-            android:layout_width="60sp"
-            android:layout_height="60sp"
-            android:background="#FFFFFF"
-            android:text="S"
-            android:textColor="#2D2F31"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.63"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/nordButton"
-            app:layout_constraintVertical_bias="0.0" />
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sejlstilling"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"/>
 
 
-        <Button
-            android:id="@+id/fButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="#FFFFFF"
-            android:text="F"
-            android:textColor="#001247"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
-            app:layout_constraintVertical_bias="0.07999998" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space style="@style/EvenSpace"/>
+                <Button
+                    android:id="@+id/fButton"
+                    style="@style/DefaultButton"
+                    android:text="F"/>
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/øButton"
+                    style="@style/DefaultButton"
+                    android:text="Ø" />
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/n1Button"
+                    style="@style/DefaultButton"
+                    android:text="N1" />
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/n2Button"
+                    style="@style/DefaultButton"
+                    android:text="N2" />
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/n3Button"
+                    style="@style/DefaultButton"
+                    android:text="N3" />
+                <Space style="@style/EvenSpace"/>
+
+            </LinearLayout>
+        </LinearLayout>
 
 
-        <Button
-            android:id="@+id/n1Button"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="#FFFFFF"
-            android:text="N1"
-            android:textColor="#001247"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/øButton"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/opretButton"
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="500dp"
-            android:layout_marginBottom="25dp"
-            android:background="#FFFFFF"
-            android:text="Opret"
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fButton"
-            app:layout_constraintVertical_bias="0.49" />
-
-        <Button
-            android:id="@+id/vestButton"
-            android:layout_width="60sp"
-            android:layout_height="60sp"
-            android:background="#FFFFFF"
-            android:text="V"
-            android:textColor="#2D2F31"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.9"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/nordButton"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/n3Button"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="#FFFFFF"
-            android:text="N3"
-            android:textColor="#001247"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.95"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/n2Button"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/n2Button"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="#FFFFFF"
-            android:text="N2"
-            android:textColor="#001247"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.73"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/n1Button"
-            app:layout_constraintVertical_bias="0.0" />
-
+    <!-- KURS =====================================-->
         <EditText
             android:id="@+id/kursEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Kurs"
-            android:inputType="text"
+            android:inputType="numberDecimal"
             android:shadowColor="#1AFFFFFF"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.51"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nordButton"
-            app:layout_constraintVertical_bias="0.07999998" />
-
-    <EditText
-        android:id="@+id/sejlStillingEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Sejl Stilling"
-        android:inputType="text"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/antalRoereEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Antal Roere"
-        android:inputType="text"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.61" />
+            android:textSize="22sp" />
 
 
-        <!--Styrbor eller bagbord-->
+    <!-- ANTALROERE =====================================-->
+        <EditText
+            android:id="@+id/antalRoereEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Antal Roere"
+            android:inputType="text"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF" />
+
+
+
+    <!-- SEJLFØRING =====================================-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sejlføring"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space style="@style/EvenSpace"/>
+                <Button
+                    android:id="@+id/læ"
+                    style="@style/DefaultButton"
+                    android:text="læ"/>
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/ag"
+                    style="@style/DefaultButton"
+                    android:text="ag" />
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/ha"
+                    style="@style/DefaultButton"
+                    android:text="bi" />
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/fo"
+                    style="@style/DefaultButton"
+                    android:text="fo" />
+                <Space style="@style/EvenSpace"/>
+
+                <Button
+                    android:id="@+id/bi"
+                    style="@style/DefaultButton"
+                    android:text="ha" />
+                <Space style="@style/EvenSpace"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    <!-- HALS-SWITCH =====================================-->
         <Switch
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
@@ -292,90 +246,19 @@
             app:layout_constraintStart_toStartOf="@+id/n3Button" />
 
 
-
-        <!--Sejlstilling-->
-        <TextView
-            android:id="@+id/Sejlstilling"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sejlstilling"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.52"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.484" />
-
-
+    <!-- OPRET BUTTON =====================================-->
         <Button
-            android:id="@+id/læ"
-            android:layout_width="60dp"
+            android:id="@+id/opretButton"
+            android:layout_width="150dp"
             android:layout_height="60dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="25dp"
             android:background="#FFFFFF"
-            android:text="læ"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.045"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.578" />
+            android:text="Opret"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/ag"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="#FFFFFF"
-            android:text="ag"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.27"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.578" />
-
-        <Button
-            android:id="@+id/ha"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="#FFFFFF"
-            android:text="ha"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.578" />
-
-        <Button
-            android:id="@+id/fo"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="#FFFFFF"
-            android:text="fo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.729"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.578" />
-
-        <Button
-            android:id="@+id/bi"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="#FFFFFF"
-            android:text="bi"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.954"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.578" />
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </LinearLayout>
 </ScrollView>
