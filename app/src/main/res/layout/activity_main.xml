@@ -287,12 +287,17 @@
             android:layout_height="wrap_content"
             android:text="Styr/-Bagbord"
             android:textColor="@color/textColor"
+            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
             app:layout_constraintEnd_toStartOf="@+id/n3Button"
             app:layout_constraintStart_toStartOf="@+id/n3Button" />
 
 
     <!-- OPRET BUTTON =====================================-->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="29dp" />
+
         <EditText
             android:id="@+id/noteEditText"
             android:layout_width="375dp"
