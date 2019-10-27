@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Switch;
 
 import com.example.skibslogapp.Model.Togt;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String finalSejlføring = "";
     String styrbordEllerBagbord = "";
     String sejlStilling = "";
+
     //button colors:
     int basicColor = Color.argb(255, 255, 255, 255);
     int standOutColor = Color.argb(255, 0, 183, 255);
@@ -30,14 +32,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button fButton, øButton, n1Button, n2Button, n3Button;
     Button læ, ag, ha, fo, bi;
     Button opretButton;
+    TextView vindretning_input;
+    Button vindretning_delete;
     Switch sbBb;
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
 
         //Vind Retning
         nordButton = (Button) findViewById(R.id.nordButton);
@@ -89,66 +93,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ag.setOnClickListener(this);
         bi.setOnClickListener(this);
 
+        vindretning_delete = findViewById(R.id.vindretning_delete);
+        vindretning_delete.setOnClickListener(this);
+        vindretning_delete.setVisibility(View.INVISIBLE);
+
+        vindretning_input = findViewById(R.id.vindretning_input);
+        vindretning_input.setText("");
+
     }
+
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (sbBb.isChecked()) {
             styrbordEllerBagbord = "bb";
-        }else{
+        } else {
             styrbordEllerBagbord = "sb";
         }
 
     }
 
+
     public void onClick(View v) {
 
 
-        if (v == nordButton) {                                    //Vind Retning
-            if (finalVindRetning.equals("nord")) {
-                finalVindRetning = "";
-                nordButton.setBackgroundColor(basicColor);
-            } else {
-                finalVindRetning = "nord";
-                nordButton.setBackgroundColor(standOutColor);
-                østButton.setBackgroundColor(basicColor);
-                sydButton.setBackgroundColor(basicColor);
-                vestButton.setBackgroundColor(basicColor);
-            }
-        } else if (v == østButton) {
-            if (finalVindRetning.equals("øst")) {
-                finalVindRetning = "";
-                østButton.setBackgroundColor(basicColor);
-            } else {
-                finalVindRetning = "øst";
-                østButton.setBackgroundColor(standOutColor);
-                nordButton.setBackgroundColor(basicColor);
-                sydButton.setBackgroundColor(basicColor);
-                vestButton.setBackgroundColor(basicColor);
+        // Vindretning
+        if (v == nordButton || v == østButton || v == sydButton || v == vestButton) {
+            String currentInput = vindretning_input.getText().toString();
+
+            if (currentInput.length() < 3) {
+                currentInput += ((Button) v).getText().toString();
+                vindretning_input.setText(currentInput);
+                vindretning_delete.setVisibility(View.VISIBLE);
             }
 
-        } else if (v == sydButton) {
-            if (finalVindRetning.equals("syd")) {
-                finalVindRetning = "";
-                sydButton.setBackgroundColor(basicColor);
-            } else {
-                finalVindRetning = "syd";
-                sydButton.setBackgroundColor(standOutColor);
-                vestButton.setBackgroundColor(basicColor);
-                nordButton.setBackgroundColor(basicColor);
-                østButton.setBackgroundColor(basicColor);
-            }
-        } else if (v == vestButton) {
-            if (finalVindRetning.equals("vest")) {
-                finalVindRetning = "";
-                vestButton.setBackgroundColor(basicColor);
-            } else {
-                finalVindRetning = "vest";
-                vestButton.setBackgroundColor(standOutColor);
-                nordButton.setBackgroundColor(basicColor);
-                østButton.setBackgroundColor(basicColor);
-                sydButton.setBackgroundColor(basicColor);
-            }
+
+        } else if (v == vindretning_delete) {
+            vindretning_input.setText("");
+            vindretning_delete.setVisibility(View.INVISIBLE);
         } else if (v == fButton) {                                      //sejlFøring
             if (finalSejlføring.equals("f")) {
                 finalSejlføring = "";
@@ -233,9 +215,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bi.setBackgroundColor(basicColor);
                 ha.setBackgroundColor(standOutColor);
             }
-        }
-
-        else if (v == fo) {
+        } else if (v == fo) {
             if (sejlStilling.equals("fo")) {
                 sejlStilling = "";
                 fo.setBackgroundColor(basicColor);
@@ -247,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bi.setBackgroundColor(basicColor);
                 fo.setBackgroundColor(standOutColor);
             }
-        }else if (v == bi) {
+        } else if (v == bi) {
             if (sejlStilling.equals("bi")) {
                 sejlStilling = "";
                 bi.setBackgroundColor(basicColor);
@@ -259,6 +239,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ag.setBackgroundColor(basicColor);
                 bi.setBackgroundColor(standOutColor);
             }
+
         } else if (v == ag) {
             if (sejlStilling.equals("ag")) {
                 sejlStilling = "";
@@ -271,11 +252,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bi.setBackgroundColor(basicColor);
                 ag.setBackgroundColor(standOutColor);
             }
-        }
 
-
-
-        else if (v == opretButton) {
+        } else if (v == opretButton) {
             LogInstans nyeste = new LogInstans(finalVindRetning,
                     kursEditText.getText().toString(),
                     finalSejlføring.concat(" -" + styrbordEllerBagbord), sejlStilling);
@@ -285,6 +263,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
-
 }

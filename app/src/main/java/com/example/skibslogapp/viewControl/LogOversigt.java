@@ -22,6 +22,7 @@ import com.example.skibslogapp.R;
 import java.util.ArrayList;
 
 public class LogOversigt extends AppCompatActivity implements OnItemClickListener {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
