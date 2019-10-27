@@ -26,7 +26,8 @@
                 android:ems="10"
                 android:inputType="time"
                 android:textColor="#FF0000"
-                android:textColorHint="#FFFFFF" />
+                android:textColorHint="#FFFFFF"
+                android:maxLength="5"/>
 
             <Button
                 android:id="@+id/resetTimeButton"
