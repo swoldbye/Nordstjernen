@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/leftMenu"
-        app:menu="@menu/navigation_menu"
+        app:menu="@menu/leftmenu_menu"
         android:layout_gravity="start">
 
     </com.google.android.material.navigation.NavigationView>

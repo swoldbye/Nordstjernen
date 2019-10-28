@@ -327,12 +327,12 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener, Com
             }
 
         } else if (v == opretButton) {
-            LogInstans nyeste = new LogInstans(finalVindRetning,
-                    kursEditText.getText().toString(),
-                    finalSejlføring.concat(" -" + styrbordEllerBagbord), sejlStilling);
-            Togt.addLogPost(nyeste);
-            Intent i = new Intent(this, LogOversigt.class);
-            startActivity(i);
+//            LogInstans nyeste = new LogInstans(finalVindRetning,
+//                    kursEditText.getText().toString(),
+//                    finalSejlføring.concat(" -" + styrbordEllerBagbord), sejlStilling);
+//            Togt.addLogPost(nyeste);
+//            Intent i = new Intent(this, LogOversigt.class);
+//            startActivity(i);
 
 
         }else if(v == resetTimeButton){

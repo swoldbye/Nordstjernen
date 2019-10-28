@@ -5,10 +5,375 @@
     android:layout_height="match_parent"
     tools:context=".viewControl.OpretLog_frag">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            tools:context=".MainActivityOld"
+            android:gravity="center_horizontal">
+
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Det her er en note\nVindretning: Ø\nVindhastighed: 5 m/s\n\ \nDet her er en note\nVindretning: Ø\nVindhastighed: 5 m/s"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
+
+            <!-- TID =====================================-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp">
+
+                <EditText
+                    android:id="@+id/editTime"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="time"
+                    android:textColor="#7E0A0A"
+                    android:textSize="40sp"
+                    android:textAlignment="center"
+                    android:textColorHint="@color/textColor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:maxLength="5"/>
+
+                <Button
+                    android:id="@+id/resetTimeButton"
+                    android:layout_width="50sp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF"
+                    android:text="NU"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/editTime"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <View style="@style/Divider"/>
+
+            <!-- VINDRETNING =====================================-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/vindretning_text"
+                    style="@style/SmallTitle"
+                    android:text="Vindretning"
+                    android:layout_marginBottom="15dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/vindretning_input"
+                        android:layout_width="75sp"
+                        android:layout_height="wrap_content"
+                        android:text="PLA"
+                        android:textColor="@color/textColor"
+                        android:textSize="25sp"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/vindretning_delete"
+                        android:layout_width="50sp"
+                        android:layout_height="50sp"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="X"
+                        android:textColor="#2D2F31"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/vindretning_input"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Space style="@style/EvenSpace"/>
+                    <Button
+                        android:id="@+id/nordButton"
+                        style="@style/DefaultButton"
+                        android:text="N"
+                        />
+                    <Space style="@style/EvenSpace"/>
+
+                    <Button
+                        android:id="@+id/østButton"
+                        style="@style/DefaultButton"
+                        android:text="Ø" />
+                    <Space style="@style/EvenSpace"/>
+
+                    <Button
+                        android:id="@+id/sydButton"
+                        style="@style/DefaultButton"
+                        android:text="S" />
+                    <Space style="@style/EvenSpace"/>
+
+                    <Button
+                        android:id="@+id/vestButton"
+                        style="@style/DefaultButton"
+                        android:text="V" />
+                    <Space style="@style/EvenSpace"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!-- VINDHASTIGHED =====================================-->
+            <EditText
+                android:id="@+id/vindhastighed_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="35dp"
+                android:ems="10"
+                android:hint="Vindhastighed (m/s)"
+                android:inputType="numberSigned"
+                android:shadowColor="#1AFFFFFF"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="22sp" />
+
+            <View style="@style/Divider"/>
+
+            <!-- Sejlstilling =====================================-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:text="Sejlstilling"
+                    style="@style/SmallTitle"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Space style="@style/EvenSpace"/>
+                    <Button
+                        android:id="@+id/læ"
+                        android:textColor="#000000"
+                        style="@style/DefaultButton"
+                        android:text="læ"/>
+                    <Space style="@style/EvenSpace"/>
+
+                    <Button
+                        android:id="@+id/ag"
+                        style="@style/DefaultButton"
+                        android:text="ag" />
+                    <Space style="@style/EvenSpace"/>
+
+                    <Button
+                        android:id="@+id/ha"
+                        style="@style/DefaultButton"
+                        android:text="bi" />
+                    <Space style="@style/EvenSpace"/>
+
+                    <Button
+                        android:id="@+id/fo"
+                        style="@style/DefaultButton"
+                        android:text="fo" />
+                    <Space style="@style/EvenSpace"/>
+
+                    <Button
+                        android:id="@+id/bi"
+                        style="@style/DefaultButton"
+                        android:text="ha" />
+                    <Space style="@style/EvenSpace"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!-- ANTALROERE =====================================-->
+            <EditText
+                android:id="@+id/antalRoereEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="70dp"
+                android:ems="10"
+                android:hint="Antal Roere"
+                android:inputType="text"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="22sp" />
+
+
+            <View style="@style/Divider"/>
+
+            <!-- SEJLFØRING =====================================-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:text="Sejlføring"
+                    style="@style/SmallTitle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Space style="@style/EvenSpace"/>
+                    <Button
+                        android:id="@+id/fButton"
+                        style="@style/DefaultButton"
+                        android:text="F"/>
+                    <Space style="@style/EvenSpace"/>
+
+                    <Button
+                        android:id="@+id/øButton"
+                        style="@style/DefaultButton"
+                        android:text="Ø" />
+                    <Space style="@style/EvenSpace"/>
+
+                    <Button
+                        android:id="@+id/n1Button"
+                        style="@style/DefaultButton"
+                        android:text="N1" />
+                    <Space style="@style/EvenSpace"/>
+
+                    <Button
+                        android:id="@+id/n2Button"
+                        style="@style/DefaultButton"
+                        android:text="N2" />
+                    <Space style="@style/EvenSpace"/>
+
+                    <Button
+                        android:id="@+id/n3Button"
+                        style="@style/DefaultButton"
+                        android:text="N3" />
+                    <Space style="@style/EvenSpace"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!-- HALS-SWITCH =====================================-->
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Styr-/Bagbord"
+                android:textColor="@color/textColor"
+                android:textSize="30sp" />
+
+
+            <View style="@style/Divider"/>
+
+            <EditText
+                android:id="@+id/kursEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="70dp"
+                android:ems="10"
+                android:hint="Kurs"
+                android:inputType="numberDecimal"
+                android:shadowColor="#1AFFFFFF"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="22sp" />
+
+            <View style="@style/Divider"/>
+
+            <EditText
+                android:id="@+id/noteEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"
+                android:ems="10"
+                android:hint="Note"
+                android:inputType="textMultiLine"
+                android:paddingTop="7sp"
+                android:paddingBottom="15sp"
+                android:textSize="22sp"
+                android:paddingHorizontal="10sp"
+                android:background="@drawable/background"
+                android:backgroundTint="#EEEEEE"
+                android:textColor="@color/textColor"
+                android:textColorHint="#000000" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="15sp"
+                android:layout_marginHorizontal="75sp">
+
+                <ImageButton
+                    android:id="@+id/imageButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#00FFFFFF"
+                    app:srcCompat="@drawable/imageedit_1_9579847328" />
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#00FFFFFF"
+                    app:srcCompat="@drawable/imageedit_1_4276958480" />
+
+            </LinearLayout>
+
+            <!-- OPRET BUTTON =====================================-->
+            <Button
+                android:id="@+id/opretButton"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Opret"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
