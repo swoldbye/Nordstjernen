@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.text.Editable;
@@ -181,6 +183,11 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener, Com
 
     @Override
     public void onClick(View v) {
+
+        LogOversigt_frag logOversigt_frag;
+        FragmentManager fragmentManager;
+        FragmentTransaction fragmentTransaction;
+
         // Vindretning
         if (v == nordButton || v == østButton || v == sydButton || v == vestButton) {
             String currentInput = vindretning_input.getText().toString();
@@ -327,12 +334,25 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener, Com
             }
 
         } else if (v == opretButton) {
+
+            logOversigt_frag = new LogOversigt_frag();
 //            LogInstans nyeste = new LogInstans(finalVindRetning,
 //                    kursEditText.getText().toString(),
 //                    finalSejlføring.concat(" -" + styrbordEllerBagbord), sejlStilling);
 //            Togt.addLogPost(nyeste);
 //            Intent i = new Intent(this, LogOversigt.class);
 //            startActivity(i);
+
+            LogInstans logInstans = new LogInstans(finalVindRetning,
+                    kursEditText.getText().toString(),
+                    finalSejlføring.concat(" -" + styrbordEllerBagbord),sejlStilling);
+
+            Togt.addLogPost(logInstans);
+
+            fragmentManager = getActivity().getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragContainer,logOversigt_frag);
+            fragmentTransaction.commit();
 
 
         }else if(v == resetTimeButton){
