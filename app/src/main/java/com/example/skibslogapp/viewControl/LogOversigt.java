@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.skibslogapp.MainActivity;
+import com.example.skibslogapp.MainActivityOld;
 import com.example.skibslogapp.Model.LogInstans;
 import com.example.skibslogapp.Model.Togt;
 import com.example.skibslogapp.R;
@@ -63,7 +63,7 @@ public class LogOversigt extends AppCompatActivity implements OnItemClickListene
 
         } else if (item.getItemId() == 102) {
 
-            Intent intent = new Intent(this, MainActivity.class); //kan ikke skifte denne ud med settings :/
+            Intent intent = new Intent(this, MainActivityOld.class); //kan ikke skifte denne ud med settings :/
             startActivity(intent);
 
         } else if (item.getItemId() == 103) {

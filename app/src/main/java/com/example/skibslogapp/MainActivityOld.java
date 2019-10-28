@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -25,7 +24,7 @@ import java.util.Calendar;
 
 
 //Developer Branch
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class MainActivityOld extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     int timeStringLengthBefore = 0;
     String finalVindRetning = "";
     String finalSejlføring = "";
@@ -49,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_old);
+
         getSupportActionBar().hide();
 
         //Tidsslet
