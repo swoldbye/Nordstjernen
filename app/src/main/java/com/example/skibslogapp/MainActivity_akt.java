@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.skibslogapp.viewControl.OpretLog_frag;
 import com.google.android.material.navigation.NavigationView;
@@ -64,15 +65,20 @@ public class MainActivity_akt extends AppCompatActivity {
                 Fragment fragment = null;
                 int itemid = menuItem.getItemId();
 
-                //Input functionality for menu items
+                //Tilføj funktionalitet til menu items
 
-                if (itemid == R.id.nav_help){
+                if (itemid == R.id.nav_opret_togt){
 
-                }else if (itemid == R.id.nav_send){
+                }else if (itemid == R.id.nav_togt_oversigt){
 
-                }else if (itemid == R.id.nav_about){
+                }else if (itemid == R.id.nav_opret_etape){
 
-                }else if (itemid == R.id.nav_email){
+                }else if (itemid == R.id.nav_etape_oversigt){
+
+                }else if (itemid == R.id.nav_opret_log){
+                    Toast.makeText(MainActivity_akt.this,"Hej fra toast",Toast.LENGTH_LONG).show();
+
+                }else if (itemid == R.id.nav_log_oversigt){
 
                 }
                 if (fragment != null) {

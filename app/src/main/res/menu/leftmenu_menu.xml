@@ -1,21 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group
-        android:checkableBehavior="single">
-        <item android:id="@+id/nav_help"
-            android:title="help"/>
+<!--    Dette er Navigerings vinduets menu punkter og opsætning-->
 
-        <item android:id="@+id/nav_send"
-            android:title="send"/>
+    <View style="@style/Divider"/>
 
-        <item android:id="@+id/nav_about"
-            android:title="about"/>
+    <item android:title="Oversigt">
+        <menu
+            android:checkableBehavior="single"> <!--Man kan kun vælge en af de items i gruppen ad gangen-->
 
-        <item android:id="@+id/nav_email"
-            android:title="email"
-            android:icon="@drawable/baseline_clear_black_18dp"/>
+            <item android:id="@+id/nav_opret_togt"
+                android:title="Opret togt"/>
 
-    </group>
+            <item android:id="@+id/nav_togt_oversigt"
+                android:title="Togt oversigt"
+                android:icon="@drawable/baseline_clear_black_18dp"/>
+
+            <item android:id="@+id/nav_opret_etape"
+                android:title="Opret etape"/>
+
+            <item android:id="@+id/nav_etape_oversigt"
+                android:title="Etape oversigt"/>
+
+            <item android:id="@+id/nav_opret_log"
+                android:title="Opret log"/>
+
+            <item android:id="@+id/nav_log_oversigt"
+                android:title="Log oversigt"/>
+
+        </menu>
+
+    </item>
+
+    <View style="@style/Divider"/>
+
+    <item android:title="Andre ting">
+
+        <menu android:checkableBehavior="single">
+            <item android:id="@+id/nav_email"
+                android:title="Email"
+                android:icon="@drawable/ic_email"/>
+
+            <item android:id="@+id/nav_info"
+                android:title="Information"
+                android:icon="@drawable/ic_info_black_24dp"/>
+        </menu>
+    </item>
 
 </menu>
