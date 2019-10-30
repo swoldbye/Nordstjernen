@@ -6,7 +6,7 @@
     <View style="@style/Divider"/>
 
     <item android:title="Oversigt">
-        <menu
+        <group
             android:checkableBehavior="single"> <!--Man kan kun vælge en af de items i gruppen ad gangen-->
 
             <item android:id="@+id/nav_opret_togt"
@@ -28,7 +28,7 @@
             <item android:id="@+id/nav_log_oversigt"
                 android:title="Log oversigt"/>
 
-        </menu>
+        </group>
 
     </item>
 
@@ -36,7 +36,7 @@
 
     <item android:title="Andre ting">
 
-        <menu android:checkableBehavior="single">
+        <mengroupu android:checkableBehavior="single">
             <item android:id="@+id/nav_email"
                 android:title="Email"
                 android:icon="@drawable/ic_email"/>
@@ -44,7 +44,7 @@
             <item android:id="@+id/nav_info"
                 android:title="Information"
                 android:icon="@drawable/ic_info_black_24dp"/>
-        </menu>
+        </mengroupu>
     </item>
 
 </menu>
