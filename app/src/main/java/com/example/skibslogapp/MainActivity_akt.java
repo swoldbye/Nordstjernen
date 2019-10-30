@@ -17,20 +17,26 @@ import android.widget.RelativeLayout;
 import com.example.skibslogapp.viewControl.OpretLog_frag;
 import com.google.android.material.navigation.NavigationView;
 
+/**
+ *
+ */
 public class MainActivity_akt extends AppCompatActivity {
 
-    private RelativeLayout relativeLayout;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_draver);
+        setContentView(R.layout.activity_main);
 
-        relativeLayout = findViewById(R.id.relativeLayout);
+//      Sæt Toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
 
-        setToolbar();
         configureNavigationDrawer();
 
         if (savedInstanceState == null){
@@ -45,16 +51,10 @@ public class MainActivity_akt extends AppCompatActivity {
         return true;
     }
 
-    private void setToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
-    }
-
-
-
+    /**
+     * Denne funktion giver funktioner til de forskellige elementer i venstre menuen.
+     *
+     */
     private void configureNavigationDrawer(){
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.leftMenu);
@@ -86,6 +86,13 @@ public class MainActivity_akt extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Denne metode giver de forskellige toolbar views funktionalitet
+     *
+     * @param menuItem De forskellige elementer i toolbar
+     * @return true hvis funktionen kan udføres
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         int itemId = menuItem.getItemId();

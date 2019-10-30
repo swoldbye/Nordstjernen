@@ -33,8 +33,6 @@ public class LogOversigt_frag extends Fragment implements AdapterView.OnItemClic
     private TogtOversigt_frag togtOversigt_frag;
     private OpretLog_frag opretLog_frag;
 
-
-
     public LogOversigt_frag() {
     }
 
@@ -44,7 +42,7 @@ public class LogOversigt_frag extends Fragment implements AdapterView.OnItemClic
 
         View view = inflater.inflate(R.layout.fragment_log_oversigt, container, false);
 
-        ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.logoversigt, R.id.overskrift,(ArrayList<LogInstans>) Togt.getTogter());
+        ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.fragment_log_oversigt, R.id.overskrift,(ArrayList<LogInstans>) Togt.getTogter());
 
         ListView logOversigt = new ListView(getActivity());
         logOversigt.setOnItemClickListener(this);

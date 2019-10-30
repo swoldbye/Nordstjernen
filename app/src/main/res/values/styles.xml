@@ -8,11 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="LogbookAppTheme" parent="@style/AppTheme">
-
-
-
-    </style>
+    <style name="LogbookAppTheme" parent="@style/AppTheme"/>
 
 
     <style name="EvenSpace">
