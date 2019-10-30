@@ -28,9 +28,6 @@ import com.example.skibslogapp.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class OpretLog_frag extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private int timeStringLengthBefore = 0;

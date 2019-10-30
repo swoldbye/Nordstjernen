@@ -3,7 +3,7 @@
 
 <!--    Dette er Navigerings vinduets menu punkter og opsætning-->
 
-    <group android:checkableBehavior="single"><!--Man kan kun vælge en af de items i gruppen ad gangen-->
+    <group android:checkableBehavior="single"><!--Man kan kun vælge et item i gruppen ad gangen-->
 
         <item android:title="Oversigt">
             <menu>

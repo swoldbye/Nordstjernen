@@ -73,7 +73,7 @@ public class LogData_frag extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-//        if(v==buttonAddItem) {
+//        if(v == buttonAddItem) {
 //            DB.addItemToSheet(editTextItemName, editTextBrand, this);
 //        }
     }

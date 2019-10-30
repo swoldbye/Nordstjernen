@@ -1,3 +1,10 @@
+<!--For at nogle specielle egenskaber fra API v21 kan blive aktive laver jeg et nyt app tema, som-->
+<!--nedarver fra det originale app tema fra styles.xml i values pakken.-->
+<!--Disse attributter gør det muligt at lave animationer mellem aktivitet transition.-->
+<!--F.eks når man klikker på en lille film der kører og den bliver fuld skærm. i stedet-->
+<!--for at det sker instant, kan det gøres med en animation hvor billedet bliver større, og det gør at -->
+<!--brugeren har større fokus på appens content.-->
+
 <resources>
 
     <style name="LogbookAppTheme" parent="@style/AppTheme">

@@ -22,19 +22,20 @@ import com.example.skibslogapp.viewControl.TogtOversigt_frag;
 import com.google.android.material.navigation.NavigationView;
 
 /**
+ *  Denne klasse indeholder hovedaktiviteten og dens funktionaliteter.
  *
+ *  - Toolbar
+ *  - Venstre menu
+ *
+ *  Hovedaktiviteten har en fragment container under toolbar som skifter mellem appens fragmenter
  */
 public class MainActivity_akt extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
 
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
-
-    OpretLog_frag opretLog_frag;
-    TogtOversigt_frag togtOversigt_frag;
-    LogOversigt_frag logOversigt_frag;
+    private OpretLog_frag opretLog_frag;
+    private TogtOversigt_frag togtOversigt_frag;
+    private LogOversigt_frag logOversigt_frag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,16 @@ public class MainActivity_akt extends AppCompatActivity {
         }
     }
 
+    /**
+     * Hvis denne metode bliver sat til en hvis menu, så kan man trykke på tre prikker i top højre hjørne
+     * af toolbar, også kommer der en menu frem der.
+     *
+     * Vi har dog kun brug for venstremenuen ind til videre, så jeg sætter denne til en tom menu, så der ikke
+     * kommer noget i højre hjørne
+     *
+     * @param menu den menu der skal inflates
+     * @return true
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.empty, menu);
@@ -67,6 +78,7 @@ public class MainActivity_akt extends AppCompatActivity {
      *
      */
     private void configureNavigationDrawer(){
+        NavigationView navigationView;
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.leftMenu);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -77,7 +89,6 @@ public class MainActivity_akt extends AppCompatActivity {
                 logOversigt_frag = new LogOversigt_frag();
                 togtOversigt_frag = new TogtOversigt_frag();
 
-                Fragment fragment = null;
                 int itemid = menuItem.getItemId();
 
                 //Tilføj funktionalitet til menu items
@@ -85,42 +96,23 @@ public class MainActivity_akt extends AppCompatActivity {
                 if (itemid == R.id.nav_opret_togt){
 
                 }else if (itemid == R.id.nav_togt_oversigt){
-                    fragmentManager = MainActivity_akt.this.getSupportFragmentManager();
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragContainer, togtOversigt_frag);
-                    fragmentTransaction.commit();
-                    drawerLayout.closeDrawers();
-                    return true;
+                    changeFrag(togtOversigt_frag);
 
                 }else if (itemid == R.id.nav_opret_etape){
 
                 }else if (itemid == R.id.nav_etape_oversigt){
 
                 }else if (itemid == R.id.nav_opret_log){
-                    Toast.makeText(MainActivity_akt.this,"Hej fra toast",Toast.LENGTH_LONG).show();
-                    fragmentManager = MainActivity_akt.this.getSupportFragmentManager();
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragContainer, opretLog_frag);
-                    fragmentTransaction.commit();
-                    drawerLayout.closeDrawers();
-                    return true;
+                    changeFrag(opretLog_frag);
 
                 }else if (itemid == R.id.nav_log_oversigt){
-                    fragmentManager = MainActivity_akt.this.getSupportFragmentManager();
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragContainer, logOversigt_frag);
-                    fragmentTransaction.commit();
-                    drawerLayout.closeDrawers();
-                    return true;
+                    changeFrag(logOversigt_frag);
+
+                }else {
+                    Toast.makeText(MainActivity_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",
+                            Toast.LENGTH_LONG).show();
 
                 }
-//                if (fragment != null) {
-//                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//                    transaction.replace(R.id.fragContainer, fragment);
-//                    transaction.commit();
-//                    drawerLayout.closeDrawers();
-//                    return true;
-//                }
                 return false;
             }
         });
@@ -142,6 +134,23 @@ public class MainActivity_akt extends AppCompatActivity {
                 return true;
             // Indsæt flere entries, hvis der er...
         }
+        return true;
+    }
+
+    /**
+     * Metode til at skifte fragment inde fra venstre menuen.
+     *
+     * @param fragment Det fragment man vil skifte til
+     * @return true
+     */
+    private boolean changeFrag(Fragment fragment){
+        FragmentManager fragmentManager;
+        FragmentTransaction fragmentTransaction;
+        fragmentManager = MainActivity_akt.this.getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragContainer, fragment);
+        fragmentTransaction.commit();
+        drawerLayout.closeDrawers();
         return true;
     }
 }
