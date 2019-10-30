@@ -13,8 +13,7 @@
                 android:title="Opret togt"/>
 
             <item android:id="@+id/nav_togt_oversigt"
-                android:title="Togt oversigt"
-                android:icon="@drawable/baseline_clear_black_18dp"/>
+                android:title="Togt oversigt" />
 
             <item android:id="@+id/nav_opret_etape"
                 android:title="Opret etape"/>
