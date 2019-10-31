@@ -30,8 +30,9 @@ import com.google.android.material.navigation.NavigationView;
  */
 public class Main_akt extends AppCompatActivity {
 
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
     private DrawerLayout drawerLayout;
-
     private OpretLog_frag opretLog_frag;
     private TogtOversigt_frag togtOversigt_frag;
     private LogOversigt_frag logOversigt_frag;
@@ -45,8 +46,9 @@ public class Main_akt extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
+
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+//        actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
 
         configureNavigationDrawer();
 
@@ -94,18 +96,20 @@ public class Main_akt extends AppCompatActivity {
 
                 if (itemid == R.id.nav_opret_togt){
 
+
                 }else if (itemid == R.id.nav_togt_oversigt){
-                    changeFrag(togtOversigt_frag);
+                    changeFragFromMenu(togtOversigt_frag);
 
                 }else if (itemid == R.id.nav_opret_etape){
+
 
                 }else if (itemid == R.id.nav_etape_oversigt){
 
                 }else if (itemid == R.id.nav_opret_log){
-                    changeFrag(opretLog_frag);
+                    changeFragFromMenu(opretLog_frag);
 
                 }else if (itemid == R.id.nav_log_oversigt){
-                    changeFrag(logOversigt_frag);
+                    changeFragFromMenu(logOversigt_frag);
 
                 }else {
                     Toast.makeText(Main_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",
@@ -142,9 +146,7 @@ public class Main_akt extends AppCompatActivity {
      * @param fragment Det fragment man vil skifte til
      * @return true
      */
-    private boolean changeFrag(Fragment fragment){
-        FragmentManager fragmentManager;
-        FragmentTransaction fragmentTransaction;
+    public boolean changeFragFromMenu(Fragment fragment){
         fragmentManager = Main_akt.this.getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragContainer, fragment);
@@ -152,4 +154,19 @@ public class Main_akt extends AppCompatActivity {
         drawerLayout.closeDrawers();
         return true;
     }
+
+    /**
+     * Ved at kalde denne metode gemmes toolbar
+     */
+    public void hideToolbar(){
+        this.getSupportActionBar().hide();
+    }
+
+    /**
+     * Ved at kalde denne metode vises toolbar
+     */
+    public void showToolbar(){
+        this.getSupportActionBar().show();
+    }
+
 }
