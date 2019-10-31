@@ -32,7 +32,6 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity_akt extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-
     private OpretLog_frag opretLog_frag;
     private TogtOversigt_frag togtOversigt_frag;
     private LogOversigt_frag logOversigt_frag;
@@ -45,9 +44,9 @@ public class MainActivity_akt extends AppCompatActivity {
 //      Sæt Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+//        actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
 
         configureNavigationDrawer();
 
@@ -129,9 +128,9 @@ public class MainActivity_akt extends AppCompatActivity {
         int itemId = menuItem.getItemId();
         switch(itemId) {
 
-            case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
+//            case android.R.id.home:
+//                drawerLayout.openDrawer(GravityCompat.START);
+//                return true;
             // Indsæt flere entries, hvis der er...
         }
         return true;
