@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.skibslogapp.viewControl.LogOversigt_frag;
@@ -31,6 +30,8 @@ import com.google.android.material.navigation.NavigationView;
  */
 public class MainActivity_akt extends AppCompatActivity {
 
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
     private DrawerLayout drawerLayout;
     private OpretLog_frag opretLog_frag;
     private TogtOversigt_frag togtOversigt_frag;
@@ -97,7 +98,7 @@ public class MainActivity_akt extends AppCompatActivity {
 
 
                 }else if (itemid == R.id.nav_togt_oversigt){
-                    changeFrag(togtOversigt_frag);
+                    changeFragFromMenu(togtOversigt_frag);
 
                 }else if (itemid == R.id.nav_opret_etape){
 
@@ -105,10 +106,10 @@ public class MainActivity_akt extends AppCompatActivity {
                 }else if (itemid == R.id.nav_etape_oversigt){
 
                 }else if (itemid == R.id.nav_opret_log){
-                    changeFrag(opretLog_frag);
+                    changeFragFromMenu(opretLog_frag);
 
                 }else if (itemid == R.id.nav_log_oversigt){
-                    changeFrag(logOversigt_frag);
+                    changeFragFromMenu(logOversigt_frag);
 
                 }else {
                     Toast.makeText(MainActivity_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",
@@ -145,9 +146,7 @@ public class MainActivity_akt extends AppCompatActivity {
      * @param fragment Det fragment man vil skifte til
      * @return true
      */
-    public boolean changeFrag(Fragment fragment){
-        FragmentManager fragmentManager;
-        FragmentTransaction fragmentTransaction;
+    public boolean changeFragFromMenu(Fragment fragment){
         fragmentManager = MainActivity_akt.this.getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragContainer, fragment);
@@ -169,4 +168,5 @@ public class MainActivity_akt extends AppCompatActivity {
     public void showToolbar(){
         this.getSupportActionBar().show();
     }
+
 }

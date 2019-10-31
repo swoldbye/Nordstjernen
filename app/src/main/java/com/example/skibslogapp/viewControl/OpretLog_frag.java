@@ -1,7 +1,6 @@
 package com.example.skibslogapp.viewControl;
 
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -331,14 +330,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener, Com
             }
 
         } else if (v == opretButton) {
-
             logOversigt_frag = new LogOversigt_frag();
-//            LogInstans nyeste = new LogInstans(finalVindRetning,
-//                    kursEditText.getText().toString(),
-//                    finalSejlføring.concat(" -" + styrbordEllerBagbord), sejlStilling);
-//            Togt.addLogPost(nyeste);
-//            Intent i = new Intent(this, LogOversigt.class);
-//            startActivity(i);
 
             LogInstans logInstans = new LogInstans(finalVindRetning,
                     kursEditText.getText().toString(),
@@ -350,7 +342,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener, Com
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.fragContainer,logOversigt_frag);
             fragmentTransaction.commit();
-
 
         }else if(v == resetTimeButton){
             editTime.setText("");
