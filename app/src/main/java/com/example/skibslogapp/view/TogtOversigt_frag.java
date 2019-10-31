@@ -1,4 +1,4 @@
-package com.example.skibslogapp.viewControl;
+package com.example.skibslogapp.view;
 
 
 import android.os.Bundle;

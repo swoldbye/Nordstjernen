@@ -1,4 +1,4 @@
-package com.example.skibslogapp.Model;
+package com.example.skibslogapp.model;
 
 
 public class LogInstans{

@@ -1,4 +1,4 @@
-package com.example.skibslogapp.Model.DB;
+package com.example.skibslogapp.model.DB;
 
 
 import android.content.Intent;
@@ -23,7 +23,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.skibslogapp.R;
-import com.example.skibslogapp.viewControl.TogtOversigt_frag;
+import com.example.skibslogapp.view.TogtOversigt_frag;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

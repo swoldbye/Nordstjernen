@@ -13,12 +13,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.skibslogapp.viewControl.LogOversigt_frag;
-import com.example.skibslogapp.viewControl.OpretLog_frag;
-import com.example.skibslogapp.viewControl.TogtOversigt_frag;
+import com.example.skibslogapp.view.LogOversigt_frag;
+import com.example.skibslogapp.view.OpretLog_frag;
+import com.example.skibslogapp.view.TogtOversigt_frag;
 import com.google.android.material.navigation.NavigationView;
 
 /**
@@ -29,7 +28,7 @@ import com.google.android.material.navigation.NavigationView;
  *
  *  Hovedaktiviteten har en fragment container under toolbar som skifter mellem appens fragmenter
  */
-public class MainActivity_akt extends AppCompatActivity {
+public class Main_akt extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
 
@@ -109,7 +108,7 @@ public class MainActivity_akt extends AppCompatActivity {
                     changeFrag(logOversigt_frag);
 
                 }else {
-                    Toast.makeText(MainActivity_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",
+                    Toast.makeText(Main_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",
                             Toast.LENGTH_LONG).show();
 
                 }
@@ -146,7 +145,7 @@ public class MainActivity_akt extends AppCompatActivity {
     private boolean changeFrag(Fragment fragment){
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
-        fragmentManager = MainActivity_akt.this.getSupportFragmentManager();
+        fragmentManager = Main_akt.this.getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragContainer, fragment);
         fragmentTransaction.commit();

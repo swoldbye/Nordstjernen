@@ -1,7 +1,6 @@
-package com.example.skibslogapp.viewControl;
+package com.example.skibslogapp.view;
 
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -21,8 +20,8 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.example.skibslogapp.Model.LogInstans;
-import com.example.skibslogapp.Model.Togt;
+import com.example.skibslogapp.model.LogInstans;
+import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.R;
 
 import java.text.SimpleDateFormat;

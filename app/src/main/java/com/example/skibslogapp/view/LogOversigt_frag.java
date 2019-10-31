@@ -1,4 +1,4 @@
-package com.example.skibslogapp.viewControl;
+package com.example.skibslogapp.view;
 
 
 import android.os.Bundle;
@@ -19,8 +19,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.skibslogapp.Model.LogInstans;
-import com.example.skibslogapp.Model.Togt;
+import com.example.skibslogapp.model.LogInstans;
+import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.R;
 
 import java.util.ArrayList;
