@@ -128,9 +128,9 @@ public class MainActivity_akt extends AppCompatActivity {
         int itemId = menuItem.getItemId();
         switch(itemId) {
 
-//            case android.R.id.home:
-//                drawerLayout.openDrawer(GravityCompat.START);
-//                return true;
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
             // Indsæt flere entries, hvis der er...
         }
         return true;
