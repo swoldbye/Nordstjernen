@@ -44,7 +44,8 @@ public class MainActivity_akt extends AppCompatActivity {
 //      Sæt Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
+
 //        actionBar.setDisplayHomeAsUpEnabled(true);
 //        actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
 
@@ -94,10 +95,12 @@ public class MainActivity_akt extends AppCompatActivity {
 
                 if (itemid == R.id.nav_opret_togt){
 
+
                 }else if (itemid == R.id.nav_togt_oversigt){
                     changeFrag(togtOversigt_frag);
 
                 }else if (itemid == R.id.nav_opret_etape){
+
 
                 }else if (itemid == R.id.nav_etape_oversigt){
 
@@ -142,7 +145,7 @@ public class MainActivity_akt extends AppCompatActivity {
      * @param fragment Det fragment man vil skifte til
      * @return true
      */
-    private boolean changeFrag(Fragment fragment){
+    public boolean changeFrag(Fragment fragment){
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
         fragmentManager = MainActivity_akt.this.getSupportFragmentManager();
@@ -151,5 +154,19 @@ public class MainActivity_akt extends AppCompatActivity {
         fragmentTransaction.commit();
         drawerLayout.closeDrawers();
         return true;
+    }
+
+    /**
+     * Ved at kalde denne metode gemmes toolbar
+     */
+    public void hideToolbar(){
+        this.getSupportActionBar().hide();
+    }
+
+    /**
+     * Ved at kalde denne metode vises toolbar
+     */
+    public void showToolbar(){
+        this.getSupportActionBar().show();
     }
 }
