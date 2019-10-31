@@ -2,12 +2,6 @@ package com.example.skibslogapp.viewControl;
 
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +12,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.skibslogapp.Model.LogInstans;
 import com.example.skibslogapp.Model.Togt;
@@ -60,8 +60,8 @@ public class LogOversigt_frag extends Fragment implements AdapterView.OnItemClic
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 
         menu.add(Menu.NONE, 101, Menu.NONE, "Togt Oversigt");
-        menu.add(Menu.NONE, 102, Menu.NONE, "NyNote").setIcon(android.R.drawable.ic_menu_edit).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        menu.add(Menu.NONE, 103, Menu.NONE, "Luk Appen").setIcon(android.R.drawable.ic_menu_close_clear_cancel).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        MenuItemCompat.setShowAsAction(menu.add(Menu.NONE, 102, Menu.NONE, "NyNote").setIcon(android.R.drawable.ic_menu_edit), MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        MenuItemCompat.setShowAsAction(menu.add(Menu.NONE, 103, Menu.NONE, "Luk Appen").setIcon(android.R.drawable.ic_menu_close_clear_cancel), MenuItem.SHOW_AS_ACTION_NEVER);
 
         //'Inflates' the xml menu I made.
         //getMenuInflater().inflate(R.menu.usemenu, menu);
