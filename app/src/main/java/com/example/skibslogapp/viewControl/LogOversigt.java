@@ -27,8 +27,6 @@ public class LogOversigt extends AppCompatActivity implements OnItemClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.logoversigt, R.id.overskrift,(ArrayList<LogInstans>) Togt.getTogter());
 
         ListView logOversigt = new ListView(this);

@@ -19,6 +19,7 @@ import android.widget.Switch;
 import com.example.skibslogapp.Model.Togt;
 import com.example.skibslogapp.Model.LogInstans;
 import com.example.skibslogapp.viewControl.LogOversigt;
+import com.example.skibslogapp.viewControl.PostOversigt;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView vindretning_input;
     Button vindretning_delete;
     Switch sbBb;
-
+    String simpleDate3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final Runnable r = new Runnable() {
             public void run() {
                 handler.postDelayed(this, 1000);
-                String simpleDate3 = new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime());
+                simpleDate3 = new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime());
                 editTime.setHint(simpleDate3);
             }
         };
@@ -192,12 +193,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (currentInput.length() < 3) {
                 currentInput += ((Button) v).getText().toString();
                 vindretning_input.setText(currentInput);
+                finalVindRetning = currentInput;
                 vindretning_delete.setVisibility(View.VISIBLE);
             }
 
 
         } else if (v == vindretning_delete) {
             vindretning_input.setText("");
+            finalVindRetning = "";
             vindretning_delete.setVisibility(View.INVISIBLE);
         } else if (v == fButton) {                                      //sejlFøring
             if (finalSejlføring.equals("f")) {
@@ -331,11 +334,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         } else if (v == opretButton) {
-            LogInstans nyeste = new LogInstans(finalVindRetning,
+            LogInstans nyeste = new LogInstans(simpleDate3,finalVindRetning,
                     kursEditText.getText().toString(),
                     finalSejlføring.concat(" -" + styrbordEllerBagbord), sejlStilling);
             Togt.addLogPost(nyeste);
-            Intent i = new Intent(this, LogOversigt.class);
+            Intent i = new Intent(this, PostOversigt.class);
             startActivity(i);
 
 
