@@ -46,6 +46,8 @@ public class PostOversigt extends AppCompatActivity implements View.OnClickListe
         tempLogs.add(new LogInstans("13:34", "SSØ", "453", "N#", "AG"));
         tempLogs.add(new LogInstans("14:00", "SSØ", "023", "F", "BI"));
 
+
+
         tempLogs.addAll(Togt.getTogter());
 
         PostListAdapter adapter = new PostListAdapter(this, R.layout.postlist_view_layout, tempLogs);
