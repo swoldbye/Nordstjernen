@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView vindretning_input;
     Button vindretning_delete;
     Switch sbBb;
+    View mob;
 
 
     @Override
@@ -136,6 +137,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Opret Post
         opretButton = (Button) findViewById(R.id.opretButton);
 
+        //Mand over bord
+        mob = findViewById(R.id.mob_button);
+
         //On click Listeners:
         nordButton.setOnClickListener(this);
         østButton.setOnClickListener(this);
@@ -152,6 +156,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fo.setOnClickListener(this);
         ag.setOnClickListener(this);
         bi.setOnClickListener(this);
+
+        mob.setOnClickListener(this);
+
 
         editTime.setOnClickListener(this);
         resetTimeButton.setOnClickListener(this);
@@ -330,7 +337,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ag.setBackgroundColor(standOutColor); ag.setTextColor(Color.parseColor("#FFFFFF"));
             }
 
-        } else if (v == opretButton) {
+        } else if (v == opretButton || v == findViewById(R.id.mob_button)) {
             LogInstans nyeste = new LogInstans(finalVindRetning,
                     kursEditText.getText().toString(),
                     finalSejlføring.concat(" -" + styrbordEllerBagbord), sejlStilling);
