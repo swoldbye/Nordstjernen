@@ -47,6 +47,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener, Com
     private TextView vindretning_input;
     private Button vindretning_delete;
     private Switch sbBb;
+    View mob;
 
 
     public OpretLog_frag() {
@@ -143,6 +144,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener, Com
         //Opret Post
         opretButton = (Button) view.findViewById(R.id.opretButton);
 
+        //Mand over bord
+        mob = findViewById(R.id.mob_button);
+
         //On click Listeners:
         nordButton.setOnClickListener(this);
         østButton.setOnClickListener(this);
@@ -159,6 +163,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener, Com
         fo.setOnClickListener(this);
         ag.setOnClickListener(this);
         bi.setOnClickListener(this);
+
+        mob.setOnClickListener(this);
+
 
         editTime.setOnClickListener(this);
         resetTimeButton.setOnClickListener(this);
@@ -329,7 +336,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener, Com
                 ag.setBackgroundColor(standOutColor); ag.setTextColor(Color.parseColor("#FFFFFF"));
             }
 
-        } else if (v == opretButton) {
+        } else if (v == opretButton || v == findViewById(R.id.mob)) {
             logOversigt_frag = new LogOversigt_frag();
 
             LogInstans logInstans = new LogInstans(finalVindRetning,
