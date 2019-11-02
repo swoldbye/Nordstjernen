@@ -145,7 +145,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener, Com
         opretButton = (Button) view.findViewById(R.id.opretButton);
 
         //Mand over bord
-        mob = findViewById(R.id.mob_button);
+        mob = view.findViewById(R.id.mob_button);
 
         //On click Listeners:
         nordButton.setOnClickListener(this);
@@ -336,7 +336,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener, Com
                 ag.setBackgroundColor(standOutColor); ag.setTextColor(Color.parseColor("#FFFFFF"));
             }
 
-        } else if (v == opretButton || v == findViewById(R.id.mob)) {
+        } else if (v == opretButton || v == mob) {
             logOversigt_frag = new LogOversigt_frag();
 
             LogInstans logInstans = new LogInstans(finalVindRetning,
