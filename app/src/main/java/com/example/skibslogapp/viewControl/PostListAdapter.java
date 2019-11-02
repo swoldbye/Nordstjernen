@@ -40,6 +40,10 @@ public class PostListAdapter extends ArrayAdapter<LogInstans> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
+        if (position % 2 == 1) {
+            convertView.setBackgroundResource(R.color.offWhite);
+        }
+
         TextView tidTextView = convertView.findViewById(R.id.tidTextView);
         TextView vindretningTextView = convertView.findViewById(R.id.vindretningTextView);
         TextView kursTextView = convertView.findViewById(R.id.kursTextView);
