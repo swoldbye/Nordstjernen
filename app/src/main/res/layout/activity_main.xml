@@ -22,10 +22,6 @@
             android:text="Det her er en note\nVindretning: Ø\nVindhastighed: 5 m/s\n\ \nDet her er en note\nVindretning: Ø\nVindhastighed: 5 m/s"
             android:textSize="20sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"></LinearLayout>
 
         <!-- TID =====================================-->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -147,23 +143,49 @@
 
 
     <!-- VINDHASTIGHED =====================================-->
-        <EditText
-            android:id="@+id/vindhastighed_edittext"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginEnd="35dp"
-            android:ems="10"
-            android:hint="Vindhastighed (m/s)"
-            android:inputType="numberSigned"
-            android:digits="0123456789"
-            android:imeOptions="actionNext"
-            android:shadowColor="#1AFFFFFF"
-            android:textColor="@color/textColor"
-            android:textColorHint="@color/textColor"
-            android:textSize="22sp" />
+            android:layout_marginTop="50dp">
 
+            <EditText
+                android:id="@+id/vindhastighed_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:ems="10"
+                android:hint="Vindhastighed"
+                android:inputType="numberSigned"
+                android:digits="0123456789"
+                android:maxLength="4"
+                android:imeOptions="actionNext"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="22sp"
+                android:paddingHorizontal="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <!-- Unit -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="m/s"
+                android:textSize="22sp"
+                android:textColor="@color/textColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/vindhastighed_edittext"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <View style="@style/Divider"/>
+
+
+
 
         <!-- Sejlstilling =====================================-->
         <LinearLayout
@@ -223,7 +245,8 @@
             android:id="@+id/antalRoereEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="70dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginStart="80dp"
             android:ems="10"
             android:digits="0123456789"
             android:imeOptions="actionNext"
@@ -289,35 +312,92 @@
 
 
     <!-- HALS-SWITCH =====================================-->
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Styr-/Bagbord"
-            android:textColor="@color/textColor"
-            android:textSize="30sp" />
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="Hals"
+                android:letterSpacing="0"
+                style="@style/SmallTitle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Space style="@style/EvenSpace"/>
+                <Button
+                    android:id="@+id/hals_bagbord_btn"
+                    style="@style/DefaultButton"
+                    android:layout_width="120dp"
+                    android:text="Bagbord"
+                    android:textSize="20dp"/>
+                <Space style="@style/EvenSpace"
+                    android:layout_weight="0.1"/>
+
+                <Button
+                    android:id="@+id/hals_styrbord_btn"
+                    style="@style/DefaultButton"
+                    android:layout_width="120dp"
+                    android:textSize="20dp"
+                    android:text="Styrbord"/> />
+                <Space style="@style/EvenSpace"/>
+
+            </LinearLayout>
+        </LinearLayout>
 
 
         <View style="@style/Divider"/>
 
     <!-- Kurs  =====================================-->
-        <EditText
-            android:id="@+id/kursEditText"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="70dp"
-            android:ems="10"
-            android:hint="Kurs"
-            android:digits="0123456789"
-            android:maxLength="3"
-            android:inputType="numberSigned"
-            android:shadowColor="#1AFFFFFF"
-            android:textColor="@color/textColor"
-            android:textColorHint="@color/textColor"
-            android:textSize="22sp" />
+            android:layout_marginTop="50dp">
 
+            <EditText
+                android:id="@+id/kursEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:ems="10"
+                android:hint="Kurs"
+                android:inputType="numberSigned"
+                android:digits="0123456789"
+                android:maxLength="3"
+                android:imeOptions="actionNext"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <!-- Unit -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="°"
+                android:textSize="30sp"
+                android:textColor="@color/textColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/kursEditText"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <View style="@style/Divider"/>
 
+
+
+        <!-- NOTE ======================================-->
         <EditText
             android:id="@+id/noteEditText"
             android:layout_width="match_parent"

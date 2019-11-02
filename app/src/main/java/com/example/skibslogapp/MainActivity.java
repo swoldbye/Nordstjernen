@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int basicColor;
     int standOutColor;
     Button resetTimeButton;
-    Button nordButton, østButton, sydButton, vestButton;
+    Button nordButton, østButton, sydButton, vestButton, halsSbButton, halsBbButton;
     EditText kursEditText, antalRoereEditText, editTime;
     Button fButton, øButton, n1Button, n2Button, n3Button;
     Button læ, ag, ha, fo, bi;
@@ -123,15 +123,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         antalRoereEditText = (EditText) findViewById(R.id.antalRoereEditText);
 
         //Sejlføring
-
         fButton = (Button) findViewById(R.id.fButton);
         øButton = (Button) findViewById(R.id.øButton);
         n1Button = (Button) findViewById(R.id.n1Button);
         n2Button = (Button) findViewById(R.id.n2Button);
         n3Button = (Button) findViewById(R.id.n3Button);
 
-        sbBb = (Switch) findViewById(R.id.switch1);
-        sbBb.setOnCheckedChangeListener(this);
+
+
 
         //Opret Post
         opretButton = (Button) findViewById(R.id.opretButton);
