@@ -156,6 +156,8 @@
             android:ems="10"
             android:hint="Vindhastighed (m/s)"
             android:inputType="numberSigned"
+            android:digits="0123456789"
+            android:imeOptions="actionNext"
             android:shadowColor="#1AFFFFFF"
             android:textColor="@color/textColor"
             android:textColorHint="@color/textColor"
@@ -223,8 +225,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="70dp"
             android:ems="10"
+            android:digits="0123456789"
+            android:imeOptions="actionNext"
             android:hint="Antal Roere"
-            android:inputType="text"
+            android:inputType="numberSigned"
             android:textColor="@color/textColor"
             android:textColorHint="@color/textColor"
             android:textSize="22sp" />
@@ -296,6 +300,7 @@
 
         <View style="@style/Divider"/>
 
+    <!-- Kurs  =====================================-->
         <EditText
             android:id="@+id/kursEditText"
             android:layout_width="match_parent"
@@ -303,7 +308,9 @@
             android:layout_marginHorizontal="70dp"
             android:ems="10"
             android:hint="Kurs"
-            android:inputType="numberDecimal"
+            android:digits="0123456789"
+            android:maxLength="3"
+            android:inputType="numberSigned"
             android:shadowColor="#1AFFFFFF"
             android:textColor="@color/textColor"
             android:textColorHint="@color/textColor"
