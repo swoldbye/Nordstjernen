@@ -19,7 +19,7 @@ import android.widget.Switch;
 import com.example.skibslogapp.Model.Togt;
 import com.example.skibslogapp.Model.LogInstans;
 import com.example.skibslogapp.viewControl.LogOversigt;
-import com.example.skibslogapp.viewControl.ToggleViewList;
+import com.example.skibslogapp.viewControl.utility.ToggleViewList;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -37,16 +37,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int basicColor;
     int standOutColor;
     Button resetTimeButton;
-    Button nordButton, østButton, sydButton, vestButton, halsSbButton, halsBbButton;
+    Button nordButton, østButton, sydButton, vestButton;
     EditText kursEditText, antalRoereEditText, editTime;
-    Button fButton, øButton, n1Button, n2Button, n3Button;
-    Button læ, ag, ha, fo, bi;
     Button opretButton;
     TextView vindretning_input;
     Button vindretning_delete;
     Switch sbBb;
 
     ToggleButtonList hals_Buttons;
+    ToggleButtonList sejlStilling_Buttons;
 
 
     @Override
@@ -117,29 +116,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Kurs
         kursEditText = (EditText) findViewById(R.id.kursEditText);
 
-        //Sejl Stilling
-        læ = (Button) findViewById(R.id.læ);
-        ag = (Button) findViewById(R.id.ag);
-        bi = (Button) findViewById(R.id.bi);
-        fo = (Button) findViewById(R.id.fo);
-        ha = (Button) findViewById(R.id.ha);
 
         //Antal Roere
         antalRoereEditText = (EditText) findViewById(R.id.antalRoereEditText);
 
-        //Sejlføring
-        fButton = (Button) findViewById(R.id.fButton);
-        øButton = (Button) findViewById(R.id.øButton);
-        n1Button = (Button) findViewById(R.id.n1Button);
-        n2Button = (Button) findViewById(R.id.n2Button);
-        n3Button = (Button) findViewById(R.id.n3Button);
 
         //Opret Post
         opretButton = (Button) findViewById(R.id.opretButton);
 
         hals_Buttons = new ToggleButtonList(
-                findViewById(R.id.hals_bagbord_btn),
-                findViewById(R.id.hals_styrbord_btn)
+            findViewById(R.id.hals_bagbord_btn),
+            findViewById(R.id.hals_styrbord_btn)
+        );
+
+        sejlStilling_Buttons = new ToggleButtonList(
+            findViewById(R.id.læ),
+            findViewById(R.id.ag),
+            findViewById(R.id.bi),
+            findViewById(R.id.fo),
+            findViewById(R.id.ha)
+        );
+
+        hals_Buttons = new ToggleButtonList(
+            findViewById(R.id.fButton),
+            findViewById(R.id.øButton),
+            findViewById(R.id.n1Button),
+            findViewById(R.id.n2Button),
+            findViewById(R.id.n3Button)
         );
 
 
@@ -148,17 +151,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         østButton.setOnClickListener(this);
         sydButton.setOnClickListener(this);
         vestButton.setOnClickListener(this);
-        fButton.setOnClickListener(this);
-        øButton.setOnClickListener(this);
-        n1Button.setOnClickListener(this);
-        n2Button.setOnClickListener(this);
-        n3Button.setOnClickListener(this);
-        opretButton.setOnClickListener(this);
-        læ.setOnClickListener(this);
-        ha.setOnClickListener(this);
-        fo.setOnClickListener(this);
-        ag.setOnClickListener(this);
-        bi.setOnClickListener(this);
 
         editTime.setOnClickListener(this);
         resetTimeButton.setOnClickListener(this);
@@ -202,140 +194,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 vindretning_delete.setVisibility(View.VISIBLE);
             }
 
-
         } else if (v == vindretning_delete) {
             vindretning_input.setText("");
             vindretning_delete.setVisibility(View.INVISIBLE);
-        } else if (v == fButton) {                                      //sejlFøring
-            if (finalSejlføring.equals("f")) {
-                finalSejlføring = "";
-                fButton.setBackgroundColor(basicColor);
-                fButton.setTextColor(Color.parseColor("#000000"));
-            } else {
-                finalSejlføring = "f";
-                øButton.setBackgroundColor(basicColor); øButton.setTextColor(Color.parseColor("#000000"));
-                n1Button.setBackgroundColor(basicColor); n1Button.setTextColor(Color.parseColor("#000000"));
-                n2Button.setBackgroundColor(basicColor); n2Button.setTextColor(Color.parseColor("#000000"));
-                n3Button.setBackgroundColor(basicColor); n3Button.setTextColor(Color.parseColor("#000000"));
-                fButton.setBackgroundColor(standOutColor); fButton.setTextColor(Color.parseColor("#FFFFFF"));
-            }
-        } else if (v == øButton) {
-            if (finalSejlføring.equals("ø")) {
-                finalSejlføring = "";
-                øButton.setBackgroundColor(basicColor);
-                øButton.setTextColor(Color.parseColor("#000000"));
-            } else {
-                finalSejlføring = "ø";
-                fButton.setBackgroundColor(basicColor); fButton.setTextColor(Color.parseColor("#000000"));
-                n1Button.setBackgroundColor(basicColor); n1Button.setTextColor(Color.parseColor("#000000"));
-                n2Button.setBackgroundColor(basicColor); n2Button.setTextColor(Color.parseColor("#000000"));
-                n3Button.setBackgroundColor(basicColor); n3Button.setTextColor(Color.parseColor("#000000"));
-                øButton.setBackgroundColor(standOutColor); øButton.setTextColor(Color.parseColor("#FFFFFF"));
-            }
-        } else if (v == n1Button) {
-            if (finalSejlføring.equals("n1")) {
-                finalSejlføring = "";
-                n1Button.setBackgroundColor(basicColor);
-                n1Button.setTextColor(Color.parseColor("#000000"));
-            } else {
-                finalSejlføring = "n1";
-                fButton.setBackgroundColor(basicColor); fButton.setTextColor(Color.parseColor("#000000"));
-                øButton.setBackgroundColor(basicColor); øButton.setTextColor(Color.parseColor("#000000"));
-                n2Button.setBackgroundColor(basicColor); n2Button.setTextColor(Color.parseColor("#000000"));
-                n3Button.setBackgroundColor(basicColor); n3Button.setTextColor(Color.parseColor("#000000"));
-                n1Button.setBackgroundColor(standOutColor); n1Button.setTextColor(Color.parseColor("#FFFFFF"));
-            }
-        } else if (v == n2Button) {
-            if (finalSejlføring.equals("n2")) {
-                finalSejlføring = "";
-                n2Button.setBackgroundColor(basicColor);
-                n2Button.setTextColor(Color.parseColor("#000000"));
-            } else {
-                finalSejlføring = "n2";
-                fButton.setBackgroundColor(basicColor); fButton.setTextColor(Color.parseColor("#000000"));
-                øButton.setBackgroundColor(basicColor); øButton.setTextColor(Color.parseColor("#000000"));
-                n1Button.setBackgroundColor(basicColor); n1Button.setTextColor(Color.parseColor("#000000"));
-                n3Button.setBackgroundColor(basicColor); n3Button.setTextColor(Color.parseColor("#000000"));
-                n2Button.setBackgroundColor(standOutColor); n2Button.setTextColor(Color.parseColor("#FFFFFF"));
-            }
-        } else if (v == n3Button) {
-            if (finalSejlføring.equals("n3")) {
-                finalSejlføring = "";
-                n3Button.setBackgroundColor(basicColor);
-                n3Button.setTextColor(Color.parseColor("#000000"));
-            } else {
-                finalSejlføring = "n3";
-                fButton.setBackgroundColor(basicColor); fButton.setTextColor(Color.parseColor("#000000"));
-                øButton.setBackgroundColor(basicColor); øButton.setTextColor(Color.parseColor("#000000"));
-                n1Button.setBackgroundColor(basicColor); n1Button.setTextColor(Color.parseColor("#000000"));
-                n2Button.setBackgroundColor(basicColor); n2Button.setTextColor(Color.parseColor("#000000"));
-                n3Button.setBackgroundColor(standOutColor); n3Button.setTextColor(Color.parseColor("#FFFFFF"));
-            }
-        } else if (v == læ) {
-            if (sejlStilling.equals("læ")) {
-                sejlStilling = "";
-                læ.setBackgroundColor(basicColor);
-                læ.setTextColor(Color.parseColor("#000000"));
-            } else {
-                sejlStilling = "læ";
-                ag.setBackgroundColor(basicColor); ag.setTextColor(Color.parseColor("#000000"));
-                ha.setBackgroundColor(basicColor); ha.setTextColor(Color.parseColor("#000000"));
-                fo.setBackgroundColor(basicColor); fo.setTextColor(Color.parseColor("#000000"));
-                bi.setBackgroundColor(basicColor); bi.setTextColor(Color.parseColor("#000000"));
-                læ.setBackgroundColor(standOutColor); læ.setTextColor(Color.parseColor("#FFFFFF"));
-            }
-        } else if (v == ha) {
-            if (sejlStilling.equals("ha")) {
-                sejlStilling = "";
-                ha.setBackgroundColor(basicColor);
-                ha.setTextColor(Color.parseColor("#000000"));
-            } else {
-                sejlStilling = "ha";
-                læ.setBackgroundColor(basicColor); læ.setTextColor(Color.parseColor("#000000"));
-                ag.setBackgroundColor(basicColor); ag.setTextColor(Color.parseColor("#000000"));
-                fo.setBackgroundColor(basicColor); fo.setTextColor(Color.parseColor("#000000"));
-                bi.setBackgroundColor(basicColor); bi.setTextColor(Color.parseColor("#000000"));
-                ha.setBackgroundColor(standOutColor); ha.setTextColor(Color.parseColor("#FFFFFF"));
-            }
-        } else if (v == fo) {
-            if (sejlStilling.equals("fo")) {
-                sejlStilling = "";
-                fo.setBackgroundColor(basicColor);
-                fo.setTextColor(Color.parseColor("#000000"));
-            } else {
-                sejlStilling = "fo";
-                læ.setBackgroundColor(basicColor); læ.setTextColor(Color.parseColor("#000000"));
-                ha.setBackgroundColor(basicColor); ha.setTextColor(Color.parseColor("#000000"));
-                ag.setBackgroundColor(basicColor); ag.setTextColor(Color.parseColor("#000000"));
-                bi.setBackgroundColor(basicColor); bi.setTextColor(Color.parseColor("#000000"));
-                fo.setBackgroundColor(standOutColor); fo.setTextColor(Color.parseColor("#FFFFFF"));
-            }
-        } else if (v == bi) {
-            if (sejlStilling.equals("bi")) {
-                sejlStilling = "";
-                bi.setBackgroundColor(basicColor);
-                bi.setTextColor(Color.parseColor("#000000"));
-            } else {
-                sejlStilling = "bi";
-                læ.setBackgroundColor(basicColor); læ.setTextColor(Color.parseColor("#000000"));
-                ha.setBackgroundColor(basicColor); ha.setTextColor(Color.parseColor("#000000"));
-                fo.setBackgroundColor(basicColor); fo.setTextColor(Color.parseColor("#000000"));
-                ag.setBackgroundColor(basicColor); ag.setTextColor(Color.parseColor("#000000"));
-                bi.setBackgroundColor(standOutColor); bi.setTextColor(Color.parseColor("#FFFFFF"));
-            }
-        } else if (v == ag) {
-            if (sejlStilling.equals("ag")) {
-                sejlStilling = "";
-                ag.setBackgroundColor(basicColor);
-                ag.setTextColor(Color.parseColor("#000000"));
-            } else {
-                sejlStilling = "ag";
-                læ.setBackgroundColor(basicColor); læ.setTextColor(Color.parseColor("#000000"));
-                ha.setBackgroundColor(basicColor); ha.setTextColor(Color.parseColor("#000000"));
-                fo.setBackgroundColor(basicColor); fo.setTextColor(Color.parseColor("#000000"));
-                bi.setBackgroundColor(basicColor); bi.setTextColor(Color.parseColor("#000000"));
-                ag.setBackgroundColor(standOutColor); ag.setTextColor(Color.parseColor("#FFFFFF"));
-            }
 
         } else if (v == opretButton) {
             LogInstans nyeste = new LogInstans(finalVindRetning,
@@ -354,23 +215,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
+    /**
+     * Implementation of the ToggleViewList specific for the buttons
+     * on the log entry creation page. */
     private class ToggleButtonList extends ToggleViewList{
 
+        /* This constructor is necessary, as the default
+            parent class constructor takes 0 views. (ask Malte)*/
         ToggleButtonList(View ... views){
             super(views);
         }
 
+        /**
+         * What to do when a view (in this case button) is disabled
+         * @param view The view (button) being disabled */
         @Override
         public void onViewUntoggled(View view) {
             Button btn = (Button) view;
-
             Resources res = btn.getContext().getResources();
-
             btn.setBackgroundTintList( res.getColorStateList(R.color.grey) );
             btn.setTextColor( res.getColorStateList(R.color.colorPrimary) );
         }
 
+        /**
+         * What to do when a view (in this case button) is enabled
+         * @param view The view (button) being disabled */
         @Override
         public void onViewToggled(View view) {
             Button btn = (Button) view;
