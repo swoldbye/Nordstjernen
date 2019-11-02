@@ -3,8 +3,8 @@ package com.example.skibslogapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -19,6 +19,7 @@ import android.widget.Switch;
 import com.example.skibslogapp.Model.Togt;
 import com.example.skibslogapp.Model.LogInstans;
 import com.example.skibslogapp.viewControl.LogOversigt;
+import com.example.skibslogapp.viewControl.ToggleViewList;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView vindretning_input;
     Button vindretning_delete;
     Switch sbBb;
+
+    ToggleButtonList hals_Buttons;
 
 
     @Override
@@ -100,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+
+
         //Reset Tidsslet
         resetTimeButton = (Button) findViewById(R.id.resetTimeButton);
 
@@ -129,11 +134,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         n2Button = (Button) findViewById(R.id.n2Button);
         n3Button = (Button) findViewById(R.id.n3Button);
 
-
-
-
         //Opret Post
         opretButton = (Button) findViewById(R.id.opretButton);
+
+        hals_Buttons = new ToggleButtonList(
+                findViewById(R.id.hals_bagbord_btn),
+                findViewById(R.id.hals_styrbord_btn)
+        );
+
 
         //On click Listeners:
         nordButton.setOnClickListener(this);
@@ -343,5 +351,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             resetTimeButton.setVisibility(View.INVISIBLE);
         }
 
+    }
+
+
+
+    private class ToggleButtonList extends ToggleViewList{
+
+        ToggleButtonList(View ... views){
+            super(views);
+        }
+
+        @Override
+        public void onViewUntoggled(View view) {
+            Button btn = (Button) view;
+
+            Resources res = btn.getContext().getResources();
+
+            btn.setBackgroundTintList( res.getColorStateList(R.color.grey) );
+            btn.setTextColor( res.getColorStateList(R.color.colorPrimary) );
+        }
+
+        @Override
+        public void onViewToggled(View view) {
+            Button btn = (Button) view;
+            Resources res = btn.getContext().getResources();
+            btn.setBackgroundTintList( res.getColorStateList(R.color.colorAccent) );
+            btn.setTextColor( Color.WHITE );
+        }
     }
 }
