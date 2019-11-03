@@ -1,4 +1,4 @@
-package com.example.skibslogapp.viewControl;
+package com.example.skibslogapp;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -43,6 +43,7 @@ public class PostListAdapter extends ArrayAdapter<LogInstans> {
         if (position % 2 == 1) {
             convertView.setBackgroundResource(R.color.offWhite);
         }
+
 
         TextView tidTextView = convertView.findViewById(R.id.tidTextView);
         TextView vindretningTextView = convertView.findViewById(R.id.vindretningTextView);

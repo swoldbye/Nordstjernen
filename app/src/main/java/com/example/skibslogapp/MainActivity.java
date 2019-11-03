@@ -1,15 +1,18 @@
 package com.example.skibslogapp;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
+import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -18,15 +21,16 @@ import android.widget.Switch;
 
 import com.example.skibslogapp.Model.Togt;
 import com.example.skibslogapp.Model.LogInstans;
-import com.example.skibslogapp.viewControl.LogOversigt;
-import com.example.skibslogapp.viewControl.PostOversigt;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
 //Developer Branch
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class MainActivity extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+
+    OnMainActivityListener mCallback;
+
     int timeStringLengthBefore = 0;
     String finalVindRetning = "";
     String finalSejlføring = "";
@@ -47,14 +51,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Switch sbBb;
     String simpleDate3;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_main, container, false);
 
         //Tidsslet
-        editTime = (EditText) findViewById(R.id.editTime);
+        editTime = (EditText) view.findViewById(R.id.editTime);
         final Handler handler =new Handler();
         final Runnable r = new Runnable() {
             public void run() {
@@ -102,40 +105,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         //Reset Tidsslet
-        resetTimeButton = (Button) findViewById(R.id.resetTimeButton);
+        resetTimeButton = (Button) view.findViewById(R.id.resetTimeButton);
 
         //Vind Retning
-        nordButton = (Button) findViewById(R.id.nordButton);
-        østButton = (Button) findViewById(R.id.østButton);
-        sydButton = (Button) findViewById(R.id.sydButton);
-        vestButton = (Button) findViewById(R.id.vestButton);
+        nordButton = (Button) view.findViewById(R.id.nordButton);
+        østButton = (Button) view.findViewById(R.id.østButton);
+        sydButton = (Button) view.findViewById(R.id.sydButton);
+        vestButton = (Button) view.findViewById(R.id.vestButton);
 
         //Kurs
-        kursEditText = (EditText) findViewById(R.id.kursEditText);
+        kursEditText = (EditText) view.findViewById(R.id.kursEditText);
 
         //Sejl Stilling
-        læ = (Button) findViewById(R.id.læ);
-        ag = (Button) findViewById(R.id.ag);
-        bi = (Button) findViewById(R.id.bi);
-        fo = (Button) findViewById(R.id.fo);
-        ha = (Button) findViewById(R.id.ha);
+        læ = (Button) view.findViewById(R.id.læ);
+        ag = (Button) view.findViewById(R.id.ag);
+        bi = (Button) view.findViewById(R.id.bi);
+        fo = (Button) view.findViewById(R.id.fo);
+        ha = (Button) view.findViewById(R.id.ha);
 
         //Antal Roere
-        antalRoereEditText = (EditText) findViewById(R.id.antalRoereEditText);
+        antalRoereEditText = (EditText) view.findViewById(R.id.antalRoereEditText);
 
         //Sejlføring
 
-        fButton = (Button) findViewById(R.id.fButton);
-        øButton = (Button) findViewById(R.id.øButton);
-        n1Button = (Button) findViewById(R.id.n1Button);
-        n2Button = (Button) findViewById(R.id.n2Button);
-        n3Button = (Button) findViewById(R.id.n3Button);
+        fButton = (Button) view.findViewById(R.id.fButton);
+        øButton = (Button) view.findViewById(R.id.øButton);
+        n1Button = (Button) view.findViewById(R.id.n1Button);
+        n2Button = (Button) view.findViewById(R.id.n2Button);
+        n3Button = (Button) view.findViewById(R.id.n3Button);
 
-        sbBb = (Switch) findViewById(R.id.switch1);
+        sbBb = (Switch) view.findViewById(R.id.switch1);
         sbBb.setOnCheckedChangeListener(this);
 
         //Opret Post
-        opretButton = (Button) findViewById(R.id.opretButton);
+        opretButton = (Button) view.findViewById(R.id.opretButton);
 
         //On click Listeners:
         nordButton.setOnClickListener(this);
@@ -158,17 +161,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resetTimeButton.setOnClickListener(this);
         resetTimeButton.setVisibility(View.INVISIBLE);
 
-        vindretning_delete = findViewById(R.id.vindretning_delete);
+        vindretning_delete = view.findViewById(R.id.vindretning_delete);
         vindretning_delete.setOnClickListener(this);
         vindretning_delete.setVisibility(View.INVISIBLE);
 
-        vindretning_input = findViewById(R.id.vindretning_input);
+        vindretning_input = view.findViewById(R.id.vindretning_input);
         vindretning_input.setText("");
 
 
         basicColor = getResources().getColor(R.color.grey);
         standOutColor = getResources().getColor(R.color.colorPrimary);
 
+
+        return view;
     }
 
 
@@ -338,14 +343,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     kursEditText.getText().toString(),
                     finalSejlføring.concat(" -" + styrbordEllerBagbord), sejlStilling);
             Togt.addLogPost(nyeste);
-            Intent i = new Intent(this, PostOversigt.class);
-            startActivity(i);
-
+            mCallback.updateList(nyeste);
+            getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
 
         }else if(v == resetTimeButton){
             editTime.setText("");
             resetTimeButton.setVisibility(View.INVISIBLE);
         }
 
+    }
+    public interface OnMainActivityListener{
+        void updateList(LogInstans nyeste);
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        if(context instanceof OnMainActivityListener){
+            mCallback = (OnMainActivityListener) context;
+        } else {
+            throw new RuntimeException(context.toString());
+        }
+    }
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        mCallback = null;
     }
 }
