@@ -206,7 +206,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             vindretning_input.setText("");
             vindretning_delete.setVisibility(View.INVISIBLE);
 
-        } else if (v == opretButton || v == mob) {
+        }else if (v == opretButton || v == mob) {
             LogInstans nyeste = new LogInstans(simpleDate3,finalVindRetning,
                     kursEditText.getText().toString(),
                     finalSejlføring.concat(" -" + styrbordEllerBagbord),sejlStilling);
@@ -221,6 +221,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         }
 
     }
+
+
 
     public interface OnMainActivityListener{
         void updateList(LogInstans nyeste);
