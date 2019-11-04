@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.OpretLog_frag">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <!--Mand over bord ==========================-->
+        <FrameLayout
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:padding="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:outlineProvider="none"
+            android:elevation="1dp"
+            android:clipToPadding="false"
+            >
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/mob_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:backgroundTint="@color/colorAccent"
+                app:rippleColor="@android:color/darker_gray"
+                android:elevation="20dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="20dp"
+                android:gravity="center"
+                android:text="MOB"
+                android:textColor="@color/colorPrimary"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+        </FrameLayout>
+
+
+
+        <!-- SCROLL VIEW =================================================   -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                tools:context=".MainActivity">
+
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Det her er en note\nVindretning: Ø\nVindhastighed: 5 m/s\n\ \nDet her er en note\nVindretning: Ø\nVindhastighed: 5 m/s"
+                    android:textSize="20sp" />
+
+
+                <!-- TID =====================================-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp">
+
+                    <EditText
+                        android:id="@+id/editTime"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="time"
+                        android:maxLength="5"
+                        android:textAlignment="center"
+                        android:textColor="#7E0A0A"
+                        android:textColorHint="@color/textColor"
+                        android:textSize="40sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/resetTimeButton"
+                        android:layout_width="50sp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:background="#FFFFFF"
+                        android:text="NU"
+                        android:textSize="24sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/editTime"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <View style="@style/Divider" />
+
+
+                <!-- VINDRETNING =====================================-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/vindretning_text"
+                        style="@style/SmallTitle"
+                        android:layout_marginBottom="15dp"
+                        android:text="Vindretning" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp">
+
+                        <TextView
+                            android:id="@+id/vindretning_input"
+                            android:layout_width="75sp"
+                            android:layout_height="wrap_content"
+                            android:text="PLA"
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor"
+                            android:textSize="25sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/vindretning_delete"
+                            android:layout_width="50sp"
+                            android:layout_height="50sp"
+                            android:backgroundTint="#FFFFFF"
+                            android:text="X"
+                            android:textColor="#2D2F31"
+                            android:textSize="22sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/vindretning_input"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/nordButton"
+                            style="@style/DefaultButton"
+                            android:text="N" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/østButton"
+                            style="@style/DefaultButton"
+                            android:text="Ø" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/sydButton"
+                            style="@style/DefaultButton"
+                            android:text="S" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/vestButton"
+                            style="@style/DefaultButton"
+                            android:text="V" />
+
+                        <Space style="@style/EvenSpace" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <!-- VINDHASTIGHED =====================================-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp">
+
+                    <EditText
+                        android:id="@+id/vindhastighed_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="80dp"
+                        android:layout_marginEnd="80dp"
+                        android:digits="0123456789"
+                        android:ems="10"
+                        android:hint="Vindhastighed"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberSigned"
+                        android:maxLength="4"
+                        android:paddingHorizontal="0dp"
+                        android:textColor="@color/textColor"
+                        android:textColorHint="@color/textColor"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Unit -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="m/s"
+                        android:textColor="@color/textColor"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/vindhastighed_edittext"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View style="@style/Divider" />
+
+
+                <!-- Sejlstilling =====================================-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/SmallTitle"
+                        android:text="Sejlstilling" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/læ"
+                            style="@style/DefaultButton"
+                            android:text="læ"
+                            android:textColor="#000000" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/ag"
+                            style="@style/DefaultButton"
+                            android:text="ag" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/ha"
+                            style="@style/DefaultButton"
+                            android:text="bi" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/fo"
+                            style="@style/DefaultButton"
+                            android:text="fo" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/bi"
+                            style="@style/DefaultButton"
+                            android:text="ha" />
+
+                        <Space style="@style/EvenSpace" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <!-- ANTALROERE =====================================-->
+                <EditText
+                    android:id="@+id/antalRoereEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginEnd="80dp"
+                    android:digits="0123456789"
+                    android:ems="10"
+                    android:hint="Antal Roere"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberSigned"
+                    android:textColor="@color/textColor"
+                    android:textColorHint="@color/textColor"
+                    android:textSize="22sp" />
+
+
+                <View style="@style/Divider" />
+
+                <!-- SEJLFØRING =====================================-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/SmallTitle"
+                        android:text="Sejlføring" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/fButton"
+                            style="@style/DefaultButton"
+                            android:text="F" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/øButton"
+                            style="@style/DefaultButton"
+                            android:text="Ø" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/n1Button"
+                            style="@style/DefaultButton"
+                            android:text="N1" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/n2Button"
+                            style="@style/DefaultButton"
+                            android:text="N2" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/n3Button"
+                            style="@style/DefaultButton"
+                            android:text="N3" />
+
+                        <Space style="@style/EvenSpace" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <!-- HALS-SWITCH =====================================-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/SmallTitle"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:letterSpacing="0"
+                        android:text="Hals" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/hals_bagbord_btn"
+                            style="@style/DefaultButton"
+                            android:layout_width="140dp"
+                            android:text="Bagbord"
+                            android:textSize="20dp" />
+
+                        <Space
+                            style="@style/EvenSpace"
+                            android:layout_weight="0.1" />
+
+                        <Button
+                            android:id="@+id/hals_styrbord_btn"
+                            style="@style/DefaultButton"
+                            android:layout_width="140dp"
+                            android:text="Styrbord"
+                            android:textSize="20dp" />
+                        />
+
+                        <Space style="@style/EvenSpace" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View style="@style/Divider" />
+
+
+                <!-- Kurs  =====================================-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp">
+
+                    <EditText
+                        android:id="@+id/kursEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="80dp"
+                        android:layout_marginEnd="80dp"
+                        android:digits="0123456789"
+                        android:ems="10"
+                        android:hint="Kurs"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberSigned"
+                        android:maxLength="3"
+                        android:textColor="@color/textColor"
+                        android:textColorHint="@color/textColor"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Unit -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="°"
+                        android:textColor="@color/textColor"
+                        android:textSize="30sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/kursEditText"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View style="@style/Divider" />
+
+
+                <!-- NOTE ======================================-->
+                <EditText
+                    android:id="@+id/noteEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="25dp"
+                    android:background="@drawable/background"
+                    android:backgroundTint="#EEEEEE"
+                    android:ems="10"
+                    android:hint="Note"
+                    android:inputType="textMultiLine"
+                    android:paddingHorizontal="10sp"
+                    android:paddingTop="7sp"
+                    android:paddingBottom="15sp"
+                    android:textColor="@color/textColor"
+                    android:textColorHint="#000000"
+                    android:textSize="22sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="75sp"
+                    android:layout_marginTop="15sp"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/imageButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#00FFFFFF"
+                        app:srcCompat="@drawable/imageedit_1_9579847328" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#00FFFFFF"
+                        app:srcCompat="@drawable/imageedit_1_4276958480" />
+
+                </LinearLayout>
+
+                <!-- OPRET BUTTON =====================================-->
+                <Button
+                    android:id="@+id/opretButton"
+                    android:layout_width="150dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Opret"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
