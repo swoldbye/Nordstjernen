@@ -3,37 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".view.OpretLog_frag">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
 
         <!--Mand over bord ==========================-->
         <FrameLayout
             android:layout_width="105dp"
             android:layout_height="105dp"
+            android:clipToPadding="false"
+            android:elevation="1dp"
+            android:outlineProvider="none"
             android:padding="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:outlineProvider="none"
-            android:elevation="1dp"
-            android:clipToPadding="false"
-            >
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/mob_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
                 android:backgroundTint="@color/colorAccent"
-                app:rippleColor="@android:color/darker_gray"
+                android:clickable="true"
                 android:elevation="20dp"
-                />
+                android:focusable="true"
+                app:rippleColor="@android:color/darker_gray" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -43,9 +40,8 @@
                 android:text="MOB"
                 android:textColor="@color/colorPrimary"
                 android:textSize="22sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
         </FrameLayout>
-
 
 
         <!-- SCROLL VIEW =================================================   -->
@@ -64,19 +60,10 @@
                 tools:context=".MainActivity">
 
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Det her er en note\nVindretning: Ø\nVindhastighed: 5 m/s\n\ \nDet her er en note\nVindretning: Ø\nVindhastighed: 5 m/s"
-                    android:textSize="20sp" />
-
-
                 <!-- TID =====================================-->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp">
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/editTime"
