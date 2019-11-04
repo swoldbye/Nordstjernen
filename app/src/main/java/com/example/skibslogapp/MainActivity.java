@@ -274,20 +274,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private void vindDirectionLogic(String currDirection, String btnDirection, String counterDirection) {
+        if(!currDirection.contains(counterDirection)) {
+            switch(currDirection.length()) {
+                case 0:
+                    vindretning_input.setText(btnDirection);
+                    break;
+
+                case 1:
+                    if(btnDirection.equals("N") || btnDirection.equals("S")) vindretning_input.setText(btnDirection.concat(currDirection)); //Put in the front
+                    else vindretning_input.setText(currDirection.concat(btnDirection)); //Put in the back
+                    break;
+
+                case 2:
+                    if(currDirection.indexOf(btnDirection) == currDirection.lastIndexOf(btnDirection)) {
+                        if(currDirection.contains(btnDirection)) vindretning_input.setText(btnDirection.concat(currDirection)); //Put in front
+                        else if(btnDirection.equals("N") || btnDirection.equals("S"))
+                            vindretning_input.setText(currDirection.substring(0,1).concat(btnDirection).concat(currDirection.substring(1,2))); //Put in the middle
+                        else vindretning_input.setText(currDirection.concat(btnDirection)); //Put in the back
+                    }
+                    break;
+            }
+            vindretning_delete.setVisibility(View.VISIBLE);
+        }
+    }
 
     public void onClick(View v) {
         // Vindretning
-        if (v == nordButton || v == østButton || v == sydButton || v == vestButton) {
-            String currentInput = vindretning_input.getText().toString();
+        if(v == nordButton) vindDirectionLogic(vindretning_input.getText().toString(), "N", "S");
+        else if(v == østButton) vindDirectionLogic(vindretning_input.getText().toString(), "Ø", "V");
+        else if(v == sydButton) vindDirectionLogic(vindretning_input.getText().toString(), "S", "N");
+        else if(v == vestButton) vindDirectionLogic(vindretning_input.getText().toString(), "V", "Ø");
 
-            if (currentInput.length() < 3) {
-                currentInput += ((Button) v).getText().toString();
-                vindretning_input.setText(currentInput);
-                vindretning_delete.setVisibility(View.VISIBLE);
-            }
-
-
-        } else if (v == vindretning_delete) {
+        else if (v == vindretning_delete) {
             vindretning_input.setText("");
             vindretning_delete.setVisibility(View.INVISIBLE);
         } else if (v == fButton) {                                      //sejlFøring
