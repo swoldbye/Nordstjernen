@@ -1,60 +1,67 @@
-package com.example.skibslogapp;
+package com.example.skibslogapp.view;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Switch;
+import android.widget.TextView;
 
-import com.example.skibslogapp.Model.Togt;
-import com.example.skibslogapp.Model.LogInstans;
-import com.example.skibslogapp.viewControl.LogOversigt;
+import com.example.skibslogapp.model.LogInstans;
+import com.example.skibslogapp.model.Togt;
+import com.example.skibslogapp.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+public class OpretLog_frag extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
-//Developer Branch
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
-    int timeStringLengthBefore = 0;
-    String finalVindRetning = "";
-    String finalSejlføring = "";
-    String styrbordEllerBagbord = "";
-    String sejlStilling = "";
+    private int timeStringLengthBefore = 0;
+    private String finalVindRetning = "";
+    private String finalSejlføring = "";
+    private String styrbordEllerBagbord = "";
+    private String sejlStilling = "";
 
     //button colors:
-    int basicColor;
-    int standOutColor;
-    Button resetTimeButton;
-    Button nordButton, østButton, sydButton, vestButton;
-    EditText kursEditText, antalRoereEditText, editTime;
-    Button fButton, øButton, n1Button, n2Button, n3Button;
-    Button læ, ag, ha, fo, bi;
-    Button opretButton;
-    TextView vindretning_input;
-    Button vindretning_delete;
-    Switch sbBb;
+    private int basicColor;
+    private int standOutColor;
+    private Button resetTimeButton;
+    private Button nordButton, østButton, sydButton, vestButton;
+    private EditText kursEditText, antalRoereEditText, editTime;
+    private Button fButton, øButton, n1Button, n2Button, n3Button;
+    private Button læ, ag, ha, fo, bi;
+    private Button opretButton;
+    private TextView vindretning_input;
+    private Button vindretning_delete;
+    private Switch sbBb;
     View mob;
 
 
+    public OpretLog_frag() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
 
         //Tidsslet
-        editTime = (EditText) findViewById(R.id.editTime);
+        editTime = (EditText) view.findViewById(R.id.editTime);
         final Handler handler =new Handler();
         final Runnable r = new Runnable() {
             public void run() {
@@ -70,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onFocusChange(View v, boolean hasFocus) {
                 String time = editTime.getText().toString();
                 if(time.length() != 5 || time.lastIndexOf(":") != time.indexOf(":") //Control of string
-                    || Integer.parseInt(time.substring(0,2)) > 23 || Integer.parseInt(time.substring(3, 5)) > 59) { //Control of numbers
+                        || Integer.parseInt(time.substring(0,2)) > 23 || Integer.parseInt(time.substring(3, 5)) > 59) { //Control of numbers
                     editTime.setText("");
                 }
             }
@@ -102,43 +109,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         //Reset Tidsslet
-        resetTimeButton = (Button) findViewById(R.id.resetTimeButton);
+        resetTimeButton = (Button) view.findViewById(R.id.resetTimeButton);
 
         //Vind Retning
-        nordButton = (Button) findViewById(R.id.nordButton);
-        østButton = (Button) findViewById(R.id.østButton);
-        sydButton = (Button) findViewById(R.id.sydButton);
-        vestButton = (Button) findViewById(R.id.vestButton);
+        nordButton = (Button) view.findViewById(R.id.nordButton);
+        østButton = (Button) view.findViewById(R.id.østButton);
+        sydButton = (Button) view.findViewById(R.id.sydButton);
+        vestButton = (Button) view.findViewById(R.id.vestButton);
 
         //Kurs
-        kursEditText = (EditText) findViewById(R.id.kursEditText);
+        kursEditText = (EditText) view.findViewById(R.id.kursEditText);
 
         //Sejl Stilling
-        læ = (Button) findViewById(R.id.læ);
-        ag = (Button) findViewById(R.id.ag);
-        bi = (Button) findViewById(R.id.bi);
-        fo = (Button) findViewById(R.id.fo);
-        ha = (Button) findViewById(R.id.ha);
+        læ = (Button) view.findViewById(R.id.læ);
+        ag = (Button) view.findViewById(R.id.ag);
+        bi = (Button) view.findViewById(R.id.bi);
+        fo = (Button) view.findViewById(R.id.fo);
+        ha = (Button) view.findViewById(R.id.ha);
 
         //Antal Roere
-        antalRoereEditText = (EditText) findViewById(R.id.antalRoereEditText);
+        antalRoereEditText = (EditText) view.findViewById(R.id.antalRoereEditText);
 
         //Sejlføring
 
-        fButton = (Button) findViewById(R.id.fButton);
-        øButton = (Button) findViewById(R.id.øButton);
-        n1Button = (Button) findViewById(R.id.n1Button);
-        n2Button = (Button) findViewById(R.id.n2Button);
-        n3Button = (Button) findViewById(R.id.n3Button);
+        fButton = (Button) view.findViewById(R.id.fButton);
+        øButton = (Button) view.findViewById(R.id.øButton);
+        n1Button = (Button) view.findViewById(R.id.n1Button);
+        n2Button = (Button) view.findViewById(R.id.n2Button);
+        n3Button = (Button) view.findViewById(R.id.n3Button);
 
-        sbBb = (Switch) findViewById(R.id.switch1);
+        sbBb = (Switch) view.findViewById(R.id.switch1);
         sbBb.setOnCheckedChangeListener(this);
 
         //Opret Post
-        opretButton = (Button) findViewById(R.id.opretButton);
+        opretButton = (Button) view.findViewById(R.id.opretButton);
 
         //Mand over bord
-        mob = findViewById(R.id.mob_button);
+        mob = view.findViewById(R.id.mob_button);
 
         //On click Listeners:
         nordButton.setOnClickListener(this);
@@ -164,33 +171,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resetTimeButton.setOnClickListener(this);
         resetTimeButton.setVisibility(View.INVISIBLE);
 
-        vindretning_delete = findViewById(R.id.vindretning_delete);
+        vindretning_delete = view.findViewById(R.id.vindretning_delete);
         vindretning_delete.setOnClickListener(this);
         vindretning_delete.setVisibility(View.INVISIBLE);
 
-        vindretning_input = findViewById(R.id.vindretning_input);
+        vindretning_input = view.findViewById(R.id.vindretning_input);
         vindretning_input.setText("");
-
 
         basicColor = getResources().getColor(R.color.grey);
         standOutColor = getResources().getColor(R.color.colorPrimary);
 
+        return view;
     }
-
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (sbBb.isChecked()) {
-            styrbordEllerBagbord = "bb";
-        } else {
-            styrbordEllerBagbord = "sb";
-        }
-
-    }
-
-
     public void onClick(View v) {
 
+        LogOversigt_frag logOversigt_frag;
+        FragmentManager fragmentManager;
+        FragmentTransaction fragmentTransaction;
 
         // Vindretning
         if (v == nordButton || v == østButton || v == sydButton || v == vestButton) {
@@ -337,19 +336,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ag.setBackgroundColor(standOutColor); ag.setTextColor(Color.parseColor("#FFFFFF"));
             }
 
-        } else if (v == opretButton || v == findViewById(R.id.mob_button)) {
-            LogInstans nyeste = new LogInstans(finalVindRetning,
-                    kursEditText.getText().toString(),
-                    finalSejlføring.concat(" -" + styrbordEllerBagbord), sejlStilling);
-            Togt.addLogPost(nyeste);
-            Intent i = new Intent(this, LogOversigt.class);
-            startActivity(i);
+        } else if (v == opretButton || v == mob) {
+            logOversigt_frag = new LogOversigt_frag();
 
+            LogInstans logInstans = new LogInstans(finalVindRetning,
+                    kursEditText.getText().toString(),
+                    finalSejlføring.concat(" -" + styrbordEllerBagbord),sejlStilling);
+
+            Togt.addLogPost(logInstans);
+
+            fragmentManager = getActivity().getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragContainer,logOversigt_frag);
+            fragmentTransaction.commit();
 
         }else if(v == resetTimeButton){
             editTime.setText("");
             resetTimeButton.setVisibility(View.INVISIBLE);
         }
 
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (sbBb.isChecked()) {
+            styrbordEllerBagbord = "bb";
+        } else {
+            styrbordEllerBagbord = "sb";
+        }
     }
 }
