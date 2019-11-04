@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Smart logger</string>
+    <string name="app_name">C3 Smart logger</string>
     <string name="time_colon">%1$s:</string>
-
-
 </resources>

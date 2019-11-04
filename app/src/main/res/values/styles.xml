@@ -33,14 +33,14 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_marginTop">30dp</item>
         <item name="android:layout_marginBottom">30dp</item>
-        <item name="background">@color/grey</item>
+        <item name="android:background">@color/grey</item>
     </style>
 
 
     <style name="DefaultButton">
-        <item name="android:layout_width">60sp</item>
-        <item name="android:layout_height">60sp</item>
-        <item name="background">@color/grey</item>
+        <item name="android:layout_width">65sp</item>
+        <item name="android:layout_height">65sp</item>
+        <item name="android:backgroundTint">@color/grey</item>
         <item name="android:textColor">#2D2F31</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
