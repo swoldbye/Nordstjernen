@@ -123,7 +123,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         editTime.setOnClickListener(this);
         resetTimeButton.setOnClickListener(this);
-        resetTimeButton.setVisibility(View.INVISIBLE);
 
         vindretning_delete = view.findViewById(R.id.vindretning_delete);
         vindretning_delete.setOnClickListener(this);
@@ -164,17 +163,20 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
                 //Accept 3 digit input
                 if (time.length() == 1) {
                     if(Integer.parseInt(time.substring(0,1)) < 10) {
-                        String newTime = "0" + time.substring(0,1) + ":";
-                        editTime.setText(time = newTime.concat("00"));
+                        editTime.setText(time = "0".concat(time.substring(0,1).concat(":00")));
                     }
                 }
                 if(time.length() == 3) {
-                    editTime.setText(time.concat("00"));
+                    if (Integer.parseInt(time.substring(0,2)) < 24) {
+                        editTime.setText(time = time.concat("00"));
+                    }
                 }
                 if(time.length() == 4) {
                     if(Integer.parseInt(time.substring(0,1)) < 10) {
-                        String newTime = "0" + time.substring(0,1) + ":" + time.substring(1,2) + time.substring(3,4);
-                        editTime.setText(time = newTime);
+                        editTime.setText(time = "0".concat(time.substring(0,1).concat(":".concat(time.substring(1,2).concat(time.substring(3,4))))));
+                    }
+                    else if(Integer.parseInt(time.substring(0,2)) < 24) {
+                        editTime.setText(time = time.substring(0,2).concat(":").concat(time.substring(3,4).concat("0")));
                     }
                 }
                 //Control for correct input

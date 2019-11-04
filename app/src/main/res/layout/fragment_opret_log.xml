@@ -103,6 +103,7 @@
                         android:background="#FFFFFF"
                         android:text="NU"
                         android:textSize="24sp"
+                        android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/editTime"
                         app:layout_constraintTop_toTopOf="parent" />
