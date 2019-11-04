@@ -97,9 +97,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(editTime.getText().toString().length() > 0){
-                    resetTimeButton.setVisibility(View.VISIBLE);
-                } else resetTimeButton.setVisibility(View.INVISIBLE);
+//                if(editTime.getText().toString().length() > 0){
+//                    resetTimeButton.setVisibility(View.VISIBLE);
+//                } else resetTimeButton.setVisibility(View.INVISIBLE);
                 int timeStringLengthAfter = editTime.getText().toString().length();
                 if(timeStringLengthAfter > timeStringLengthBefore && timeStringLengthAfter == 2) { //Insert colon
                     editTime.setText(getString(R.string.time_colon, editTime.getText()));
@@ -170,7 +170,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         editTime.setOnClickListener(this);
         resetTimeButton.setOnClickListener(this);
-        resetTimeButton.setVisibility(View.INVISIBLE);
 
         vindretning_delete = findViewById(R.id.vindretning_delete);
         vindretning_delete.setOnClickListener(this);
