@@ -56,69 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-        //Tidsslet
+        //Time
         editTime = (EditText) findViewById(R.id.editTime);
-        final Handler handler =new Handler();
-        final Runnable r = new Runnable() {
-            public void run() {
-                if(!editTime.hasFocus()) {
-                    handler.postDelayed(this, 1000);
-                    String simpleDate3 = new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime());
-                    editTime.setHint(simpleDate3);
-                }
-            }
-        };
-        handler.postDelayed(r, 0000);
-
-        editTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) editTime.setHint("");
-                else editTime.setHint(new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime()));
-
-                String time = editTime.getText().toString();
-                //Accept 3 digit input
-                if(time.length() == 4) {
-                    if(Integer.parseInt(time.substring(0,1)) < 10) {
-                        String newTime = "0" + time.substring(0,1) + ":" + time.substring(1,2) + time.substring(3,4);
-                        editTime.setText(time = newTime);
-                    }
-                }
-                //Control for correct input
-                if(time.length() != 5 || time.lastIndexOf(":") != time.indexOf(":") //Control of string
-                    || Integer.parseInt(time.substring(0,2)) > 23 || Integer.parseInt(time.substring(3, 5)) > 59) { //Control of numbers
-                    editTime.setText("");
-                }
-            }
-        });
-
-
-        editTime.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-//                if(editTime.getText().toString().length() > 0){
-//                    resetTimeButton.setVisibility(View.VISIBLE);
-//                } else resetTimeButton.setVisibility(View.INVISIBLE);
-                int timeStringLengthAfter = editTime.getText().toString().length();
-                if(timeStringLengthAfter > timeStringLengthBefore && timeStringLengthAfter == 2) { //Insert colon
-                    editTime.setText(getString(R.string.time_colon, editTime.getText()));
-                    editTime.setSelection(3);
-                }
-                timeStringLengthBefore = timeStringLengthAfter;
-            }
-        });
-
-        //Reset Tidsslet
         resetTimeButton = (Button) findViewById(R.id.resetTimeButton);
 
         //Vind Retning
@@ -199,6 +138,89 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         kursEditText.setOnEditorActionListener(clearFocusOnDone);
         editTime.setOnEditorActionListener(clearFocusOnDone);
         vindHastighedEditTxt.setOnEditorActionListener(clearFocusOnDone);
+
+        final Handler handler =new Handler();
+        final Runnable r = new Runnable() {
+            public void run() {
+                if(!editTime.hasFocus()) {
+                    handler.postDelayed(this, 1000);
+                    String simpleDate3 = new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime());
+                    editTime.setHint(simpleDate3);
+                }
+            }
+        };
+        handler.postDelayed(r, 0000);
+
+        editTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) editTime.setHint("");
+                else editTime.setHint(new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime()));
+
+                String time = editTime.getText().toString();
+                //Accept 3 digit input
+                if (time.length() == 1) {
+                    if(Integer.parseInt(time.substring(0,1)) < 10) {
+                        String newTime = "0" + time.substring(0,1) + ":";
+                        editTime.setText(time = newTime.concat("00"));
+                    }
+                }
+                if(time.length() == 3) {
+                    editTime.setText(time.concat("00"));
+                }
+                if(time.length() == 4) {
+                    if(Integer.parseInt(time.substring(0,1)) < 10) {
+                        String newTime = "0" + time.substring(0,1) + ":" + time.substring(1,2) + time.substring(3,4);
+                        editTime.setText(time = newTime);
+                    }
+                }
+                //Control for correct input
+                if(time.length() != 5 || time.lastIndexOf(":") != time.indexOf(":") //Control of string
+                    || Integer.parseInt(time.substring(0,2)) > 23 || Integer.parseInt(time.substring(3, 5)) > 59) { //Control of numbers
+                    editTime.setText("");
+                }
+            }
+        });
+
+        editTime.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int timeStringLengthAfter = editTime.getText().toString().length();
+                if(timeStringLengthAfter > timeStringLengthBefore && timeStringLengthAfter == 2) { //Insert colon
+                    editTime.setText(getString(R.string.time_colon, editTime.getText()));
+                    editTime.setSelection(3);
+                }
+                timeStringLengthBefore = timeStringLengthAfter;
+            }
+        });
+
+        kursEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                String s = kursEditText.getText().toString();
+                try {
+                    if(Integer.parseInt(s) <= 360) {
+                        //Correct lesser inputs
+                        if(s.length() == 1) s = "00".concat(s);
+                        else if(s.length() == 2) s = "0".concat(s);
+                        kursEditText.setText(s);
+                    } else kursEditText.setText("");
+                } catch (NumberFormatException e) {} //Do nothing
+
+            }
+        });
+
+
     }
 
     /**
@@ -239,6 +261,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return super.dispatchTouchEvent( event );
     }
+
+
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -408,7 +432,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }else if(v == resetTimeButton){
             editTime.setText("");
-            resetTimeButton.setVisibility(View.INVISIBLE);
         }
 
     }
