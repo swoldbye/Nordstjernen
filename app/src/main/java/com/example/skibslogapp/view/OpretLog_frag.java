@@ -300,19 +300,49 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         }else if (v == opretButton || v == mob) {
 
-            View btn_styrbord = getView().findViewById(R.id.hals_styrbord_btn);
-            String hals = hals_Buttons.getToggledView() == btn_styrbord ? "sb" : "bb";
+            // Henter hals
+            Button btn_styrbord = getView().findViewById(R.id.hals_styrbord_btn);
+            Button pressedHals = hals_Buttons.getToggledView();
+            String hals = "";
+            if( pressedHals != null ){
+                hals = "-";
+                hals += pressedHals == btn_styrbord ? "sb" : "bb";
+            }
+
+            // Henter tiden
+            String time = editTime.getText().toString();
+            if(time.length() == 0){
+                time = editTime.getHint().toString();
+            }
+
+            // Henter sejlføring
+            String sejlføring = "";
+            Button pressedSejlføring = sejlføring_Buttons.getToggledView();
+            if(pressedSejlføring != null){
+                sejlføring = pressedSejlføring.getText().toString() + hals;
+            }
+
+            // Henter sejlstilling
+            String sejlstilling = "";
+            Button pressedSejlstilling = sejlStilling_Buttons.getToggledView();
+            if(pressedSejlstilling != null){
+                sejlføring = pressedSejlstilling.getText().toString();
+            }
 
             LogInstans nyeste = new LogInstans(
-                    simpleDate3,
+                    time,
                     vindretning_input.getText().toString(),
                     kursEditText.getText().toString(),
-                    sejlføring_Buttons.getToggledView().getText().toString() +"-"+ hals,
-                    sejlStilling_Buttons.getToggledView().getText().toString());
+                    sejlføring,
+                    sejlstilling
+            );
 
             Togt.addLogPost(nyeste);
             mCallback.updateList(nyeste);
-            getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .remove(this)
+                    .commit();
 
         }else if(v == resetTimeButton){
             editTime.setText("");
