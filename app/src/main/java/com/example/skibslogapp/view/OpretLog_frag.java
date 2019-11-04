@@ -212,6 +212,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
                     finalSejlføring.concat(" -" + styrbordEllerBagbord),sejlStilling);
 
             Togt.addLogPost(nyeste);
+            mCallback.updateList(nyeste);
+            getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
 
         }else if(v == resetTimeButton){
             editTime.setText("");
