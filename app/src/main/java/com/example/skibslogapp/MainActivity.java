@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -26,8 +28,6 @@ import com.example.skibslogapp.viewControl.LogOversigt;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-
-//Developer Branch
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     int timeStringLengthBefore = 0;
     String finalVindRetning = "";
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int standOutColor;
     Button resetTimeButton;
     Button nordButton, østButton, sydButton, vestButton;
-    EditText kursEditText, antalRoereEditText, editTime;
+    EditText kursEditText, antalRoereEditText, editTime, vindHastighedEditTxt;
     Button fButton, øButton, n1Button, n2Button, n3Button;
     Button læ, ag, ha, fo, bi;
     Button opretButton;
@@ -77,12 +77,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 else editTime.setHint(new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime()));
 
                 String time = editTime.getText().toString();
+                //Accept 3 digit input
+                if(time.length() == 4) {
+                    if(Integer.parseInt(time.substring(0,1)) < 10) {
+                        String newTime = "0" + time.substring(0,1) + ":" + time.substring(1,2) + time.substring(3,4);
+                        editTime.setText(time = newTime);
+                    }
+                }
+                //Control for correct input
                 if(time.length() != 5 || time.lastIndexOf(":") != time.indexOf(":") //Control of string
                     || Integer.parseInt(time.substring(0,2)) > 23 || Integer.parseInt(time.substring(3, 5)) > 59) { //Control of numbers
                     editTime.setText("");
                 }
             }
         });
+
 
         editTime.addTextChangedListener(new TextWatcher() {
             @Override
@@ -117,6 +126,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         østButton = (Button) findViewById(R.id.østButton);
         sydButton = (Button) findViewById(R.id.sydButton);
         vestButton = (Button) findViewById(R.id.vestButton);
+
+        //Vindhastighed
+        vindHastighedEditTxt = (EditText) findViewById(R.id.vindhastighed_edittext);
 
         //Kurs
         kursEditText = (EditText) findViewById(R.id.kursEditText);
@@ -181,7 +193,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         basicColor = getResources().getColor(R.color.grey);
         standOutColor = getResources().getColor(R.color.colorPrimary);
+
+        //On Editor Listeners
+        antalRoereEditText.setOnEditorActionListener(clearFocusOnDone);
+        kursEditText.setOnEditorActionListener(clearFocusOnDone);
+        editTime.setOnEditorActionListener(clearFocusOnDone);
+        vindHastighedEditTxt.setOnEditorActionListener(clearFocusOnDone);
     }
+
+    /**
+     * Clears the focus when clicking the "Done" or "Next" button on the keyboard
+     */
+    TextView.OnEditorActionListener clearFocusOnDone = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            if(actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
+                v.clearFocus(); //Clears focus, which cascade into it resetting through OnFocusChange()
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+            return true;
+        }
+    };
 
     /**
      * Code snippet taken from https://stackoverflow.com/questions/4828636/edittext-clear-focus-on-touch-outside
@@ -219,8 +252,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void onClick(View v) {
-
-
         // Vindretning
         if (v == nordButton || v == østButton || v == sydButton || v == vestButton) {
             String currentInput = vindretning_input.getText().toString();
