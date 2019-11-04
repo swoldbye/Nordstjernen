@@ -25,6 +25,7 @@ import com.example.skibslogapp.model.LogInstans;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.utility.ToggleViewList;
 
+import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -158,7 +159,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         vestButton.setOnClickListener(this);
 
         mob.setOnClickListener(this);
-
+        opretButton.setOnClickListener(this);
 
         editTime.setOnClickListener(this);
         resetTimeButton.setOnClickListener(this);
@@ -199,6 +200,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             vindretning_delete.setVisibility(View.INVISIBLE);
 
         } else if (v == opretButton || v == mob) {
+            System.out.println("Clicking button");
             logOversigt_frag = new LogOversigt_frag();
 
             LogInstans logInstans = new LogInstans(finalVindRetning,
@@ -218,6 +220,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         }
 
     }
+
 
     /**
      * Implementation of the ToggleViewList specific for the buttons
@@ -248,7 +251,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         public void onViewToggled(View view) {
             Button btn = (Button) view;
             Resources res = btn.getContext().getResources();
-            btn.setBackgroundTintList( res.getColorStateList(R.color.colorAccent) );
+            btn.setBackgroundTintList( res.getColorStateList(R.color.colorPrimary) );
             btn.setTextColor( Color.WHITE );
         }
     }
