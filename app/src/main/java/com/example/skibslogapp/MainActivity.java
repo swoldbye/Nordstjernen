@@ -61,9 +61,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final Handler handler =new Handler();
         final Runnable r = new Runnable() {
             public void run() {
-                handler.postDelayed(this, 1000);
-                String simpleDate3 = new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime());
-                editTime.setHint(simpleDate3);
+                if(!editTime.hasFocus()) {
+                    handler.postDelayed(this, 1000);
+                    String simpleDate3 = new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime());
+                    editTime.setHint(simpleDate3);
+                }
             }
         };
         handler.postDelayed(r, 0000);
@@ -71,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) editTime.setHint("");
+                else editTime.setHint(new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime()));
+
                 String time = editTime.getText().toString();
                 if(time.length() != 5 || time.lastIndexOf(":") != time.indexOf(":") //Control of string
                     || Integer.parseInt(time.substring(0,2)) > 23 || Integer.parseInt(time.substring(3, 5)) > 59) { //Control of numbers
