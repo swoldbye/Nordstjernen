@@ -326,7 +326,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             String sejlstilling = "";
             Button pressedSejlstilling = sejlStilling_Buttons.getToggledView();
             if(pressedSejlstilling != null){
-                sejlføring = pressedSejlstilling.getText().toString();
+                sejlstilling = pressedSejlstilling.getText().toString();
             }
 
             LogInstans nyeste = new LogInstans(
