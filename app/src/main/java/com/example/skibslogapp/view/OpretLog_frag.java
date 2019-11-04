@@ -1,6 +1,7 @@
 package com.example.skibslogapp.view;
 
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -31,6 +32,8 @@ import java.util.Calendar;
 
 public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
+    OnMainActivityListener mCallback;
+
     private int timeStringLengthBefore = 0;
     private String finalVindRetning = "";
     private String finalSejlføring = "";
@@ -51,6 +54,11 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     ToggleButtonList hals_Buttons;
     ToggleButtonList sejlStilling_Buttons;
 
+    String simpleDate3;
+
+    public OpretLog_frag(OnMainActivityListener mCallback){
+        this.mCallback = mCallback;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,7 +71,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         final Runnable r = new Runnable() {
             public void run() {
                 handler.postDelayed(this, 1000);
-                String simpleDate3 = new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime());
+                simpleDate3 = new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime());
                 editTime.setHint(simpleDate3);
             }
         };
@@ -181,7 +189,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        LogOversigt_frag logOversigt_frag;
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
 
@@ -200,19 +207,11 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             vindretning_delete.setVisibility(View.INVISIBLE);
 
         } else if (v == opretButton || v == mob) {
-            System.out.println("Clicking button");
-            logOversigt_frag = new LogOversigt_frag();
-
-            LogInstans logInstans = new LogInstans(finalVindRetning,
+            LogInstans nyeste = new LogInstans(simpleDate3,finalVindRetning,
                     kursEditText.getText().toString(),
                     finalSejlføring.concat(" -" + styrbordEllerBagbord),sejlStilling);
 
-            Togt.addLogPost(logInstans);
-
-            fragmentManager = getActivity().getSupportFragmentManager();
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragContainer,logOversigt_frag);
-            fragmentTransaction.commit();
+            Togt.addLogPost(nyeste);
 
         }else if(v == resetTimeButton){
             editTime.setText("");
@@ -221,6 +220,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     }
 
+    public interface OnMainActivityListener{
+        void updateList(LogInstans nyeste);
+    }
 
     /**
      * Implementation of the ToggleViewList specific for the buttons

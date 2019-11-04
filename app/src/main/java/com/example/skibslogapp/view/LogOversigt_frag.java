@@ -40,13 +40,13 @@ public class LogOversigt_frag extends Fragment implements AdapterView.OnItemClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_log_oversigt, container, false);
+        View view = null; //inflater.inflate(R.layout.fragment_log_oversigt, container, false);
 
-        ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.fragment_log_oversigt, R.id.overskrift,(ArrayList<LogInstans>) Togt.getTogter());
+        /*ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.fragment_log_oversigt, R.id.overskrift,(ArrayList<LogInstans>) Togt.getTogter());
 
         ListView logOversigt = new ListView(getActivity());
         logOversigt.setOnItemClickListener(this);
-        logOversigt.setAdapter(adapter);
+        logOversigt.setAdapter(adapter);*/
 
         return view;
     }
@@ -83,7 +83,7 @@ public class LogOversigt_frag extends Fragment implements AdapterView.OnItemClic
 
         } else if (item.getItemId() == 102) {
 
-            opretLog_frag = new OpretLog_frag();
+
 
             fragmentManager = getActivity().getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();

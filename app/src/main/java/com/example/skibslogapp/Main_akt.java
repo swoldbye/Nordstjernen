@@ -53,7 +53,7 @@ public class Main_akt extends AppCompatActivity {
         configureNavigationDrawer();
 
         if (savedInstanceState == null){
-            Fragment fragment = new OpretLog_frag();
+            Fragment fragment = new PostActivity();
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
         }
     }
@@ -86,7 +86,6 @@ public class Main_akt extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-                opretLog_frag = new OpretLog_frag();
                 logOversigt_frag = new LogOversigt_frag();
                 togtOversigt_frag = new TogtOversigt_frag();
 

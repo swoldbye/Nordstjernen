@@ -24,6 +24,11 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
     ArrayList<LogInstans> tempLogs = new ArrayList<>();
 
 
+
+    public PostOversigt(OnPostOversigtListener mCallback){
+        this.mCallback = mCallback;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -74,21 +79,5 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
     public interface OnPostOversigtListener{
         void hideOpretPost();
         void showOpretPost();
-    }
-
-    @Override
-    public void onAttach(Context context){
-        super.onAttach(context);
-        if(context instanceof OnPostOversigtListener){
-            mCallback = (OnPostOversigtListener) context;
-        } else {
-            throw new RuntimeException(context.toString());
-        }
-    }
-
-    @Override
-    public void onDetach(){
-        super.onDetach();
-        mCallback = null;
     }
 }
