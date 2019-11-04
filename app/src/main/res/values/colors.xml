@@ -2,8 +2,9 @@
 <resources>
     <color name="colorPrimary">#05192E</color>
     <color name="colorPrimaryDark">#05192E</color>
-    <color name="colorAccent">#05192E</color>
+    <color name="colorAccent">#D1DBE6</color>
     <color name="grey">#DDDDDD</color>
     <color name="textColor">#05192E</color>
+    <color name="BenjaminMooreMarineBlue">#1e3f5a</color>
     <color name="offWhite">#f2f2f2</color>
 </resources>

@@ -10,8 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.skibslogapp.Model.LogInstans;
-import com.example.skibslogapp.R;
+import com.example.skibslogapp.model.LogInstans;
 
 import java.util.List;
 

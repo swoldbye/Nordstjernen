@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--    Dette er Navigerings vinduets menu punkter og opsætning-->
+
+    <group android:checkableBehavior="single"><!--Man kan kun vælge et item i gruppen ad gangen-->
+
+        <item android:title="Oversigt">
+            <menu>
+
+                <item android:id="@+id/nav_opret_togt"
+                    android:title="Opret togt"/>
+
+                <item android:id="@+id/nav_togt_oversigt"
+                    android:title="Togt oversigt" />
+
+                <item android:id="@+id/nav_opret_etape"
+                    android:title="Opret etape"/>
+
+                <item android:id="@+id/nav_etape_oversigt"
+                    android:title="Etape oversigt"/>
+
+                <item android:id="@+id/nav_opret_log"
+                    android:title="Opret log"/>
+
+                <item android:id="@+id/nav_log_oversigt"
+                    android:title="Log oversigt"/>
+
+            </menu>
+        </item>
+
+        <item android:title="Andre ting">
+            <menu>
+
+                <item android:id="@+id/nav_email"
+                    android:title="Email"
+                    android:icon="@drawable/ic_email"/>
+
+                <item android:id="@+id/nav_info"
+                    android:title="Information"
+                    android:icon="@drawable/ic_info_black_24dp"/>
+
+            </menu>
+        </item>
+    </group>
+</menu>

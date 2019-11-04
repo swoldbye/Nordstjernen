@@ -12,10 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.skibslogapp.Model.LogInstans;
-import com.example.skibslogapp.Model.Togt;
-import com.example.skibslogapp.PostListAdapter;
-import com.example.skibslogapp.R;
+import com.example.skibslogapp.model.LogInstans;
 
 import java.util.ArrayList;
 

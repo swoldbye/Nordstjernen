@@ -1,8 +1,11 @@
-package com.example.skibslogapp.Model;
+package com.example.skibslogapp.model;
 
+
+import com.example.skibslogapp.model.Togt;
 
 public class LogInstans{
-Togt togt;
+
+    Togt togt;
 
     String tid = "";
     String vindretning = "";

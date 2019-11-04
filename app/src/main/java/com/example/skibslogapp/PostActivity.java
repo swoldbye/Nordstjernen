@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
-import com.example.skibslogapp.Model.LogInstans;
+import com.example.skibslogapp.model.LogInstans;
 
 public class PostActivity extends AppCompatActivity implements PostOversigt.OnPostOversigtListener, MainActivity.OnMainActivityListener {
 
