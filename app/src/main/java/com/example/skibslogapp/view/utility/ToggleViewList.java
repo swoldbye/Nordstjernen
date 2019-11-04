@@ -1,4 +1,4 @@
-package com.example.skibslogapp.viewControl.utility;
+package com.example.skibslogapp.view.utility;
 
 import android.view.View;
 

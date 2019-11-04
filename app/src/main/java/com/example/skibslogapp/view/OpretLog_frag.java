@@ -1,7 +1,6 @@
 package com.example.skibslogapp.view;
 
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,20 +16,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.example.skibslogapp.Model.Togt;
-import com.example.skibslogapp.Model.LogInstans;
-import com.example.skibslogapp.viewControl.LogOversigt;
-import com.example.skibslogapp.viewControl.utility.ToggleViewList;
+import com.example.skibslogapp.model.Togt;
+import com.example.skibslogapp.model.LogInstans;
+import com.example.skibslogapp.R;
+import com.example.skibslogapp.view.utility.ToggleViewList;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class OpretLog_frag extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     private int timeStringLengthBefore = 0;
     private String finalVindRetning = "";
@@ -132,24 +130,24 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener, Com
         mob = view.findViewById(R.id.mob_button);
 
         hals_Buttons = new ToggleButtonList(
-            findViewById(R.id.hals_bagbord_btn),
-            findViewById(R.id.hals_styrbord_btn)
+            view.findViewById(R.id.hals_bagbord_btn),
+            view.findViewById(R.id.hals_styrbord_btn)
         );
 
         sejlStilling_Buttons = new ToggleButtonList(
-            findViewById(R.id.læ),
-            findViewById(R.id.ag),
-            findViewById(R.id.bi),
-            findViewById(R.id.fo),
-            findViewById(R.id.ha)
+            view.findViewById(R.id.læ),
+            view.findViewById(R.id.ag),
+            view.findViewById(R.id.bi),
+            view.findViewById(R.id.fo),
+            view.findViewById(R.id.ha)
         );
 
         hals_Buttons = new ToggleButtonList(
-            findViewById(R.id.fButton),
-            findViewById(R.id.øButton),
-            findViewById(R.id.n1Button),
-            findViewById(R.id.n2Button),
-            findViewById(R.id.n3Button)
+            view.findViewById(R.id.fButton),
+            view.findViewById(R.id.øButton),
+            view.findViewById(R.id.n1Button),
+            view.findViewById(R.id.n2Button),
+            view.findViewById(R.id.n3Button)
         );
 
 
@@ -220,7 +218,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener, Com
         }
 
     }
-
 
     /**
      * Implementation of the ToggleViewList specific for the buttons

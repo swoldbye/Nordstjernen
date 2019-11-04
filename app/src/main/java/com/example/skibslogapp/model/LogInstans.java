@@ -2,7 +2,7 @@ package com.example.skibslogapp.model;
 
 
 public class LogInstans{
-Togt togt;
+    Togt togt;
 
     private String vindretning = "";
     private String kurs = "";
