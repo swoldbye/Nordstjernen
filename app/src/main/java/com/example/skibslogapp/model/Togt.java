@@ -15,5 +15,4 @@ public class Togt {
     public static void addLogPost(LogInstans x){
         togt.add(x);
     }
-
 }
