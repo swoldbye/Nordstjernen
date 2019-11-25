@@ -1,5 +1,6 @@
 package com.example.skibslogapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.skibslogapp.datalayer.SQLconnection;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.TogtOversigt_frag;
@@ -48,10 +50,15 @@ public class Main_akt extends AppCompatActivity {
     private TogtOversigt_frag togtOversigt_frag;
     private LogOversigt_frag logOversigt_frag;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        Intent i = new Intent(this, SQLconnection.class);
+        startActivity(i);
+
+        /*setContentView(R.layout.activity_main);
 
 //      Sæt Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -66,7 +73,7 @@ public class Main_akt extends AppCompatActivity {
         if (savedInstanceState == null){
             Fragment fragment = new PostActivity();
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
-        }
+        }*/
     }
 
     /**
@@ -108,7 +115,7 @@ public class Main_akt extends AppCompatActivity {
 
 
                 }else if (itemid == R.id.nav_togt_oversigt){
-                    changeFragFromMenu(togtOversigt_frag);
+                    //changeFragFromMenu(togtOversigt_frag);
 
                 }else if (itemid == R.id.nav_opret_etape){
 
@@ -119,7 +126,7 @@ public class Main_akt extends AppCompatActivity {
                     changeFragFromMenu(opretLog_frag);
 
                 }else if (itemid == R.id.nav_log_oversigt){
-                    changeFragFromMenu(logOversigt_frag);
+                   //changeFragFromMenu(logOversigt_frag);
 
                 }else {
                     Toast.makeText(Main_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",
