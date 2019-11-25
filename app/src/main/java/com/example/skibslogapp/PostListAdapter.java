@@ -35,6 +35,7 @@ public class PostListAdapter extends ArrayAdapter<LogInstans> {
         String kurs = getItem(position).getKurs();
         String sejlføring = getItem(position).getSejlføring();
         String sejlstilling = getItem(position).getSejlstilling();
+        String note = getItem(position).getNote();
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
@@ -49,12 +50,14 @@ public class PostListAdapter extends ArrayAdapter<LogInstans> {
         TextView kursTextView = convertView.findViewById(R.id.kursTextView);
         TextView sejlføringTextView = convertView.findViewById(R.id.sejlføringTextView);
         TextView sejlstillingTextView = convertView.findViewById(R.id.sejlstillingTextView);
+        TextView noteTextView = convertView.findViewById(R.id.NoteTextView);
 
         tidTextView.setText(tid);
         vindretningTextView.setText(vindretning);
         kursTextView.setText(kurs);
         sejlføringTextView.setText(sejlføring);
         sejlstillingTextView.setText(sejlstilling);
+        noteTextView.setText(note);
 
         return convertView;
     }
