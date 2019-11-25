@@ -32,6 +32,7 @@ public class PostListAdapter extends ArrayAdapter<LogInstans> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         String tid = getItem(position).getTid();
         String vindretning = getItem(position).getVindretning();
+        String strømning = getItem(position).getStrømning();
         String kurs = getItem(position).getKurs();
         String sejlføring = getItem(position).getSejlføring();
         String sejlstilling = getItem(position).getSejlstilling();
@@ -47,6 +48,7 @@ public class PostListAdapter extends ArrayAdapter<LogInstans> {
 
         TextView tidTextView = convertView.findViewById(R.id.tidTextView);
         TextView vindretningTextView = convertView.findViewById(R.id.vindretningTextView);
+        TextView strømningTextView = convertView.findViewById(R.id.strømningTextView);
         TextView kursTextView = convertView.findViewById(R.id.kursTextView);
         TextView sejlføringTextView = convertView.findViewById(R.id.sejlføringTextView);
         TextView sejlstillingTextView = convertView.findViewById(R.id.sejlstillingTextView);
@@ -54,6 +56,7 @@ public class PostListAdapter extends ArrayAdapter<LogInstans> {
 
         tidTextView.setText(tid);
         vindretningTextView.setText(vindretning);
+        strømningTextView.setText(strømning);
         kursTextView.setText(kurs);
         sejlføringTextView.setText(sejlføring);
         sejlstillingTextView.setText(sejlstilling);

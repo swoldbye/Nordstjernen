@@ -9,17 +9,20 @@ public class LogInstans{
 
     String tid = "";
     String vindretning = "";
+    String strømning = "";
     String kurs = "";
     String sejlføring = "";
     String sejlstilling = "";
     String note = "";
 
-    public LogInstans(String tid, String vindretning, String kurs, String sejlføring, String sejlstilling, String note){
+    public LogInstans(String tid, String vindretning,String strømning, String kurs, String sejlføring, String sejlstilling, String note){
         this.tid = tid;
         this.vindretning = vindretning;
+        this.strømning = strømning;
         this.kurs = kurs;
         this.sejlføring=sejlføring;
         this.sejlstilling = sejlstilling;
+
         this.note = note;
     }
 
@@ -34,6 +37,8 @@ public class LogInstans{
     public String getVindretning() {
         return vindretning;
     }
+
+    public String getStrømning() {return strømning;}
 
     public String getKurs() {
         return kurs;

@@ -392,6 +392,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             LogInstans nyeste = new LogInstans(
                     time,
                     vindretning_input.getText().toString(),
+                    strømretning_input.getText().toString(),
                     kursEditText.getText().toString(),
                     sejlføring,
                     sejlstilling,

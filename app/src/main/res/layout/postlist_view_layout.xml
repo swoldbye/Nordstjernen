@@ -29,6 +29,15 @@
             android:textSize="25sp" />
 
         <TextView
+            android:id="@+id/strømningTextView"
+            android:layout_width="40sp"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:layout_weight="20"
+            android:textSize="25sp" />
+
+        <TextView
             android:id="@+id/kursTextView"
             android:layout_width="40sp"
             android:layout_height="35dp"
