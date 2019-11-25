@@ -12,4 +12,12 @@ public class LogDAO {
     public void getTogter(){
 
     }
+
+    public void updateLogpunkt(){
+
+    }
+
+    public void updateEtape(){
+
+    }
 }
