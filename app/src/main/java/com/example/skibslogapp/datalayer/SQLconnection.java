@@ -18,9 +18,10 @@ import com.example.skibslogapp.R;
 
 public class SQLconnection extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SQLiteDatabase db;
+
         super.onCreate(savedInstanceState);
         TextView textView = new TextView(this);
         textView.append("Herunder resultatet af en forespørgsel på en SQLite-database\n\n");
@@ -30,17 +31,19 @@ public class SQLconnection extends AppCompatActivity {
 
 
         // Oprettelse af database
-        SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(getFilesDir() + "/database.db", null);
+        db = SQLiteDatabase.openOrCreateDatabase(getFilesDir() + "/database.db", null);
 
         // Oprette tabel - foregår via SQL
         db.execSQL("DROP TABLE IF EXISTS LogPunkter;");
         db.execSQL("CREATE TABLE LogPunkter (_id INTEGER PRIMARY KEY, note TEXT NOT NULL, antalRore INTEGER," +
                 "kurs TEXT NOT NULL, vindretning TEXT NOT NULL);");
 
-        // Oprette en logpunkt
 
-        db.execSQL("INSERT INTO LogPunkter (note, antalRore, kurs, vindretning) VALUES ('Den var godt', 22,'nnø','sv');");
-        db.execSQL("INSERT INTO LogPunkter (note, antalRore, kurs, vindretning) VALUES ('Nu Okay da', 7,'øv','nnn');");
+        addLog(db,"Den var god", 22,"nnø","sv");
+        addLog(db,"Nu Okay da", 7,"øv","nnn");
+
+        //db.execSQL("INSERT INTO LogPunkter (note, antalRore, kurs, vindretning) VALUES ('Den var godt', 22,'nnø','sv');");
+        //db.execSQL("INSERT INTO LogPunkter (note, antalRore, kurs, vindretning) VALUES ('Nu Okay da', 7,'øv','nnn');");
 
 
         // Søgning
@@ -63,5 +66,10 @@ public class SQLconnection extends AppCompatActivity {
 
         db.close();
 
+    }
+
+    // Oprette en logpunkt
+    public void addLog(SQLiteDatabase db, String note, int antalRore, String kurs, String vindretning){
+        db.execSQL("INSERT INTO LogPunkter (note, antalRore, kurs, vindretning) VALUES ('"+note+"', "+antalRore+",'"+kurs+"', '"+vindretning+"');");
     }
 }
