@@ -1,4 +1,4 @@
-package com.example.skibslogapp.model.DB;
+package com.example.skibslogapp.datalayer.sheets_db;
 
 
 import android.content.Intent;
@@ -10,10 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,21 +21,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.TogtOversigt_frag;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 public class LogData_frag extends Fragment implements View.OnClickListener {
 
-    private Button urlOK, storeData, shareApp, takeMeTo;
-    private TextView dato, time, browser, textView;
-    private Calendar calendar;
-    private SimpleDateFormat dateFormat;
-    private WebView webView;
-    private EditText editText;
-    private String address;
-    private Intent i;
-    EditText editTextItemName,editTextBrand, editTextPrice;
-    Button buttonAddItem;
 //    DBservices DB = new DBservices();
 
     public LogData_frag() {
@@ -72,10 +55,10 @@ public class LogData_frag extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
+/** Example on how we send it to sheets
 //        if(v == buttonAddItem) {
 //            DB.addItemToSheet(editTextItemName, editTextBrand, this);
-//        }
+//        }*/
     }
 
     @Override
