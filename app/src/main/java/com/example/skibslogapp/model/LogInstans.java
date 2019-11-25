@@ -12,13 +12,15 @@ public class LogInstans{
     String kurs = "";
     String sejlføring = "";
     String sejlstilling = "";
+    String note = "";
 
-    public LogInstans(String tid, String vindretning, String kurs, String sejlføring, String sejlstilling){
+    public LogInstans(String tid, String vindretning, String kurs, String sejlføring, String sejlstilling, String note){
         this.tid = tid;
         this.vindretning = vindretning;
         this.kurs = kurs;
         this.sejlføring=sejlføring;
         this.sejlstilling = sejlstilling;
+        this.note = note;
     }
 
     public Togt getTogt() {
@@ -43,5 +45,9 @@ public class LogInstans{
 
     public String getSejlstilling() {
         return sejlstilling;
+    }
+
+    public String getNote() {
+        return note;
     }
 }
