@@ -4,5 +4,7 @@ import java.util.ArrayList;
 
 public class Etape {
     int ID;
-    ArrayList logs = new ArrayList<LogPunkt>();
+    String Name;
+
+    //ArrayList logs = new ArrayList<LogPunkt>();
 }

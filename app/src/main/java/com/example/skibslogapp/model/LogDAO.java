@@ -1,11 +1,13 @@
 package com.example.skibslogapp.model;
 
+import android.database.sqlite.SQLiteDatabase;
+
 /**
  *
  * Updates should only be made in the DAO class
  */
 public class LogDAO {
-    int ID;
+
 
     public void AddLogpunkt(LogPunkt logPunkt, Etape etape){
 

@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Togt {
     //Opdateret:
     int ID;
-    static ArrayList etapper = new ArrayList<Etape>();
+    String Name;
+    //static ArrayList etapper = new ArrayList<Etape>();
 
 
     //Ikke opdateret:
