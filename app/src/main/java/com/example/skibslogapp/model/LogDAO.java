@@ -6,6 +6,7 @@ package com.example.skibslogapp.model;
  */
 public class LogDAO {
     int ID;
+
     public void AddLogpunkt(LogPunkt logPunkt, Etape etape){
 
     }

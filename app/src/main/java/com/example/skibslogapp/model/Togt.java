@@ -3,10 +3,13 @@ package com.example.skibslogapp.model;
 import java.util.ArrayList;
 
 public class Togt {
+    //Opdateret:
     int ID;
+    static ArrayList etapper = new ArrayList<Etape>();
 
+
+    //Ikke opdateret:
     static ArrayList togt = new ArrayList<LogInstans>();
-
 
     private Togt() {}
 
