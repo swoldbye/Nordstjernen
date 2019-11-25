@@ -3,6 +3,8 @@ package com.example.skibslogapp.model;
 import java.util.ArrayList;
 
 public class Togt {
+    int ID;
+
     static ArrayList togt = new ArrayList<LogInstans>();
 
 
