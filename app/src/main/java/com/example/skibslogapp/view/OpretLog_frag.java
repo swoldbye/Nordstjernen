@@ -49,10 +49,11 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     Button resetTimeButton;
     Button nordButton, østButton, sydButton, vestButton;
-    EditText kursEditText, antalRoereEditText, editTime,vindHastighedEditTxt;
+    Button nordButton_Strøm, østButton_Strøm, sydButton_Strøm, vestButton_Strøm;
+    EditText kursEditText, antalRoereEditText, editTime,vindHastighedEditTxt, strømNingsretningEditText;
     Button opretButton;
-    TextView vindretning_input;
-    Button vindretning_delete;
+    TextView vindretning_input, strømretning_input;
+    Button vindretning_delete, strømningsretning_delete;
     Switch sbBb;
     View mob;
     ToggleButtonList hals_Buttons;
@@ -81,6 +82,12 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         sydButton = (Button) view.findViewById(R.id.sydButton);
         vestButton = (Button) view.findViewById(R.id.vestButton);
 
+        //Strøm Retning
+        nordButton_Strøm = (Button) view.findViewById(R.id.nordButton_strøm);
+        østButton_Strøm = (Button) view.findViewById(R.id.østButton_strøm);
+        sydButton_Strøm = (Button) view.findViewById(R.id.sydButton_strøm);
+        vestButton_Strøm = (Button) view.findViewById(R.id.vestButton_strøm);
+
         //Kurs
         kursEditText = (EditText) view.findViewById(R.id.kursEditText);
 
@@ -88,8 +95,11 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         //Antal Roere
         antalRoereEditText = (EditText) view.findViewById(R.id.antalRoereEditText);
 
+        //Vindhastighed
         vindHastighedEditTxt = view.findViewById(R.id.vindhastighed_edittext);
 
+        //Strømningshastighed
+        strømNingsretningEditText = view.findViewById(R.id.strømhastighed_edittext);
         //Opret Post
         opretButton = (Button) view.findViewById(R.id.opretButton);
 
@@ -127,6 +137,11 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         sydButton.setOnClickListener(this);
         vestButton.setOnClickListener(this);
 
+        nordButton_Strøm.setOnClickListener(this);
+        østButton_Strøm.setOnClickListener(this);
+        sydButton_Strøm.setOnClickListener(this);
+        vestButton_Strøm.setOnClickListener(this);
+
         mob.setOnClickListener(this);
         opretButton.setOnClickListener(this);
 
@@ -140,6 +155,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         vindretning_input = view.findViewById(R.id.vindretning_input);
         vindretning_input.setText("");
 
+        strømretning_input = view.findViewById(R.id.strøm_input);
+        strømretning_input.setText("");
+
         basicColor = getResources().getColor(R.color.grey);
         standOutColor = getResources().getColor(R.color.colorPrimary);
 
@@ -149,6 +167,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         kursEditText.setOnEditorActionListener(clearFocusOnDone);
         editTime.setOnEditorActionListener(clearFocusOnDone);
         vindHastighedEditTxt.setOnEditorActionListener(clearFocusOnDone);
+        strømNingsretningEditText.setOnEditorActionListener(clearFocusOnDone);
 
         final Handler handler =new Handler();
         final Runnable r = new Runnable() {
@@ -284,6 +303,33 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
 
 
+    private void strømDirectionLogic(String currDirection, String btnDirection, String counterDirection) {
+        if(!currDirection.contains(counterDirection)) {
+            switch(currDirection.length()) {
+                case 0:
+                    strømretning_input.setText(btnDirection);
+                    break;
+
+                case 1:
+                    if(btnDirection.equals("N") || btnDirection.equals("S")) strømretning_input.setText(btnDirection.concat(currDirection)); //Put in the front
+                    else strømretning_input.setText(currDirection.concat(btnDirection)); //Put in the back
+                    break;
+
+                case 2:
+                    if(currDirection.indexOf(btnDirection) == currDirection.lastIndexOf(btnDirection)) {
+                        if(currDirection.contains(btnDirection)) strømretning_input.setText(btnDirection.concat(currDirection)); //Put in front
+                        else if(btnDirection.equals("N") || btnDirection.equals("S"))
+                            strømretning_input.setText(currDirection.substring(0,1).concat(btnDirection).concat(currDirection.substring(1,2))); //Put in the middle
+                        else strømretning_input.setText(currDirection.concat(btnDirection)); //Put in the back
+                    }
+                    break;
+            }
+            strømretning_input.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+
 
     @Override
     public void onClick(View v) {
@@ -301,6 +347,16 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         else if (v == vindretning_delete) {
             vindretning_input.setText("");
             vindretning_delete.setVisibility(View.INVISIBLE);
+
+        }else if(v == nordButton_Strøm) strømDirectionLogic(strømretning_input.getText().toString(), "N", "S");
+        else if(v == østButton_Strøm) strømDirectionLogic(strømretning_input.getText().toString(), "Ø", "V");
+        else if(v == sydButton_Strøm) strømDirectionLogic(strømretning_input.getText().toString(), "S", "N");
+        else if(v == vestButton_Strøm) strømDirectionLogic(strømretning_input.getText().toString(), "V", "Ø");
+
+        else if (v == strømningsretning_delete) {
+            strømretning_input.setText("");
+            strømningsretning_delete.setVisibility(View.INVISIBLE);
+
 
         }else if (v == opretButton || v == mob) {
 
@@ -353,6 +409,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             editTime.setText("");
             resetTimeButton.setVisibility(View.INVISIBLE);
         }
+
+
 
     }
 
