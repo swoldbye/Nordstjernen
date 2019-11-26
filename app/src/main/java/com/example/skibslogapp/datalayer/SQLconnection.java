@@ -36,16 +36,15 @@ public class SQLconnection extends AppCompatActivity {
         // Oprette logpunkts tabel tabel - foregår via SQL
         db.execSQL("DROP TABLE IF EXISTS LogPunkter;");
         db.execSQL("CREATE TABLE LogPunkter (_id INTEGER PRIMARY KEY, note TEXT NOT NULL, antalRore INTEGER," +
-                "kurs TEXT NOT NULL, vindretning TEXT NOT NULL);");
+                "kurs TEXT NOT NULL, vindretning TEXT NOT NULL," +
+                "etape_id INTEGER, \n" +
+                "FOREIGN KEY(etape_id) REFERENCES LogPunkter(id));");
 
         // Oprette etape tabel tabel
         db.execSQL("CREATE TABLE IF NOT EXISTS  etape (\n" +
                 "                        id INTEGER PRIMARY KEY,\n" +
                 "                        reference VARCHAR(32) NOT NULL,\n" +
-                "                        name TEXT NOT NULL,\n" +
-                "                        log_id INTEGER,\n" +
-                "                        FOREIGN KEY(log_id) REFERENCES LogPunkter(id)\n" +
-                "                     );");
+                "                        name TEXT NOT NULL);");
 
 
         addLog("Den var god", 22,"nnø","sv");
