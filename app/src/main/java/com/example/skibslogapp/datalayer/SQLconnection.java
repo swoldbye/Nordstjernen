@@ -32,10 +32,20 @@ public class SQLconnection extends AppCompatActivity {
         // Oprettelse af database
         db = SQLiteDatabase.openOrCreateDatabase(getFilesDir() + "/database.db", null);
 
-        // Oprette tabel - foregår via SQL
+
+        // Oprette logpunkts tabel tabel - foregår via SQL
         db.execSQL("DROP TABLE IF EXISTS LogPunkter;");
         db.execSQL("CREATE TABLE LogPunkter (_id INTEGER PRIMARY KEY, note TEXT NOT NULL, antalRore INTEGER," +
                 "kurs TEXT NOT NULL, vindretning TEXT NOT NULL);");
+
+        // Oprette etape tabel tabel
+        db.execSQL("CREATE TABLE IF NOT EXISTS  etape (\n" +
+                "                        id INTEGER PRIMARY KEY,\n" +
+                "                        reference VARCHAR(32) NOT NULL,\n" +
+                "                        name TEXT NOT NULL,\n" +
+                "                        log_id INTEGER,\n" +
+                "                        FOREIGN KEY(log_id) REFERENCES LogPunkter(id)\n" +
+                "                     );");
 
 
         addLog("Den var god", 22,"nnø","sv");
