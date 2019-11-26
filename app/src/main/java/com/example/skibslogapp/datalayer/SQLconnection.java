@@ -35,6 +35,11 @@ public class SQLconnection extends AppCompatActivity {
 
 
         // Oprette logpunkts tabel tabel - foregår via SQL
+        /**
+         * @author Claes
+         * Vi opretter denne med en foreign key, så den kun kan have 1 etape
+         * men etape kan godt have mange logpunkter(one to many)
+         */
         db.execSQL("DROP TABLE IF EXISTS LogPunkter;");
         db.execSQL("CREATE TABLE LogPunkter (_id INTEGER PRIMARY KEY, note TEXT NOT NULL, antalRore INTEGER," +
                 "kurs TEXT NOT NULL, vindretning TEXT NOT NULL," +
