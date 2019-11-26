@@ -17,11 +17,10 @@ import com.example.skibslogapp.R;
 //db.execSQL();
 
 public class SQLconnection extends AppCompatActivity {
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SQLiteDatabase db;
-
         super.onCreate(savedInstanceState);
         TextView textView = new TextView(this);
         textView.append("Herunder resultatet af en forespørgsel på en SQLite-database\n\n");
@@ -39,13 +38,23 @@ public class SQLconnection extends AppCompatActivity {
                 "kurs TEXT NOT NULL, vindretning TEXT NOT NULL);");
 
 
-        addLog(db,"Den var god", 22,"nnø","sv");
-        addLog(db,"Nu Okay da", 7,"øv","nnn");
-
-        //db.execSQL("INSERT INTO LogPunkter (note, antalRore, kurs, vindretning) VALUES ('Den var godt', 22,'nnø','sv');");
-        //db.execSQL("INSERT INTO LogPunkter (note, antalRore, kurs, vindretning) VALUES ('Nu Okay da', 7,'øv','nnn');");
+        addLog("Den var god", 22,"nnø","sv");
+        addLog("Nu Okay da", 7,"øv","nnn");
 
 
+        textView.append(getTogter());
+
+
+        db.close();
+
+    }
+
+    // Oprette en logpunkt
+    public void addLog(String note, int antalRore, String kurs, String vindretning){
+        db.execSQL("INSERT INTO LogPunkter (note, antalRore, kurs, vindretning) VALUES ('"+note+"', "+antalRore+",'"+kurs+"', '"+vindretning+"');");
+    }
+
+    public String getTogter(){
         // Søgning
         //Cursor cursor = db.rawQuery("SELECT * from kunder WHERE kredit > 100 ORDER BY kredit ASC;", null);
         String[] kolonner = {"_id", "note", "antalRore", "kurs", "vindretning"};
@@ -53,6 +62,7 @@ public class SQLconnection extends AppCompatActivity {
         String sortering = "antalRore ASC"; // ORDER BY
         Cursor cursor = db.query("LogPunkter", kolonner, valg, null, null, null, sortering);
 
+        String res="";
         while (cursor.moveToNext()) {
             long id = cursor.getLong(0);
             String note = cursor.getString(1);
@@ -60,16 +70,9 @@ public class SQLconnection extends AppCompatActivity {
             String kurs = cursor.getString(3);
             String vind = cursor.getString(4);
 
-            textView.append(id + " | " + note + " | " + aRore +" | "+ kurs +" | "+vind+"\n");
+            res += id + " | " + note + " | " + aRore +" | "+ kurs +" | "+vind+"\n";
         }
         cursor.close();
-
-        db.close();
-
-    }
-
-    // Oprette en logpunkt
-    public void addLog(SQLiteDatabase db, String note, int antalRore, String kurs, String vindretning){
-        db.execSQL("INSERT INTO LogPunkter (note, antalRore, kurs, vindretning) VALUES ('"+note+"', "+antalRore+",'"+kurs+"', '"+vindretning+"');");
+        return res;
     }
 }
