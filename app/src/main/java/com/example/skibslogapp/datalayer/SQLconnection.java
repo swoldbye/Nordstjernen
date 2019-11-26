@@ -22,12 +22,13 @@ public class SQLconnection extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //for debugging===========================
         TextView textView = new TextView(this);
         textView.append("Herunder resultatet af en forespørgsel på en SQLite-database\n\n");
         ScrollView scrollView = new ScrollView(this);
         scrollView.addView(textView);
         setContentView(scrollView);
-
+        //========================================
 
         // Oprettelse af database
         db = SQLiteDatabase.openOrCreateDatabase(getFilesDir() + "/database.db", null);
@@ -41,32 +42,40 @@ public class SQLconnection extends AppCompatActivity {
                 "FOREIGN KEY(etape_id) REFERENCES LogPunkter(id));");
 
         // Oprette etape tabel tabel
-        db.execSQL("CREATE TABLE IF NOT EXISTS  etape (\n" +
+        db.execSQL("DROP TABLE IF EXISTS etape;");
+        db.execSQL("CREATE TABLE etape (\n" +
                 "                        id INTEGER PRIMARY KEY,\n" +
-                "                        reference VARCHAR(32) NOT NULL,\n" +
                 "                        name TEXT NOT NULL);");
 
 
-        addLog("Den var god", 22,"nnø","sv");
-        addLog("Nu Okay da", 7,"øv","nnn");
+        //for debugging===========================
+        addEtape("geveGodsEtape");
 
+        addLog("Den var god", 22,"nnø","sv",1);
+        addLog("Nu Okay da", 7,"øv","nnn",1);
 
         textView.append(getTogter());
-
+        //========================================
 
         db.close();
 
     }
-
-    // Oprette en logpunkt
-    public void addLog(String note, int antalRore, String kurs, String vindretning){
-        db.execSQL("INSERT INTO LogPunkter (note, antalRore, kurs, vindretning) VALUES ('"+note+"', "+antalRore+",'"+kurs+"', '"+vindretning+"');");
+    //_________________________________________
+    // Oprette ny data
+    public void addLog(String note, int antalRore, String kurs, String vindretning, int etapeID){
+        db.execSQL("INSERT INTO LogPunkter (note, antalRore, kurs, vindretning, etape_id) VALUES ('"+note+"', "+antalRore+",'"+kurs+"', '"+vindretning+"','"+etapeID+"');");
     }
 
+    public void addEtape(String name){
+        db.execSQL("INSERT INTO etape (name) VALUES ('"+name+"');");
+    }
+
+    //_________________________________________
+    // Hænt data ud
     public String getTogter(){
         // Søgning
         //Cursor cursor = db.rawQuery("SELECT * from kunder WHERE kredit > 100 ORDER BY kredit ASC;", null);
-        String[] kolonner = {"_id", "note", "antalRore", "kurs", "vindretning"};
+        String[] kolonner = {"_id", "note", "antalRore", "kurs", "vindretning", "etape_id"};
         String valg = "antalRore > 0"; // WHERE
         String sortering = "antalRore ASC"; // ORDER BY
         Cursor cursor = db.query("LogPunkter", kolonner, valg, null, null, null, sortering);
@@ -78,8 +87,9 @@ public class SQLconnection extends AppCompatActivity {
             int aRore = cursor.getInt(2);
             String kurs = cursor.getString(3);
             String vind = cursor.getString(4);
+            int etape = cursor.getInt(5);
 
-            res += id + " | " + note + " | " + aRore +" | "+ kurs +" | "+vind+"\n";
+            res += id + " | " + note + " | " + aRore +" | "+ kurs +" | "+vind+" | "+etape+" | "+"\n";
         }
         cursor.close();
         return res;
