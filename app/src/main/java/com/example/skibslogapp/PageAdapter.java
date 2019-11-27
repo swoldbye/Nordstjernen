@@ -23,7 +23,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
      *
      * @param position the position of the tab
      *
-     * @return The fragment
+     * @return The fragment you want to change
      */
     @NonNull
     @Override
