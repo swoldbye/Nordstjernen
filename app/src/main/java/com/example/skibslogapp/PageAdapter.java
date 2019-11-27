@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 /**
  * TODO use FragmentStatePagerAdapter because we will be working with dynamic no. of tabs
  */
-public class PageAdapter extends FragmentPagerAdapter {
+public class PageAdapter extends FragmentStatePagerAdapter {
 
     private int numOfTabs; // The total number of tabs
 
