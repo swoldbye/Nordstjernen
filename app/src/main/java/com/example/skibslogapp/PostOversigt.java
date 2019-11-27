@@ -3,7 +3,6 @@ package com.example.skibslogapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -25,10 +24,11 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
     Button openCloseButton;
     OnPostOversigtListener mCallback;
     ArrayList<LogInstans> tempLogs = new ArrayList<>();
-    TabLayout tabLayout;
-    TabItem item1, item2, item3, item4, item5;
-    ViewPager viewPager;
-    PageAdapter pageAdapter;
+
+//    TabLayout tabLayout;
+//    TabItem item1, item2, item3, item4, item5;
+//    ViewPager viewPager;
+//    PageAdapter pageAdapter;
 
     public PostOversigt(OnPostOversigtListener mCallback){
         this.mCallback = mCallback;
@@ -37,24 +37,21 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.post_oversigt_frag, container, false);
+        View view = inflater.inflate(R.layout.fragment_post_oversigt, container, false);
 
         openCloseButton = view.findViewById(R.id.openCloseButton);
         openCloseButton.setOnClickListener(this);
 
-        tabLayout = view.findViewById(R.id.tabLayout);
-        item1 = view.findViewById(R.id.tab1);
-        item2 = view.findViewById(R.id.tab2);
-        item3 = view.findViewById(R.id.tab3);
-        item4 = view.findViewById(R.id.tab4);
-        item5 = view.findViewById(R.id.tab5);
-        viewPager = view.findViewById(R.id.viewPager);
-
-
-
-
-
-
+//        tabLayout = view.findViewById(R.id.tabLayout);
+//        item1 = view.findViewById(R.id.tab1);
+//        item2 = view.findViewById(R.id.tab2);
+//        item3 = view.findViewById(R.id.tab3);
+//        item4 = view.findViewById(R.id.tab4);
+//        item5 = view.findViewById(R.id.tab5);
+//        viewPager = view.findViewById(R.id.viewPager);
+//
+//        pageAdapter = new PageAdapter(getFragmentManager(),tabLayout.getTabCount());
+//        viewPager.setAdapter(pageAdapter);
 
         postListView = view.findViewById(R.id.postListView);
         tempLogs.add(new LogInstans("11:34", "SSØ", "005", "F", "LÆ"));

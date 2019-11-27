@@ -1,6 +1,7 @@
 package com.example.skibslogapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -41,6 +42,8 @@ import com.google.android.material.navigation.NavigationView;
  */
 public class Main_akt extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private DrawerLayout drawerLayout;
@@ -53,6 +56,8 @@ public class Main_akt extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.d(TAG, "onCreate: Started.");
+
 //      Sæt Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,7 +65,7 @@ public class Main_akt extends AppCompatActivity {
         configureNavigationDrawer();
 
         if (savedInstanceState == null){
-            Fragment fragment = new PostActivity();
+            Fragment fragment = new TabLayout_frag();
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
         }
     }

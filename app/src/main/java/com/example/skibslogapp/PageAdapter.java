@@ -50,7 +50,7 @@ public class PageAdapter extends FragmentPagerAdapter {
     }
 
     /**
-     * Returns the total number of tabs
+     * Returns the total number of tabs in the tab layout
      */
     @Override
     public int getCount() {
