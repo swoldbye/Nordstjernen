@@ -107,9 +107,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         sejlStilling_Buttons = new ToggleButtonList(
             view.findViewById(R.id.læ),
             view.findViewById(R.id.ag),
-            view.findViewById(R.id.bi),
+            view.findViewById(R.id.ha),
             view.findViewById(R.id.fo),
-            view.findViewById(R.id.ha)
+            view.findViewById(R.id.bi)
         );
 
         sejlføring_Buttons = new ToggleButtonList(
