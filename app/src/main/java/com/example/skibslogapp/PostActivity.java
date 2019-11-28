@@ -52,5 +52,6 @@ public class PostActivity extends Fragment implements PostOversigt.OnPostOversig
     @Override
     public void updateList(LogInstans nyeste) {
         postOversigt.setList(nyeste);
+
     }
 }
