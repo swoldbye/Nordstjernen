@@ -6,7 +6,7 @@ public class Togt {
     //Opdateret:
     int ID;
     String Name;
-    //static ArrayList etapper = new ArrayList<Etape>();
+    public ArrayList etapper = new ArrayList<Etape>();
 
 
     //Ikke opdateret:

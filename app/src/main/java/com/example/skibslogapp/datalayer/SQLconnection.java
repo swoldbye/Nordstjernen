@@ -30,27 +30,7 @@ public class SQLconnection extends AppCompatActivity {
         setContentView(scrollView);
         //========================================
 
-        // Oprettelse af database
-        db = SQLiteDatabase.openOrCreateDatabase(getFilesDir() + "/database.db", null);
-
-
-        // Oprette logpunkts tabel tabel - foregår via SQL
-        /**
-         * @author Claes
-         * Vi opretter denne med en foreign key, så den kun kan have 1 etape
-         * men etape kan godt have mange logpunkter(one to many)
-         */
-        db.execSQL("DROP TABLE IF EXISTS LogPunkter;");
-        db.execSQL("CREATE TABLE LogPunkter (_id INTEGER PRIMARY KEY, note TEXT NOT NULL, antalRore INTEGER," +
-                "kurs TEXT NOT NULL, vindretning TEXT NOT NULL," +
-                "etape_id INTEGER, \n" +
-                "FOREIGN KEY(etape_id) REFERENCES LogPunkter(id));");
-
-        // Oprette etape tabel tabel
-        db.execSQL("DROP TABLE IF EXISTS etape;");
-        db.execSQL("CREATE TABLE etape (\n" +
-                "                        id INTEGER PRIMARY KEY,\n" +
-                "                        name TEXT NOT NULL);");
+        createOrOpenDB();
 
 
         //for debugging===========================
@@ -65,8 +45,37 @@ public class SQLconnection extends AppCompatActivity {
         db.close();
 
     }
+
+    //Making the DB a SingleTon
+    public SQLiteDatabase createOrOpenDB(){
+        if(db == null){
+            // Oprettelse af database
+            db = SQLiteDatabase.openOrCreateDatabase(getFilesDir() + "/database.db", null);
+            // Oprette logpunkts tabel tabel - foregår via SQL
+            /**
+             * @author Claes
+             * Vi opretter denne med en foreign key, så den kun kan have 1 etape
+             * men etape kan godt have mange logpunkter(one to many)
+             */
+            db.execSQL("DROP TABLE IF EXISTS LogPunkter;");
+            db.execSQL("CREATE TABLE LogPunkter (_id INTEGER PRIMARY KEY, note TEXT NOT NULL, antalRore INTEGER," +
+                    "kurs TEXT NOT NULL, vindretning TEXT NOT NULL," +
+                    "etape_id INTEGER, \n" +
+                    "FOREIGN KEY(etape_id) REFERENCES LogPunkter(id));");
+
+            // Oprette etape tabel tabel
+            db.execSQL("DROP TABLE IF EXISTS etape;");
+            db.execSQL("CREATE TABLE etape (\n" +
+                    "                        id INTEGER PRIMARY KEY,\n" +
+                    "                        name TEXT NOT NULL);");
+            return db;
+        }else{
+            return db;
+        }
+    }
+
     //_________________________________________
-    // Oprette ny data
+    // indset ny data
     public void addLog(String note, int antalRore, String kurs, String vindretning, int etapeID){
         db.execSQL("INSERT INTO LogPunkter (note, antalRore, kurs, vindretning, etape_id) VALUES ('"+note+"', "+antalRore+",'"+kurs+"', '"+vindretning+"','"+etapeID+"');");
     }
