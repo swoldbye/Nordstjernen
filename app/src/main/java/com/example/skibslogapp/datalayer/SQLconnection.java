@@ -14,7 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.skibslogapp.R;
 
-//db.execSQL();
+/**
+ * This class is a back up that we use when SQLiteOpenHelper class is not functinoal for some reason.
+ */
 
 public class SQLconnection extends AppCompatActivity {
     private SQLiteDatabase db;
@@ -32,7 +34,6 @@ public class SQLconnection extends AppCompatActivity {
 
         createOrOpenDB();
 
-
         //for debugging===========================
         addEtape("geveGodsEtape");
 
@@ -47,27 +48,31 @@ public class SQLconnection extends AppCompatActivity {
     }
 
     //Making the DB a SingleTon
+    //TODO: Make this in SqlDBsupport instead.
     public SQLiteDatabase createOrOpenDB(){
         if(db == null){
             // Oprettelse af database
             db = SQLiteDatabase.openOrCreateDatabase(getFilesDir() + "/database.db", null);
-            // Oprette logpunkts tabel tabel - foregår via SQL
             /**
              * @author Claes
              * Vi opretter denne med en foreign key, så den kun kan have 1 etape
              * men etape kan godt have mange logpunkter(one to many)
              */
             db.execSQL("DROP TABLE IF EXISTS LogPunkter;");
+            // Oprette logpunkts tabel tabel - foregår via SQL
             db.execSQL("CREATE TABLE LogPunkter (_id INTEGER PRIMARY KEY, note TEXT NOT NULL, antalRore INTEGER," +
                     "kurs TEXT NOT NULL, vindretning TEXT NOT NULL," +
                     "etape_id INTEGER, \n" +
                     "FOREIGN KEY(etape_id) REFERENCES LogPunkter(id));");
 
+            db.execSQL("DROP TABLE IF EXISTS etape;");
             // Oprette etape tabel tabel
             db.execSQL("DROP TABLE IF EXISTS etape;");
             db.execSQL("CREATE TABLE etape (\n" +
                     "                        id INTEGER PRIMARY KEY,\n" +
                     "                        name TEXT NOT NULL);");
+
+
             return db;
         }else{
             return db;

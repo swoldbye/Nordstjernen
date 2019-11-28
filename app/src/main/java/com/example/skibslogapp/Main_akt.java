@@ -25,9 +25,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.skibslogapp.datalayer.SQLconnection;
+import com.example.skibslogapp.datalayer.BenytSQLiteOpenHelper;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.TogtOversigt_frag;
@@ -55,7 +54,7 @@ public class Main_akt extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        Intent i = new Intent(this, SQLconnection.class);
+        Intent i = new Intent(this, BenytSQLiteOpenHelper.class);
         startActivity(i);
 
         /*setContentView(R.layout.activity_main);
