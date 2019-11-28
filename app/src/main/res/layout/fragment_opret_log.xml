@@ -428,7 +428,7 @@
                         android:layout_marginStart="80dp"
                         android:layout_marginEnd="80dp"
                         android:ems="10"
-                        android:hint="Kurs"
+                        android:hint="Styrekurs"
                         android:imeOptions="actionDone"
                         android:inputType="time"
                         android:maxLength="3"
