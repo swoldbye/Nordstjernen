@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.skibslogapp.model.LogInstans;
 import com.google.android.material.tabs.TabItem;
@@ -20,38 +21,34 @@ import java.util.ArrayList;
 
 public class PostOversigt extends Fragment implements View.OnClickListener{
 
+    public static final String ARG_PAGE = "arg_page";
+
+    TextView day;
     ListView postListView;
     Button openCloseButton;
     OnPostOversigtListener mCallback;
     ArrayList<LogInstans> tempLogs = new ArrayList<>();
 
-//    TabLayout tabLayout;
-//    TabItem item1, item2, item3, item4, item5;
-//    ViewPager viewPager;
-//    PageAdapter pageAdapter;
-
     public PostOversigt(OnPostOversigtListener mCallback){
         this.mCallback = mCallback;
     }
+
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_post_oversigt, container, false);
 
+//        Bundle arguments = getArguments();
+//        int dayNumber = arguments.getInt(ARG_PAGE);
+
         openCloseButton = view.findViewById(R.id.openCloseButton);
         openCloseButton.setOnClickListener(this);
 
-//        tabLayout = view.findViewById(R.id.tabLayout);
-//        item1 = view.findViewById(R.id.tab1);
-//        item2 = view.findViewById(R.id.tab2);
-//        item3 = view.findViewById(R.id.tab3);
-//        item4 = view.findViewById(R.id.tab4);
-//        item5 = view.findViewById(R.id.tab5);
-//        viewPager = view.findViewById(R.id.viewPager);
-//
-//        pageAdapter = new PageAdapter(getFragmentManager(),tabLayout.getTabCount());
-//        viewPager.setAdapter(pageAdapter);
+//        day = view.findViewById(R.id.timeOfDay);
+//        day.setText(dayNumber);
+
 
         postListView = view.findViewById(R.id.postListView);
         tempLogs.add(new LogInstans("11:34", "SSØ", "005", "F", "LÆ"));
@@ -72,6 +69,27 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
 
         return view;
     }
+
+//    public static PostOversigt newInstance(int dayNumber) {
+//
+//        OnPostOversigtListener call = new OnPostOversigtListener() {
+//            @Override
+//            public void hideOpretPost() {
+//
+//            }
+//
+//            @Override
+//            public void showOpretPost() {
+//
+//            }
+//        };
+//
+//        PostOversigt fragment = new PostOversigt(call);
+//        Bundle args = new Bundle();
+//        args.putInt(ARG_PAGE,dayNumber);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     public void setList(LogInstans nyeste){
         tempLogs.add(nyeste);

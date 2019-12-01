@@ -79,7 +79,7 @@ public class TabLayout_frag extends Fragment {
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        // Inflate the layout for this fragment
+        tabLayout.setTabsFromPagerAdapter(pageAdapter);
         return view;
     }
 

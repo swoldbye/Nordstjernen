@@ -1,6 +1,7 @@
 package com.example.skibslogapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -28,6 +29,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
+
         switch (position){
             case 0:
                 return new PostActivity();
@@ -44,6 +46,21 @@ public class PageAdapter extends FragmentStatePagerAdapter {
             case 4:
                 return new Day5();
 
+            case 5:
+                return new Day6();
+
+            case 6:
+                return new Day7();
+
+            case 7:
+                return new Day8();
+
+            case 8:
+                return new Day9();
+
+            case 9:
+                return new Day10();
+
              default:
                 return null;
         }
@@ -55,5 +72,12 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getCount() {
         return numOfTabs;
+    }
+
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return "Day " + (position + 1);
     }
 }
