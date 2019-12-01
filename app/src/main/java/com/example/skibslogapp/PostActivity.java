@@ -18,15 +18,10 @@ public class PostActivity extends Fragment implements PostOversigt.OnPostOversig
 
     private static final String TAG = "PostActivity";
 
-    int position;
     OpretLog_frag opretLog_frag;
     PostOversigt postOversigt = new PostOversigt(this);
 
     public PostActivity() {
-    }
-
-    public PostActivity(int position) {
-        this.position = position;
     }
 
     @Override

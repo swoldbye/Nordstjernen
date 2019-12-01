@@ -30,6 +30,9 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
+//        PostActivity postActivity = new PostActivity();
+//        return postActivity;
+
         switch (position){
             case 0:
                 return new PostActivity();
@@ -75,6 +78,12 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     }
 
 
+    /**
+     * Set a title for each tab with a position
+     *
+     * @param position The position of the tab
+     * @return  the title
+     */
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {

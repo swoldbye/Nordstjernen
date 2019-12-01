@@ -63,7 +63,7 @@ public class TabLayout_frag extends Fragment {
                     //Do something else if needed
                 }else if (tab.getPosition() == 4){
                     //Do something else if needed
-                }
+                } // add more if statements or delete them all if we dont need them.
             }
 
             @Override
@@ -77,6 +77,7 @@ public class TabLayout_frag extends Fragment {
             }
         });
 
+        //links the viewpager with the tablayout
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         tabLayout.setTabsFromPagerAdapter(pageAdapter);
