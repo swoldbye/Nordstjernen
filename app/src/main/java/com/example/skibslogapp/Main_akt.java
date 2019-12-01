@@ -27,6 +27,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.example.skibslogapp.datalayer.BenytSQLiteOpenHelper;
+import com.example.skibslogapp.datalayer.local.SQLiteTest;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.TogtOversigt_frag;
@@ -47,6 +48,7 @@ public class Main_akt extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private OpretLog_frag opretLog_frag;
     private TogtOversigt_frag togtOversigt_frag;
+
     private LogOversigt_frag logOversigt_frag;
 
 
@@ -54,10 +56,8 @@ public class Main_akt extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        Intent i = new Intent(this, BenytSQLiteOpenHelper.class);
-        startActivity(i);
 
-        /*setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 
 //      Sæt Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -72,7 +72,10 @@ public class Main_akt extends AppCompatActivity {
         if (savedInstanceState == null){
             Fragment fragment = new PostActivity();
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
-        }*/
+        }
+
+        SQLiteTest.test(getBaseContext());
+
     }
 
     /**

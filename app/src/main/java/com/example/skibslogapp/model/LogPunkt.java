@@ -4,17 +4,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class LogPunkt {
-    int ID;
+    long id;
+
     LocalDate dato;
     LocalTime tid;
 
-    int AntalRoere;
+    int antalroere;
     String position;
     String vindretning = "";
     String kurs = "";
-    String sejlføring = "";
+    String sejlfoering = "";
     String sejlstilling = "";
     String note = "";
-    Boolean hals;
-    Boolean MandOverBord;
+    boolean hals;
+    boolean mandOverBord;
 }

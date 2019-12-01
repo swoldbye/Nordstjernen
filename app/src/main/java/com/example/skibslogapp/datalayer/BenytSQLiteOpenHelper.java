@@ -44,8 +44,10 @@ class TogtDb extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABELLog + " ("
-                + ID + " integer primary key, "
+
+
+        db.execSQL("CREATE TABLE " + TABELLog + " ("
+                    + ID + " integer primary key, "
                 + NOTE + " text not null, " + ANTALRORE + " INTEGER, "
                 +KURS +" text not null, " +VINDRETNING +" text not null,"
                 +ETAPEID +" INTEGER," +
@@ -69,6 +71,7 @@ public class BenytSQLiteOpenHelper extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         TextView textView = new TextView(this);
         textView.append("Herunder resultatet af en forespørgsel på en SQLite-database\n\n");
         ScrollView scrollView = new ScrollView(this);
@@ -79,6 +82,7 @@ public class BenytSQLiteOpenHelper extends AppCompatActivity {
         // Oprettelse af database
         TogtDb kundeDb = new TogtDb(this);
         SQLiteDatabase db = kundeDb.getWritableDatabase();
+
 
         // Oprette en række
         ContentValues række = new ContentValues();

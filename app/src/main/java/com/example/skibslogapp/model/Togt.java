@@ -1,26 +1,32 @@
 package com.example.skibslogapp.model;
 
-import java.util.ArrayList;
 
 public class Togt {
-    //Opdateret:
-    int ID;
-    String Name;
-    public ArrayList etapper = new ArrayList<Etape>();
 
+    private int id;
+    private String name;
 
-    //Ikke opdateret:
-    static ArrayList togt = new ArrayList<LogInstans>();
-
-    private Togt() {}
-
-    public static ArrayList<LogInstans> getTogter(){
-        return togt;
+    public Togt(String name) {
+        this.id = id;
+        this.name = name;
     }
 
-    public static void addLogPost(LogInstans x){
-        togt.add(x);
+    public static void addLogPost(LogInstans nyeste) {
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

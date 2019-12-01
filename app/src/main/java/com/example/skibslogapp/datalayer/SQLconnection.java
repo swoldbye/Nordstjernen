@@ -14,10 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.skibslogapp.R;
 
+
 /**
  * This class is a back up that we use when SQLiteOpenHelper class is not functinoal for some reason.
  */
-
 public class SQLconnection extends AppCompatActivity {
     private SQLiteDatabase db;
 
