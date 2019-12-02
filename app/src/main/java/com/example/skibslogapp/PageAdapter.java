@@ -33,6 +33,8 @@ public class PageAdapter extends FragmentStatePagerAdapter {
 //        PostActivity postActivity = new PostActivity();
 //        return postActivity;
 
+//        return PostActivity.newInstance(position);
+
         switch (position){
             case 0:
                 return new PostActivity();
@@ -87,6 +89,6 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return "Day " + (position + 1);
+        return "Dag " + (position + 1);
     }
 }
