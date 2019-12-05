@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 public class PageAdapter extends FragmentStatePagerAdapter {
 
     private int numOfTabs; // The total number of tabs
+    Fragment fragment = null;
 
     public PageAdapter(FragmentManager fragmentManager, int numOfTabs){
         super(fragmentManager);
@@ -30,12 +31,19 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
+//        for (int i = 0; i < numOfTabs; i++) {
+//            if (i == position) {
+//                fragment = PostActivity.newInstance();
+//                break;
+//            }
+//        }
+//        return fragment;
 //        PostActivity postActivity = new PostActivity();
 //        return postActivity;
 
 //        return PostActivity.newInstance(position);
 
-        switch (position){
+        switch (position) {
             case 0:
                 return new PostActivity();
 
@@ -66,8 +74,9 @@ public class PageAdapter extends FragmentStatePagerAdapter {
             case 9:
                 return new Day10();
 
-             default:
+            default:
                 return null;
+
         }
     }
 

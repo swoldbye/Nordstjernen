@@ -24,12 +24,11 @@ public class PostActivity extends Fragment implements PostOversigt.OnPostOversig
     public PostActivity() {
     }
 
-    public static PostActivity newInstance(int val) {
+    public static PostActivity newInstance() {
 
-        Bundle args = new Bundle();
-
+//        Bundle args = new Bundle();
         PostActivity fragment = new PostActivity();
-        fragment.setArguments(args);
+//        fragment.setArguments(args);
         return fragment;
     }
 

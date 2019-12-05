@@ -14,37 +14,34 @@ import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 /**
- * A simple {@link Fragment} subclass.
+ *
  */
 public class TabLayout_frag extends Fragment {
 
     private static final String TAG = "TabLayout_frag";
 
-    TabLayout tabLayout;
-    TabItem item1, item2, item3, item4, item5;
-    ViewPager viewPager;
-    PageAdapter pageAdapter;
-
-
     public TabLayout_frag() {
-        // Required empty public constructor
-    }
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab_layout, container, false);
 
+        TabLayout tabLayout;
+        ViewPager viewPager;
+        PageAdapter pageAdapter;
+        int days = 8;
+
         Log.d(TAG, "onCreateView: Started.");
 
         tabLayout = view.findViewById(R.id.tabLayout);
-        item1 = view.findViewById(R.id.tab1);
-        item2 = view.findViewById(R.id.tab2);
-        item3 = view.findViewById(R.id.tab3);
-        item4 = view.findViewById(R.id.tab4);
-        item5 = view.findViewById(R.id.tab5);
         viewPager = view.findViewById(R.id.viewPager);
+
+//        for (int i = 0; i < days; i++){
+//            tabLayout.addTab(tabLayout.newTab());
+//        }
 
         pageAdapter = new PageAdapter(getFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
