@@ -1,6 +1,5 @@
 package com.example.skibslogapp.view;
 
-
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,18 +12,24 @@ import android.widget.ArrayAdapter;
 import com.example.skibslogapp.R;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
-public class TogtOversigt_frag extends Fragment {
+public class OpretTogt_frag extends Fragment {
 
+    String[] skibsListe ={"Skib1","Skib2","Skib3","Skib4","Skib5","Skib6"};
+    ArrayAdapter<String> dropDownSkib;
+    MaterialBetterSpinner betterSpinner;
 
-    public TogtOversigt_frag() {
+    public OpretTogt_frag() {
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_togt_oversigt, container, false);
+        View view = inflater.inflate(R.layout.fragment_opret_togt, container, false);
 
-
+        dropDownSkib = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_dropdown_item_1line,skibsListe);
+        betterSpinner = view.findViewById(R.id.skibsListe);
+        betterSpinner.setAdapter(dropDownSkib);
 
         // Inflate the layout for this fragment
         return view;

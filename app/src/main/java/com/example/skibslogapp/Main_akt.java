@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
+import com.example.skibslogapp.view.OpretTogt_frag;
 import com.example.skibslogapp.view.TogtOversigt_frag;
 import com.google.android.material.navigation.NavigationView;
 
@@ -47,6 +48,7 @@ public class Main_akt extends AppCompatActivity {
     private OpretLog_frag opretLog_frag;
     private TogtOversigt_frag togtOversigt_frag;
     private LogOversigt_frag logOversigt_frag;
+    private OpretTogt_frag opretTogt_frag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,13 +101,14 @@ public class Main_akt extends AppCompatActivity {
 
                 logOversigt_frag = new LogOversigt_frag();
                 togtOversigt_frag = new TogtOversigt_frag();
+                opretTogt_frag = new OpretTogt_frag();
 
                 int itemid = menuItem.getItemId();
 
                 //Tilføj funktionalitet til menu items
 
                 if (itemid == R.id.nav_opret_togt){
-
+                    changeFragFromMenu(opretTogt_frag);
 
                 }else if (itemid == R.id.nav_togt_oversigt){
                     changeFragFromMenu(togtOversigt_frag);
