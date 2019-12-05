@@ -1,18 +1,32 @@
 package com.example.skibslogapp.model;
 
-import java.util.ArrayList;
 
 public class Togt {
-    static ArrayList togt = new ArrayList<LogInstans>();
 
+    private long id = -1;
+    private String name;
 
-    private Togt() {}
-
-    public static ArrayList<LogInstans> getTogter(){
-        return togt;
+    public Togt(String name) {
+        this.name = name;
     }
 
-    public static void addLogPost(LogInstans x){
-        togt.add(x);
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean equals(Togt togt){
+        return id == togt.id && name.equals(togt.name);
     }
 }
