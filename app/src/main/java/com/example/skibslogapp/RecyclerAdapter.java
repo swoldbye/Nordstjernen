@@ -23,6 +23,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.NoteVi
         TextView kursTextView;
         TextView sejlføringTextView;
         TextView sejlstillingTextView;
+        TextView noteTextView;
 
         public NoteViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -31,6 +32,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.NoteVi
             kursTextView = itemView.findViewById(R.id.kursTextView);
             sejlføringTextView = itemView.findViewById(R.id.sejlføringTextView);
             sejlstillingTextView = itemView.findViewById(R.id.sejlstillingTextView);
+            noteTextView = itemView.findViewById(R.id.NoteTextView);
 
         }
     }
@@ -55,6 +57,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.NoteVi
         holder.kursTextView.setText(current.getKurs());
         holder.sejlføringTextView.setText(current.getSejlføring());
         holder.sejlstillingTextView.setText(current.getSejlstilling());
+        holder.noteTextView.setText(current.getNote());
     }
 
     @Override

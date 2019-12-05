@@ -46,6 +46,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     //button colors:
     int basicColor;
     int standOutColor;
+
     Button resetTimeButton;
     Button nordButton, østButton, sydButton, vestButton;
     EditText kursEditText, antalRoereEditText, editTime,vindHastighedEditTxt;
@@ -57,6 +58,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     ToggleButtonList hals_Buttons;
     ToggleButtonList sejlStilling_Buttons;
     private ToggleButtonList sejlføring_Buttons;
+    EditText noteEditText;
 
     String simpleDate3;
 
@@ -88,32 +90,34 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         vindHastighedEditTxt = view.findViewById(R.id.vindhastighed_edittext);
 
-
         //Opret Post
         opretButton = (Button) view.findViewById(R.id.opretButton);
+
+        //Note
+        noteEditText = (EditText) view.findViewById(R.id.noteEditText);
 
         //Mand over bord
         mob = view.findViewById(R.id.mob_button);
 
         hals_Buttons = new ToggleButtonList(
-            view.findViewById(R.id.hals_bagbord_btn),
-            view.findViewById(R.id.hals_styrbord_btn)
+                view.findViewById(R.id.hals_bagbord_btn),
+                view.findViewById(R.id.hals_styrbord_btn)
         );
 
         sejlStilling_Buttons = new ToggleButtonList(
-            view.findViewById(R.id.læ),
-            view.findViewById(R.id.ag),
-            view.findViewById(R.id.bi),
-            view.findViewById(R.id.fo),
-            view.findViewById(R.id.ha)
+                view.findViewById(R.id.læ),
+                view.findViewById(R.id.ag),
+                view.findViewById(R.id.bi),
+                view.findViewById(R.id.fo),
+                view.findViewById(R.id.ha)
         );
 
         sejlføring_Buttons = new ToggleButtonList(
-            view.findViewById(R.id.fButton),
-            view.findViewById(R.id.øButton),
-            view.findViewById(R.id.n1Button),
-            view.findViewById(R.id.n2Button),
-            view.findViewById(R.id.n3Button)
+                view.findViewById(R.id.fButton),
+                view.findViewById(R.id.øButton),
+                view.findViewById(R.id.n1Button),
+                view.findViewById(R.id.n2Button),
+                view.findViewById(R.id.n3Button)
         );
 
 
@@ -334,7 +338,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
                     vindretning_input.getText().toString(),
                     kursEditText.getText().toString(),
                     sejlføring,
-                    sejlstilling
+                    sejlstilling,
+                    noteEditText.getText().toString()
             );
 
             Togt.addLogPost(nyeste);

@@ -7,69 +7,94 @@
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
     app:cardElevation="3dp"
-    app:cardBackgroundColor="@color/colorAccent"
+    app:cardBackgroundColor="#e6f2ff"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:orientation="horizontal"
         android:weightSum="100">
 
         <TextView
             android:id="@+id/tidTextView"
-            android:layout_width="40sp"
-            android:layout_height="35sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="80"
             android:gravity="center"
             android:text="TextView"
-            android:layout_weight="20"
-            android:textSize="25sp" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="25sp"
+            android:background="#cce6ff"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="20">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
 
-        <TextView
-            android:id="@+id/vindretningTextView"
-            android:layout_width="40sp"
-            android:layout_height="35dp"
-            android:gravity="center"
-            android:text="TextView"
-            android:layout_weight="20"
-            android:textSize="25sp" />
+                <TextView
+                    android:id="@+id/vindretningTextView"
+                    android:layout_width="40sp"
+                    android:layout_height="35dp"
+                    android:layout_weight="25"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/kursTextView"
-            android:layout_width="40sp"
-            android:layout_height="35dp"
-            android:gravity="center"
-            android:text="TextView"
-            android:layout_weight="20"
-            android:textSize="25sp" />
+                <TextView
+                    android:id="@+id/kursTextView"
+                    android:layout_width="40sp"
+                    android:layout_height="35dp"
+                    android:layout_weight="25"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/sejlføringTextView"
-            android:layout_width="40sp"
-            android:layout_height="35dp"
-            android:gravity="center"
-            android:text="TextView"
-            android:layout_weight="20"
-            android:textSize="25sp" />
+                <TextView
+                    android:id="@+id/sejlføringTextView"
+                    android:layout_width="40sp"
+                    android:layout_height="35dp"
+                    android:layout_weight="25"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/sejlstillingTextView"
-            android:layout_width="40sp"
-            android:layout_height="35dp"
-            android:gravity="center"
-            android:text="TextView"
-            android:layout_weight="20"
-            android:textSize="25sp" />
+                <TextView
+                    android:id="@+id/sejlstillingTextView"
+                    android:layout_width="40sp"
+                    android:layout_height="35dp"
+                    android:layout_weight="25"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="25sp" />
 
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/NoteTextView"
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:text="Here is an arbitrary note"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25sp"
+                android:paddingLeft="5dp"
+                />
+
+        </LinearLayout>
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/NoteTextView"
-        android:layout_width="match_parent"
-        android:layout_height="35sp"
-        android:text="Here is an arbitrary note"
-        android:textSize="25sp" />
 
 
 </androidx.cardview.widget.CardView>

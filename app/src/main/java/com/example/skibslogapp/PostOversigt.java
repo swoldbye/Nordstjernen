@@ -54,16 +54,16 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
 //        day = view.findViewById(R.id.timeOfDay);
 //        day.setText(dayNumber);
 
-        logs.add(new LogInstans("11:34", "SSØ", "005", "F", "LÆ"));
-        logs.add(new LogInstans("11:35", "N", "006", "Ø", "AG"));
-        logs.add(new LogInstans("11:37", "NØ", "026", "F", "BI"));
-        logs.add(new LogInstans("12:00", "SØ", "010", "F", "FO"));
-        logs.add(new LogInstans("12:32", "NV", "500", "N1", "HA"));
-        logs.add(new LogInstans("12:35", "NVN", "234", "F", "HA"));
-        logs.add(new LogInstans("12:50", "SSØ", "543", "N2", "LÆ"));
-        logs.add(new LogInstans("13:30", "SSØ", "345", "F", "FO"));
-        logs.add(new LogInstans("13:34", "SSØ", "453", "N#", "AG"));
-        logs.add(new LogInstans("14:00", "SSØ", "023", "F", "BI"));
+        logs.add(new LogInstans("11:34", "", "005", "F", "LÆ", ""));
+        logs.add(new LogInstans("11:35", "N", "006", "Ø", "AG", "Simon er cool."));
+        logs.add(new LogInstans("11:37", "", "026", "F", "BI", "Simon er super cool."));
+        logs.add(new LogInstans("12:00", "SØ", "", "F", "FO",""));
+        logs.add(new LogInstans("12:32", "NV", "", "N1", "HA", ""));
+        logs.add(new LogInstans("12:35", "", "", "F", "HA", "Simon er super super super super cool."));
+        logs.add(new LogInstans("12:50", "SSØ", "543", "N2", "LÆ", "Vinden er kold"));
+        logs.add(new LogInstans("13:30", "", "345", "F", "FO", "Rigtig kold :("));
+        logs.add(new LogInstans("13:34", "", "", "N#", "AG", ""));
+        logs.add(new LogInstans("14:00", "", "023", "F", "BI", ""));
 
 
         //tempLogs.addAll(Togt.getTogter());
