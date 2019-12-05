@@ -2,7 +2,7 @@ package com.example.skibslogapp.model;
 
 
 import com.example.skibslogapp.model.Togt;
-//Todo: refactor this into LogPunkt, LogbogDAO, etape and Togt
+//Todo: refactor this into Logpunkt, LogbogDAO, etape and Togt
 
 public class LogInstans{
 

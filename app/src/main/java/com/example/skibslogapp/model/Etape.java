@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Etape {
 
-    private int id = -1;
+    private long id = -1;
     private Date startDate = null;
     private Date endDate = null;
 
@@ -41,8 +41,12 @@ public class Etape {
         }
     }
 
-    public int getId(){
+    public long getId(){
         return id;
+    }
+
+    public void setId(long id){
+        this.id = id;
     }
 
     @Override

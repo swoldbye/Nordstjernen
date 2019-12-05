@@ -3,6 +3,7 @@ package com.example.skibslogapp.datalayer.local;
 import android.content.Context;
 
 import com.example.skibslogapp.model.Etape;
+import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.model.Togt;
 
 import java.util.List;
@@ -17,11 +18,31 @@ public class SQLiteTest {
         List<Togt> togter = dao.getTogter();
 
         if( togter.size() == 0){
-            dao.addTogt(new Togt("Tokes Sommertogt"));
-            dao.addTogt(new Togt("En tur rundt om fyn"));
-            dao.addTogt(new Togt("Ud i det blå"));
+
+            Togt togt = new Togt("Tokes Sommertogt");
+            dao.addTogt(togt);
+
+            Etape etape = new Etape();
+            dao.addEtape(togt, etape);
+
+            Logpunkt logpunkt = new Logpunkt(null);
+
+            dao.addLogpunkt(etape, logpunkt);
         }
 
+        Etape etape = dao.getEtaper(dao.getTogter().get(0)).get(0);
+        List<Logpunkt> punkter = dao.getLogpunkter(etape);
+
+        for( Logpunkt punkt : punkter ){
+            System.out.println(punkt);
+        }
+
+
+
+
+
+
+        /*
         togter = dao.getTogter();
 
         System.out.println("Loading togter:");
@@ -43,8 +64,7 @@ public class SQLiteTest {
             etaper = dao.getEtaper(togt);
             for( Etape etape : etaper ){
                 System.out.println(etape);
-            }
-        }
-    }
 
+            }*/
+    }
 }

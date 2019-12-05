@@ -3,22 +3,21 @@ package com.example.skibslogapp.model;
 
 public class Togt {
 
-    private int id;
+    private long id = -1;
     private String name;
 
     public Togt(String name) {
-        this.id = id;
         this.name = name;
     }
 
     public static void addLogPost(LogInstans nyeste) {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
