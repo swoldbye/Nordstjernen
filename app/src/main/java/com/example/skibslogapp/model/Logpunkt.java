@@ -20,6 +20,7 @@ public class Logpunkt {
 
     private String sejlfoering = null;
     private String sejlstilling = null;
+    private String stroem = null;
 
     int hals = -1;
 
@@ -134,6 +135,15 @@ public class Logpunkt {
 
     public void setTogtId(long togtId) {
         this.togtId = togtId;
+    }
+
+
+    public String getStroem() {
+        return stroem;
+    }
+
+    public void setStroem(String stroem) {
+        this.stroem = stroem;
     }
 
     public String getTimeString(){

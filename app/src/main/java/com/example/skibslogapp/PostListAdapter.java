@@ -44,6 +44,7 @@ public class PostListAdapter extends ArrayAdapter<Logpunkt> {
         String vindretning = logpunkt.getVindretning();
         String sejlfoering = logpunkt.getSejlfoering();
         String sejlstilling = logpunkt.getSejlstilling();
+        String stroem = logpunkt.getStroem();
         String kurs = logpunkt.getKurs() > -1 ? Integer.toString(logpunkt.getKurs()) : "";
         String note = logpunkt.getNote();
 
@@ -56,6 +57,7 @@ public class PostListAdapter extends ArrayAdapter<Logpunkt> {
 
         TextView tidTextView = convertView.findViewById(R.id.tidTextView);
         TextView vindretningTextView = convertView.findViewById(R.id.vindretningTextView);
+        TextView strømningTextView = convertView.findViewById(R.id.strømningTextView);
         TextView kursTextView = convertView.findViewById(R.id.kursTextView);
         TextView sejlføringTextView = convertView.findViewById(R.id.sejlføringTextView);
         TextView sejlstillingTextView = convertView.findViewById(R.id.sejlstillingTextView);
@@ -63,6 +65,7 @@ public class PostListAdapter extends ArrayAdapter<Logpunkt> {
 
         tidTextView.setText(tid);
         vindretningTextView.setText(vindretning);
+        strømningTextView.setText(stroem);
         kursTextView.setText(kurs);
         sejlføringTextView.setText(sejlfoering);
         sejlstillingTextView.setText(sejlstilling);
