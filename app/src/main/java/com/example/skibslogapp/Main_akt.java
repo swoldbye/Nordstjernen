@@ -17,14 +17,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
@@ -46,11 +42,15 @@ public class Main_akt extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private OpretLog_frag opretLog_frag;
     private TogtOversigt_frag togtOversigt_frag;
+
     private LogOversigt_frag logOversigt_frag;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
 //      Sæt Toolbar
@@ -108,7 +108,7 @@ public class Main_akt extends AppCompatActivity {
 
 
                 }else if (itemid == R.id.nav_togt_oversigt){
-                    changeFragFromMenu(togtOversigt_frag);
+                    //changeFragFromMenu(togtOversigt_frag);
 
                 }else if (itemid == R.id.nav_opret_etape){
 
@@ -119,7 +119,7 @@ public class Main_akt extends AppCompatActivity {
                     changeFragFromMenu(opretLog_frag);
 
                 }else if (itemid == R.id.nav_log_oversigt){
-                    changeFragFromMenu(logOversigt_frag);
+                   //changeFragFromMenu(logOversigt_frag);
 
                 }else {
                     Toast.makeText(Main_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",
