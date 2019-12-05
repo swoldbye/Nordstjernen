@@ -38,11 +38,11 @@ public class PageAdapter extends FragmentStatePagerAdapter {
 //            }
 //        }
 //        return fragment;
-//        PostActivity postActivity = new PostActivity();
-//        return postActivity;
+        PostActivity postActivity = new PostActivity();
+        return postActivity;
 
 //        return PostActivity.newInstance(position);
-
+/*
         switch (position) {
             case 0:
                 return new PostActivity();
@@ -78,6 +78,8 @@ public class PageAdapter extends FragmentStatePagerAdapter {
                 return null;
 
         }
+
+ */
     }
 
     /**
@@ -85,7 +87,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
      */
     @Override
     public int getCount() {
-        return numOfTabs;
+        return 5;
     }
 
 

@@ -3,6 +3,8 @@ package com.example.skibslogapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
@@ -23,16 +25,19 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
 
     public static final String ARG_PAGE = "arg_page";
 
-    TextView day;
-    ListView postListView;
+    RecyclerView postRecyclerView;
     Button openCloseButton;
     OnPostOversigtListener mCallback;
-    ArrayList<LogInstans> tempLogs = new ArrayList<>();
+    ArrayList<LogInstans> logs = new ArrayList<>();
+    int position;
 
-    public PostOversigt(OnPostOversigtListener mCallback){
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+
+    public PostOversigt(OnPostOversigtListener mCallback) {
         this.mCallback = mCallback;
     }
-
 
 
     @Nullable
@@ -49,26 +54,31 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
 //        day = view.findViewById(R.id.timeOfDay);
 //        day.setText(dayNumber);
 
+        logs.add(new LogInstans("11:34", "SSØ", "005", "F", "LÆ"));
+        logs.add(new LogInstans("11:35", "N", "006", "Ø", "AG"));
+        logs.add(new LogInstans("11:37", "NØ", "026", "F", "BI"));
+        logs.add(new LogInstans("12:00", "SØ", "010", "F", "FO"));
+        logs.add(new LogInstans("12:32", "NV", "500", "N1", "HA"));
+        logs.add(new LogInstans("12:35", "NVN", "234", "F", "HA"));
+        logs.add(new LogInstans("12:50", "SSØ", "543", "N2", "LÆ"));
+        logs.add(new LogInstans("13:30", "SSØ", "345", "F", "FO"));
+        logs.add(new LogInstans("13:34", "SSØ", "453", "N#", "AG"));
+        logs.add(new LogInstans("14:00", "SSØ", "023", "F", "BI"));
 
-        postListView = view.findViewById(R.id.postListView);
-        tempLogs.add(new LogInstans("11:34", "SSØ", "005", "F", "LÆ"));
-        tempLogs.add(new LogInstans("11:35", "N", "006", "Ø", "AG"));
-        tempLogs.add(new LogInstans("11:37", "NØ", "026", "F", "BI"));
-        tempLogs.add(new LogInstans("12:00", "SØ", "010", "F", "FO"));
-        tempLogs.add(new LogInstans("12:32", "NV", "500", "N1", "HA"));
-        tempLogs.add(new LogInstans("12:35", "NVN", "234", "F", "HA"));
-        tempLogs.add(new LogInstans("12:50", "SSØ", "543", "N2", "LÆ"));
-        tempLogs.add(new LogInstans("13:30", "SSØ", "345", "F", "FO"));
-        tempLogs.add(new LogInstans("13:34", "SSØ", "453", "N#", "AG"));
-        tempLogs.add(new LogInstans("14:00", "SSØ", "023", "F", "BI"));
 
         //tempLogs.addAll(Togt.getTogter());
 
-        PostListAdapter adapter = new PostListAdapter(getActivity(), R.layout.postlist_view_layout, tempLogs);
-        postListView.setAdapter(adapter);
+        postRecyclerView = view.findViewById(R.id.postRecyclerView);
+        postRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this.getContext());
+        mAdapter = new RecyclerAdapter(logs);
+
+        postRecyclerView.setLayoutManager(mLayoutManager);
+        postRecyclerView.setAdapter(mAdapter);
 
         return view;
     }
+
 
 //    public static PostOversigt newInstance(int dayNumber) {
 //
@@ -92,11 +102,14 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
 //    }
 
     public void setList(LogInstans nyeste){
-        tempLogs.add(nyeste);
+        return;
+        /*tempLogs.add(nyeste);
         PostListAdapter adapter = new PostListAdapter(getActivity(), R.layout.postlist_view_layout, tempLogs);
         postListView.setAdapter(adapter);
-        openCloseButton.setText("open");
+        openCloseButton.setText("open");*/
     }
+
+
 
     public void onClick(View v){
         if(v == openCloseButton){
