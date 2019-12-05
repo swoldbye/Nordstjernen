@@ -5,5 +5,20 @@
     android:layout_height="match_parent"
     tools:context=".view.TogtOversigt_frag">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/togtRecycView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:background="@color/colorPrimary"
+            android:scrollbars="vertical"/>
+
+    </LinearLayout>
+
 
 </FrameLayout>

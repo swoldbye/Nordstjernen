@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -51,11 +53,10 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         opretBtn = view.findViewById(R.id.opretTogtBtn);
         opretBtn.setOnClickListener(this);
 
-        dropDownShip = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_dropdown_item_1line,skibsListe);
+        dropDownShip = new ArrayAdapter<String>(this.getContext(),android.R.layout.simple_dropdown_item_1line,skibsListe);
         betterSpinner = view.findViewById(R.id.skibsListe);
         betterSpinner.setAdapter(dropDownShip);
 
-        // Inflate the layout for this fragment
         return view;
     }
 
@@ -72,6 +73,8 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         String kaptajn = skipper.getText().toString();
         String inputtedDate = date.getText().toString();
         String togtStartDest = startDest.getText().toString();
+
+        TogtOversigt_frag togtOversigt_frag;
 
         if (view == opretBtn && togtet.length() <= 0){
             togtName.setError("Der skal indtastes et navn til togtet!");
@@ -92,6 +95,8 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         }else {
             if (view == opretBtn){
 
+                togtOversigt_frag = new TogtOversigt_frag();
+
                 loadFromPrefs();
 
                 Togt togt = new Togt(kaptajn,togtStartDest,togtet,inputtedDate,ship);
@@ -101,6 +106,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
                 Toast.makeText(this.getContext(),"Togt oprettet!",Toast.LENGTH_LONG).show();
 
+                changeFragment(togtOversigt_frag);
             }
         }
     }
@@ -123,7 +129,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
     private void loadFromPrefs(){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         gson = new Gson();
-        String json = sharedPreferences.getString("highscoreList", null);
+        String json = sharedPreferences.getString("togterList", null);
         Type type = new TypeToken<ArrayList<Togt>>() {}.getType();
         togter = gson.fromJson(json,type);
 
@@ -131,4 +137,12 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
             togter = new ArrayList<>();
         }
     }
+
+    private void changeFragment(Fragment fragment){
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragContainer,fragment);
+        fragmentTransaction.commit();
+    }
+
 }
