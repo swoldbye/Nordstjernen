@@ -42,6 +42,11 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".datalayer.SQLconnection" />
+        <activity android:name=".datalayer.BenytSQLiteOpenHelper" />
+
+
+
     </application>
 
 </manifest>
