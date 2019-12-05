@@ -12,10 +12,43 @@ public class Togt {
     ArrayList<Besaetning> besaetningArrayList = new ArrayList<>();
     String skipper;
     String startDest;
-    String slutDest;
-    Date dato;
+    String name;
+    String date;
+    String ship;
 
     private Togt() {}
+
+    public Togt(String skipper, String startDest, String name, String date, String ship) {
+        this.skipper = skipper;
+        this.startDest = startDest;
+        this.name = name;
+        this.date = date;
+        this.ship = ship;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getShip() {
+        return ship;
+    }
+
+    public void setShip(String ship) {
+        this.ship = ship;
+    }
 
     public static ArrayList getTogt() {
         return togt;
@@ -47,22 +80,6 @@ public class Togt {
 
     public void setStartDest(String startDest) {
         this.startDest = startDest;
-    }
-
-    public String getSlutDest() {
-        return slutDest;
-    }
-
-    public void setSlutDest(String slutDest) {
-        this.slutDest = slutDest;
-    }
-
-    public Date getDato() {
-        return dato;
-    }
-
-    public void setDato(Date dato) {
-        this.dato = dato;
     }
 
     public static ArrayList<LogInstans> getTogter(){
