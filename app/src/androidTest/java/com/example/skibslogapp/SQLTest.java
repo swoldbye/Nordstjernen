@@ -62,4 +62,55 @@ public class SQLTest {
         SQLiteConnector.enableTestMode(false, context);
     }
 
+
+    private class TestTogtObserver implements TogtDAO.TogtObserver{
+
+        private Togt togt = null;
+
+        Togt getTogt(){
+            Togt togt = this.togt;
+            this.togt = null;
+            return togt;
+        }
+
+        @Override
+        public void onUpdate(Togt togt) {
+            this.togt = togt;
+        }
+    }
+
+    @Test
+    public void togtObserverTest(){
+
+        // Setup
+        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        SQLiteConnector.enableTestMode(true, context);
+
+        TogtDAO togtDAO = new TogtDAO(context);
+        EtapeDAO etapeDAO = new EtapeDAO(context);
+        LogpunktDAO logpunktDAO = new LogpunktDAO(context);
+
+        Togt togt = new Togt("Test Togt");
+        Etape etape = new Etape();
+        Logpunkt logpunkt = new Logpunkt();
+
+        // Setting up observer
+        TestTogtObserver observer = new TestTogtObserver();
+        TogtDAO.addTogtObserver(observer);
+        assertNull( observer.getTogt()  );
+
+        // Saving togter
+        togtDAO.addTogt(togt);
+        assertNull( observer.getTogt()  );
+
+        etapeDAO.addEtape(togt, etape);
+        assertTrue( observer.getTogt().equals(togt) );
+
+        logpunktDAO.addLogpunkt(etape, logpunkt);
+        assertTrue( observer.getTogt().equals(togt) );
+
+        SQLiteConnector.enableTestMode(false, context);
+    }
+
+
 }

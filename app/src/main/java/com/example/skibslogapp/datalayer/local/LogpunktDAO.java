@@ -24,7 +24,6 @@ public class LogpunktDAO {
     }
 
 
-
     /**
      * Add a Logpunkt to the database. A new unique ID will be generated for
      * the Logpunkt, and set to the 'id' field.
@@ -67,6 +66,10 @@ public class LogpunktDAO {
 
         long id = database.insert("logpunkter", null, row);
         logpunkt.setId(id);
+        logpunkt.setEtapeId(etape.getId());
+        logpunkt.setTogtId(etape.getTogtId());
+
+        new TogtDAO(context).togtUpdated(etape.getTogtId());
     }
 
 
@@ -88,9 +91,13 @@ public class LogpunktDAO {
 
         Cursor cursor = database.rawQuery("SELECT * FROM logpunkter WHERE etape="+etape.getId()+";", null);
 
+        // Create logpunkter
         while( cursor.moveToNext() ){
             Logpunkt logpunkt = new Logpunkt( new Date( cursor.getLong(cursor.getColumnIndex("date"))));
             logpunkt.setId( cursor.getInt( cursor.getColumnIndex("id")));
+
+            logpunkt.setEtapeId(etape.getId());
+            logpunkt.setTogtId(etape.getTogtId());
 
             logpunkt.setVindretning( cursor.getString( cursor.getColumnIndex("vindretning") ));
             logpunkt.setSejlfoering( cursor.getString( cursor.getColumnIndex("sejlfoering") ));

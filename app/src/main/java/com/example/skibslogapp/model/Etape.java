@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Etape {
 
     private long id = -1;
+    private long togtId = -1;
     private Date startDate = null;
     private Date endDate = null;
 
@@ -34,8 +35,9 @@ public class Etape {
     }
 
 
-    public Etape(long id, Date startDate, Date endDate) {
+    public Etape(long id, long togtId, Date startDate, Date endDate) {
         this.id = id;
+        this.togtId = togtId;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -83,6 +85,17 @@ public class Etape {
         this.id = id;
     }
 
+
+
+    public long getTogtId() {
+        return togtId;
+    }
+
+    public void setTogtId(long togtId) {
+        this.togtId = togtId;
+    }
+
+
     @Override
     public String toString(){
         Calendar cal = Calendar.getInstance();
@@ -107,8 +120,9 @@ public class Etape {
             );
         }
 
-        return String.format( "{Etape{ id: %d, start: %s, end: %s }",
+        return String.format( "{Etape{ id: %d, togtId: %d, start: %s, end: %s }",
                 id,
+                togtId,
                 startDateString,
                 endDateString
         );
@@ -118,6 +132,7 @@ public class Etape {
     public boolean equals(Etape e){
         return
                 id == e.id &&
+                togtId == e.togtId &&
                 Objects.equals(startDate, e.startDate) &&
                 Objects.equals(endDate, e.endDate);
     }

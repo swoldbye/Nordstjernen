@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class Logpunkt {
     private long id = -1;
+    private long etapeId = -1;
+    private long togtId = -1;
 
     private Date date; // And time
 
@@ -116,6 +118,22 @@ public class Logpunkt {
     }
 
 
+    public long getEtapeId() {
+        return etapeId;
+    }
+
+    public void setEtapeId(long etapeId) {
+        this.etapeId = etapeId;
+    }
+
+    public long getTogtId() {
+        return togtId;
+    }
+
+    public void setTogtId(long togtId) {
+        this.togtId = togtId;
+    }
+
     /**
      * Compares the Logpunkt with another Logpunkt, comparing
      * all values.
@@ -151,8 +169,9 @@ public class Logpunkt {
         );
 
         return String.format(
-            "Logpunkt{ id: %d, date: %s, mob: %s, kurs: %s, vind: %s, sejls.: %s, sejlf. %s, roere: %s, note: %s}",
+            "Logpunkt{ id: %d, etapeId: %d, date: %s, mob: %s, kurs: %s, vind: %s, sejls.: %s, sejlf. %s, roere: %s, note: %s}",
                 id,
+                etapeId,
                 dateString,
                 mandOverBord ? "true" : "false",
                 kurs >=0 ? kurs : "-",

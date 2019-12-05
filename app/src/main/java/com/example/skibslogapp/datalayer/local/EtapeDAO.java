@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+
 public class EtapeDAO {
 
 
@@ -39,8 +40,10 @@ public class EtapeDAO {
      */
     public void addEtape( Togt togt, Etape etape ){
 
-        if( !new TogtDAO(context).togtExists(togt) )
-            throw new DAOException("Etape with ID "+etape.getId()+" doesn't exist in database");
+        TogtDAO togtDAO = new TogtDAO(context);
+
+        if( !togtDAO.togtExists(togt) )
+            throw new DAOException("Togt with ID "+togt.getId()+" doesn't exist in database");
 
         SQLiteDatabase database = connector.getWritableDatabase();
 
@@ -53,6 +56,9 @@ public class EtapeDAO {
 
         long id = database.insert("etaper", "endDate", row);
         etape.setId(id);
+        etape.setTogtId(togt.getId());
+
+        togtDAO.togtUpdated(etape.getTogtId());
     }
 
 
@@ -79,6 +85,7 @@ public class EtapeDAO {
             int column = -1;
 
             long id = cursor.getInt( cursor.getColumnIndex("id"));
+            long togtId = cursor.getInt( cursor.getColumnIndex("togt"));
 
             Date startDate = null;
             column = cursor.getColumnIndex("startDate");
@@ -92,7 +99,7 @@ public class EtapeDAO {
                 endDate = new Date(cursor.getLong(column));
             }
 
-            etaper.add( new Etape(id, startDate, endDate) );
+            etaper.add( new Etape(id, togtId, startDate, endDate) );
         }
         cursor.close();
 
@@ -124,8 +131,9 @@ public class EtapeDAO {
             row.put( "endDate", etape.getEndDate().getTime() );
 
         database.update("etaper", row, "id="+etape.getId(), null );
-    }
 
+        new TogtDAO(context).togtUpdated(etape.getTogtId());
+    }
 
 
     /**

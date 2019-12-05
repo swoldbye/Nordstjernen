@@ -16,9 +16,21 @@ public class TogtDAO {
     private SQLiteConnector connector;
     private Context context;
 
+    private static LinkedList<TogtObserver> togtObservers = new LinkedList<>();
+
     public TogtDAO(Context context){
         this.context = context;
         connector = new SQLiteConnector(context);
+    }
+
+
+    /**
+     * Add an observer to be notified whenever a togt has been updated.
+     *
+     * @param observer The observer to be notified
+     */
+    public static void addTogtObserver( TogtObserver observer ){
+        togtObservers.add(observer);
     }
 
 
@@ -64,6 +76,41 @@ public class TogtDAO {
         return togter;
     }
 
+
+    /**
+     * Retrieves a Togt based on the ID. Not meant to be used
+     * outside of the class.
+     */
+    private Togt getTogt(long id){
+        SQLiteDatabase database = connector.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM togter WHERE id="+id+";", null);
+
+        Togt togt = null;
+        while(cursor.moveToNext()){
+            togt = new Togt(cursor.getString(1));
+            togt.setId(cursor.getInt(0));
+        }
+
+        cursor.close();
+        return togt;
+    }
+
+
+    protected void togtUpdated(long id){
+        Togt togt = getTogt(id);
+
+        if( togt == null )
+            throw new DAOException("No Togt with ID "+id+" exists in the database");
+
+        for( TogtObserver observer : togtObservers){
+            observer.onUpdate(togt);
+        }
+    }
+
+
+
+
+
     /**
      * Checks if the given Togt exists in the database
      * based on the togt ID.
@@ -81,5 +128,9 @@ public class TogtDAO {
         return rowCount > 0;
     }
 
+
+    public interface TogtObserver{
+        void onUpdate(Togt togt);
+    }
 
 }
