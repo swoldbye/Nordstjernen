@@ -22,7 +22,7 @@
             >
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/opretTogtBtn"
+                android:id="@+id/opretBtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/colorPrimary"

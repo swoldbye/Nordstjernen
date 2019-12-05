@@ -50,7 +50,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         skipper = view.findViewById(R.id.skipperEdit);
         date = view.findViewById(R.id.datoEdit);
         startDest = view.findViewById(R.id.startDestEdit);
-        opretBtn = view.findViewById(R.id.opretTogtBtn);
+        opretBtn = view.findViewById(R.id.opretBtn);
         opretBtn.setOnClickListener(this);
 
         dropDownShip = new ArrayAdapter<String>(this.getContext(),android.R.layout.simple_dropdown_item_1line,skibsListe);

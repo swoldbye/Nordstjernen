@@ -27,13 +27,15 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class TogtOversigt_frag extends Fragment implements TogtListAdapter.OnTogtListener {
+public class TogtOversigt_frag extends Fragment implements TogtListAdapter.OnTogtListener, View.OnClickListener {
 
     private static final String TAG = "TogtOversigt_frag";
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+
+    View opretTogt;
 
     ArrayList<Togt> togtList;
 
@@ -46,6 +48,9 @@ public class TogtOversigt_frag extends Fragment implements TogtListAdapter.OnTog
         View view = inflater.inflate(R.layout.fragment_togt_oversigt, container, false);
 
         togtList = new ArrayList<>();
+
+        opretTogt = view.findViewById(R.id.opretTogtBtn);
+        opretTogt.setOnClickListener(this);
 
         loadFromPrefs();
 
@@ -77,7 +82,18 @@ public class TogtOversigt_frag extends Fragment implements TogtListAdapter.OnTog
     public void onTogtClick(int position) {
         Log.d(TAG,"onTogtClick: clicked");
 
+    }
 
+    @Override
+    public void onClick(View v) {
+        OpretTogt_frag opretTogt_frag = new OpretTogt_frag();
+        changeFragment(opretTogt_frag);
+    }
 
+    private void changeFragment(Fragment fragment){
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragContainer,fragment);
+        fragmentTransaction.commit();
     }
 }
