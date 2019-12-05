@@ -14,9 +14,9 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 public class OpretTogt_frag extends Fragment {
 
-    String[] skibsListe ={"Skib1","Skib2","Skib3","Skib4","Skib5","Skib6"};
-    ArrayAdapter<String> dropDownSkib;
-    MaterialBetterSpinner betterSpinner;
+    private String[] skibsListe ={"Skib1","Skib2","Skib3","Skib4","Skib5","Skib6"};
+    private ArrayAdapter<String> dropDownSkib;
+    private MaterialBetterSpinner betterSpinner;
 
     public OpretTogt_frag() {
 
