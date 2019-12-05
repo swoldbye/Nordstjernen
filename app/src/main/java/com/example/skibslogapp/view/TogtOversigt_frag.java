@@ -5,10 +5,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +27,9 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class TogtOversigt_frag extends Fragment {
+public class TogtOversigt_frag extends Fragment implements TogtListAdapter.OnTogtListener {
+
+    private static final String TAG = "TogtOversigt_frag";
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -47,7 +52,7 @@ public class TogtOversigt_frag extends Fragment {
         recyclerView = view.findViewById(R.id.togtRecycView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this.getContext());
-        adapter = new TogtListAdapter(togtList);
+        adapter = new TogtListAdapter(togtList, this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
@@ -68,4 +73,11 @@ public class TogtOversigt_frag extends Fragment {
         }
     }
 
+    @Override
+    public void onTogtClick(int position) {
+        Log.d(TAG,"onTogtClick: clicked");
+
+
+
+    }
 }

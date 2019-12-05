@@ -119,10 +119,10 @@ public class Main_akt extends AppCompatActivity {
                 }else if (itemid == R.id.nav_etape_oversigt){
 
                 }else if (itemid == R.id.nav_opret_log){
-                    changeFragFromMenu(opretLog_frag);
+
 
                 }else if (itemid == R.id.nav_log_oversigt){
-                    changeFragFromMenu(logOversigt_frag);
+
 
                 }else {
                     Toast.makeText(Main_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",

@@ -15,26 +15,37 @@ import java.util.ArrayList;
 public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtListViewHolder> {
 
     private ArrayList<Togt> togtArrayList;
+    private OnTogtListener togtListener;
 
-    public static class TogtListViewHolder extends RecyclerView.ViewHolder {
+    public static class TogtListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView togtName;
+        OnTogtListener onTogtListener;
 
-        public TogtListViewHolder(@NonNull View itemView) {
+        public TogtListViewHolder(@NonNull View itemView, OnTogtListener onTogtListener) {
             super(itemView);
             togtName = itemView.findViewById(R.id.togtNameListItem);
+            this.onTogtListener = onTogtListener;
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onTogtListener.onTogtClick(getAdapterPosition());
         }
     }
 
-    public TogtListAdapter(ArrayList<Togt> list) {
+    public TogtListAdapter(ArrayList<Togt> list, OnTogtListener onTogtListener) {
         togtArrayList = list;
+        this.togtListener = onTogtListener;
     }
 
     @NonNull
     @Override
     public TogtListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.togt_list_item, parent,false);
-        TogtListViewHolder viewHolder = new TogtListViewHolder(view);
+        TogtListViewHolder viewHolder = new TogtListViewHolder(view, togtListener );
         return viewHolder;
     }
 
@@ -56,5 +67,12 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
     @Override
     public int getItemCount() {
         return togtArrayList.size();
+    }
+
+    /**
+     *
+     */
+    public interface OnTogtListener{
+        void onTogtClick(int position);
     }
 }
