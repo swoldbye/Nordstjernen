@@ -3,36 +3,44 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="8dp"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
-    app:cardElevation="3dp"
+    app:cardElevation="4dp"
     app:cardBackgroundColor="#e6f2ff"
-    >
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:orientation="horizontal"
-        android:weightSum="100">
+        >
 
         <TextView
             android:id="@+id/tidTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="80"
+            android:layout_weight="75"
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/colorPrimary"
             android:textSize="25sp"
-            android:background="#cce6ff"
+            android:textStyle="bold"
             />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="97"
+            android:text="" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="20">
+            android:layout_weight="25">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,7 +54,7 @@
                     android:layout_width="40sp"
                     android:layout_height="35dp"
                     android:layout_weight="25"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="TextView"
                     android:textColor="@color/colorPrimary"
                     android:textSize="25sp" />
@@ -56,7 +64,7 @@
                     android:layout_width="40sp"
                     android:layout_height="35dp"
                     android:layout_weight="25"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="TextView"
                     android:textColor="@color/colorPrimary"
                     android:textSize="25sp" />
@@ -66,7 +74,7 @@
                     android:layout_width="40sp"
                     android:layout_height="35dp"
                     android:layout_weight="25"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="TextView"
                     android:textColor="@color/colorPrimary"
                     android:textSize="25sp" />
@@ -76,7 +84,7 @@
                     android:layout_width="40sp"
                     android:layout_height="35dp"
                     android:layout_weight="25"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="TextView"
                     android:textColor="@color/colorPrimary"
                     android:textSize="25sp" />
@@ -90,7 +98,7 @@
                 android:text="Here is an arbitrary note"
                 android:textColor="@color/colorPrimary"
                 android:textSize="25sp"
-                android:paddingLeft="5dp"
+                android:textStyle="italic"
                 />
 
         </LinearLayout>
