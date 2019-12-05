@@ -14,10 +14,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 class SQLiteConnector extends SQLiteOpenHelper {
 
     // Increment version number if you change anything
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
 
     // Name of database
     private static final String DATABASE ="logbog.db";
+    private static final boolean CLEAR_ON_START = false; // ONLY FOR DEBUGGING PURPOSES
 
 
     public SQLiteConnector(Context context) {
@@ -44,6 +45,8 @@ class SQLiteConnector extends SQLiteOpenHelper {
             "CREATE TABLE etaper (" +
                 "id INTEGER," +
                 "togt INTEGER," +
+                "startDate INTEGER NOT NULL," +
+                "endDate INTEGER," +
                 "PRIMARY KEY(id)," +
                 "FOREIGN KEY(togt) REFERENCES togter(id)"+
             ")"
