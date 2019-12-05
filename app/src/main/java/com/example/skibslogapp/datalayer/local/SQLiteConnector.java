@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-
 /**
  * This class is the SQLite database definition used as the
  * local storage for Logbog informations (Togt, Etape, Logpunkt).
@@ -15,6 +14,11 @@ import android.database.sqlite.SQLiteOpenHelper;
  * the version number of the database (VERSION). This will DROP the database if it
  * already exists on the device when running the app again, and recreate it
  * using the new updated schema.
+ *
+ * TEST MODE:
+ * Running the static method enableTestMode(true) will make consecutive objects
+ * of the SQLiteConnector use a test database rather than the actual database.
+ * The method also deletes the test database.
  *
  * DEBUGGING:
  * You can access the database via command line using 'adb':
@@ -32,7 +36,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  *          and commands specific for the CLI:
  *              .tables
  */
-class SQLiteConnector extends SQLiteOpenHelper {
+public class SQLiteConnector extends SQLiteOpenHelper {
 
     // Increment version number if you change anything
     private static final int VERSION = 6;
@@ -40,9 +44,26 @@ class SQLiteConnector extends SQLiteOpenHelper {
     // Name of database
     private static final String DATABASE ="logbog.db";
 
+    // Name of the TEST database
+    private static final String TEST_DATABASE = "test_logbog.db";
+
+    private static String usedName = DATABASE;
+
+
+    // See Test mode for information
+    public static void enableTestMode(boolean enable, Context context){
+        if(enable){
+            usedName = TEST_DATABASE;
+            context.deleteDatabase(TEST_DATABASE);
+        }else{
+            usedName = DATABASE;
+        }
+    }
+
 
     public SQLiteConnector(Context context) {
-        super(context, DATABASE, null, VERSION);
+        super(context, usedName, null, VERSION);
+
     }
 
     /** This method is called when the database is created (i.e. if it didn't exist when
@@ -107,5 +128,6 @@ class SQLiteConnector extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE logpunkter");
         this.onCreate(db);
     }
+
 }
 

@@ -28,4 +28,8 @@ public class Togt {
     public void setName(String name) {
         this.name = name;
     }
+
+    public boolean equals(Togt togt){
+        return id == togt.id && name.equals(togt.name);
+    }
 }

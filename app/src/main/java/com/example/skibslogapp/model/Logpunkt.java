@@ -19,6 +19,12 @@ public class Logpunkt {
 
     int hals = -1;
 
+
+    public Logpunkt(){
+        this(null);
+    }
+
+
     /** If date is null, it sets it to current time */
     public Logpunkt(Date date ){
         if( date == null )
@@ -109,6 +115,26 @@ public class Logpunkt {
         this.mandOverBord = mandOverBord;
     }
 
+
+    /**
+     * Compares the Logpunkt with another Logpunkt, comparing
+     * all values.
+     *
+     * @param otherPunkt Logpunkt to compare with
+     */
+    public boolean equals( Logpunkt otherPunkt ){
+        return
+            id == otherPunkt.id     &&
+            kurs == otherPunkt.kurs &&
+            hals == otherPunkt.hals &&
+            sejlfoering == otherPunkt.sejlfoering &&
+            sejlstilling == otherPunkt.sejlstilling &&
+            vindretning == otherPunkt.vindretning &&
+            mandOverBord == otherPunkt.mandOverBord &&
+            date.equals(otherPunkt.date) &&
+            roere == otherPunkt.roere;
+
+    }
 
     @Override
     public String toString(){
