@@ -10,9 +10,6 @@ public class Togt {
         this.name = name;
     }
 
-    public static void addLogPost(LogInstans nyeste) {
-    }
-
     public long getId() {
         return id;
     }

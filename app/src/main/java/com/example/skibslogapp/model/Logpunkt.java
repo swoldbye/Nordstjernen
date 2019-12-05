@@ -1,5 +1,7 @@
 package com.example.skibslogapp.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -132,6 +134,33 @@ public class Logpunkt {
 
     public void setTogtId(long togtId) {
         this.togtId = togtId;
+    }
+
+    public String getTimeString(){
+        if( date == null ) return "";
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return String.format( "%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+    }
+
+    public String getKursString(){
+        if( kurs == -1 ) return "";
+        return Integer.toString(kurs);
+    }
+
+    public String getSejloeringString(){
+        if( sejlfoering == null ) return "";
+        return sejlfoering;
+    }
+
+    public String getSejlstillingString(){
+        if( sejlstilling == null ) return "";
+        return sejlstilling;
+    }
+
+    public String getNoteString(){
+        if( note == null ) return "";
+        return note;
     }
 
     /**

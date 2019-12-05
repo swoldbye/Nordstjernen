@@ -14,7 +14,7 @@ import java.util.List;
 
 public class LogpunktDAO {
 
-    // Connector to the database
+    // Connector to tshe database
     private SQLiteConnector connector;
     private Context context;
 

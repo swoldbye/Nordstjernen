@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.example.skibslogapp.Main_akt;
 import com.example.skibslogapp.R;
-import com.example.skibslogapp.datalayer.SQLconnection;
 
 public class TogtOversigt_frag extends Fragment {
 

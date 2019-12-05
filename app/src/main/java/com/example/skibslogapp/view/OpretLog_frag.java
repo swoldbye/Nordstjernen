@@ -24,18 +24,18 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.skibslogapp.datalayer.local.LogpunktDAO;
+import com.example.skibslogapp.model.GlobalTogt;
+import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.model.Togt;
-import com.example.skibslogapp.model.LogInstans;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.utility.ToggleViewList;
 
-import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class OpretLog_frag extends Fragment implements View.OnClickListener {
-
-    OnMainActivityListener mCallback;
 
     private int timeStringLengthBefore = 0;
     private String finalVindRetning = "";
@@ -62,9 +62,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     String simpleDate3;
 
-    public OpretLog_frag(OnMainActivityListener mCallback){
-        this.mCallback = mCallback;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -313,11 +310,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
                 hals += pressedHals == btn_styrbord ? "sb" : "bb";
             }
 
-            // Henter tiden
-            String time = editTime.getText().toString();
-            if(time.length() == 0){
-                time = editTime.getHint().toString();
-            }
+
 
             // Henter sejlføring
             String sejlføring = "";
@@ -333,17 +326,36 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
                 sejlstilling = pressedSejlstilling.getText().toString();
             }
 
-            LogInstans nyeste = new LogInstans(
-                    time,
-                    vindretning_input.getText().toString(),
-                    kursEditText.getText().toString(),
-                    sejlføring,
-                    sejlstilling,
-                    noteEditText.getText().toString()
-            );
+            String kursStr = kursEditText.getText().toString();
 
-            Togt.addLogPost(nyeste);
-            mCallback.updateList(nyeste);
+
+            // Fetching time ---------------------------------------------------------------
+
+            String timeStr = editTime.getText().toString();
+            if(timeStr.length() == 0){
+                timeStr = editTime.getHint().toString();
+            }
+
+            // Getting calender instance
+            Calendar calendar= Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+
+            // Setting minutes and hour
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeStr.substring(0, 2)));
+            calendar.set(Calendar.MINUTE, Integer.parseInt(timeStr.substring(3, 5)));
+
+            // Create Logpunkt from time in calendar
+            Logpunkt logpunkt = new Logpunkt( new Date(calendar.getTimeInMillis()) );
+            logpunkt.setVindretning(vindretning_input.getText().toString());
+            logpunkt.setKurs( kursStr.equals("") ? -1 : Integer.parseInt(kursStr) );
+            logpunkt.setSejlfoering( sejlføring );
+            logpunkt.setSejlfoering( sejlstilling );
+            logpunkt.setNote( noteEditText.getText().toString() );
+
+            LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
+            logpunktDAO.addLogpunkt(GlobalTogt.getEtape(getContext()), logpunkt);
+
+
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .remove(this)
@@ -356,11 +368,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     }
 
-
-
-    public interface OnMainActivityListener{
-        void updateList(LogInstans nyeste);
-    }
 
     /**
      * Implementation of the ToggleViewList specific for the buttons

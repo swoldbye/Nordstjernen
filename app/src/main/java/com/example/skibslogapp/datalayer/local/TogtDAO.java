@@ -33,6 +33,10 @@ public class TogtDAO {
         togtObservers.add(observer);
     }
 
+    public static void removeTogtObserver( TogtObserver observer ){
+        togtObservers.remove(observer);
+    }
+
 
     /**
      * Add a Togt to the database, using the object field values.
