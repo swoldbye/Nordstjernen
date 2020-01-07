@@ -22,7 +22,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  *
  * DEBUGGING:
  * You can access the database via command line using 'adb':
- *      1. Open a Command Line (Command Prompt, Bash etc.)
+ *      1. Open a Command Line Interpreter (Command Prompt, PowerShell Bash etc.)
  *      2. Check connected devices:
  *              adb devices
  *      3. Connect to device (note: can't make it work on actual device, only emulator):
@@ -39,7 +39,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SQLiteConnector extends SQLiteOpenHelper {
 
     // Increment version number if you change anything
-    private static final int VERSION = 7;
+    private static final int VERSION = 8;
 
     // Name of database
     private static final String DATABASE ="logbog.db";
