@@ -26,7 +26,10 @@ import android.widget.TextView;
 
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.GlobalTogt;
+import com.example.skibslogapp.model.Koordinat;
+import com.example.skibslogapp.model.LocationRegistration;
 import com.example.skibslogapp.model.Logpunkt;
+
 import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.utility.ToggleViewList;
@@ -357,6 +360,10 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         }else if (v == opretButton || v == mob) {
 
+            //LocationRegistration koordinateRegistration = new LocationRegistration(getActivity().getApplicationContext());
+            Koordinat testKoordinates = new Koordinat(getActivity().getApplicationContext(), getActivity());
+
+testKoordinates.getKoordinat();
             // Henter hals
             Button btn_styrbord = getView().findViewById(R.id.hals_styrbord_btn);
             Button pressedHals = hals_Buttons.getToggledView();
