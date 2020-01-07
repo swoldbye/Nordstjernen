@@ -39,7 +39,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SQLiteConnector extends SQLiteOpenHelper {
 
     // Increment version number if you change anything
-    private static final int VERSION = 8;
+    private static final int VERSION = 9;
 
     // Name of database
     private static final String DATABASE ="logbog.db";
@@ -103,7 +103,8 @@ public class SQLiteConnector extends SQLiteOpenHelper {
                 "etape INTEGER NOT NULL," +
                 "dato INTEGER NOT NULL," +
                 "dato_opret INTEGER NOT NULL," +
-                "position REAL," +
+                "breddegrad REAL," +
+                "laengdegrad REAL," +
                 "note TEXT," +
                 "roere INTEGER,"+
                 "kurs INTEGER,"+

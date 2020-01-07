@@ -22,7 +22,8 @@ public class Logpunkt {
     private String note = null;
     private boolean mandOverBord = false;
 
-    private double position;
+    private double breddegrad;
+    private double laengdegrad;
 
     private String sejlfoering = null;
     private String sejlstilling = null;
@@ -216,13 +217,25 @@ public class Logpunkt {
         return mandOverBord;
     }
 
-    public double getPosition() {
-        return position;
+    public double getBreddegrad() {
+        return breddegrad;
     }
 
-    public void setPosition(double position) {
-        this.position = position;
+    public void setBreddegrad(double breddegrad) {
+        this.breddegrad = breddegrad;
     }
+
+
+    public double getLaengdegrad() {
+        return laengdegrad;
+    }
+
+    public void setLaengdegrad(double laengdegrad) {
+        this.laengdegrad = laengdegrad;
+    }
+
+
+
 
     /**
      * Compares the Logpunkt with another Logpunkt, comparing
@@ -238,7 +251,8 @@ public class Logpunkt {
             id == otherPunkt.id     &&
             kurs == otherPunkt.kurs &&
             hals == otherPunkt.hals &&
-            position == otherPunkt.position &&
+            laengdegrad == otherPunkt.laengdegrad &&
+            breddegrad == otherPunkt.breddegrad &&
             sejlfoering == otherPunkt.sejlfoering &&
             sejlstilling == otherPunkt.sejlstilling &&
             vindretning == otherPunkt.vindretning &&
@@ -275,12 +289,13 @@ public class Logpunkt {
         );
 
         return String.format(
-            "Logpunkt{ id: %d, etapeId: %d, date: %s, creationDate: %s, pos.: %.4f, mob: %s, kurs: %s, vind: %s, vindhast.: %d, strøm: %s, strømhast.: %d, sejls.: %s, sejlf. %s, roere: %s, note: %s}",
+            "Logpunkt{ id: %d, etapeId: %d, date: %s, creationDate: %s, l.grad: %.4f, b.grad: %.4f, mob: %s, kurs: %s, vind: %s, vindhast.: %d, strøm: %s, strømhast.: %d, sejls.: %s, sejlf. %s, roere: %s, note: %s}",
                 id,
                 etapeId,
                 dateString,
                 creationDateString,
-                position,
+                laengdegrad,
+                breddegrad,
                 mandOverBord ? "true" : "false",
                 kurs >=0 ? kurs : "-",
                 vindretning != null ? vindretning : "-",

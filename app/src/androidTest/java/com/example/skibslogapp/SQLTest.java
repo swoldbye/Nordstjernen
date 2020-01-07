@@ -57,6 +57,7 @@ public class SQLTest {
         togt.setId( togt.getId() + 1);
         logpunkt.setId(logpunkt.getId() + 1);
         etape.setId( etape.getId() + 1);
+        logpunkt.setLaengdegrad(0.001);
 
         // Checking they're false
         assertFalse(loadedTogt.equals(togt));
@@ -68,7 +69,6 @@ public class SQLTest {
 
 
     private class TestTogtObserver implements TogtDAO.TogtObserver{
-
         private Togt togt = null;
 
         Togt getTogt(){
