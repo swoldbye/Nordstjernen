@@ -10,8 +10,8 @@ import android.database.sqlite.SQLiteOpenHelper;
  * local storage for Logbog informations (Togt, Etape, Logpunkt).
  *
  * CHANGING STUFF:
- * If you database schema (tables or their columns) you have to increment
- * the version number of the database (VERSION). This will DROP the database if it
+ * If you change the database schema (tables or their columns) you have to increment
+ * the version number of the database (VERSION). This will delete the database if it
  * already exists on the device when running the app again, and recreate it
  * using the new updated schema.
  *
@@ -26,12 +26,12 @@ import android.database.sqlite.SQLiteOpenHelper;
  *      2. Check connected devices:
  *              adb devices
  *      3. Connect to device (note: can't make it work on actual device, only emulator):
- *              adb -s SERIALNUMBER shell (i.e. adb -s emulator-5540)
- *      4. cd into:
- *              /data/data/com.example.skibslogapp/databases
- *      5. Open database:
- *              sqlite3 logbog.db
- *      6. You're now in the sqlite3 CLI and can use sql command i.e.
+ *              adb -s SERIALNUMBER shell   (i.e. 'adb -s emulator-5540 shell')
+ *      4  Run as project:
+ *              run-as com.example.skibslogapp
+ *      4. Open database:
+ *              sqlite3 databases/logbog.db
+ *      5. You're now in the sqlite3 CLI and can use sql command i.e.
  *              SELECT * FROM etaper;
  *          and commands specific for the CLI:
  *              .tables
@@ -39,7 +39,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SQLiteConnector extends SQLiteOpenHelper {
 
     // Increment version number if you change anything
-    private static final int VERSION = 6;
+    private static final int VERSION = 7;
 
     // Name of database
     private static final String DATABASE ="logbog.db";
@@ -49,8 +49,10 @@ public class SQLiteConnector extends SQLiteOpenHelper {
 
     private static String usedName = DATABASE;
 
-
-    // See Test mode for information
+    /**
+     * Enables the use of test database when creating new SQLiteConnectors.
+     * Calling it also resets the current test database.
+     */
     public static void enableTestMode(boolean enable, Context context){
         if(enable){
             usedName = TEST_DATABASE;
@@ -98,14 +100,19 @@ public class SQLiteConnector extends SQLiteOpenHelper {
         db.execSQL(
             "CREATE TABLE logpunkter (" +
                 "id INTEGER," +
-                "etape INTEGER," +
-                "date INTEGER NOT NULL," +
+                "etape INTEGER NOT NULL," +
+                "dato INTEGER NOT NULL," +
+                "dato_opret INTEGER NOT NULL," +
+                "position REAL," +
                 "note TEXT," +
                 "roere INTEGER,"+
                 "kurs INTEGER,"+
                 "vindretning TEXT,"+
+                "vindhastighed INTEGER,"+
                 "sejlfoering TEXT,"+
                 "sejlstilling TEXT,"+
+                "stroemretning TEXT,"+
+                "stroemhastighed INTEGER,"+
                 "hals BIT,"+
                 "mandOverBord BIT,"+
                 "PRIMARY KEY(id)," +
