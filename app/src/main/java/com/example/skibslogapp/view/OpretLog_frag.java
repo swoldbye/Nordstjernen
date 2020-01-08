@@ -4,8 +4,10 @@ package com.example.skibslogapp.view;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +24,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -95,6 +99,12 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         //Note
         noteEditText = (EditText) view.findViewById(R.id.noteEditText);
+        noteEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                toggleMOBPosition(hasFocus);
+            }
+        });
 
         //Mand over bord
         mob = view.findViewById(R.id.mob_button);
@@ -149,6 +159,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         kursEditText.setOnEditorActionListener(clearFocusOnDone);
         editTime.setOnEditorActionListener(clearFocusOnDone);
         vindHastighedEditTxt.setOnEditorActionListener(clearFocusOnDone);
+        noteEditText.setOnEditorActionListener(clearFocusOnDone);
 
         final Handler handler =new Handler();
         final Runnable r = new Runnable() {
@@ -245,16 +256,20 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
      */
     TextView.OnEditorActionListener clearFocusOnDone = new TextView.OnEditorActionListener() {
         @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            if(actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
-                v.clearFocus(); //Clears focus, which cascade into it resetting through OnFocusChange()
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        public boolean onEditorAction(TextView v, int keyCode, KeyEvent event) {
+            if(keyCode == EditorInfo.IME_ACTION_DONE || keyCode == EditorInfo.IME_ACTION_NEXT) {
+                clearFocusOnDone(v);
             }
             return true;
         }
     };
 
+    private void clearFocusOnDone(TextView v) {
+        v.clearFocus(); //Clears focus, which cascade into it resetting through OnFocusChange()
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        toggleMOBPosition(getView().findViewById(R.id.noteEditText).hasFocus());
+    }
 
 
     private void vindDirectionLogic(String currDirection, String btnDirection, String counterDirection) {
@@ -356,7 +371,16 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     }
 
-
+    public void toggleMOBPosition(boolean entering) {
+        FrameLayout mob_container = getView().findViewById(R.id.mob_container);
+        CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(mob_container.getLayoutParams());
+        if(entering) {
+            params.gravity = Gravity.TOP;
+        } else {
+            params.gravity = Gravity.BOTTOM;
+        }
+        mob_container.setLayoutParams(params);
+    }
 
     public interface OnMainActivityListener{
         void updateList(LogInstans nyeste);

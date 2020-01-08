@@ -6,18 +6,18 @@
     android:layout_height="wrap_content"
     tools:context=".view.OpretLog_frag">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
         <!--Mand over bord ==========================-->
         <FrameLayout
+            android:id="@+id/mob_container"
             android:layout_width="105dp"
             android:layout_height="105dp"
             android:padding="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_gravity="start|bottom"
             android:outlineProvider="none"
             android:elevation="1dp"
             android:clipToPadding="false"
@@ -27,6 +27,7 @@
                 android:id="@+id/mob_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="bottom|start"
                 android:backgroundTint="@color/colorAccent"
                 android:clickable="true"
                 android:elevation="20dp"
@@ -516,6 +517,6 @@
             </LinearLayout>
         </ScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </FrameLayout>
