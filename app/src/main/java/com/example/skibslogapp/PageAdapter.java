@@ -1,5 +1,7 @@
 package com.example.skibslogapp;
 
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -40,6 +42,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
 //        return fragment;
         PostActivity postActivity = new PostActivity();
         return postActivity;
+
 
 //        return PostActivity.newInstance(position);
 /*
@@ -87,7 +90,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
      */
     @Override
     public int getCount() {
-        return 5;
+        return 10;
     }
 
 

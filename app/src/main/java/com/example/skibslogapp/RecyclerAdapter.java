@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.skibslogapp.model.LogInstans;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.NoteViewHolder> {
 
-    private ArrayList<LogInstans> mTempLogs;
+    private List<LogInstans> mTempLogs;
 
     public static class NoteViewHolder extends RecyclerView.ViewHolder{
 
@@ -33,11 +34,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.NoteVi
             sejlføringTextView = itemView.findViewById(R.id.sejlføringTextView);
             sejlstillingTextView = itemView.findViewById(R.id.sejlstillingTextView);
             noteTextView = itemView.findViewById(R.id.NoteTextView);
-
         }
     }
 
-    public RecyclerAdapter(ArrayList<LogInstans> tempLogs){
+    public RecyclerAdapter(List<LogInstans> tempLogs){
         mTempLogs = tempLogs;
     }
 

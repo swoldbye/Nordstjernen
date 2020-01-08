@@ -32,7 +32,7 @@ public class TabLayout_frag extends Fragment {
         TabLayout tabLayout;
         ViewPager viewPager;
         PageAdapter pageAdapter;
-        int days = 8;
+        //int days = 8;
 
         Log.d(TAG, "onCreateView: Started.");
 

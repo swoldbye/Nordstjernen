@@ -20,6 +20,7 @@ import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PostOversigt extends Fragment implements View.OnClickListener{
 
@@ -28,15 +29,16 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
     RecyclerView postRecyclerView;
     Button openCloseButton;
     OnPostOversigtListener mCallback;
-    ArrayList<LogInstans> logs = new ArrayList<>();
+    List<LogInstans> logs;
     int position;
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
 
-    public PostOversigt(OnPostOversigtListener mCallback) {
+    public PostOversigt(OnPostOversigtListener mCallback, List<LogInstans> logs) {
         this.mCallback = mCallback;
+        this.logs = logs;
     }
 
 
@@ -54,16 +56,7 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
 //        day = view.findViewById(R.id.timeOfDay);
 //        day.setText(dayNumber);
 
-        logs.add(new LogInstans("11:34", "", "005", "F", "LÆ", ""));
-        logs.add(new LogInstans("11:35", "N", "006", "Ø", "AG", "Simon er cool."));
-        logs.add(new LogInstans("11:37", "", "026", "F", "BI", "Simon er super cool."));
-        logs.add(new LogInstans("12:00", "SØ", "", "F", "FO",""));
-        logs.add(new LogInstans("12:32", "NV", "", "N1", "HA", ""));
-        logs.add(new LogInstans("12:35", "", "", "F", "HA", "Simon er super super super super cool."));
-        logs.add(new LogInstans("12:50", "SSØ", "543", "N2", "LÆ", "Vinden er kold"));
-        logs.add(new LogInstans("13:30", "", "345", "F", "FO", "Rigtig kold :("));
-        logs.add(new LogInstans("13:34", "", "", "N#", "AG", ""));
-        logs.add(new LogInstans("14:00", "", "023", "F", "BI", ""));
+
 
 
         //tempLogs.addAll(Togt.getTogter());
