@@ -1,27 +1,52 @@
 package com.example.skibslogapp;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
+import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.example.skibslogapp.datalayer.local.TogtDAO;
+import com.example.skibslogapp.model.LogInstans;
 import com.example.skibslogapp.view.OpretLog_frag;
 
-public class PostActivity extends Fragment implements PostOversigt.OnPostOversigtListener {
+import java.util.ArrayList;
+
+public class PostActivity extends Fragment implements PostOversigt.OnPostOversigtListener, OpretLog_frag.OnMainActivityListener {
+
+    private static final String TAG = "PostActivity";
+
+
+    //ArrayList<LogInstans> log = new ArrayList<>();
+    //LogInstans log1 = new LogInstans("11:30", "NNØ", "SØ", "N1", "AB", "Arbtrary Note");
+
 
     OpretLog_frag opretLog_frag;
     PostOversigt postOversigt = new PostOversigt(this);
 
+    public PostActivity() {
+    }
+
+    public static PostActivity newInstance() {
+
+//        Bundle args = new Bundle();
+        PostActivity fragment = new PostActivity();
+//        fragment.setArguments(args);
+        return fragment;
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_post, container, false);
-        addOversigtFrag();
 
+        Log.d(TAG, "onCreateView: Started.");
+
+        addOversigtFrag();
         return view;
     }
 
@@ -41,10 +66,15 @@ public class PostActivity extends Fragment implements PostOversigt.OnPostOversig
 
     @Override
     public void showOpretPost() {
-        opretLog_frag = new OpretLog_frag();
+        opretLog_frag = new OpretLog_frag(this);
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.opretPostContainerFrame, opretLog_frag)
                 .commit();
+    }
+
+    @Override
+    public void updateList(LogInstans nyeste) {
+        postOversigt.setList(nyeste);
     }
 }
