@@ -22,7 +22,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostOversigt extends Fragment implements View.OnClickListener{
+public class PostOversigt extends Fragment implements View.OnClickListener {
 
     public static final String ARG_PAGE = "arg_page";
 
@@ -55,8 +55,6 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
 
 //        day = view.findViewById(R.id.timeOfDay);
 //        day.setText(dayNumber);
-
-
 
 
         //tempLogs.addAll(Togt.getTogter());
@@ -94,7 +92,7 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
 //        return fragment;
 //    }
 
-    public void setList(LogInstans nyeste){
+    public void setList(LogInstans nyeste) {
         return;
         /*tempLogs.add(nyeste);
         PostListAdapter adapter = new PostListAdapter(getActivity(), R.layout.postlist_view_layout, tempLogs);
@@ -103,21 +101,21 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
     }
 
 
-
-    public void onClick(View v){
-        if(v == openCloseButton){
-            if(openCloseButton.getText().toString().equals("open")) {
+    public void onClick(View v) {
+        if (v == openCloseButton) {
+            if (openCloseButton.getText().toString().equals("open")) {
                 mCallback.showOpretPost();
                 openCloseButton.setText("close");
-            }else{
+            } else {
                 mCallback.hideOpretPost();
                 openCloseButton.setText("open");
             }
         }
     }
 
-    public interface OnPostOversigtListener{
+    public interface OnPostOversigtListener {
         void hideOpretPost();
+
         void showOpretPost();
     }
 }

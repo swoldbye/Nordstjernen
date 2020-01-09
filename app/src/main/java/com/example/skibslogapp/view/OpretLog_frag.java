@@ -49,7 +49,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     Button resetTimeButton;
     Button nordButton, østButton, sydButton, vestButton;
-    EditText kursEditText, antalRoereEditText, editTime,vindHastighedEditTxt;
+    EditText kursEditText, antalRoereEditText, editTime, vindHastighedEditTxt;
     Button opretButton;
     TextView vindretning_input;
     Button vindretning_delete;
@@ -62,7 +62,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     String simpleDate3;
 
-    public OpretLog_frag(OnMainActivityListener mCallback){
+    public OpretLog_frag(OnMainActivityListener mCallback) {
         this.mCallback = mCallback;
     }
 
@@ -150,10 +150,10 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         editTime.setOnEditorActionListener(clearFocusOnDone);
         vindHastighedEditTxt.setOnEditorActionListener(clearFocusOnDone);
 
-        final Handler handler =new Handler();
+        final Handler handler = new Handler();
         final Runnable r = new Runnable() {
             public void run() {
-                if(!editTime.hasFocus()) {
+                if (!editTime.hasFocus()) {
                     handler.postDelayed(this, 1000);
                     String simpleDate3 = new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime());
                     editTime.setHint(simpleDate3);
@@ -166,31 +166,31 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) editTime.setHint("");
-                else editTime.setHint(new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime()));
+                else
+                    editTime.setHint(new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime()));
 
                 String time = editTime.getText().toString();
                 //Accept 3 digit input
                 if (time.length() == 1) {
-                    if(Integer.parseInt(time.substring(0,1)) < 10) {
-                        editTime.setText(time = "0".concat(time.substring(0,1).concat(":00")));
+                    if (Integer.parseInt(time.substring(0, 1)) < 10) {
+                        editTime.setText(time = "0".concat(time.substring(0, 1).concat(":00")));
                     }
                 }
-                if(time.length() == 3) {
-                    if (Integer.parseInt(time.substring(0,2)) < 24) {
+                if (time.length() == 3) {
+                    if (Integer.parseInt(time.substring(0, 2)) < 24) {
                         editTime.setText(time = time.concat("00"));
                     }
                 }
-                if(time.length() == 4) {
-                    if(Integer.parseInt(time.substring(0,1)) < 10) {
-                        editTime.setText(time = "0".concat(time.substring(0,1).concat(":".concat(time.substring(1,2).concat(time.substring(3,4))))));
-                    }
-                    else if(Integer.parseInt(time.substring(0,2)) < 24) {
-                        editTime.setText(time = time.substring(0,2).concat(":").concat(time.substring(3,4).concat("0")));
+                if (time.length() == 4) {
+                    if (Integer.parseInt(time.substring(0, 1)) < 10) {
+                        editTime.setText(time = "0".concat(time.substring(0, 1).concat(":".concat(time.substring(1, 2).concat(time.substring(3, 4))))));
+                    } else if (Integer.parseInt(time.substring(0, 2)) < 24) {
+                        editTime.setText(time = time.substring(0, 2).concat(":").concat(time.substring(3, 4).concat("0")));
                     }
                 }
                 //Control for correct input
-                if(time.length() != 5 || time.lastIndexOf(":") != time.indexOf(":") //Control of string
-                        || Integer.parseInt(time.substring(0,2)) > 23 || Integer.parseInt(time.substring(3, 5)) > 59) { //Control of numbers
+                if (time.length() != 5 || time.lastIndexOf(":") != time.indexOf(":") //Control of string
+                        || Integer.parseInt(time.substring(0, 2)) > 23 || Integer.parseInt(time.substring(3, 5)) > 59) { //Control of numbers
                     editTime.setText("");
                 }
             }
@@ -210,7 +210,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             @Override
             public void afterTextChanged(Editable s) {
                 int timeStringLengthAfter = editTime.getText().toString().length();
-                if(timeStringLengthAfter > timeStringLengthBefore && timeStringLengthAfter == 2) { //Insert colon
+                if (timeStringLengthAfter > timeStringLengthBefore && timeStringLengthAfter == 2) { //Insert colon
                     editTime.setText(getString(R.string.time_colon, editTime.getText()));
                     editTime.setSelection(3);
                 }
@@ -223,13 +223,14 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             public void onFocusChange(View v, boolean hasFocus) {
                 String s = kursEditText.getText().toString();
                 try {
-                    if(Integer.parseInt(s) <= 360) {
+                    if (Integer.parseInt(s) <= 360) {
                         //Correct lesser inputs
-                        if(s.length() == 1) s = "00".concat(s);
-                        else if(s.length() == 2) s = "0".concat(s);
+                        if (s.length() == 1) s = "00".concat(s);
+                        else if (s.length() == 2) s = "0".concat(s);
                         kursEditText.setText(s);
                     } else kursEditText.setText("");
-                } catch (NumberFormatException e) {} //Do nothing
+                } catch (NumberFormatException e) {
+                } //Do nothing
 
             }
         });
@@ -238,15 +239,13 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     }
 
 
-
-
     /**
      * Clears the focus when clicking the "Done" or "Next" button on the keyboard
      */
     TextView.OnEditorActionListener clearFocusOnDone = new TextView.OnEditorActionListener() {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            if(actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
+            if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
                 v.clearFocus(); //Clears focus, which cascade into it resetting through OnFocusChange()
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -256,33 +255,34 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     };
 
 
-
     private void vindDirectionLogic(String currDirection, String btnDirection, String counterDirection) {
-        if(!currDirection.contains(counterDirection)) {
-            switch(currDirection.length()) {
+        if (!currDirection.contains(counterDirection)) {
+            switch (currDirection.length()) {
                 case 0:
                     vindretning_input.setText(btnDirection);
                     break;
 
                 case 1:
-                    if(btnDirection.equals("N") || btnDirection.equals("S")) vindretning_input.setText(btnDirection.concat(currDirection)); //Put in the front
-                    else vindretning_input.setText(currDirection.concat(btnDirection)); //Put in the back
+                    if (btnDirection.equals("N") || btnDirection.equals("S"))
+                        vindretning_input.setText(btnDirection.concat(currDirection)); //Put in the front
+                    else
+                        vindretning_input.setText(currDirection.concat(btnDirection)); //Put in the back
                     break;
 
                 case 2:
-                    if(currDirection.indexOf(btnDirection) == currDirection.lastIndexOf(btnDirection)) {
-                        if(currDirection.contains(btnDirection)) vindretning_input.setText(btnDirection.concat(currDirection)); //Put in front
-                        else if(btnDirection.equals("N") || btnDirection.equals("S"))
-                            vindretning_input.setText(currDirection.substring(0,1).concat(btnDirection).concat(currDirection.substring(1,2))); //Put in the middle
-                        else vindretning_input.setText(currDirection.concat(btnDirection)); //Put in the back
+                    if (currDirection.indexOf(btnDirection) == currDirection.lastIndexOf(btnDirection)) {
+                        if (currDirection.contains(btnDirection))
+                            vindretning_input.setText(btnDirection.concat(currDirection)); //Put in front
+                        else if (btnDirection.equals("N") || btnDirection.equals("S"))
+                            vindretning_input.setText(currDirection.substring(0, 1).concat(btnDirection).concat(currDirection.substring(1, 2))); //Put in the middle
+                        else
+                            vindretning_input.setText(currDirection.concat(btnDirection)); //Put in the back
                     }
                     break;
             }
             vindretning_delete.setVisibility(View.VISIBLE);
         }
     }
-
-
 
 
     @Override
@@ -293,43 +293,46 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         FragmentTransaction fragmentTransaction;
 
         // Vindretning
-        if(v == nordButton) vindDirectionLogic(vindretning_input.getText().toString(), "N", "S");
-        else if(v == østButton) vindDirectionLogic(vindretning_input.getText().toString(), "Ø", "V");
-        else if(v == sydButton) vindDirectionLogic(vindretning_input.getText().toString(), "S", "N");
-        else if(v == vestButton) vindDirectionLogic(vindretning_input.getText().toString(), "V", "Ø");
+        if (v == nordButton) vindDirectionLogic(vindretning_input.getText().toString(), "N", "S");
+        else if (v == østButton)
+            vindDirectionLogic(vindretning_input.getText().toString(), "Ø", "V");
+        else if (v == sydButton)
+            vindDirectionLogic(vindretning_input.getText().toString(), "S", "N");
+        else if (v == vestButton)
+            vindDirectionLogic(vindretning_input.getText().toString(), "V", "Ø");
 
         else if (v == vindretning_delete) {
             vindretning_input.setText("");
             vindretning_delete.setVisibility(View.INVISIBLE);
 
-        }else if (v == opretButton || v == mob) {
+        } else if (v == opretButton || v == mob) {
 
             // Henter hals
             Button btn_styrbord = getView().findViewById(R.id.hals_styrbord_btn);
             Button pressedHals = hals_Buttons.getToggledView();
             String hals = "";
-            if( pressedHals != null ){
+            if (pressedHals != null) {
                 hals = "-";
                 hals += pressedHals == btn_styrbord ? "sb" : "bb";
             }
 
             // Henter tiden
             String time = editTime.getText().toString();
-            if(time.length() == 0){
+            if (time.length() == 0) {
                 time = editTime.getHint().toString();
             }
 
             // Henter sejlføring
             String sejlføring = "";
             Button pressedSejlføring = sejlføring_Buttons.getToggledView();
-            if(pressedSejlføring != null){
+            if (pressedSejlføring != null) {
                 sejlføring = pressedSejlføring.getText().toString() + hals;
             }
 
             // Henter sejlstilling
             String sejlstilling = "";
             Button pressedSejlstilling = sejlStilling_Buttons.getToggledView();
-            if(pressedSejlstilling != null){
+            if (pressedSejlstilling != null) {
                 sejlstilling = pressedSejlstilling.getText().toString();
             }
 
@@ -349,7 +352,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
                     .remove(this)
                     .commit();
 
-        }else if(v == resetTimeButton){
+        } else if (v == resetTimeButton) {
             editTime.setText("");
             resetTimeButton.setVisibility(View.INVISIBLE);
         }
@@ -357,47 +360,52 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     }
 
 
-
-    public interface OnMainActivityListener{
+    public interface OnMainActivityListener {
         void updateList(LogInstans nyeste);
     }
 
     /**
      * Implementation of the ToggleViewList specific for the buttons
-     * on the log entry creation page. */
-    private class ToggleButtonList extends ToggleViewList{
+     * on the log entry creation page.
+     */
+    private class ToggleButtonList extends ToggleViewList {
 
         /* This constructor is necessary, as the default
             parent class constructor takes 0 views. (ask Malte)*/
-        ToggleButtonList(View ... views){
+        ToggleButtonList(View... views) {
             super(views);
         }
 
         /**
          * What to do when a view (in this case button) is disabled
-         * @param view The view (button) being disabled */
+         *
+         * @param view The view (button) being disabled
+         */
         @Override
         public void onViewUntoggled(View view) {
             Button btn = (Button) view;
             Resources res = btn.getContext().getResources();
-            btn.setBackgroundTintList( res.getColorStateList(R.color.grey) );
-            btn.setTextColor( res.getColorStateList(R.color.colorPrimary) );
+            btn.setBackgroundTintList(res.getColorStateList(R.color.grey));
+            btn.setTextColor(res.getColorStateList(R.color.colorPrimary));
         }
 
         /**
          * What to do when a view (in this case button) is enabled
-         * @param view The view (button) being disabled */
+         *
+         * @param view The view (button) being disabled
+         */
         @Override
         public void onViewToggled(View view) {
             Button btn = (Button) view;
             Resources res = btn.getContext().getResources();
-            btn.setBackgroundTintList( res.getColorStateList(R.color.colorPrimary) );
-            btn.setTextColor( Color.WHITE );
+            btn.setBackgroundTintList(res.getColorStateList(R.color.colorPrimary));
+            btn.setTextColor(Color.WHITE);
         }
 
         /**
          * We know we're using buttons, so to make life easier, we convert
-         * the views to buttons, before returning them         */
+         * the views to buttons, before returning them
+         */
         @Override
         public Button getToggledView() {
             return (Button) super.getToggledView();

@@ -78,16 +78,15 @@ public class LogOversigt_frag extends Fragment implements AdapterView.OnItemClic
 
             fragmentManager = getActivity().getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragContainer,togtOversigt_frag);
+            fragmentTransaction.replace(R.id.fragContainer, togtOversigt_frag);
             fragmentTransaction.commit();
 
         } else if (item.getItemId() == 102) {
 
 
-
             fragmentManager = getActivity().getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragContainer,opretLog_frag);
+            fragmentTransaction.replace(R.id.fragContainer, opretLog_frag);
             fragmentTransaction.commit();
 
         } else if (item.getItemId() == 103) {
