@@ -35,6 +35,10 @@ public class Togt {
         this.ship = ship;
     }
 
+    public Togt(String skipper) {
+        this.skipper = skipper;
+    }
+
     public String getName() {
         return name;
     }
