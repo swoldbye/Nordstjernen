@@ -63,6 +63,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     ToggleButtonList sejlStilling_Buttons;
     private ToggleButtonList sejlføring_Buttons;
     EditText noteEditText;
+    Koordinat testKoordinates;
 
     String simpleDate3;
 
@@ -71,7 +72,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
-
+        testKoordinates = new Koordinat(getActivity().getApplicationContext(), getActivity());
         //Tidsslet
         editTime = (EditText) view.findViewById(R.id.editTime);
         resetTimeButton = (Button) view.findViewById(R.id.resetTimeButton);
@@ -361,9 +362,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         }else if (v == opretButton || v == mob) {
 
             //LocationRegistration koordinateRegistration = new LocationRegistration(getActivity().getApplicationContext());
-            Koordinat testKoordinates = new Koordinat(getActivity().getApplicationContext(), getActivity());
 
-testKoordinates.getKoordinat();
+
+            testKoordinates.getKoordinat();
             // Henter hals
             Button btn_styrbord = getView().findViewById(R.id.hals_styrbord_btn);
             Button pressedHals = hals_Buttons.getToggledView();

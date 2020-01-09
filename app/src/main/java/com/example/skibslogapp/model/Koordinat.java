@@ -26,6 +26,8 @@ public class Koordinat {
    public Koordinat(Context context, Activity fraq_activity){
         //this.mContext = context;
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
+
+        //Ask for access permission
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(fraq_activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1234);
             return;
@@ -39,6 +41,7 @@ public class Koordinat {
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setExpirationDuration(10000);
         locationRequest.setNumUpdates(1);
+
 
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
 
