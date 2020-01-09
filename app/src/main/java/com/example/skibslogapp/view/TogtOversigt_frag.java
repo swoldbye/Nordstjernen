@@ -24,6 +24,12 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/**
+ * This fragment contanins a recycleview with the created "Togts". You can click a  list element to
+ * enter the "Togt" to se the log posts of the given "Togt".
+ * You can click a button on the element to erase the "Togt" from the recycleView List and the database
+ * and you can edit a "Togt" by clicken another button.
+ */
 public class TogtOversigt_frag extends Fragment implements TogtListAdapter.OnTogtListener, View.OnClickListener {
 
     private static final String TAG = "TogtOversigt_frag";
