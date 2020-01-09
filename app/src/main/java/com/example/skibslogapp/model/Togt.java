@@ -7,21 +7,17 @@ import java.util.Date;
 
 public class Togt {
 
-    static ArrayList togt = new ArrayList<LogInstans>();
+    static ArrayList togt = new ArrayList<Logpunkt>();
 
     private long id = -1;
     private String name;
-
-    public Togt(String name) {
-        this.name = name;
-    }
+    private String startDest;
+    private String skipper;
+    private String date;
+    private String ship;
 
     ArrayList<Besaetning> besaetningArrayList = new ArrayList<>();
-    String skipper;
-    String startDest;
-    String name;
-    String date;
-    String ship;
+
 
     public long getId() {
         return id;
@@ -95,15 +91,10 @@ public class Togt {
         this.startDest = startDest;
     }
 
-    public static ArrayList<LogInstans> getTogter(){
-        return togt;
-    public String getName() {
-        return name;
-    }
+//    public static ArrayList<LogInstans> getTogter() {
+//        return togt;
+//    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public boolean equals(Togt togt){
         return id == togt.id && name.equals(togt.name);
