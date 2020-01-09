@@ -61,8 +61,8 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
     }
 
     /**
-     * Returns the amount of items in the list, which is the size of the ArrayList
-     *
+     * Returns the amount of items in the list, which is the size of the ArrayList.
+     * If this returns 0, the list and the recycleview will be empty
      */
     @Override
     public int getItemCount() {

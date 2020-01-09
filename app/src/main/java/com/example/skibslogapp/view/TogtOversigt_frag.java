@@ -3,6 +3,11 @@ package com.example.skibslogapp.view;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -10,19 +15,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.preference.PreferenceManager;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.TogtListAdapter;
 import com.example.skibslogapp.model.Togt;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -64,8 +61,11 @@ public class TogtOversigt_frag extends Fragment implements TogtListAdapter.OnTog
         return view;
     }
 
+    /**
+     * this loads the togt list from sharedPreferences. It will probably be replaced with a load mechanism
+     * from SQLite, because that is where we save our data.
+     */
     private void loadFromPrefs(){
-
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         Gson gson = new Gson();
         String json = sharedPreferences.getString("togterList",null);
