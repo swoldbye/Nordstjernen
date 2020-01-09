@@ -57,9 +57,8 @@ public class Main_akt extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
 
         configureNavigationDrawer();
 
