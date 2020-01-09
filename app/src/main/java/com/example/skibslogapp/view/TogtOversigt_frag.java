@@ -2,12 +2,18 @@ package com.example.skibslogapp.view;
 
 
 import android.content.SharedPreferences;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -15,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.skibslogapp.Main_akt;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.TogtListAdapter;
 import com.example.skibslogapp.model.Togt;
@@ -63,6 +70,9 @@ public class TogtOversigt_frag extends Fragment implements TogtListAdapter.OnTog
         adapter = new TogtListAdapter(togtList, this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        // Inflate the layout for this fragment
+
 
         return view;
     }

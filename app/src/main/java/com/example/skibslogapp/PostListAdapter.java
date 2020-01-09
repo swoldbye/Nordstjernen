@@ -10,18 +10,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.skibslogapp.model.LogInstans;
+import com.example.skibslogapp.model.Logpunkt;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-public class PostListAdapter extends ArrayAdapter<LogInstans> {
+public class PostListAdapter extends ArrayAdapter<Logpunkt> {
 
     private static final String TAG = "PostLIstAdapter";
 
     private Context mContext;
     int mResource;
 
-    public PostListAdapter(@NonNull Context context, int resource, @NonNull List<LogInstans> objects) {
+    public PostListAdapter(@NonNull Context context, int resource, @NonNull List<Logpunkt> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
@@ -30,11 +32,21 @@ public class PostListAdapter extends ArrayAdapter<LogInstans> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        String tid = getItem(position).getTid();
-        String vindretning = getItem(position).getVindretning();
-        String kurs = getItem(position).getKurs();
-        String sejlføring = getItem(position).getSejlføring();
-        String sejlstilling = getItem(position).getSejlstilling();
+
+        Logpunkt logpunkt = getItem(position);
+
+        // Time
+        Date date = logpunkt.getDate();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        String tid = String.format( "%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        String vindretning = logpunkt.getVindretning();
+        String sejlfoering = logpunkt.getSejlfoering();
+        String sejlstilling = logpunkt.getSejlstilling();
+        String stroem = logpunkt.getStroem();
+        String kurs = logpunkt.getKurs() > -1 ? Integer.toString(logpunkt.getKurs()) : "";
+        String note = logpunkt.getNote();
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
@@ -43,18 +55,21 @@ public class PostListAdapter extends ArrayAdapter<LogInstans> {
             convertView.setBackgroundResource(R.color.offWhite);
         }
 
-
         TextView tidTextView = convertView.findViewById(R.id.tidTextView);
         TextView vindretningTextView = convertView.findViewById(R.id.vindretningTextView);
+        TextView strømningTextView = convertView.findViewById(R.id.strømningTextView);
         TextView kursTextView = convertView.findViewById(R.id.kursTextView);
         TextView sejlføringTextView = convertView.findViewById(R.id.sejlføringTextView);
         TextView sejlstillingTextView = convertView.findViewById(R.id.sejlstillingTextView);
+        TextView noteTextView = convertView.findViewById(R.id.NoteTextView);
 
         tidTextView.setText(tid);
         vindretningTextView.setText(vindretning);
+        strømningTextView.setText(stroem);
         kursTextView.setText(kurs);
-        sejlføringTextView.setText(sejlføring);
+        sejlføringTextView.setText(sejlfoering);
         sejlstillingTextView.setText(sejlstilling);
+        noteTextView.setText(note);
 
         return convertView;
     }

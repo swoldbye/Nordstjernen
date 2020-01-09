@@ -9,6 +9,13 @@ public class Togt {
 
     static ArrayList togt = new ArrayList<LogInstans>();
 
+    private long id = -1;
+    private String name;
+
+    public Togt(String name) {
+        this.name = name;
+    }
+
     ArrayList<Besaetning> besaetningArrayList = new ArrayList<>();
     String skipper;
     String startDest;
@@ -16,7 +23,13 @@ public class Togt {
     String date;
     String ship;
 
-    private Togt() {}
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public Togt(String skipper, String startDest, String name, String date, String ship) {
         this.skipper = skipper;
@@ -84,10 +97,15 @@ public class Togt {
 
     public static ArrayList<LogInstans> getTogter(){
         return togt;
+    public String getName() {
+        return name;
     }
 
-    public static void addLogPost(LogInstans x){
-        togt.add(x);
+    public void setName(String name) {
+        this.name = name;
     }
 
+    public boolean equals(Togt togt){
+        return id == togt.id && name.equals(togt.name);
+    }
 }
