@@ -3,6 +3,7 @@ package com.example.skibslogapp;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,11 +21,14 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
     public static class TogtListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView togtName;
+        public ImageView edit, delete;
         OnTogtListener onTogtListener;
 
         public TogtListViewHolder(@NonNull View itemView, OnTogtListener onTogtListener) {
             super(itemView);
             togtName = itemView.findViewById(R.id.togtNameListItem);
+            edit = itemView.findViewById(R.id.togtEdit);
+            delete = itemView.findViewById(R.id.togtDelete);
             this.onTogtListener = onTogtListener;
 
             itemView.setOnClickListener(this);
