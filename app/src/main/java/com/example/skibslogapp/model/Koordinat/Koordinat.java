@@ -5,18 +5,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.speech.tts.TextToSpeech;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
-import com.example.skibslogapp.view.OpretLog_frag;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationAvailability;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
 import java.util.Locale;
@@ -49,6 +42,8 @@ public class Koordinat {
     }
 
     //Ask for access permission
+    //TODO: Fix shouldShowRequestPermissionRationale
+
     public void prepRequestLocationUpdates() {
         System.out.println("prepRequestLocationUpdates");
         //If the user already have given permission, ACCESS_FINE_PERMISSION MAKE USE OF BOTH SATTELITE ANT TELETOWERS

@@ -7,7 +7,7 @@ public class KoordinatDTO {
     private double longitude;
     private boolean successfulCoordinate;
 
-    KoordinatDTO(double latitude, double longitude){
+    public KoordinatDTO(double latitude, double longitude){
         this.latitude = latitude;
         this.longitude = longitude;
     }

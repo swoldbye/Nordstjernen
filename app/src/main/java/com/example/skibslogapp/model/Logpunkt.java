@@ -150,7 +150,11 @@ public class Logpunkt {
     }
 
     public void setKoordinat(KoordinatDTO koordinat) {
-        this.koordinat = koordinat;
+        if (koordinat == null) {
+            this.koordinat = new KoordinatDTO(0, 0);
+        } else {
+            this.koordinat = koordinat;
+        }
     }
 
     public String getTimeString(){
