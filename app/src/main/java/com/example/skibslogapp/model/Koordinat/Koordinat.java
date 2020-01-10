@@ -24,12 +24,10 @@ import java.util.Locale;
 public class Koordinat {
 
 
-
-
-private LocationCallback callback = new LocationCallback();
-private ForespørgselMåling forespørgsel = new ForespørgselMåling();
-private Activity fraq_activity;
-private Context mContext;
+    private LocationCallback callback = new LocationCallback();
+    private ForespørgselMåling forespørgsel = new ForespørgselMåling();
+    private Activity fraq_activity;
+    private Context mContext;
     //private Context mContext;
 
     /*
@@ -37,26 +35,25 @@ private Context mContext;
      */
     static FusedLocationProviderClient fusedLocationProviderClient;
 
-   public Koordinat(Context context, Activity fraq_activity){
+    public Koordinat(Context context, Activity fraq_activity) {
         this.mContext = context;
-       this.fraq_activity = fraq_activity;
+        this.fraq_activity = fraq_activity;
 
 
-       fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
-
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
 
 
     }
 
-/*
-Method describes what the request that we make.
- */
-    public void startMeassureKoordinat(){
+    /*
+    Method describes what the request that we make.
+     */
+    public void startMeassureKoordinat() {
         prepRequestLocationUpdates();
     }
 
     //Ask for access permission
-    public void prepRequestLocationUpdates(){
+    public void prepRequestLocationUpdates() {
         System.out.println("prepRequestLocationUpdates");
         //If the user already have given permission, ACCESS_FINE_PERMISSION MAKE USE OF BOTH SATTELITE ANT TELETOWERS
         if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -65,13 +62,13 @@ Method describes what the request that we make.
             //Permission access start measuering
             System.out.println("User ACCESS");
             startGetCoordinates();
-        }else{
+        } else {
             System.out.println("User NO PERMISSION");
 
             //Will retur false if the user tabs "Bont ask me again/Permission denied".
             //Returns true if the user previusly rejected the message and now try to access it again. -> Indication of user confussion
-            if(ActivityCompat.shouldShowRequestPermissionRationale(fraq_activity,Manifest.permission.ACCESS_FINE_LOCATION)){
-                Toast.makeText(mContext, "Lokation skal være aktiveret for at GPS lokation kan logges.",Toast.LENGTH_SHORT).show();
+            if (ActivityCompat.shouldShowRequestPermissionRationale(fraq_activity, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                Toast.makeText(mContext, "Lokation skal være aktiveret for at GPS lokation kan logges.", Toast.LENGTH_SHORT).show();
             }
             //Requesting permission
             ActivityCompat.requestPermissions(fraq_activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1234);
@@ -80,17 +77,17 @@ Method describes what the request that we make.
 
     }
 
-    public void removeLocationUpdates(){
+    public void removeLocationUpdates() {
         fusedLocationProviderClient.removeLocationUpdates(callback);
     }
 
-    public void startGetCoordinates(){
+    public void startGetCoordinates() {
         isGooglePlayInstalled(mContext);
         //Uses the requestLocationUpdates because i do not want the measureing to happen in the background. I only want it to happen when the Opret_log fraq is vissible
         fusedLocationProviderClient.requestLocationUpdates(forespørgsel.getLocationRequest(), callback, null);
     }
 
-    public KoordinatDTO getKoordinates(){
+    public KoordinatDTO getKoordinates() {
         return callback.getKoordinates();
     }
 
@@ -101,59 +98,15 @@ Method describes what the request that we make.
     public static void isGooglePlayInstalled(Context context) {
         PackageManager pm = context.getPackageManager();
         boolean app_installed = false;
-        try
-        {
+        try {
 
             //context.getPackageManager().getProviderInfo()
             PackageInfo info = pm.getPackageInfo("com.android.vending", PackageManager.GET_ACTIVITIES);
             String label = (String) info.applicationInfo.loadLabel(pm);
             app_installed = (label != null && !label.equals("Market"));
-        }
-        catch (PackageManager.NameNotFoundException e)
-        {
+        } catch (PackageManager.NameNotFoundException e) {
             app_installed = false;
         }
         System.out.println("Google play is: " + app_installed);
     }
-    /*
-    Her er callbackfunktionen som udføres efter at koordinater er indhentet.
-
-
-    LocationCallback locationCallback = new LocationCallback() {
-        @Override
-        public void onLocationResult(LocationResult locationResult) {
-            Location l = locationResult.getLastLocation();
-            System.out.println(l.getAltitude());
-            System.out.println("Latitude: " +l.getLatitude());
-            System.out.println("Longitude: " +l.getLongitude());
-
-        }
-
-        //Checking if the the GPS is alvalable
-        @Override
-        public void onLocationAvailability(LocationAvailability locationAvailability) {
-            super.onLocationAvailability(locationAvailability);
-
-        }
-    };
-  */
 }
-
-/*
-    public void getKoordinat(){
-        //Creatin a request for koordinates
-        LocationRequest locationRequest = LocationRequest.create();
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        //Setting a expiration duration so that request wont be pending
-        locationRequest.setExpirationDuration(10000);
-        //Do one request
-        locationRequest.setNumUpdates(1);
-
-
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest, callback, null);
-
-
-    }
-
-
- */
