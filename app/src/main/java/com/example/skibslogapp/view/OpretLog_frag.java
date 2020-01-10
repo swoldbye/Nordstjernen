@@ -364,7 +364,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             //LocationRegistration koordinateRegistration = new LocationRegistration(getActivity().getApplicationContext());
 
 
-            testKoordinates.startMeassureKoordinat();
+            //testKoordinates.startMeassureKoordinat();
             // Henter hals
             Button btn_styrbord = getView().findViewById(R.id.hals_styrbord_btn);
             Button pressedHals = hals_Buttons.getToggledView();
@@ -478,6 +478,17 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     }
 
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        System.out.println("Measure koordinate");
+        testKoordinates.startGetCoordinates();
+    }
 
-
+    @Override
+    public void onStop() {
+        super.onStop();
+        System.out.println("Stopping measure koordinates");
+        testKoordinates.removeLocationUpdates();
+    }
 }

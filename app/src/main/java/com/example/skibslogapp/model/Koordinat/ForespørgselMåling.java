@@ -9,14 +9,21 @@ This call contains the request that we do when measuring the koordinates
 
 public class ForespørgselMåling {
     private LocationRequest locationRequest;
+    private final static int EXPIRATION_TIME = 100000;
+    private final static int INTERVAL_BETWEEN_MEASUREMENTS = 10000;
+    private final static int UPDATE_NUM = 10000;
 
     ForespørgselMåling(){
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         //Setting a expiration duration so that request wont be pending
-        locationRequest.setExpirationDuration(10000);
+
+        //Set to 10 measurements * set interval
+        locationRequest.setExpirationDuration(EXPIRATION_TIME);
+        //Setting interval between each request
+        locationRequest.setInterval(INTERVAL_BETWEEN_MEASUREMENTS);
         //Do one request
-        locationRequest.setNumUpdates(1);
+        locationRequest.setNumUpdates(UPDATE_NUM);
     }
 
     /*
