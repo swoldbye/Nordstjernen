@@ -4,9 +4,9 @@ package com.example.skibslogapp.view;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -28,7 +28,7 @@ import android.widget.TextView;
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Koordinat.Koordinat;
-import com.example.skibslogapp.model.Koordinat.KoordinatDTO;
+import com.example.skibslogapp.model.Koordinat.Location;
 import com.example.skibslogapp.model.Logpunkt;
 
 import com.example.skibslogapp.R;
@@ -73,6 +73,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
         testKoordinates = new Koordinat(getActivity().getApplicationContext(), getActivity());
+        testKoordinates.startMeassureKoordinat();
         //Tidsslet
         editTime = (EditText) view.findViewById(R.id.editTime);
         resetTimeButton = (Button) view.findViewById(R.id.resetTimeButton);
@@ -364,7 +365,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             //LocationRegistration koordinateRegistration = new LocationRegistration(getActivity().getApplicationContext());
 
 
-            //testKoordinates.startMeassureKoordinat();
+           // KoordinatDTO testKoordinat = testKoordinates.getKoordinates();
+           // testKoordinat.printKoordinates();
+
             // Henter hals
             Button btn_styrbord = getView().findViewById(R.id.hals_styrbord_btn);
             Button pressedHals = hals_Buttons.getToggledView();
@@ -482,13 +485,13 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         System.out.println("Measure koordinate");
-        testKoordinates.startGetCoordinates();
+       testKoordinates.startGetCoordinates();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         System.out.println("Stopping measure koordinates");
-        testKoordinates.removeLocationUpdates();
+      testKoordinates.removeLocationUpdates();
     }
 }
