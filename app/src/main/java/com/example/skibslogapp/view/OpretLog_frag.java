@@ -362,10 +362,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         }else if (v == opretButton || v == mob) {
 
-            //LocationRegistration koordinateRegistration = new LocationRegistration(getActivity().getApplicationContext());
-
-
-           // KoordinatDTO testKoordinat = testKoordinates.getKoordinates();
+            // KoordinatDTO testKoordinat = testKoordinates.getKoordinates();
            // testKoordinat.printKoordinates();
 
             // Henter hals
@@ -419,9 +416,12 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             logpunkt.setSejlfoering( sejlføring );
             logpunkt.setSejlfoering( sejlstilling );
             logpunkt.setNote( noteEditText.getText().toString() );
+            logpunkt.setKoordinat(testKoordinates.getKoordinates());
 
             LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
             logpunktDAO.addLogpunkt(GlobalTogt.getEtape(getContext()), logpunkt);
+
+            System.out.println(logpunkt.toString());
 
             getActivity().getSupportFragmentManager()
                     .beginTransaction()

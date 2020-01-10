@@ -1,5 +1,7 @@
 package com.example.skibslogapp.model.Koordinat;
 
+import androidx.annotation.NonNull;
+
 public class KoordinatDTO {
     private double latitude;
     private double longitude;
@@ -15,5 +17,10 @@ public class KoordinatDTO {
         System.out.println("Longitude: " + longitude);
     }
 
-
+    @NonNull
+    @Override
+    public String toString() {
+        String koordinat = "Latitude: " + latitude + ", Longitude" + longitude;
+        return koordinat;
+    }
 }

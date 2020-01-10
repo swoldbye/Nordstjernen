@@ -2,6 +2,8 @@ package com.example.skibslogapp.model;
 
 import androidx.annotation.NonNull;
 
+import com.example.skibslogapp.model.Koordinat.KoordinatDTO;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -21,6 +23,7 @@ public class Logpunkt {
     private String sejlfoering = null;
     private String sejlstilling = null;
     private String stroem = null;
+    private KoordinatDTO koordinat;
 
     int hals = -1;
 
@@ -146,6 +149,10 @@ public class Logpunkt {
         this.stroem = stroem;
     }
 
+    public void setKoordinat(KoordinatDTO koordinat) {
+        this.koordinat = koordinat;
+    }
+
     public String getTimeString(){
         if( date == null ) return "";
         Calendar calendar = Calendar.getInstance();
@@ -208,7 +215,7 @@ public class Logpunkt {
         );
 
         return String.format(
-            "Logpunkt{ id: %d, etapeId: %d, date: %s, mob: %s, kurs: %s, vind: %s, sejls.: %s, sejlf. %s, roere: %s, note: %s}",
+            "Logpunkt{ id: %d, etapeId: %d, date: %s, mob: %s, kurs: %s, vind: %s, sejls.: %s, sejlf. %s, roere: %s, note: %s, koordinat: %s}",
                 id,
                 etapeId,
                 dateString,
@@ -218,7 +225,8 @@ public class Logpunkt {
                 sejlstilling != null ? sejlstilling : "-",
                 sejlfoering != null ? sejlfoering : "-",
                 roere >= 0 ? roere : "-",
-                note != null ? note : "-"
+                note != null ? note : "-",
+                koordinat.toString()
         );
     }
 }
