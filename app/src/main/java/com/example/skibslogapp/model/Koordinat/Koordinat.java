@@ -38,11 +38,7 @@ public class Koordinat {
     public Koordinat(Context context, Activity fraq_activity) {
         this.mContext = context;
         this.fraq_activity = fraq_activity;
-
-
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
-
-
     }
 
     /*
@@ -72,14 +68,14 @@ public class Koordinat {
             }
             //Requesting permission
             ActivityCompat.requestPermissions(fraq_activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1234);
-
         }
-
     }
+
 
     public void removeLocationUpdates() {
         fusedLocationProviderClient.removeLocationUpdates(callback);
     }
+
 
     public void startGetCoordinates() {
         isGooglePlayInstalled(mContext);
@@ -87,13 +83,14 @@ public class Koordinat {
         fusedLocationProviderClient.requestLocationUpdates(forespørgsel.getLocationRequest(), callback, null);
     }
 
+
     public KoordinatDTO getKoordinates() {
         return callback.getKoordinates();
     }
 
 
     /*
-    This method checks if google Play is installed
+    This method checks if google Play is installed - Not sure if this is the right way
      */
     public static void isGooglePlayInstalled(Context context) {
         PackageManager pm = context.getPackageManager();
