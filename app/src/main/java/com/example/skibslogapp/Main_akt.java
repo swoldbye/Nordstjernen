@@ -203,4 +203,8 @@ public class Main_akt extends AppCompatActivity {
         this.getSupportActionBar().show();
     }
 
+
+
+
+
 }

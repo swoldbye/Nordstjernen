@@ -4,6 +4,7 @@ package com.example.skibslogapp.view;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -26,11 +27,10 @@ import android.widget.TextView;
 
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.GlobalTogt;
-import com.example.skibslogapp.model.Koordinat;
-import com.example.skibslogapp.model.LocationRegistration;
+import com.example.skibslogapp.model.Koordinat.Koordinat;
+import com.example.skibslogapp.model.Koordinat.KoordinatDTO;
 import com.example.skibslogapp.model.Logpunkt;
 
-import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.utility.ToggleViewList;
 
@@ -364,7 +364,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             //LocationRegistration koordinateRegistration = new LocationRegistration(getActivity().getApplicationContext());
 
 
-            testKoordinates.getKoordinat();
+            testKoordinates.startMeassureKoordinat();
             // Henter hals
             Button btn_styrbord = getView().findViewById(R.id.hals_styrbord_btn);
             Button pressedHals = hals_Buttons.getToggledView();
@@ -476,4 +476,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             return (Button) super.getToggledView();
         }
     }
+
+
+
+
 }
