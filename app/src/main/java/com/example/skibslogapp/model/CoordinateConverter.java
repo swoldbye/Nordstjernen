@@ -22,17 +22,4 @@ public class CoordinateConverter {
         return String.format("%d\u00B0%.2f'%s", degrees, minutes, direction);
     }
 
-
-    private static void print(double original, String dmm){
-        System.out.println( String.format("%.4f  -> %s",original,dmm));
-    }
-
-    public static void main(String[] args) {
-        double lon = 29.39945;
-
-
-        print(lon, toLongitudeString(lon));
-        print(lon, toLatitudeString(lon));
-
-    }
 }
