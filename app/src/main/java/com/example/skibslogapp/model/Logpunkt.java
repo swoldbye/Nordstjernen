@@ -4,8 +4,11 @@ import com.example.skibslogapp.model.Koordinat.Position;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class Logpunkt {
+
+    // Ids
     private long id = -1;
     private long etapeId = -1;
     private long togtId = -1;
@@ -14,26 +17,25 @@ public class Logpunkt {
     private Date date;
     private Date creationDate; // And time
 
+    private Position position;
 
-    private int roere = -1;
+    private boolean mandOverBord = false;
+
     private String vindretning = null;
     private int vindhastighed = 0;
     private String stroemRetning = null;
     private int stroemhastighed = 0;
     private int kurs = -1;
     private String note = null;
-    private boolean mandOverBord = false;
-
-    private double breddegrad;
-    private double laengdegrad;
 
     private String sejlfoering = null;
     private String sejlstilling = null;
+    private int roere = -1;
 
-    private Position koordinat;
 
-    int hals = -1;
 
+
+    private int hals = -1;
 
     public Logpunkt(){
         this(null);
@@ -173,15 +175,15 @@ public class Logpunkt {
         this.stroemRetning = stroemRetning;
     }
 
-    public void setKoordinat(Position koordinat) {
-        this.koordinat = koordinat;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public String getTimeString(){
         if( date == null ) return "";
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        return String.format( "%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        return String.format(Locale.US, "%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
     }
 
     public String getKursString(){
@@ -224,25 +226,10 @@ public class Logpunkt {
         return mandOverBord;
     }
 
-    public double getBreddegrad() {
-        return breddegrad;
+
+    public Position getPosition() {
+        return position;
     }
-
-    public void setBreddegrad(double breddegrad) {
-        this.breddegrad = breddegrad;
-    }
-
-
-    public double getLaengdegrad() {
-        return laengdegrad;
-    }
-
-    public void setLaengdegrad(double laengdegrad) {
-        this.laengdegrad = laengdegrad;
-    }
-
-
-
 
     /**
      * Compares the Logpunkt with another Logpunkt, comparing
@@ -258,8 +245,6 @@ public class Logpunkt {
             id == otherPunkt.id     &&
             kurs == otherPunkt.kurs &&
             hals == otherPunkt.hals &&
-            laengdegrad == otherPunkt.laengdegrad &&
-            breddegrad == otherPunkt.breddegrad &&
             sejlfoering == otherPunkt.sejlfoering &&
             sejlstilling == otherPunkt.sejlstilling &&
             vindretning == otherPunkt.vindretning &&
@@ -296,13 +281,13 @@ public class Logpunkt {
         );
 
         return String.format(
-            "Logpunkt{ id: %d, etapeId: %d, date: %s, creationDate: %s, l.grad: %.4f, b.grad: %.4f, mob: %s, kurs: %s, vind: %s, vindhast.: %d, strøm: %s, strømhast.: %d, sejls.: %s, sejlf. %s, roere: %s, note: %s, koordinat: %s}",
+                Locale.US,
+            "Logpunkt{ id: %d, etapeId: %d, date: %s, creationDate: %s, pos.: %s, mob: %s, kurs: %s, vind: %s, vindhast.: %d, strøm: %s, strømhast.: %d, sejls.: %s, sejlf. %s, roere: %s, note: %s }",
                 id,
                 etapeId,
                 dateString,
                 creationDateString,
-                laengdegrad,
-                breddegrad,
+                position != null ? position : "-",
                 mandOverBord ? "true" : "false",
                 kurs >=0 ? kurs : "-",
                 vindretning != null ? vindretning : "-",
@@ -312,8 +297,7 @@ public class Logpunkt {
                 sejlstilling != null ? sejlstilling : "-",
                 sejlfoering != null ? sejlfoering : "-",
                 roere >= 0 ? roere : "-",
-                note != null ? note : "-",
-                koordinat != null ? koordinat : "-"
+                note != null ? note : "-"
         );
     }
 }
