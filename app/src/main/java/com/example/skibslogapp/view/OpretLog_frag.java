@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -27,8 +26,7 @@ import android.widget.TextView;
 
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.GlobalTogt;
-import com.example.skibslogapp.model.Koordinat.Koordinat;
-import com.example.skibslogapp.model.Koordinat.Location;
+import com.example.skibslogapp.model.Koordinat.PositionController;
 import com.example.skibslogapp.model.Logpunkt;
 
 import com.example.skibslogapp.R;
@@ -63,7 +61,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     ToggleButtonList sejlStilling_Buttons;
     private ToggleButtonList sejlføring_Buttons;
     EditText noteEditText;
-    Koordinat testKoordinates;
+    PositionController testKoordinates;
 
     String simpleDate3;
 
@@ -72,8 +70,11 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
-        testKoordinates = new Koordinat(getActivity().getApplicationContext(), getActivity());
+
+        // Coordinate Reader
+        testKoordinates = new PositionController(getActivity().getApplicationContext(), getActivity());
         testKoordinates.startMeassureKoordinat();
+
         //Tidsslet
         editTime = (EditText) view.findViewById(R.id.editTime);
         resetTimeButton = (Button) view.findViewById(R.id.resetTimeButton);
@@ -362,7 +363,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         }else if (v == opretButton || v == mob) {
 
-            // KoordinatDTO testKoordinat = testKoordinates.getKoordinates();
+            // Position testKoordinat = testKoordinates.getKoordinates();
            // testKoordinat.printKoordinates();
 
             // Henter hals
