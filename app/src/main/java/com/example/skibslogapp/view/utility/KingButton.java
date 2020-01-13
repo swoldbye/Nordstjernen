@@ -11,6 +11,10 @@ import com.example.skibslogapp.R;
 
 import java.util.ArrayList;
 
+/**
+ * Class to implement RadioButton logic unto our Buttons with our desired visuals.
+ * Logic derived from there can only be one King, but multiple realms can have multiple Kings (if the King doesn't know about another King, it is not a problem).
+ */
 public class KingButton extends AppCompatButton {
     private ArrayList<KingButton> relations = new ArrayList<>();
     int basicColor = getResources().getColor(R.color.grey);
@@ -21,10 +25,30 @@ public class KingButton extends AppCompatButton {
         super(context, attrs);
     }
 
+    /**
+     * Adds a relation between this and another KingButton
+     *
+     * @param newRelation   KingButton to get relation to
+     */
+    public void createRelation(KingButton newRelation) {
+        relations.add(newRelation);
+        newRelation.addRelation(this);
+    }
+
+    /**
+     * Adds a relation to another KingButton (the other KingButton might not know this KingButton)
+     *
+     * @param newRelation   KingButton to get relation to
+     */
     public void addRelation(KingButton newRelation) {
         relations.add(newRelation);
     }
 
+    /**
+     * Switches this KingButton to be 'King' and dethrones (deselects) the previously 'King'
+     * or
+     * Deselects this KingButton as 'King'
+     */
     public void kingSelected() {
         if(isSelected) kingDeselected(); //Dethrones the king, essentially resetting the button
         else {
@@ -36,6 +60,9 @@ public class KingButton extends AppCompatButton {
         }
     }
 
+    /**
+     * Sets the visuals of the KingButton to be deselected
+     */
     public void kingDeselected() {
         isSelected = false;
         Resources res = this.getContext().getResources();
@@ -43,6 +70,11 @@ public class KingButton extends AppCompatButton {
         setBackgroundTintList(res.getColorStateList(R.color.grey));
     }
 
+    /**
+     * Returns true if KingButton is current 'King'.
+
+     * @return  true if selected, else false
+     */
     public boolean isSelected() {
         return isSelected;
     }

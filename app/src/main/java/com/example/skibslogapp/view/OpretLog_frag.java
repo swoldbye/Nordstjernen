@@ -4,7 +4,6 @@ package com.example.skibslogapp.view;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -34,7 +33,6 @@ import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.utility.KingButton;
 import com.example.skibslogapp.view.utility.ToggleViewList;
 
-import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -129,14 +127,10 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         n1Btn = view.findViewById(R.id.n1Button);
         n2Btn = view.findViewById(R.id.n2Button);
         n3Btn = view.findViewById(R.id.n3Button);
-        fBtn.addRelation(øBtn);
-        øBtn.addRelation(fBtn);
-        n1Btn.addRelation(n2Btn);
-        n1Btn.addRelation(n3Btn);
-        n2Btn.addRelation(n1Btn);
-        n2Btn.addRelation(n3Btn);
-        n3Btn.addRelation(n1Btn);
-        n3Btn.addRelation(n2Btn);
+        fBtn.createRelation(øBtn);
+        n1Btn.createRelation(n2Btn);
+        n1Btn.createRelation(n3Btn);
+        n2Btn.createRelation(n3Btn);
 
         //On click Listeners:
         nordButton.setOnClickListener(this);
