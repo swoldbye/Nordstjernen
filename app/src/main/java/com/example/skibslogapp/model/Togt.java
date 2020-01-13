@@ -5,18 +5,25 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
+
+import java.util.Locale;
+
 public class Togt {
 
     static ArrayList togt = new ArrayList<Logpunkt>();
 
     private long id = -1;
     private String name;
-    private String startDest;
+    private String startDestination;
+    private String skib;
     private String skipper;
-    private String ship;
 
-    ArrayList<Besaetning> besaetningArrayList = new ArrayList<>();
-
+    public Togt(String name) {
+        this.name = name;
+    }
 
     public long getId() {
         return id;
@@ -24,17 +31,6 @@ public class Togt {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Togt(String skipper, String startDest, String name, String ship) {
-        this.skipper = skipper;
-        this.startDest = startDest;
-        this.name = name;
-        this.ship = ship;
-    }
-
-    public Togt(String skipper) {
-        this.skipper = skipper;
     }
 
     public String getName() {
@@ -45,28 +41,20 @@ public class Togt {
         this.name = name;
     }
 
-    public String getShip() {
-        return ship;
+    public String getStartDestination() {
+        return startDestination;
     }
 
-    public void setShip(String ship) {
-        this.ship = ship;
+    public void setStartDestination(String startDestination) {
+        this.startDestination = startDestination;
     }
 
-    public static ArrayList getTogt() {
-        return togt;
+    public String getSkib() {
+        return skib;
     }
 
-    public static void setTogt(ArrayList togt) {
-        Togt.togt = togt;
-    }
-
-    public ArrayList<Besaetning> getBesaetningArrayList() {
-        return besaetningArrayList;
-    }
-
-    public void setBesaetningArrayList(ArrayList<Besaetning> besaetningArrayList) {
-        this.besaetningArrayList = besaetningArrayList;
+    public void setSkib(String skib) {
+        this.skib = skib;
     }
 
     public String getSkipper() {
@@ -77,20 +65,23 @@ public class Togt {
         this.skipper = skipper;
     }
 
-    public String getStartDest() {
-        return startDest;
-    }
-
-    public void setStartDest(String startDest) {
-        this.startDest = startDest;
-    }
-
-//    public static ArrayList<LogInstans> getTogter() {
-//        return togt;
-//    }
-
-
     public boolean equals(Togt togt){
-        return id == togt.id && name.equals(togt.name);
+        return
+                id == togt.id &&
+                TextUtils.equals(name, togt.name) &&
+                TextUtils.equals(skib, togt.skib) &&
+                TextUtils.equals(skipper, togt.skipper) &&
+                TextUtils.equals(startDestination, togt.startDestination)
+                ;
+    }
+
+
+    @Override
+    @NonNull
+    public String toString(){
+        return String.format(Locale.US,
+                "Togt{ ID: %d, Navn: %s, Skib: %s, Skipper: %s, Startd.: %s }",
+                id, name, skib != null ? skib : "-", skipper != null ? skipper : "-", startDestination != null ? startDestination : "-"
+        );
     }
 }

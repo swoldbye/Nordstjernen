@@ -15,17 +15,14 @@ import java.util.List;
 
 public class EtapeDAO {
 
-
     // Connector to the database
     private SQLiteConnector connector;
     private Context context;
-
 
     public EtapeDAO(Context context) {
         this.context = context;
         connector = new SQLiteConnector(context);
     }
-
 
     /**
      * Add an Etape to the database. A new unique ID will be generated for

@@ -27,7 +27,6 @@ import android.widget.TextView;
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Logpunkt;
-import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.utility.ToggleViewList;
 
@@ -403,7 +402,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             // Create Logpunkt from time in calendar
             Logpunkt logpunkt = new Logpunkt( new Date(calendar.getTimeInMillis()) );
             logpunkt.setVindretning( vindretning_input.getText().toString() );
-            logpunkt.setStroem( strømretning_input.getText().toString() );
+            logpunkt.setStroemRetning( strømretning_input.getText().toString() );
             logpunkt.setKurs( kursStr.equals("") ? -1 : Integer.parseInt(kursStr) );
             logpunkt.setSejlfoering( sejlføring );
             logpunkt.setSejlfoering( sejlstilling );

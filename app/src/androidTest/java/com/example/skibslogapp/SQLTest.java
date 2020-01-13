@@ -1,6 +1,7 @@
 package com.example.skibslogapp;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
@@ -12,15 +13,17 @@ import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.model.Togt;
 
-
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 public class SQLTest {
 
+
     @Test
     public void overallTest(){
+
+        String logTag = "SQL-overallTest";
 
         // Setup
         Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
@@ -34,6 +37,11 @@ public class SQLTest {
         Etape etape = new Etape();
         Logpunkt logpunkt = new Logpunkt();
 
+        togt.setName("Tokes Sommercruise");
+        togt.setSkipper("Toke");
+        togt.setStartDestination("Roskilde Havn");
+        togt.setSkib("Helge Ask");
+
         // Saving togter
         togtDAO.addTogt(togt);
         etapeDAO.addEtape(togt, etape);
@@ -44,6 +52,9 @@ public class SQLTest {
         Etape loadedEtape = etapeDAO.getEtaper(loadedTogt).get(0);
         Logpunkt loadedLogpunkt = logpunktDAO.getLogpunkter(loadedEtape).get(0);
 
+        Log.d(logTag, "Saved Togt: "+togt);
+        Log.d(logTag, "Loaded Togt: "+loadedTogt);
+
         // Checking they're correct
         assertTrue(loadedTogt.equals(togt));
         assertTrue(loadedEtape.equals(etape));
@@ -53,6 +64,7 @@ public class SQLTest {
         togt.setId( togt.getId() + 1);
         logpunkt.setId(logpunkt.getId() + 1);
         etape.setId( etape.getId() + 1);
+        logpunkt.setLaengdegrad(0.001);
 
         // Checking they're false
         assertFalse(loadedTogt.equals(togt));
@@ -64,7 +76,6 @@ public class SQLTest {
 
 
     private class TestTogtObserver implements TogtDAO.TogtObserver{
-
         private Togt togt = null;
 
         Togt getTogt(){
@@ -111,6 +122,7 @@ public class SQLTest {
 
         SQLiteConnector.enableTestMode(false, context);
     }
+
 
 
 }
