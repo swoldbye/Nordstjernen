@@ -63,8 +63,6 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         String kaptajn = skipper.getText().toString();
         String togtStartDest = startDest.getText().toString();
 
-        TogtOversigt_frag togtOversigt_frag;
-
         if (view == opretBtn && togtet.length() <= 0){
             togtName.setError("Der skal indtastes et navn til togtet!");
             return;
@@ -80,7 +78,8 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         }else {
             if (view == opretBtn){
 
-                togtOversigt_frag = new TogtOversigt_frag();
+
+                TogtOversigt_frag togtOversigt_frag = new TogtOversigt_frag();
 
                 Togt togt = new Togt(togtet);
                 togt.setSkib(ship);
