@@ -30,7 +30,6 @@ import android.widget.TextView;
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Logpunkt;
-import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.utility.KingButton;
 import com.example.skibslogapp.view.utility.ToggleViewList;
@@ -52,23 +51,18 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     int standOutColor;
 
     Button resetTimeButton;
-    Button nordButton, østButton, sydButton, vestButton;
+    Button vindNordBtn, vindØstBtn, vindSydBtn, vindVestBtn;
     KingButton fBtn, øBtn, n1Btn, n2Btn, n3Btn;
-    EditText kursEditText, antalRoereEditText, editTime,vindHastighedEditTxt;
     Button nordButton_Strøm, østButton_Strøm, sydButton_Strøm, vestButton_Strøm;
     EditText kursEditText, antalRoereEditText, editTime,vindHastighedEditTxt, strømNingsretningEditText;
-    Button opretButton;
     TextView vindretning_input, strømretning_input;
     Button vindretning_delete, strømningsretning_delete;
-    Switch sbBb;
     View mob;
     ToggleButtonList hals_Buttons;
     ToggleButtonList sejlStilling_Buttons;
     private ToggleButtonList sejlføring_Buttons;
     EditText noteEditText;
-
-    String simpleDate3;
-
+    Button opretButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,10 +74,10 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         resetTimeButton = (Button) view.findViewById(R.id.resetTimeButton);
 
         //Vind Retning
-        nordButton = (Button) view.findViewById(R.id.nordButton);
-        østButton = (Button) view.findViewById(R.id.østButton);
-        sydButton = (Button) view.findViewById(R.id.sydButton);
-        vestButton = (Button) view.findViewById(R.id.vestButton);
+        vindNordBtn = (Button) view.findViewById(R.id.nordButton);
+        vindØstBtn = (Button) view.findViewById(R.id.østButton);
+        vindSydBtn = (Button) view.findViewById(R.id.sydButton);
+        vindVestBtn = (Button) view.findViewById(R.id.vestButton);
 
         //Strøm Retning
         nordButton_Strøm = (Button) view.findViewById(R.id.nordButton_strøm);
@@ -142,10 +136,10 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         n2Btn.createRelation(n3Btn);
 
         //On click Listeners:
-        nordButton.setOnClickListener(this);
-        østButton.setOnClickListener(this);
-        sydButton.setOnClickListener(this);
-        vestButton.setOnClickListener(this);
+        vindNordBtn.setOnClickListener(this);
+        vindØstBtn.setOnClickListener(this);
+        vindSydBtn.setOnClickListener(this);
+        vindVestBtn.setOnClickListener(this);
 
         nordButton_Strøm.setOnClickListener(this);
         østButton_Strøm.setOnClickListener(this);
@@ -174,9 +168,12 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         strømretning_input = view.findViewById(R.id.strøm_input);
         strømretning_input.setText("");
 
+        strømningsretning_delete = view.findViewById(R.id.strøm_delete);
+        strømningsretning_delete.setOnClickListener(this);
+        strømningsretning_delete.setVisibility(View.INVISIBLE);
+
         basicColor = getResources().getColor(R.color.grey);
         standOutColor = getResources().getColor(R.color.colorPrimary);
-
 
         //On Editor Listeners
         antalRoereEditText.setOnEditorActionListener(clearFocusOnDone);
@@ -345,7 +342,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
                     }
                     break;
             }
-            strømretning_input.setVisibility(View.VISIBLE);
+            strømningsretning_delete.setVisibility(View.VISIBLE);
         }
     }
 
@@ -360,16 +357,16 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         FragmentTransaction fragmentTransaction;
 
         // Vindretning
-        if(v == nordButton) vindDirectionLogic(vindretning_input.getText().toString(), "N", "S");
-        else if(v == østButton) vindDirectionLogic(vindretning_input.getText().toString(), "Ø", "V");
-        else if(v == sydButton) vindDirectionLogic(vindretning_input.getText().toString(), "S", "N");
-        else if(v == vestButton) vindDirectionLogic(vindretning_input.getText().toString(), "V", "Ø");
+        if(v == vindNordBtn) vindDirectionLogic(vindretning_input.getText().toString(), "N", "S");
+        else if(v == vindØstBtn) vindDirectionLogic(vindretning_input.getText().toString(), "Ø", "V");
+        else if(v == vindSydBtn) vindDirectionLogic(vindretning_input.getText().toString(), "S", "N");
+        else if(v == vindVestBtn) vindDirectionLogic(vindretning_input.getText().toString(), "V", "Ø");
 
         else if (v == vindretning_delete) {
             vindretning_input.setText("");
             vindretning_delete.setVisibility(View.INVISIBLE);
 
-        }else if(v == nordButton_Strøm) strømDirectionLogic(strømretning_input.getText().toString(), "N", "S");
+        } else if(v == nordButton_Strøm) strømDirectionLogic(strømretning_input.getText().toString(), "N", "S");
         else if(v == østButton_Strøm) strømDirectionLogic(strømretning_input.getText().toString(), "Ø", "V");
         else if(v == sydButton_Strøm) strømDirectionLogic(strømretning_input.getText().toString(), "S", "N");
         else if(v == vestButton_Strøm) strømDirectionLogic(strømretning_input.getText().toString(), "V", "Ø");
@@ -377,12 +374,12 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         else if (v == strømningsretning_delete) {
             strømretning_input.setText("");
             strømningsretning_delete.setVisibility(View.INVISIBLE);
-
-
-        } else if(v == fBtn || v == øBtn || v == n1Btn || v == n2Btn || v == n3Btn) {
+        }
+        else if(v == fBtn || v == øBtn || v == n1Btn || v == n2Btn || v == n3Btn) {
             KingButton btn = (KingButton) v;
             btn.kingSelected();
-        }else if (v == opretButton || v == mob) {
+        }
+        else if (v == opretButton || v == mob) {
 
             // Henter hals
             Button btn_styrbord = getView().findViewById(R.id.hals_styrbord_btn);
