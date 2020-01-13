@@ -143,6 +143,20 @@ public class LogpunktDAO {
 
 
     /**
+     * Deletes a Logpunkt from the database
+     *
+     * @param logpunkt The Logpunkt to delete from the database (compares the ID with id in database)
+     * @throws DAOException If the Logpunkt doesn't exist in the database
+     */
+    public void deleteLogpunkt(Logpunkt logpunkt) throws DAOException {
+        if( !logpunktExists(logpunkt) )
+            throw new DAOException(String.format("Couldn't find Logpunkt with ID %d in the database", logpunkt.getId()));
+        SQLiteDatabase database = connector.getReadableDatabase();
+        database.delete("logpunkter", "id="+logpunkt.getId(), null);
+    }
+
+
+    /**
      * Checks if the given Logpunkt exists in the database
      * based on the ID.
      *

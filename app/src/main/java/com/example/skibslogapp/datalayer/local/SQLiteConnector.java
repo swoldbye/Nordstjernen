@@ -39,7 +39,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SQLiteConnector extends SQLiteOpenHelper {
 
     // Increment version number if you change anything
-    private static final int VERSION = 9;
+    private static final int VERSION = 10;
 
     // Name of database
     private static final String DATABASE ="logbog.db";
@@ -77,7 +77,10 @@ public class SQLiteConnector extends SQLiteOpenHelper {
         db.execSQL(
             "CREATE TABLE togter (" +
                 "id INTEGER PRIMARY KEY," +
-                "name TEXT NOT NULL" +
+                "name TEXT NOT NULL," +
+                "skib TEXT," +
+                "startDestination TEXT," +
+                "skipper TEXT" +
             ")"
         );
 

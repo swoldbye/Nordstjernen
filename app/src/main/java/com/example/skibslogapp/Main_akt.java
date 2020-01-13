@@ -30,12 +30,12 @@ import com.example.skibslogapp.view.TogtOversigt_frag;
 import com.google.android.material.navigation.NavigationView;
 
 /**
- *  Denne klasse indeholder hovedaktiviteten og dens funktionaliteter.
- *
- *  - Toolbar
- *  - Venstre menu
- *
- *  Hovedaktiviteten har en fragment container under toolbar som skifter mellem appens fragmenter
+ * Denne klasse indeholder hovedaktiviteten og dens funktionaliteter.
+ * <p>
+ * - Toolbar
+ * - Venstre menu
+ * <p>
+ * Hovedaktiviteten har en fragment container under toolbar som skifter mellem appens fragmenter
  */
 public class Main_akt extends AppCompatActivity {
 
@@ -59,13 +59,12 @@ public class Main_akt extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
 
         configureNavigationDrawer();
 
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             Fragment fragment = new PostActivity();
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
         }
@@ -77,7 +76,7 @@ public class Main_akt extends AppCompatActivity {
     /**
      * Hvis denne metode bliver sat til en hvis menu, så kan man trykke på tre prikker i top højre hjørne
      * af toolbar, også kommer der en menu frem der.
-     *
+     * <p>
      * Vi har dog kun brug for venstremenuen ind til videre, så jeg sætter denne til en tom menu, så der ikke
      * kommer noget i højre hjørne
      *
@@ -92,9 +91,8 @@ public class Main_akt extends AppCompatActivity {
 
     /**
      * Denne funktion giver funktioner til de forskellige elementer i venstre menuen.
-     *
      */
-    private void configureNavigationDrawer(){
+    private void configureNavigationDrawer() {
         NavigationView navigationView;
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.leftMenu);
@@ -109,25 +107,25 @@ public class Main_akt extends AppCompatActivity {
 
                 //Tilføj funktionalitet til menu items
 
-                if (itemid == R.id.nav_opret_togt){
+                if (itemid == R.id.nav_opret_togt) {
 
 
-                }else if (itemid == R.id.nav_togt_oversigt){
+                } else if (itemid == R.id.nav_togt_oversigt) {
                     //changeFragFromMenu(togtOversigt_frag);
 
-                }else if (itemid == R.id.nav_opret_etape){
+                } else if (itemid == R.id.nav_opret_etape) {
 
 
-                }else if (itemid == R.id.nav_etape_oversigt){
+                } else if (itemid == R.id.nav_etape_oversigt) {
 
-                }else if (itemid == R.id.nav_opret_log){
+                } else if (itemid == R.id.nav_opret_log) {
                     changeFragFromMenu(opretLog_frag);
 
-                }else if (itemid == R.id.nav_log_oversigt){
-                   //changeFragFromMenu(logOversigt_frag);
+                } else if (itemid == R.id.nav_log_oversigt) {
+                    //changeFragFromMenu(logOversigt_frag);
 
-                }else {
-                    Toast.makeText(Main_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",
+                } else {
+                    Toast.makeText(Main_akt.this, "Du klikkede på noget ikke funktionelt. prøv igen",
                             Toast.LENGTH_LONG).show();
 
                 }
@@ -145,7 +143,7 @@ public class Main_akt extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         int itemId = menuItem.getItemId();
-        switch(itemId) {
+        switch (itemId) {
 
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
@@ -166,17 +164,17 @@ public class Main_akt extends AppCompatActivity {
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             View v = getCurrentFocus();
-            if ( v instanceof EditText) {
+            if (v instanceof EditText) {
                 Rect outRect = new Rect();
                 v.getGlobalVisibleRect(outRect);
-                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
                     v.clearFocus();
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
             }
         }
-        return super.dispatchTouchEvent( event );
+        return super.dispatchTouchEvent(event);
     }
 
     /**
@@ -185,7 +183,7 @@ public class Main_akt extends AppCompatActivity {
      * @param fragment Det fragment man vil skifte til
      * @return true
      */
-    public boolean changeFragFromMenu(Fragment fragment){
+    public boolean changeFragFromMenu(Fragment fragment) {
         fragmentManager = Main_akt.this.getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragContainer, fragment);
@@ -197,14 +195,14 @@ public class Main_akt extends AppCompatActivity {
     /**
      * Ved at kalde denne metode gemmes toolbar
      */
-    public void hideToolbar(){
+    public void hideToolbar() {
         this.getSupportActionBar().hide();
     }
 
     /**
      * Ved at kalde denne metode vises toolbar
      */
-    public void showToolbar(){
+    public void showToolbar() {
         this.getSupportActionBar().show();
     }
 
