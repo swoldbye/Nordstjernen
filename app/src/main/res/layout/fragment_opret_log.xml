@@ -328,35 +328,35 @@
 
                         <Space style="@style/EvenSpace" />
 
-                        <Button
+                        <com.example.skibslogapp.view.utility.KingButton
                             android:id="@+id/fButton"
                             style="@style/DefaultButton"
                             android:text="F" />
 
                         <Space style="@style/EvenSpace" />
 
-                        <Button
+                        <com.example.skibslogapp.view.utility.KingButton
                             android:id="@+id/øButton"
                             style="@style/DefaultButton"
                             android:text="Ø" />
 
                         <Space style="@style/EvenSpace" />
 
-                        <Button
+                        <com.example.skibslogapp.view.utility.KingButton
                             android:id="@+id/n1Button"
                             style="@style/DefaultButton"
                             android:text="N1" />
 
                         <Space style="@style/EvenSpace" />
 
-                        <Button
+                        <com.example.skibslogapp.view.utility.KingButton
                             android:id="@+id/n2Button"
                             style="@style/DefaultButton"
                             android:text="N2" />
 
                         <Space style="@style/EvenSpace" />
 
-                        <Button
+                        <com.example.skibslogapp.view.utility.KingButton
                             android:id="@+id/n3Button"
                             style="@style/DefaultButton"
                             android:text="N3" />

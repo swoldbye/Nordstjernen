@@ -31,6 +31,7 @@ import android.widget.TextView;
 import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.model.LogInstans;
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.view.utility.KingButton;
 import com.example.skibslogapp.view.utility.ToggleViewList;
 
 import java.sql.SQLOutput;
@@ -53,6 +54,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     Button resetTimeButton;
     Button nordButton, østButton, sydButton, vestButton;
+    KingButton fBtn, øBtn, n1Btn, n2Btn, n3Btn;
     EditText kursEditText, antalRoereEditText, editTime,vindHastighedEditTxt;
     Button opretButton;
     TextView vindretning_input;
@@ -122,14 +124,19 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             view.findViewById(R.id.bi)
         );
 
-        sejlføring_Buttons = new ToggleButtonList(
-            view.findViewById(R.id.fButton),
-            view.findViewById(R.id.øButton),
-            view.findViewById(R.id.n1Button),
-            view.findViewById(R.id.n2Button),
-            view.findViewById(R.id.n3Button)
-        );
-
+        fBtn = view.findViewById(R.id.fButton);
+        øBtn = view.findViewById(R.id.øButton);
+        n1Btn = view.findViewById(R.id.n1Button);
+        n2Btn = view.findViewById(R.id.n2Button);
+        n3Btn = view.findViewById(R.id.n3Button);
+        fBtn.addRelation(øBtn);
+        øBtn.addRelation(fBtn);
+        n1Btn.addRelation(n2Btn);
+        n1Btn.addRelation(n3Btn);
+        n2Btn.addRelation(n1Btn);
+        n2Btn.addRelation(n3Btn);
+        n3Btn.addRelation(n1Btn);
+        n3Btn.addRelation(n2Btn);
 
         //On click Listeners:
         nordButton.setOnClickListener(this);
@@ -149,6 +156,12 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         vindretning_input = view.findViewById(R.id.vindretning_input);
         vindretning_input.setText("");
+
+        fBtn.setOnClickListener(this);
+        øBtn.setOnClickListener(this);
+        n1Btn.setOnClickListener(this);
+        n2Btn.setOnClickListener(this);
+        n3Btn.setOnClickListener(this);
 
         basicColor = getResources().getColor(R.color.grey);
         standOutColor = getResources().getColor(R.color.colorPrimary);
@@ -308,15 +321,21 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         FragmentTransaction fragmentTransaction;
 
         // Vindretning
-        if(v == nordButton) vindDirectionLogic(vindretning_input.getText().toString(), "N", "S");
-        else if(v == østButton) vindDirectionLogic(vindretning_input.getText().toString(), "Ø", "V");
-        else if(v == sydButton) vindDirectionLogic(vindretning_input.getText().toString(), "S", "N");
-        else if(v == vestButton) vindDirectionLogic(vindretning_input.getText().toString(), "V", "Ø");
+        if (v == nordButton) vindDirectionLogic(vindretning_input.getText().toString(), "N", "S");
+        else if (v == østButton)
+            vindDirectionLogic(vindretning_input.getText().toString(), "Ø", "V");
+        else if (v == sydButton)
+            vindDirectionLogic(vindretning_input.getText().toString(), "S", "N");
+        else if (v == vestButton)
+            vindDirectionLogic(vindretning_input.getText().toString(), "V", "Ø");
 
         else if (v == vindretning_delete) {
             vindretning_input.setText("");
             vindretning_delete.setVisibility(View.INVISIBLE);
 
+        } else if(v == fBtn || v == øBtn || v == n1Btn || v == n2Btn || v == n3Btn) {
+            KingButton btn = (KingButton) v;
+            btn.kingSelected();
         }else if (v == opretButton || v == mob) {
 
             // Henter hals
@@ -336,10 +355,21 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
             // Henter sejlføring
             String sejlføring = "";
-            Button pressedSejlføring = sejlføring_Buttons.getToggledView();
-            if(pressedSejlføring != null){
-                sejlføring = pressedSejlføring.getText().toString() + hals;
-            }
+                //Øverste sejldel
+            if(fBtn.isSelected()) sejlføring += fBtn.getText().toString();
+            else if(øBtn.isSelected()) sejlføring += øBtn.getText().toString();
+                //Nederste sejl del
+            if(n1Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n1Btn.getText().toString() : n1Btn.getText().toString();
+            else if(n2Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n2Btn.getText().toString() : n2Btn.getText().toString();
+            else if(n3Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n3Btn.getText().toString() : n3Btn.getText().toString();
+
+            sejlføring += hals;
+
+            //Tidligere kode
+//            Button pressedSejlføring = sejlføring_Buttons.getToggledView();
+//            if(pressedSejlføring != null){
+//                sejlføring = pressedSejlføring.getText().toString() + hals;
+//            }
 
             // Henter sejlstilling
             String sejlstilling = "";
@@ -368,7 +398,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             editTime.setText("");
             resetTimeButton.setVisibility(View.INVISIBLE);
         }
-
     }
 
     public void toggleMOBPosition(boolean entering) {
