@@ -13,7 +13,6 @@ public class Togt {
     private String name;
     private String startDest;
     private String skipper;
-    private String date;
     private String ship;
 
     ArrayList<Besaetning> besaetningArrayList = new ArrayList<>();
@@ -27,11 +26,10 @@ public class Togt {
         this.id = id;
     }
 
-    public Togt(String skipper, String startDest, String name, String date, String ship) {
+    public Togt(String skipper, String startDest, String name, String ship) {
         this.skipper = skipper;
         this.startDest = startDest;
         this.name = name;
-        this.date = date;
         this.ship = ship;
     }
 
@@ -45,14 +43,6 @@ public class Togt {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getShip() {

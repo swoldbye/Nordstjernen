@@ -29,7 +29,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
     private String[] skibsListe ={"Skib1","Skib2","Skib3","Skib4","Skib5","Skib6"};
     private ArrayAdapter<String> dropDownShip;
     private MaterialBetterSpinner betterSpinner;
-    private EditText togtName, skipper, date, startDest;
+    private EditText togtName, skipper, startDest;
     private View opretBtn;
 
     private SharedPreferences sharedPreferences;
@@ -48,7 +48,6 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
         togtName = view.findViewById(R.id.togtNavn);
         skipper = view.findViewById(R.id.skipperEdit);
-        date = view.findViewById(R.id.datoEdit);
         startDest = view.findViewById(R.id.startDestEdit);
         opretBtn = view.findViewById(R.id.opretBtn);
         opretBtn.setOnClickListener(this);
@@ -65,13 +64,11 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
         togtName.setError(null);
         skipper.setError(null);
-        date.setError(null);
         startDest.setError(null);
 
         String ship = betterSpinner.getText().toString();
         String togtet = togtName.getText().toString();
         String kaptajn = skipper.getText().toString();
-        String inputtedDate = date.getText().toString();
         String togtStartDest = startDest.getText().toString();
 
         TogtOversigt_frag togtOversigt_frag;
@@ -82,10 +79,6 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
         }else if (view == opretBtn && kaptajn.length() <= 0){
             skipper.setError("Der skal intastes et navn på skipperen!");
-            return;
-
-        }else if (view == opretBtn && inputtedDate.length() <= 0){
-            date.setError("Der skal vælges en dato!");
             return;
 
         }else if (view == opretBtn && togtStartDest.length() <= 0){
@@ -99,7 +92,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
                 loadFromPrefs();
 
-                Togt togt = new Togt(kaptajn,togtStartDest,togtet,inputtedDate,ship);
+                Togt togt = new Togt(kaptajn,togtStartDest,togtet,ship);
                 togter.add(togt);
 
                 saveToPrefs(togter);
