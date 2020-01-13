@@ -4,8 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.skibslogapp.model.Etape;
+import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.model.Togt;
 
 import java.util.Date;
@@ -103,8 +105,6 @@ public class EtapeDAO {
         return etaper;
     }
 
-
-
     /**
      * Update an Etape already added to the database, to values
      * of the given object's fields.
@@ -130,6 +130,30 @@ public class EtapeDAO {
         database.update("etaper", row, "id="+etape.getId(), null );
 
         new TogtDAO(context).togtUpdated(etape.getTogtId());
+    }
+
+
+    /**
+     * Deletes an Etape from the database, including all the Logpunkter for that
+     * etape.
+     *
+     * @param etape Etape to delete (compares ID with ID in the database)
+     * @throws DAOException if the Etape doesn't exist in the database
+     */
+    public void deleteEtape(Etape etape) throws DAOException{
+
+        // Check if etape exist
+        if( !etapeExists(etape) )
+            throw new DAOException(String.format("Couldn't find Etape with ID %d in the database", etape.getId()));
+
+        // Deletes logpunkter for the Etape
+        LogpunktDAO logpunktDAO = new LogpunktDAO(context);
+        for( Logpunkt logpunkt : logpunktDAO.getLogpunkter(etape) ){
+            logpunktDAO.deleteLogpunkt(logpunkt);
+        }
+
+        // Delete Etape
+        connector.getReadableDatabase().delete("etaper", "id="+etape.getId(), null);
     }
 
 
