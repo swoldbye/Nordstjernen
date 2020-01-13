@@ -9,33 +9,19 @@ import com.example.skibslogapp.model.Togt;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 public class TogtDAO {
 
     // Connector to the database
     private SQLiteConnector connector;
-    private Context context;
 
     private static LinkedList<TogtObserver> togtObservers = new LinkedList<>();
 
     public TogtDAO(Context context){
-        this.context = context;
         connector = new SQLiteConnector(context);
     }
 
-
-    /**
-     * Add an observer to be notified whenever a togt has been updated.
-     *
-     * @param observer The observer to be notified
-     */
-    public static void addTogtObserver( TogtObserver observer ){
-        togtObservers.add(observer);
-    }
-
-    public static void removeTogtObserver( TogtObserver observer ) {
-        togtObservers.remove(observer);
-    }
 
 
     /**
@@ -87,15 +73,40 @@ public class TogtDAO {
 
             if( !cursor.isNull(cursor.getColumnIndex("startDestination")))
                 togt.setStartDestination(cursor.getString(cursor.getColumnIndex("startDestination")));
-
-
-
-
             togter.add(togt);
         }
         cursor.close();
 
         return togter;
+    }
+
+
+    /**
+     * Deletes a Togt from the local database, including all the Etaper and
+     * Logpunkter for that Togt.
+     *
+     * @param togt The Togt to be deleted (the method matches the ID of the Togt object with an ID in the database)
+     */
+    public void deleteTogt(Togt togt) throws DAOException {
+        SQLiteDatabase database = connector.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM togter;", null);
+
+        boolean foundTogt = false;
+
+        while(cursor.moveToNext()){
+            int togtId = cursor.getInt( cursor.getColumnIndex("id"));
+            if( togtId == togt.getId() ){
+                foundTogt = true;
+                break;
+            }
+        }
+        cursor.close();
+
+        if( !foundTogt ){
+            throw new DAOException(String.format(Locale.US, "Togt with id %d doesn't exist in database", togt.getId()));
+        }
+
+        database.delete("togter", "id="+togt.getId(), null );
     }
 
 
@@ -130,8 +141,18 @@ public class TogtDAO {
     }
 
 
+    /**
+     * Add an observer to be notified whenever a togt has been updated.
+     *
+     * @param observer The observer to be notified
+     */
+    public static void addTogtObserver( TogtObserver observer ){
+        togtObservers.add(observer);
+    }
 
-
+    public static void removeTogtObserver( TogtObserver observer ) {
+        togtObservers.remove(observer);
+    }
 
     /**
      * Checks if the given Togt exists in the database

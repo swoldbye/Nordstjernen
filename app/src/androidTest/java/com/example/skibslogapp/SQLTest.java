@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.example.skibslogapp.datalayer.local.DAOException;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.datalayer.local.SQLiteConnector;
@@ -16,6 +17,8 @@ import com.example.skibslogapp.model.Togt;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import java.util.List;
 
 public class SQLTest {
 
@@ -72,6 +75,38 @@ public class SQLTest {
         assertFalse(loadedLogpunkt.equals(logpunkt));
 
         SQLiteConnector.enableTestMode(false, context);
+    }
+
+    @Test
+    public void deleteTest(){
+        String logTag = "SQLTest-deleteTest";
+
+        // Setup
+        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        SQLiteConnector.enableTestMode(true, context);
+
+        TogtDAO togtDAO = new TogtDAO(context);
+
+        // Save togt
+        Togt togt = new Togt("Andreas' Sommercruise");
+        togtDAO.addTogt(togt);
+
+        // Load togt
+        Togt loadedTogt = togtDAO.getTogter().get(0);
+        assertTrue(loadedTogt.equals(togt));
+
+        // Delete loaded togt
+        togtDAO.deleteTogt(loadedTogt);
+
+        // Check Togt was deleted
+        assertEquals(togtDAO.getTogter().size(), 0);
+
+        // Try to delete "fake" togt
+        try{
+            Togt fakeTogt = new Togt("Fake Togt");
+            togtDAO.deleteTogt(fakeTogt);
+            fail("Togt was deleted");
+        }catch(DAOException exception){}
     }
 
 
