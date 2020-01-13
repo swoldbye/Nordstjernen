@@ -68,7 +68,6 @@ public class Main_akt extends AppCompatActivity {
             Fragment fragment = new PostActivity();
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
         }
-
     }
 
 
