@@ -72,6 +72,9 @@ public class Koordinat {
         fusedLocationProviderClient.removeLocationUpdates(callback);
     }
 
+    /*
+
+     */
 
     public void startGetCoordinates() {
         isGooglePlayInstalled(mContext);
@@ -79,6 +82,9 @@ public class Koordinat {
         fusedLocationProviderClient.requestLocationUpdates(forespørgsel.getLocationRequest(), callback, null);
     }
 
+    /*
+    This method returns the latest measured koordinates from the callback function
+     */
 
     public KoordinatDTO getKoordinates() {
         return callback.getKoordinates();
