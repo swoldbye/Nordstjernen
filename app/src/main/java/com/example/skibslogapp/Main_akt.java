@@ -33,12 +33,12 @@ import com.example.skibslogapp.view.TogtOversigt_frag;
 import com.google.android.material.navigation.NavigationView;
 
 /**
- *  Denne klasse indeholder hovedaktiviteten og dens funktionaliteter.
+ *  This class contains the main activity and its functionalities:
  *
  *  - Toolbar
- *  - Venstre menu
+ *  - Left menu
  *
- *  Hovedaktiviteten har en fragment container under toolbar som skifter mellem appens fragmenter
+ *  MainActivity has a fragment container beneath the toolbar that shifts between fragments.
  */
 public class Main_akt extends AppCompatActivity {
 
@@ -72,14 +72,13 @@ public class Main_akt extends AppCompatActivity {
     }
 
     /**
-     * Hvis denne metode bliver sat til en hvis menu, så kan man trykke på tre prikker i top højre hjørne
-     * af toolbar, også kommer der en menu frem der.
+     * If this method is set to a certain menu, then 3 points can be pressed in the upper right
+     * corner of the toolbar, and a menu will emerge there.
      *
-     * Vi har dog kun brug for venstremenuen ind til videre, så jeg sætter denne til en tom menu, så der ikke
-     * kommer noget i højre hjørne
+     * We only need the left menu, so this will be set to an empty menu, so no dots emerges
      *
-     * @param menu den menu der skal inflates
-     * @return true
+     * @param menu The menu that will be inflated
+     * @return True
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,7 +87,7 @@ public class Main_akt extends AppCompatActivity {
     }
 
     /**
-     * Denne funktion giver funktioner til de forskellige elementer i venstre menuen.
+     * This function, gives functionalities to the left menu elements.
      *
      */
     private void configureNavigationDrawer(){
@@ -105,7 +104,7 @@ public class Main_akt extends AppCompatActivity {
 
                 int itemid = menuItem.getItemId();
 
-                //Tilføj funktionalitet til menu items
+                //Add functionalities to the menu items.
 
                 if (itemid == R.id.nav_opret_togt){
                     changeFragFromMenu(opretTogt_frag);
@@ -135,10 +134,10 @@ public class Main_akt extends AppCompatActivity {
     }
 
     /**
-     * Denne metode giver de forskellige toolbar views funktionalitet
+     * This function give functionalities to the toolbar Views
      *
-     * @param menuItem De forskellige elementer i toolbar
-     * @return true hvis funktionen kan udføres
+     * @param menuItem The different items in the toolbar.
+     * @return true if the function can be executed
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
@@ -178,9 +177,9 @@ public class Main_akt extends AppCompatActivity {
     }
 
     /**
-     * Metode til at skifte fragment inde fra venstre menuen.
+     * Helper function to change fragment from the left menu
      *
-     * @param fragment Det fragment man vil skifte til
+     * @param fragment The fragment you want to change to.
      * @return true
      */
     public boolean changeFragFromMenu(Fragment fragment){
@@ -193,14 +192,14 @@ public class Main_akt extends AppCompatActivity {
     }
 
     /**
-     * Ved at kalde denne metode gemmes toolbar
+     * By calling this function you can hide the toolbar.
      */
     public void hideToolbar(){
         this.getSupportActionBar().hide();
     }
 
     /**
-     * Ved at kalde denne metode vises toolbar
+     * By calling this function you can show the toolbar.
      */
     public void showToolbar(){
         this.getSupportActionBar().show();
