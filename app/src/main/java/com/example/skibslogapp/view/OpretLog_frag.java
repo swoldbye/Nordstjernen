@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.GlobalTogt;
@@ -69,11 +71,27 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //Activat logging of coordinates. This is placed in onCreate to ensure that the logging will start at
+        //The first time the logging is activated.
+        testKoordinates = new Koordinat(getActivity().getApplicationContext(), this);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        testKoordinates.startMeassureKoordinat();
+        Toast.makeText(getActivity(), "Start meassuring koordinates", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
-        testKoordinates = new Koordinat(getActivity().getApplicationContext(), getActivity());
-        testKoordinates.startMeassureKoordinat();
+
         //Tidsslet
         editTime = (EditText) view.findViewById(R.id.editTime);
         resetTimeButton = (Button) view.findViewById(R.id.resetTimeButton);
@@ -485,7 +503,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         System.out.println("Measure koordinate");
-       testKoordinates.startGetCoordinates();
+       testKoordinates.startMeassureKoordinat();
     }
 
     @Override
