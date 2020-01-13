@@ -3,12 +3,8 @@ package com.example.skibslogapp.model;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
-import java.util.Date;
-
 import android.text.TextUtils;
-
 import androidx.annotation.NonNull;
-
 import java.util.Locale;
 
 public class Togt {

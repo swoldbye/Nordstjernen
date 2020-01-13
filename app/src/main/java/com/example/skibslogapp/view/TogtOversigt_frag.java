@@ -26,32 +26,16 @@ import com.example.skibslogapp.R;
 import com.example.skibslogapp.TogtListAdapter;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Togt;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This fragment contanins a recycleview with the created "Togts". You can click a  list element to
  * enter the "Togt" to se the log posts of the given "Togt".
- * You can click a button on the element to erase the "Togt" from the recycleView List and the database
- * and you can edit a "Togt" by clicken another button.
+ * You can click a button on the element to erase the "Togt" from the recycleView List and the database.
  */
 public class TogtOversigt_frag extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "TogtOversigt_frag";
-
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-
-    private TogtDAO togtDAO;
-
-    View opretTogt;
-
-    List<Togt> togtList;
 
     public TogtOversigt_frag() {
     }
@@ -61,57 +45,39 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener 
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_togt_oversigt, container, false);
 
-        opretTogt = view.findViewById(R.id.opretTogtBtn);
+        Log.d(TAG,"onCreateView started");
+
+        View opretTogt = view.findViewById(R.id.opretTogtBtn);
         opretTogt.setOnClickListener(this);
 
-//        loadFromPrefs();
+        TogtDAO togtDAO = new TogtDAO(getContext());
+        List<Togt> togtList = togtDAO.getTogter();
 
-        togtDAO = new TogtDAO(getContext());
-        togtList = togtDAO.getTogter();
-
-
-        recyclerView = view.findViewById(R.id.togtRecycView);
+        RecyclerView recyclerView = view.findViewById(R.id.togtRecycView);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this.getContext());
-        adapter = new TogtListAdapter(togtList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+        RecyclerView.Adapter adapter = new TogtListAdapter(togtList);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
-        // Inflate the layout for this fragment
-
 
         return view;
     }
 
-//    /**
-//     * this loads the togt list from sharedPreferences. It will probably be replaced with a load mechanism
-//     * from SQLite, because that is where we save our data.
-//     */
-//    private void loadFromPrefs(){
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//        Gson gson = new Gson();
-//        String json = sharedPreferences.getString("togterList",null);
-//        if (!(sharedPreferences.contains("togterList"))){
-//            System.out.println("Nothing in list");
-//        }else {
-//            Type type = new TypeToken<ArrayList<Togt>>(){}.getType();
-//            togtList = gson.fromJson(json,type);
-//            System.out.println("Loaded json");
-//        }
-//    }
-
-//    @Override
-//    public void onTogtClick(int position) {
-//        Log.d(TAG,"onTogtClick: clicked");
-//
-//    }
-
+    /**
+     * This function changes the fragment to the "OpretTogt" fragment
+     * @param v The floating button View
+     */
     @Override
     public void onClick(View v) {
         OpretTogt_frag opretTogt_frag = new OpretTogt_frag();
         changeFragment(opretTogt_frag);
     }
 
+    /**
+     * Helper function for the onClick() function.
+     *
+     * @param fragment The fragment that will be changed to.
+     */
     private void changeFragment(Fragment fragment){
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
