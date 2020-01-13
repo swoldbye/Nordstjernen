@@ -89,8 +89,6 @@ public class TogtDAO {
                 togt.setStartDestination(cursor.getString(cursor.getColumnIndex("startDestination")));
 
 
-
-
             togter.add(togt);
         }
         cursor.close();

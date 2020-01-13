@@ -24,12 +24,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.skibslogapp.Main_akt;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.TogtListAdapter;
+import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Togt;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This fragment contanins a recycleview with the created "Togts". You can click a  list element to
@@ -45,9 +47,11 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener 
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private TogtDAO togtDAO;
+
     View opretTogt;
 
-    ArrayList<Togt> togtList;
+    List<Togt> togtList;
 
     public TogtOversigt_frag() {
     }
@@ -57,12 +61,14 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener 
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_togt_oversigt, container, false);
 
-        togtList = new ArrayList<>();
-
         opretTogt = view.findViewById(R.id.opretTogtBtn);
         opretTogt.setOnClickListener(this);
 
-        loadFromPrefs();
+//        loadFromPrefs();
+
+        togtDAO = new TogtDAO(getContext());
+        togtList = togtDAO.getTogter();
+
 
         recyclerView = view.findViewById(R.id.togtRecycView);
         recyclerView.setHasFixedSize(true);
@@ -77,22 +83,22 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener 
         return view;
     }
 
-    /**
-     * this loads the togt list from sharedPreferences. It will probably be replaced with a load mechanism
-     * from SQLite, because that is where we save our data.
-     */
-    private void loadFromPrefs(){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("togterList",null);
-        if (!(sharedPreferences.contains("togterList"))){
-            System.out.println("Nothing in list");
-        }else {
-            Type type = new TypeToken<ArrayList<Togt>>(){}.getType();
-            togtList = gson.fromJson(json,type);
-            System.out.println("Loaded json");
-        }
-    }
+//    /**
+//     * this loads the togt list from sharedPreferences. It will probably be replaced with a load mechanism
+//     * from SQLite, because that is where we save our data.
+//     */
+//    private void loadFromPrefs(){
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//        Gson gson = new Gson();
+//        String json = sharedPreferences.getString("togterList",null);
+//        if (!(sharedPreferences.contains("togterList"))){
+//            System.out.println("Nothing in list");
+//        }else {
+//            Type type = new TypeToken<ArrayList<Togt>>(){}.getType();
+//            togtList = gson.fromJson(json,type);
+//            System.out.println("Loaded json");
+//        }
+//    }
 
 //    @Override
 //    public void onTogtClick(int position) {

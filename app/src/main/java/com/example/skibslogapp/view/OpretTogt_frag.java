@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Togt;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -34,8 +35,10 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private ArrayList<Togt> togter;
+//    private ArrayList<Togt> togter;
     private Gson gson;
+
+    private TogtDAO togtDAO;
 
     public OpretTogt_frag() {
 
@@ -90,12 +93,18 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
                 togtOversigt_frag = new TogtOversigt_frag();
 
-                loadFromPrefs();
+                Togt togt = new Togt(togtet);
+                togt.setSkib(ship);
+                togt.setStartDestination(togtStartDest);
+                togt.setSkipper(kaptajn);
 
-                Togt togt = new Togt(kaptajn,togtStartDest,togtet,ship);
-                togter.add(togt);
+                togtDAO = new TogtDAO(getContext());
 
-                saveToPrefs(togter);
+                togtDAO.addTogt(togt);
+
+//                togter.add(togt);
+//
+//                saveToPrefs(togter);
 
                 Toast.makeText(this.getContext(),"Togt oprettet!",Toast.LENGTH_LONG).show();
 
@@ -104,32 +113,32 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         }
     }
 
-    /**
-     * Save a list to PreferenceManager
-     */
-    private void saveToPrefs(ArrayList list){
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        editor = sharedPreferences.edit();
-        gson = new Gson();
-        String json = gson.toJson(list);
-        editor.putString("togterList", json);
-        editor.apply();
-    }
-
-    /**
-     * Load the togter list from PreferenceManager
-     */
-    private void loadFromPrefs(){
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        gson = new Gson();
-        String json = sharedPreferences.getString("togterList", null);
-        Type type = new TypeToken<ArrayList<Togt>>() {}.getType();
-        togter = gson.fromJson(json,type);
-
-        if (togter == null){
-            togter = new ArrayList<>();
-        }
-    }
+//    /**
+//     * Save a list to PreferenceManager
+//     */
+//    private void saveToPrefs(ArrayList list){
+//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//        editor = sharedPreferences.edit();
+//        gson = new Gson();
+//        String json = gson.toJson(list);
+//        editor.putString("togterList", json);
+//        editor.apply();
+//    }
+//
+//    /**
+//     * Load the togter list from PreferenceManager
+//     */
+//    private void loadFromPrefs(){
+//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+//        gson = new Gson();
+//        String json = sharedPreferences.getString("togterList", null);
+//        Type type = new TypeToken<ArrayList<Togt>>() {}.getType();
+//        togter = gson.fromJson(json,type);
+//
+//        if (togter == null){
+//            togter = new ArrayList<>();
+//        }
+//    }
 
     private void changeFragment(Fragment fragment){
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

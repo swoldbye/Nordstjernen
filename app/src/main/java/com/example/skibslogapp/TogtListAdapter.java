@@ -17,18 +17,14 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtListViewHolder> {
 
-    private ArrayList<Togt> togtArrayList;
+    private List<Togt> togtArrayList;
 //    private OnTogtListener togtListener;
 
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
-    private ArrayList<Togt> togter;
-    private Gson gson;
-
-    public TogtListAdapter(ArrayList<Togt> list) {
+    public TogtListAdapter(List<Togt> list) {
         togtArrayList = list;
 //        this.togtListener = onTogtListener;
     }
