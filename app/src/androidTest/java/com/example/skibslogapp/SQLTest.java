@@ -23,6 +23,8 @@ public class SQLTest {
     @Test
     public void overallTest(){
 
+        String logTag = "SQL-overallTest";
+
         // Setup
         Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         SQLiteConnector.enableTestMode(true, context);
@@ -35,6 +37,11 @@ public class SQLTest {
         Etape etape = new Etape();
         Logpunkt logpunkt = new Logpunkt();
 
+        togt.setName("Tokes Sommercruise");
+        togt.setSkipper("Toke");
+        togt.setStartDestination("Roskilde Havn");
+        togt.setSkib("Helge Ask");
+
         // Saving togter
         togtDAO.addTogt(togt);
         etapeDAO.addEtape(togt, etape);
@@ -45,8 +52,8 @@ public class SQLTest {
         Etape loadedEtape = etapeDAO.getEtaper(loadedTogt).get(0);
         Logpunkt loadedLogpunkt = logpunktDAO.getLogpunkter(loadedEtape).get(0);
 
-        Log.d("Test: ", "Saved logpunkt: "+logpunkt);
-        Log.d("Test: ", "Loaded  logpunkt: "+logpunkt);
+        Log.d(logTag, "Saved Togt: "+togt);
+        Log.d(logTag, "Loaded Togt: "+loadedTogt);
 
         // Checking they're correct
         assertTrue(loadedTogt.equals(togt));

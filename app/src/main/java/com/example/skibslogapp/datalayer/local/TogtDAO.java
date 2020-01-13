@@ -33,7 +33,7 @@ public class TogtDAO {
         togtObservers.add(observer);
     }
 
-    public static void removeTogtObserver( TogtObserver observer ){
+    public static void removeTogtObserver( TogtObserver observer ) {
         togtObservers.remove(observer);
     }
 
@@ -50,6 +50,10 @@ public class TogtDAO {
 
         ContentValues row = new ContentValues();
         row.put("name", togt.getName());
+
+        if( togt.getSkib() != null ) row.put("skib", togt.getSkib());
+        if( togt.getSkipper() != null ) row.put("skipper", togt.getSkipper());
+        if( togt.getStartDestination() != null ) row.put("startDestination", togt.getStartDestination());
 
         long id = database.insert("togter", null, row);
         togt.setId(id);
@@ -69,10 +73,24 @@ public class TogtDAO {
         //Cursor cursor = database.query("togter", null, null, null,null, null, null);
         LinkedList<Togt> togter = new LinkedList<>();
 
+
         // Load data from each row
         while( cursor.moveToNext() ){
-            Togt togt = new Togt(cursor.getString(1));
-            togt.setId(cursor.getInt(0));
+            Togt togt = new Togt(cursor.getString(cursor.getColumnIndex("name")));
+            togt.setId(cursor.getInt( cursor.getColumnIndex("id")));
+
+            if( !cursor.isNull(cursor.getColumnIndex("skib")))
+                togt.setSkib(cursor.getString(cursor.getColumnIndex("skib")));
+
+            if( !cursor.isNull(cursor.getColumnIndex("skipper")))
+                togt.setSkipper(cursor.getString(cursor.getColumnIndex("skipper")));
+
+            if( !cursor.isNull(cursor.getColumnIndex("startDestination")))
+                togt.setStartDestination(cursor.getString(cursor.getColumnIndex("startDestination")));
+
+
+
+
             togter.add(togt);
         }
         cursor.close();

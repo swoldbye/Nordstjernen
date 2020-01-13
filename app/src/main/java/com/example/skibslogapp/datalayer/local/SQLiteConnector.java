@@ -77,7 +77,10 @@ public class SQLiteConnector extends SQLiteOpenHelper {
         db.execSQL(
             "CREATE TABLE togter (" +
                 "id INTEGER PRIMARY KEY," +
-                "name TEXT NOT NULL" +
+                "name TEXT NOT NULL," +
+                "skib TEXT," +
+                "startDestination TEXT," +
+                "skipper TEXT" +
             ")"
         );
 
