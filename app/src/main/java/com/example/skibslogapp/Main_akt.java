@@ -70,9 +70,6 @@ public class Main_akt extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
         }
 
-        //Asking for permission to measure location.
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1234);
-
     }
 
     @Override
