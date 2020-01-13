@@ -56,7 +56,7 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener 
         RecyclerView recyclerView = view.findViewById(R.id.togtRecycView);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
-        RecyclerView.Adapter adapter = new TogtListAdapter(togtList);
+        RecyclerView.Adapter adapter = new TogtListAdapter(togtList,getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 

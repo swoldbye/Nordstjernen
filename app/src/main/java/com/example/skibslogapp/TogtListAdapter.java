@@ -1,5 +1,6 @@
 package com.example.skibslogapp;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Togt;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -25,10 +27,13 @@ import java.util.List;
 public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtListViewHolder> {
 
     private List<Togt> togtArrayList;
+    private Context mContext;
 //    private OnTogtListener togtListener;
 
-    public TogtListAdapter(List<Togt> list) {
+    public TogtListAdapter(List<Togt> list, Context context) {
         togtArrayList = list;
+        mContext = context;
+
 //        this.togtListener = onTogtListener;
     }
 
@@ -83,7 +88,10 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
      * @param position The position the element is in the RecycleView
      */
     public void delete(int position){
+        Togt togt = togtArrayList.get(position);
         togtArrayList.remove(position);
+        TogtDAO togtDAO = new TogtDAO(mContext);
+        togtDAO.deleteTogt(togt);
         notifyItemRemoved(position);
     }
 
