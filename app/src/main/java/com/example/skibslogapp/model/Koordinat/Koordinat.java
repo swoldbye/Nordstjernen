@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
+import com.example.skibslogapp.view.OpretLog_frag;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
@@ -19,7 +20,7 @@ public class Koordinat {
 
     private LocationCallback callback = new LocationCallback();
     private ForespørgselMåling forespørgsel = new ForespørgselMåling();
-    private Activity fraq_activity;
+    private OpretLog_frag fraq_activity;
     private Context mContext;
 
     /*
@@ -27,7 +28,7 @@ public class Koordinat {
      */
     static FusedLocationProviderClient fusedLocationProviderClient;
 
-    public Koordinat(Context context, Activity fraq_activity) {
+    public Koordinat(Context context, OpretLog_frag fraq_activity) {
         this.mContext = context;
         this.fraq_activity = fraq_activity;
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
@@ -59,11 +60,11 @@ public class Koordinat {
 
             //Will retur false if the user tabs "Bont ask me again/Permission denied".
             //Returns true if the user previusly rejected the message and now try to access it again. -> Indication of user confussion
-            if (ActivityCompat.shouldShowRequestPermissionRationale(fraq_activity, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                Toast.makeText(mContext, "Lokation skal være aktiveret for at GPS lokation kan logges. Tap \"CLOSE\" and \"OPEN\" to see the dialobbox again", Toast.LENGTH_LONG).show();
+            if (fraq_activity.shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                //Toast.makeText(mContext, "Lokation skal være aktiveret for at GPS lokation kan logges. Tap \"CLOSE\" and \"OPEN\" to see the dialobbox again", Toast.LENGTH_LONG).show();
             }
             //Requesting permission
-            ActivityCompat.requestPermissions(fraq_activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1234);
+            fraq_activity.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1234);
         }
     }
 
@@ -76,7 +77,7 @@ public class Koordinat {
 
      */
 
-    public void startGetCoordinates() {
+    private void startGetCoordinates() {
         isGooglePlayInstalled(mContext);
         //Uses the requestLocationUpdates because i do not want the measureing to happen in the background. I only want it to happen when the Opret_log fraq is vissible
         fusedLocationProviderClient.requestLocationUpdates(forespørgsel.getLocationRequest(), callback, null);
@@ -85,7 +86,6 @@ public class Koordinat {
     /*
     This method returns the latest measured koordinates from the callback function
      */
-
     public KoordinatDTO getKoordinates() {
         return callback.getKoordinates();
     }
