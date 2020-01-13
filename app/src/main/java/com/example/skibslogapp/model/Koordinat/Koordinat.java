@@ -21,7 +21,6 @@ public class Koordinat {
     private ForespørgselMåling forespørgsel = new ForespørgselMåling();
     private Activity fraq_activity;
     private Context mContext;
-    //private Context mContext;
 
     /*
     Fuced - Google API sørger selv for at koordinater indhentes på den mest optimal måde. Altså om det skla være GPS, WIFI, Antennemest.
@@ -33,6 +32,8 @@ public class Koordinat {
         this.fraq_activity = fraq_activity;
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
     }
+
+
 
     /*
     Method describes what the request that we make.
@@ -59,7 +60,7 @@ public class Koordinat {
             //Will retur false if the user tabs "Bont ask me again/Permission denied".
             //Returns true if the user previusly rejected the message and now try to access it again. -> Indication of user confussion
             if (ActivityCompat.shouldShowRequestPermissionRationale(fraq_activity, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                Toast.makeText(mContext, "Lokation skal være aktiveret for at GPS lokation kan logges.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Lokation skal være aktiveret for at GPS lokation kan logges. Tap \"CLOSE\" and \"OPEN\" to see the dialobbox again", Toast.LENGTH_LONG).show();
             }
             //Requesting permission
             ActivityCompat.requestPermissions(fraq_activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1234);
