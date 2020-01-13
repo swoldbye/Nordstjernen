@@ -396,7 +396,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         }else if(v == resetTimeButton){
             editTime.setText("");
-            resetTimeButton.setVisibility(View.INVISIBLE);
         }
     }
 
