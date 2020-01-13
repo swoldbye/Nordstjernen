@@ -72,10 +72,7 @@ public class Main_akt extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
+
 
     /**
      * Hvis denne metode bliver sat til en hvis menu, så kan man trykke på tre prikker i top højre hjørne

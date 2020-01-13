@@ -176,12 +176,7 @@ public class Logpunkt {
     }
 
     public void setPosition(Position position) {
-
-        if (position == null) {
-            this.position = new Position(0, 0);
-        } else {
             this.position = position;
-        }
     }
 
     public String getTimeString(){

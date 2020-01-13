@@ -1,6 +1,7 @@
 package com.example.skibslogapp.view;
 
 
+import android.Manifest;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -35,8 +36,11 @@ import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.utility.ToggleViewList;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
@@ -79,10 +83,13 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        testKoordinates.startMeassureKoordinat();
-        Toast.makeText(getActivity(), "Start meassuring koordinates", Toast.LENGTH_LONG).show();
+        if(grantResults[0] == PERMISSION_GRANTED){
+            testKoordinates.startMeassureKoordinat();
+            Toast.makeText(getActivity(), "Lokation er aktiveret", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getActivity(), "Lokation er ikke aktiveret", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
