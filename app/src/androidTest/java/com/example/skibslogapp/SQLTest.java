@@ -22,23 +22,25 @@ import java.util.List;
 
 public class SQLTest {
 
+    static TogtDAO togtDAO;
+    static EtapeDAO etapeDAO;
+    static LogpunktDAO logpunktDAO;
+    static Togt togt;
+    static Etape etape;
+    static Logpunkt logpunkt;
 
-    @Test
-    public void overallTest(){
 
-        String logTag = "SQL-overallTest";
-
-        // Setup
+    static void setupTestData(){
         Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         SQLiteConnector.enableTestMode(true, context);
 
-        TogtDAO togtDAO = new TogtDAO(context);
-        EtapeDAO etapeDAO = new EtapeDAO(context);
-        LogpunktDAO logpunktDAO = new LogpunktDAO(context);
+        togtDAO = new TogtDAO(context);
+        etapeDAO = new EtapeDAO(context);
+        logpunktDAO = new LogpunktDAO(context);
 
-        Togt togt = new Togt("Test Togt");
-        Etape etape = new Etape();
-        Logpunkt logpunkt = new Logpunkt();
+        togt = new Togt("Test Togt");
+        etape = new Etape();
+        logpunkt = new Logpunkt();
 
         togt.setName("Tokes Sommercruise");
         togt.setSkipper("Toke");
@@ -49,14 +51,17 @@ public class SQLTest {
         togtDAO.addTogt(togt);
         etapeDAO.addEtape(togt, etape);
         logpunktDAO.addLogpunkt(etape, logpunkt);
+    }
+
+    @Test
+    public void overallTest(){
+
+        setupTestData();
 
         // Loading togter
         Togt loadedTogt = togtDAO.getTogter().get(0);
         Etape loadedEtape = etapeDAO.getEtaper(loadedTogt).get(0);
         Logpunkt loadedLogpunkt = logpunktDAO.getLogpunkter(loadedEtape).get(0);
-
-        Log.d(logTag, "Saved Togt: "+togt);
-        Log.d(logTag, "Loaded Togt: "+loadedTogt);
 
         // Checking they're correct
         assertTrue(loadedTogt.equals(togt));
@@ -74,40 +79,8 @@ public class SQLTest {
         assertFalse(loadedEtape.equals(etape));
         assertFalse(loadedLogpunkt.equals(logpunkt));
 
-        SQLiteConnector.enableTestMode(false, context);
     }
 
-    @Test
-    public void deleteTest(){
-        String logTag = "SQLTest-deleteTest";
-
-        // Setup
-        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        SQLiteConnector.enableTestMode(true, context);
-
-        TogtDAO togtDAO = new TogtDAO(context);
-
-        // Save togt
-        Togt togt = new Togt("Andreas' Sommercruise");
-        togtDAO.addTogt(togt);
-
-        // Load togt
-        Togt loadedTogt = togtDAO.getTogter().get(0);
-        assertTrue(loadedTogt.equals(togt));
-
-        // Delete loaded togt
-        togtDAO.deleteTogt(loadedTogt);
-
-        // Check Togt was deleted
-        assertEquals(togtDAO.getTogter().size(), 0);
-
-        // Try to delete "fake" togt
-        try{
-            Togt fakeTogt = new Togt("Fake Togt");
-            togtDAO.deleteTogt(fakeTogt);
-            fail("Togt was deleted");
-        }catch(DAOException exception){}
-    }
 
 
     private class TestTogtObserver implements TogtDAO.TogtObserver{
@@ -157,6 +130,102 @@ public class SQLTest {
 
         SQLiteConnector.enableTestMode(false, context);
     }
+
+
+    @Test
+    public void deleteLogpunktTest(){
+
+        setupTestData();
+
+        // Loading Data
+        Togt loadedTogt = togtDAO.getTogter().get(0);
+        Etape loadedEtape = etapeDAO.getEtaper(loadedTogt).get(0);
+        Logpunkt loadedLogpunkt = logpunktDAO.getLogpunkter(loadedEtape).get(0);
+
+        assertTrue(logpunktDAO.logpunktExists(loadedLogpunkt));
+        assertTrue(etapeDAO.etapeExists(loadedEtape));
+        assertTrue(togtDAO.togtExists(togt));
+
+        // Delete loaded togt
+        logpunktDAO.deleteLogpunkt(logpunkt);
+
+        // Check logpunkt was deleted
+        assertFalse(logpunktDAO.logpunktExists(loadedLogpunkt));
+        assertTrue(etapeDAO.etapeExists(loadedEtape));
+        assertTrue(togtDAO.togtExists(togt));
+
+        // Try to delete "fake" id
+        try{
+            Logpunkt fakeLogpunkt = new Logpunkt();
+            logpunktDAO.deleteLogpunkt(fakeLogpunkt);
+            fail("Logpunkt was deleted");
+        }catch(DAOException exception){}
+    }
+
+
+    @Test
+    public void deleteEtapeTest(){
+
+        setupTestData();
+
+        // Loading Data
+        Togt loadedTogt = togtDAO.getTogter().get(0);
+        Etape loadedEtape = etapeDAO.getEtaper(loadedTogt).get(0);
+        Logpunkt loadedLogpunkt = logpunktDAO.getLogpunkter(loadedEtape).get(0);
+
+        assertTrue(logpunktDAO.logpunktExists(loadedLogpunkt));
+        assertTrue(etapeDAO.etapeExists(loadedEtape));
+        assertTrue(togtDAO.togtExists(togt));
+
+        // Delete loaded togt
+        etapeDAO.deleteEtape(etape);
+
+        // Check etape was deleted
+        assertFalse(logpunktDAO.logpunktExists(loadedLogpunkt));
+        assertFalse(etapeDAO.etapeExists(loadedEtape));
+        assertTrue(togtDAO.togtExists(togt));
+
+        // Try to delete "fake" id
+        try{
+            Etape fakeEtape = new Etape();
+            etapeDAO.deleteEtape(fakeEtape);
+            fail("Etape was deleted");
+        }catch(DAOException exception){}
+    }
+
+    @Test
+    public void deleteTogtTest(){
+
+        setupTestData();
+
+        // Loading Data
+        Togt loadedTogt = togtDAO.getTogter().get(0);
+        Etape loadedEtape = etapeDAO.getEtaper(loadedTogt).get(0);
+        Logpunkt loadedLogpunkt = logpunktDAO.getLogpunkter(loadedEtape).get(0);
+
+        assertTrue(logpunktDAO.logpunktExists(loadedLogpunkt));
+        assertTrue(etapeDAO.etapeExists(loadedEtape));
+        assertTrue(togtDAO.togtExists(togt));
+
+        // Delete loaded togt
+        togtDAO.deleteTogt(loadedTogt);
+
+        // Check togt was deleted
+        assertFalse(logpunktDAO.logpunktExists(loadedLogpunkt));
+        assertFalse(etapeDAO.etapeExists(loadedEtape));
+        assertFalse(togtDAO.togtExists(togt));
+
+        // Try to delete "fake" id
+        try{
+            Togt fakeTogt = new Togt("Fake Togt");
+            togtDAO.deleteTogt(fakeTogt);
+            fail("Etape was deleted");
+        }catch(DAOException exception){}
+    }
+
+
+
+
 
 
 

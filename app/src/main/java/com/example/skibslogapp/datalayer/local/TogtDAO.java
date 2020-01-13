@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.skibslogapp.model.Etape;
+import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.model.Togt;
 
 import java.util.LinkedList;
@@ -15,13 +17,14 @@ public class TogtDAO {
 
     // Connector to the database
     private SQLiteConnector connector;
+    private Context context;
 
     private static LinkedList<TogtObserver> togtObservers = new LinkedList<>();
 
     public TogtDAO(Context context){
         connector = new SQLiteConnector(context);
+        this.context = context;
     }
-
 
 
     /**
@@ -88,24 +91,17 @@ public class TogtDAO {
      * @param togt The Togt to be deleted (the method matches the ID of the Togt object with an ID in the database)
      */
     public void deleteTogt(Togt togt) throws DAOException {
-        SQLiteDatabase database = connector.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT * FROM togter;", null);
-
-        boolean foundTogt = false;
-
-        while(cursor.moveToNext()){
-            int togtId = cursor.getInt( cursor.getColumnIndex("id"));
-            if( togtId == togt.getId() ){
-                foundTogt = true;
-                break;
-            }
-        }
-        cursor.close();
-
-        if( !foundTogt ){
+        if( !togtExists(togt) ){
             throw new DAOException(String.format(Locale.US, "Togt with id %d doesn't exist in database", togt.getId()));
         }
 
+        // Deletes Etaper for the Togt
+        EtapeDAO etapeDAO = new EtapeDAO(context);
+        for( Etape etape : etapeDAO.getEtaper(togt) ){
+            etapeDAO.deleteEtape(etape);
+        }
+
+        SQLiteDatabase database = connector.getReadableDatabase();
         database.delete("togter", "id="+togt.getId(), null );
     }
 
