@@ -1,14 +1,13 @@
 package com.example.skibslogapp.model.Koordinat;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
+import com.example.skibslogapp.view.OpretLog_frag;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
@@ -16,7 +15,7 @@ public class PositionController {
 
     private PositionCallback callback = new PositionCallback();
     private ForespørgselMåling forespoergsel = new ForespørgselMåling();
-    private Activity activity;
+    private OpretLog_frag fragment;
     private Context mContext;
 
     /*
@@ -24,9 +23,9 @@ public class PositionController {
      */
     private FusedLocationProviderClient fusedLocationProviderClient;
 
-    public PositionController(Context context, Activity activity) {
+    public PositionController(Context context, OpretLog_frag fragment) {
         this.mContext = context;
-        this.activity = activity;
+        this.fragment = fragment;
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
     }
 
@@ -53,11 +52,11 @@ public class PositionController {
 
             // Will retur false if the user tabs "Bont ask me again/Permission denied".
             // Returns true if the user previusly rejected the message and now try to access it again. -> Indication of user confussion
-            if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                Toast.makeText(mContext, "Lokation skal være aktiveret for at GPS lokation kan logges.", Toast.LENGTH_SHORT).show();
+            if (fragment.shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                //Toast.makeText(mContext, "Lokation skal være aktiveret for at GPS lokation kan logges. Tap \"CLOSE\" and \"OPEN\" to see the dialobbox again", Toast.LENGTH_LONG).show();
             }
-            // Requesting permission
-            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1234);
+            //Requesting permission
+            fragment.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1234);
         }
     }
 
