@@ -16,40 +16,18 @@ import java.util.ArrayList;
 public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtListViewHolder> {
 
     private ArrayList<Togt> togtArrayList;
-    private OnTogtListener togtListener;
+//    private OnTogtListener togtListener;
 
-    public static class TogtListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        public TextView togtName;
-        public ImageView edit, delete;
-        OnTogtListener onTogtListener;
-
-        public TogtListViewHolder(@NonNull View itemView, OnTogtListener onTogtListener) {
-            super(itemView);
-            togtName = itemView.findViewById(R.id.togtNameListItem);
-            edit = itemView.findViewById(R.id.togtEdit);
-            delete = itemView.findViewById(R.id.togtDelete);
-            this.onTogtListener = onTogtListener;
-
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            onTogtListener.onTogtClick(getAdapterPosition());
-        }
-    }
-
-    public TogtListAdapter(ArrayList<Togt> list, OnTogtListener onTogtListener) {
+    public TogtListAdapter(ArrayList<Togt> list) {
         togtArrayList = list;
-        this.togtListener = onTogtListener;
+//        this.togtListener = onTogtListener;
     }
 
     @NonNull
     @Override
     public TogtListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.togt_list_item, parent,false);
-        TogtListViewHolder viewHolder = new TogtListViewHolder(view, togtListener );
+        TogtListViewHolder viewHolder = new TogtListViewHolder(view);
         return viewHolder;
     }
 
@@ -59,7 +37,7 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
      * @param position what item that is looked at
      */
     @Override
-    public void onBindViewHolder(@NonNull TogtListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TogtListViewHolder holder, final int position) {
         Togt currTogt = togtArrayList.get(position);
         holder.togtName.setText(currTogt.getName());
     }
@@ -75,8 +53,44 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
 
     /**
      *
+     * @param position
      */
-    public interface OnTogtListener{
-        void onTogtClick(int position);
+    public void delete(int position){
+        togtArrayList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public class TogtListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        TextView togtName;
+        ImageView delete;
+
+        public TogtListViewHolder(@NonNull View itemView) {
+            super(itemView);
+            togtName = itemView.findViewById(R.id.togtNameListItem);
+//            edit = itemView.findViewById(R.id.togtEdit);
+            delete = itemView.findViewById(R.id.togtDelete);
+            delete.setOnClickListener(this::onClick);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            delete(getAdapterPosition());
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

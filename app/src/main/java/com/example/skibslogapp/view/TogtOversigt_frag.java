@@ -37,7 +37,7 @@ import java.util.ArrayList;
  * You can click a button on the element to erase the "Togt" from the recycleView List and the database
  * and you can edit a "Togt" by clicken another button.
  */
-public class TogtOversigt_frag extends Fragment implements TogtListAdapter.OnTogtListener, View.OnClickListener {
+public class TogtOversigt_frag extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "TogtOversigt_frag";
 
@@ -67,7 +67,7 @@ public class TogtOversigt_frag extends Fragment implements TogtListAdapter.OnTog
         recyclerView = view.findViewById(R.id.togtRecycView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this.getContext());
-        adapter = new TogtListAdapter(togtList, this);
+        adapter = new TogtListAdapter(togtList);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
@@ -94,11 +94,11 @@ public class TogtOversigt_frag extends Fragment implements TogtListAdapter.OnTog
         }
     }
 
-    @Override
-    public void onTogtClick(int position) {
-        Log.d(TAG,"onTogtClick: clicked");
-
-    }
+//    @Override
+//    public void onTogtClick(int position) {
+//        Log.d(TAG,"onTogtClick: clicked");
+//
+//    }
 
     @Override
     public void onClick(View v) {
