@@ -73,7 +73,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         //Activat logging of coordinates. This is placed in onCreate to ensure that the logging will start at
         //The first time the logging is activated.
-        testKoordinates = new Koordinat(getActivity().getApplicationContext(), this);
+        testKoordinates = new PositionController(getActivity().getApplicationContext(), this);
 
     }
 
