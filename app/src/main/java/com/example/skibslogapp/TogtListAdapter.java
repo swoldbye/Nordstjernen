@@ -1,5 +1,7 @@
 package com.example.skibslogapp;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +12,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.skibslogapp.model.Togt;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtListViewHolder> {
 
     private ArrayList<Togt> togtArrayList;
 //    private OnTogtListener togtListener;
+
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private ArrayList<Togt> togter;
+    private Gson gson;
 
     public TogtListAdapter(ArrayList<Togt> list) {
         togtArrayList = list;
