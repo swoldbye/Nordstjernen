@@ -356,14 +356,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             if(n1Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n1Btn.getText().toString() : n1Btn.getText().toString();
             else if(n2Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n2Btn.getText().toString() : n2Btn.getText().toString();
             else if(n3Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n3Btn.getText().toString() : n3Btn.getText().toString();
-
+                //Sætsammen med hals
             sejlføring += hals;
-
-            //Tidligere kode
-//            Button pressedSejlføring = sejlføring_Buttons.getToggledView();
-//            if(pressedSejlføring != null){
-//                sejlføring = pressedSejlføring.getText().toString() + hals;
-//            }
 
             // Henter sejlstilling
             String sejlstilling = "";
