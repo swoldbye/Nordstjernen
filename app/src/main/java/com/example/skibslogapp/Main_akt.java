@@ -59,13 +59,12 @@ public class Main_akt extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
 
         configureNavigationDrawer();
 
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             Fragment fragment = new PostActivity();
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
         }
@@ -112,19 +111,19 @@ public class Main_akt extends AppCompatActivity {
                 }else if (itemid == R.id.nav_togt_oversigt){
                     changeFragFromMenu(togtOversigt_frag);
 
-                }else if (itemid == R.id.nav_opret_etape){
+                } else if (itemid == R.id.nav_opret_etape) {
 
 
-                }else if (itemid == R.id.nav_etape_oversigt){
+                } else if (itemid == R.id.nav_etape_oversigt) {
 
                 }else if (itemid == R.id.nav_opret_log){
-
+                    changeFragFromMenu(opretLog_frag);
 
                 }else if (itemid == R.id.nav_log_oversigt){
+                   //changeFragFromMenu(logOversigt_frag);
 
-
-                }else {
-                    Toast.makeText(Main_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",
+                } else {
+                    Toast.makeText(Main_akt.this, "Du klikkede på noget ikke funktionelt. prøv igen",
                             Toast.LENGTH_LONG).show();
 
                 }
@@ -142,7 +141,7 @@ public class Main_akt extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         int itemId = menuItem.getItemId();
-        switch(itemId) {
+        switch (itemId) {
 
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
@@ -163,17 +162,17 @@ public class Main_akt extends AppCompatActivity {
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             View v = getCurrentFocus();
-            if ( v instanceof EditText) {
+            if (v instanceof EditText) {
                 Rect outRect = new Rect();
                 v.getGlobalVisibleRect(outRect);
-                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
                     v.clearFocus();
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
             }
         }
-        return super.dispatchTouchEvent( event );
+        return super.dispatchTouchEvent(event);
     }
 
     /**
@@ -182,7 +181,7 @@ public class Main_akt extends AppCompatActivity {
      * @param fragment The fragment you want to change to.
      * @return true
      */
-    public boolean changeFragFromMenu(Fragment fragment){
+    public boolean changeFragFromMenu(Fragment fragment) {
         fragmentManager = Main_akt.this.getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragContainer, fragment);
@@ -194,14 +193,14 @@ public class Main_akt extends AppCompatActivity {
     /**
      * By calling this function you can hide the toolbar.
      */
-    public void hideToolbar(){
+    public void hideToolbar() {
         this.getSupportActionBar().hide();
     }
 
     /**
      * By calling this function you can show the toolbar.
      */
-    public void showToolbar(){
+    public void showToolbar() {
         this.getSupportActionBar().show();
     }
 
