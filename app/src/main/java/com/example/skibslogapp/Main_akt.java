@@ -101,6 +101,7 @@ public class Main_akt extends AppCompatActivity {
                 togtOversigt_frag = new TogtOversigt_frag();
                 opretTogt_frag = new OpretTogt_frag();
 
+
                 int itemid = menuItem.getItemId();
 
                 //Add functionalities to the menu items.
