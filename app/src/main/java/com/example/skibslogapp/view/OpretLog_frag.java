@@ -29,10 +29,8 @@ import android.widget.Toast;
 
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.GlobalTogt;
-import com.example.skibslogapp.model.Koordinat.Koordinat;
-import com.example.skibslogapp.model.Koordinat.Location;
+import com.example.skibslogapp.model.Koordinat.PositionController;
 import com.example.skibslogapp.model.Logpunkt;
-
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.utility.ToggleViewList;
 
@@ -65,7 +63,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     ToggleButtonList sejlStilling_Buttons;
     private ToggleButtonList sejlføring_Buttons;
     EditText noteEditText;
-    Koordinat testKoordinates;
+    PositionController testKoordinates;
 
     String simpleDate3;
 
@@ -380,7 +378,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         }else if (v == opretButton || v == mob) {
 
-            // KoordinatDTO testKoordinat = testKoordinates.getKoordinates();
+            // Position testKoordinat = testKoordinates.getKoordinates();
            // testKoordinat.printKoordinates();
 
             // Henter hals
@@ -429,17 +427,17 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             // Create Logpunkt from time in calendar
             Logpunkt logpunkt = new Logpunkt( new Date(calendar.getTimeInMillis()) );
             logpunkt.setVindretning( vindretning_input.getText().toString() );
-            logpunkt.setStroem( strømretning_input.getText().toString() );
+            logpunkt.setStroemRetning( strømretning_input.getText().toString() );
             logpunkt.setKurs( kursStr.equals("") ? -1 : Integer.parseInt(kursStr) );
             logpunkt.setSejlfoering( sejlføring );
             logpunkt.setSejlfoering( sejlstilling );
             logpunkt.setNote( noteEditText.getText().toString() );
-            logpunkt.setKoordinat(testKoordinates.getKoordinates());
+            logpunkt.setPosition(testKoordinates.getKoordinates());
 
             LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
             logpunktDAO.addLogpunkt(GlobalTogt.getEtape(getContext()), logpunkt);
 
-            System.out.println(logpunkt.toString());
+            System.out.printf("Created logpunkt: %s", logpunkt.toString());
 
             getActivity().getSupportFragmentManager()
                     .beginTransaction()

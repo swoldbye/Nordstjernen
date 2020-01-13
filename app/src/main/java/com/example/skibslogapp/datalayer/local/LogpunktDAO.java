@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.skibslogapp.model.Etape;
+import com.example.skibslogapp.model.Koordinat.Position;
 import com.example.skibslogapp.model.Logpunkt;
 
 import java.util.Date;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class LogpunktDAO {
 
-    // Connector to tshe database
+    // Connector to the database
     private SQLiteConnector connector;
     private Context context;
 
@@ -27,7 +28,7 @@ public class LogpunktDAO {
     /**
      * Add a Logpunkt to the database. A new unique ID will be generated for
      * the Logpunkt, and set to the 'id' field.
-     * The Logpunkt will be connected to the Etape, such that following calls
+     * The Logpunkt will be connected to the Etape, such that following calls to
      * getEtaper(...) will include the Logpunkt in the returned list.
      *
      * @param etape The Etape to add the Logpunkt to
@@ -47,12 +48,18 @@ public class LogpunktDAO {
         ContentValues row = new ContentValues();
 
         row.put( "etape", etape.getId() );
-        row.put( "date", logpunkt.getDate().getTime() );
+        row.put( "dato", logpunkt.getDate().getTime() );
+        row.put( "dato_opret", logpunkt.getDate().getTime() );
+        row.put( "breddegrad", logpunkt.getPosition() != null ? logpunkt.getPosition().getBreddegrad() : 0 );
+        row.put( "laengdegrad", logpunkt.getPosition() != null ? logpunkt.getPosition().getLaengdegrad() : 0 );
         row.put( "note", logpunkt.getNote() );
         row.put( "vindretning", logpunkt.getVindretning() );
+        row.put( "vindhastighed", logpunkt.getVindhastighed());
         row.put( "sejlfoering", logpunkt.getSejlfoering() );
         row.put( "mandOverBord", logpunkt.getMandOverBord() );
         row.put( "sejlstilling", logpunkt.getSejlstilling() );
+        row.put( "stroemretning", logpunkt.getStroemRetning() );
+        row.put( "stroemhastighed", logpunkt.getStroemhastighed());
 
         /* Only add these elements if they've been manually set ( != 1 ) */
         if( logpunkt.getRoere() >= 0 )
@@ -93,13 +100,22 @@ public class LogpunktDAO {
 
         // Create logpunkter
         while( cursor.moveToNext() ){
-            Logpunkt logpunkt = new Logpunkt( new Date( cursor.getLong(cursor.getColumnIndex("date"))));
-            logpunkt.setId( cursor.getInt( cursor.getColumnIndex("id")));
+            Logpunkt logpunkt = new Logpunkt( new Date( cursor.getLong(cursor.getColumnIndex("dato"))));
 
+            logpunkt.setId( cursor.getInt( cursor.getColumnIndex("id")));
             logpunkt.setEtapeId(etape.getId());
             logpunkt.setTogtId(etape.getTogtId());
+            logpunkt.setCreationDate( new Date( cursor.getLong(cursor.getColumnIndex("dato_opret"))) );
+
+            // Getting position
+            double laengde = cursor.getDouble(cursor.getColumnIndex("laengdegrad"));
+            double bredde = cursor.getDouble(cursor.getColumnIndex("breddegrad"));
+            logpunkt.setPosition( laengde != 0 && bredde != 0 ? new Position(bredde, laengde) : null );
 
             logpunkt.setVindretning( cursor.getString( cursor.getColumnIndex("vindretning") ));
+            logpunkt.setVindhastighed( cursor.getInt( cursor.getColumnIndex("vindhastighed")));
+            logpunkt.setStroemRetning( cursor.getString( cursor.getColumnIndex("stroemretning") ));
+            logpunkt.setStroemhastighed( cursor.getInt( cursor.getColumnIndex("stroemhastighed")));
             logpunkt.setSejlfoering( cursor.getString( cursor.getColumnIndex("sejlfoering") ));
             logpunkt.setSejlstilling( cursor.getString( cursor.getColumnIndex("sejlstilling") ));
             logpunkt.setNote( cursor.getString( cursor.getColumnIndex("note") ));
