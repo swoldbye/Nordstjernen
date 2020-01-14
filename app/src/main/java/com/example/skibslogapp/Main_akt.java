@@ -64,8 +64,8 @@ public class Main_akt extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
-
 
         configureNavigationDrawer();
 
