@@ -30,6 +30,7 @@ import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.OpretTogt_frag;
 import com.example.skibslogapp.view.TogtOversigt_frag;
+import com.example.skibslogapp.view.UdtagData_frag;
 import com.google.android.material.navigation.NavigationView;
 
 /**
@@ -50,7 +51,6 @@ public class Main_akt extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -92,6 +92,8 @@ public class Main_akt extends AppCompatActivity {
      * This function, gives functionalities to the left menu elements.
      *
      */
+
+    UdtagData_frag udata = new UdtagData_frag();
     private void configureNavigationDrawer(){
         NavigationView navigationView;
         drawerLayout = findViewById(R.id.drawer);
@@ -127,8 +129,15 @@ public class Main_akt extends AppCompatActivity {
                 }else if (itemid == R.id.nav_log_oversigt){
                    //changeFragFromMenu(logOversigt_frag);
 
-                } else {
-                    Toast.makeText(Main_akt.this, "Du klikkede på noget ikke funktionelt. prøv igen",
+
+                }else if (itemid == R.id.nav_email){
+                    //todo: Make sure you can get back from this frag fragmentTransaction.addToBackStack(null);
+                    changeFragFromMenu(udata);
+                    //fragmentTransaction.addToBackStack("udata");
+
+                }else {
+                    //rework this________________________________
+                    Toast.makeText(Main_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",
                             Toast.LENGTH_LONG).show();
 
                 }
