@@ -1,29 +1,41 @@
 package com.example.skibslogapp.model;
 
-import androidx.annotation.NonNull;
+import com.example.skibslogapp.model.Position.Position;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class Logpunkt {
+
+    // Ids
     private long id = -1;
     private long etapeId = -1;
     private long togtId = -1;
 
-    private Date date; // And time
+    // Dates (and times)
+    private Date date;
+    private Date creationDate; // And time
 
-    private int roere = -1;
+    private Position position;
+
+    private boolean mandOverBord = false;
+
     private String vindretning = null;
+    private int vindhastighed = 0;
+    private String stroemRetning = null;
+    private int stroemhastighed = 0;
     private int kurs = -1;
     private String note = null;
-    private boolean mandOverBord = false;
 
     private String sejlfoering = null;
     private String sejlstilling = null;
-    private String stroem = null;
+    private int roere = -1;
 
-    int hals = -1;
 
+
+
+    private int hals = -1;
 
     public Logpunkt(){
         this(null);
@@ -32,10 +44,14 @@ public class Logpunkt {
 
     /** If date is null, it sets it to current time */
     public Logpunkt(Date date ){
+        /* Time is saved in variable to secure accurate equality between
+            log date and creation date */
+        long time = System.currentTimeMillis();
         if( date == null )
-            this.date = new Date(System.currentTimeMillis());
+            this.date = new Date(time);
         else
             this.date = date;
+        this. creationDate = new Date(time);
     }
 
 
@@ -137,20 +153,37 @@ public class Logpunkt {
         this.togtId = togtId;
     }
 
-
-    public String getStroem() {
-        return stroem;
+    /**
+     * Sets the creation date of the logpunkt.
+     * Note: The creation date is automatically set to the curret time
+     * when creating a new logpunkt.
+     * @param date
+     */
+    public void setCreationDate(Date date){
+        creationDate = date;
     }
 
-    public void setStroem(String stroem) {
-        this.stroem = stroem;
+    public Date getCreationDate(Date date){
+        return creationDate;
+    }
+
+    public String getStroemRetning() {
+        return stroemRetning;
+    }
+
+    public void setStroemRetning(String stroemRetning) {
+        this.stroemRetning = stroemRetning;
+    }
+
+    public void setPosition(Position position) {
+            this.position = position;
     }
 
     public String getTimeString(){
         if( date == null ) return "";
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        return String.format( "%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        return String.format(Locale.US, "%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
     }
 
     public String getKursString(){
@@ -173,6 +206,31 @@ public class Logpunkt {
         return note;
     }
 
+    public int getVindhastighed() {
+        return vindhastighed;
+    }
+
+    public void setVindhastighed(int vindhastighed) {
+        this.vindhastighed = vindhastighed;
+    }
+
+    public int getStroemhastighed() {
+        return stroemhastighed;
+    }
+
+    public void setStroemhastighed(int stroemhastighed) {
+        this.stroemhastighed = stroemhastighed;
+    }
+
+    public boolean isMandOverBord() {
+        return mandOverBord;
+    }
+
+
+    public Position getPosition() {
+        return position;
+    }
+
     /**
      * Compares the Logpunkt with another Logpunkt, comparing
      * all values.
@@ -180,6 +238,9 @@ public class Logpunkt {
      * @param otherPunkt Logpunkt to compare with
      */
     public boolean equals( Logpunkt otherPunkt ){
+        /* .equals is not used on strings here, because the
+        *   strings may be null. It's not optimal, and may in
+        *   special cases cause problems.*/
         return
             id == otherPunkt.id     &&
             kurs == otherPunkt.kurs &&
@@ -187,10 +248,13 @@ public class Logpunkt {
             sejlfoering == otherPunkt.sejlfoering &&
             sejlstilling == otherPunkt.sejlstilling &&
             vindretning == otherPunkt.vindretning &&
+            vindhastighed == otherPunkt.vindhastighed &&
+            stroemRetning == otherPunkt.stroemRetning &&
+            stroemhastighed == otherPunkt.stroemhastighed &&
             mandOverBord == otherPunkt.mandOverBord &&
             date.equals(otherPunkt.date) &&
+            creationDate.equals(otherPunkt.creationDate) &&
             roere == otherPunkt.roere;
-
     }
 
     @Override
@@ -207,14 +271,29 @@ public class Logpunkt {
                 cal.get(Calendar.MINUTE)
         );
 
+        cal.setTime(creationDate);
+        String creationDateString = String.format("%d/%d-%d %02d:%02d",
+                cal.get(Calendar.DAY_OF_MONTH),
+                cal.get(Calendar.MONTH)+1,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.HOUR_OF_DAY),
+                cal.get(Calendar.MINUTE)
+        );
+
         return String.format(
-            "Logpunkt{ id: %d, etapeId: %d, date: %s, mob: %s, kurs: %s, vind: %s, sejls.: %s, sejlf. %s, roere: %s, note: %s}",
+                Locale.US,
+            "Logpunkt{ id: %d, etapeId: %d, date: %s, creationDate: %s, pos.: %s, mob: %s, kurs: %s, vind: %s, vindhast.: %d, strøm: %s, strømhast.: %d, sejls.: %s, sejlf. %s, roere: %s, note: %s }",
                 id,
                 etapeId,
                 dateString,
+                creationDateString,
+                position != null ? position : "-",
                 mandOverBord ? "true" : "false",
                 kurs >=0 ? kurs : "-",
-                vindretning != null ? kurs : "-",
+                vindretning != null ? vindretning : "-",
+                vindhastighed,
+                stroemRetning != null ? stroemRetning : "-",
+                stroemhastighed,
                 sejlstilling != null ? sejlstilling : "-",
                 sejlfoering != null ? sejlfoering : "-",
                 roere >= 0 ? roere : "-",
