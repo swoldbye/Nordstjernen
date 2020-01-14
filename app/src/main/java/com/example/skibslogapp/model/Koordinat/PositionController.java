@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
@@ -50,11 +51,7 @@ public class PositionController {
         } else {
             System.out.println("User NO PERMISSION");
 
-            // Will retur false if the user tabs "Bont ask me again/Permission denied".
-            // Returns true if the user previusly rejected the message and now try to access it again. -> Indication of user confussion
-            if (fragment.shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
-                //Toast.makeText(mContext, "Lokation skal være aktiveret for at GPS lokation kan logges. Tap \"CLOSE\" and \"OPEN\" to see the dialobbox again", Toast.LENGTH_LONG).show();
-            }
+
             //Requesting permission
             fragment.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1234);
         }

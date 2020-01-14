@@ -92,7 +92,12 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             testKoordinates.startMeassureKoordinat();
             Toast.makeText(getActivity(), "Lokation er aktiveret", Toast.LENGTH_LONG).show();
         }else{
-            Toast.makeText(getActivity(), "Lokation er ikke aktiveret", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Lokation er ikke aktiveret", Toast.LENGTH_SHORT).show();
+            // Will retur false if the user tabs "Bont ask me again/Permission denied".
+            // Returns true if the user previusly rejected the message and now try to access it again. -> Indication of user confussion
+            if (this.shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                Toast.makeText(getActivity(), "Lokation skal være aktiveret for at GPS lokation kan logges. Klik \"CLOSE\" og \"OPEN\" for at acceptere lokation", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
