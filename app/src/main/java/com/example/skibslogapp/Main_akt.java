@@ -25,6 +25,7 @@ import android.widget.EditText;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.TogtOversigt_frag;
+import com.example.skibslogapp.view.UdtagData_frag;
 import com.google.android.material.navigation.NavigationView;
 
 /**
@@ -48,7 +49,6 @@ public class Main_akt extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -89,6 +89,8 @@ public class Main_akt extends AppCompatActivity {
      * Denne funktion giver funktioner til de forskellige elementer i venstre menuen.
      *
      */
+    //Intent mailintent = new Intent(this, UdtagData_akt.class);
+    UdtagData_frag udata = new UdtagData_frag();
     private void configureNavigationDrawer(){
         NavigationView navigationView;
         drawerLayout = findViewById(R.id.drawer);
@@ -121,7 +123,16 @@ public class Main_akt extends AppCompatActivity {
                 }else if (itemid == R.id.nav_log_oversigt){
                    //changeFragFromMenu(logOversigt_frag);
 
+
+                }else if (itemid == R.id.nav_email){
+                    //System.out.println("before mailIntent");
+                    //todo: Make sure you can get back from this frag fragmentTransaction.addToBackStack(null);
+                    changeFragFromMenu(udata);
+                    //System.out.println("after mailIntent");
+
+
                 }else {
+                    //rework this________________________________
                     Toast.makeText(Main_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",
                             Toast.LENGTH_LONG).show();
 
@@ -188,6 +199,8 @@ public class Main_akt extends AppCompatActivity {
         drawerLayout.closeDrawers();
         return true;
     }
+
+
 
     /**
      * Ved at kalde denne metode gemmes toolbar
