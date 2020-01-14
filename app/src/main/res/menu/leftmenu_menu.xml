@@ -33,7 +33,7 @@
             <menu>
 
                 <item android:id="@+id/nav_email"
-                    android:title="Email"
+                    android:title="Export Data"
                     android:icon="@drawable/ic_email"/>
 
                 <item android:id="@+id/nav_info"
