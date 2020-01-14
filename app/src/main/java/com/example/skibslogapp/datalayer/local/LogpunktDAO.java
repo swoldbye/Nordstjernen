@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.skibslogapp.model.Etape;
-import com.example.skibslogapp.model.Koordinat.Position;
+import com.example.skibslogapp.model.Position.Position;
 import com.example.skibslogapp.model.Logpunkt;
 
 import java.util.Date;

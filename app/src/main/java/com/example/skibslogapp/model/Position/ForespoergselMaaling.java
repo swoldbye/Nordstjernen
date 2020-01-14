@@ -1,4 +1,4 @@
-package com.example.skibslogapp.model.Koordinat;
+package com.example.skibslogapp.model.Position;
 
 import com.google.android.gms.location.LocationRequest;
 

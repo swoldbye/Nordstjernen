@@ -1,10 +1,9 @@
-package com.example.skibslogapp.model.Koordinat;
+package com.example.skibslogapp.model.Position;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 

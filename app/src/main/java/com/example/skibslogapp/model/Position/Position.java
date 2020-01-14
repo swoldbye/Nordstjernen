@@ -1,4 +1,4 @@
-package com.example.skibslogapp.model.Koordinat;
+package com.example.skibslogapp.model.Position;
 
 import androidx.annotation.NonNull;
 import java.util.Locale;

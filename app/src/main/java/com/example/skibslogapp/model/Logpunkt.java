@@ -1,6 +1,6 @@
 package com.example.skibslogapp.model;
 
-import com.example.skibslogapp.model.Koordinat.Position;
+import com.example.skibslogapp.model.Position.Position;
 
 import java.util.Calendar;
 import java.util.Date;
