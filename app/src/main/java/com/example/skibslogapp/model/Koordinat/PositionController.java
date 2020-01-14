@@ -14,7 +14,7 @@ import com.google.android.gms.location.LocationServices;
 public class PositionController {
 
     private PositionCallback callback = new PositionCallback();
-    private ForespørgselMåling forespoergsel = new ForespørgselMåling();
+    private ForespørgselMaaling forespoergsel = new ForespørgselMaaling();
     private OpretLog_frag fragment;
     private Context mContext;
 
