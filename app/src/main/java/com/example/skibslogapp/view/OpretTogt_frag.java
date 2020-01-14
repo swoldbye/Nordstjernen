@@ -23,7 +23,7 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
  */
 public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
-    private String[] skibsListe ={"Skib1","Skib2","Skib3","Skib4","Skib5","Skib6"};
+    private String[] skibsListe ={"Havhingsten","Skjoldungen","Helge Ask","Ottar","Skib5","Skib6"};
     private MaterialBetterSpinner betterSpinner;
     private EditText togtName, skipper, startDest;
     private View opretBtn;

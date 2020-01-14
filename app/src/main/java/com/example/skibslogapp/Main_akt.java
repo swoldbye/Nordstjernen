@@ -42,8 +42,6 @@ import com.google.android.material.navigation.NavigationView;
  */
 public class Main_akt extends AppCompatActivity {
 
-    private FragmentManager fragmentManager;
-    private FragmentTransaction fragmentTransaction;
     private DrawerLayout drawerLayout;
     private OpretLog_frag opretLog_frag;
     private TogtOversigt_frag togtOversigt_frag;
@@ -59,8 +57,11 @@ public class Main_akt extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
+        }
+
 
         configureNavigationDrawer();
 
@@ -183,8 +184,8 @@ public class Main_akt extends AppCompatActivity {
      * @return true
      */
     public boolean changeFragFromMenu(Fragment fragment) {
-        fragmentManager = Main_akt.this.getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentManager fragmentManager = Main_akt.this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragContainer, fragment);
         fragmentTransaction.commit();
         drawerLayout.closeDrawers();
