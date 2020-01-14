@@ -18,7 +18,7 @@
             android:textColorHint="@color/colorPrimary"
             android:textAlignment="center"
             android:textStyle="bold"
-            android:padding="5dp"
+            android:padding="8dp"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp"
             android:id="@+id/etapeTogtText"/>
@@ -30,7 +30,7 @@
             android:textColorHint="@color/colorPrimary"
             android:textAlignment="center"
             android:textStyle="bold"
-            android:paddingBottom="15dp"
+            android:paddingBottom="18dp"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             android:id="@+id/skibsNavnText"/>
