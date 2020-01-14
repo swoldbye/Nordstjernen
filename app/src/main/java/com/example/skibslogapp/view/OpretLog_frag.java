@@ -24,13 +24,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.view.opretLog.Note;
 import com.example.skibslogapp.view.utility.KingButton;
 import com.example.skibslogapp.view.utility.ToggleViewList;
 
@@ -39,6 +39,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class OpretLog_frag extends Fragment implements View.OnClickListener {
+    private Note noteFrag;
+
+    private boolean mobIsDown = true;
 
     private int timeStringLengthBefore = 0;
     private String finalVindRetning = "";
@@ -61,7 +64,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     ToggleButtonList hals_Buttons;
     ToggleButtonList sejlStilling_Buttons;
     private ToggleButtonList sejlføring_Buttons;
-    EditText noteEditText;
     Button opretButton;
 
     @Override
@@ -101,12 +103,16 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         opretButton = (Button) view.findViewById(R.id.opretButton);
 
         //Note
-        noteEditText = (EditText) view.findViewById(R.id.noteEditText);
-        noteEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                toggleMOBPosition(hasFocus);
-            }
+//        noteEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                toggleMOBPosition(hasFocus);
+//            }
+//        });
+//        noteFrag = new Note();
+        noteFrag = (Note) getChildFragmentManager().findFragmentById(R.id.fragment_opretLog_note);
+        noteFrag.setListener(() -> {
+            toggleMOBPosition();
         });
 
         //Mand over bord
@@ -181,7 +187,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         editTime.setOnEditorActionListener(clearFocusOnDone);
         vindHastighedEditTxt.setOnEditorActionListener(clearFocusOnDone);
         strømNingsretningEditText.setOnEditorActionListener(clearFocusOnDone);
-        noteEditText.setOnEditorActionListener(clearFocusOnDone);
 
         final Handler handler =new Handler();
         final Runnable r = new Runnable() {
@@ -290,7 +295,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         v.clearFocus(); //Clears focus, which cascade into it resetting through OnFocusChange()
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-        toggleMOBPosition(getView().findViewById(R.id.noteEditText).hasFocus());
+//        toggleMOBPosition(getView().findViewById(R.id.noteEditText).hasFocus());
+//        toggleMOBPosition();
     }
 
 
@@ -380,85 +386,89 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             btn.kingSelected();
         }
         else if (v == opretButton || v == mob) {
-
-            // Henter hals
-            Button btn_styrbord = getView().findViewById(R.id.hals_styrbord_btn);
-            Button pressedHals = hals_Buttons.getToggledView();
-            String hals = "";
-            if( pressedHals != null ){
-                hals = "-";
-                hals += pressedHals == btn_styrbord ? "sb" : "bb";
-            }
-
-
-
-            // Henter sejlføring
-            String sejlføring = "";
-                //Øverste sejldel
-            if(fBtn.isSelected()) sejlføring += fBtn.getText().toString();
-            else if(øBtn.isSelected()) sejlføring += øBtn.getText().toString();
-                //Nederste sejl del
-            if(n1Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n1Btn.getText().toString() : n1Btn.getText().toString();
-            else if(n2Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n2Btn.getText().toString() : n2Btn.getText().toString();
-            else if(n3Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n3Btn.getText().toString() : n3Btn.getText().toString();
-                //Sætsammen med hals
-            sejlføring += hals;
-
-            // Henter sejlstilling
-            String sejlstilling = "";
-            Button pressedSejlstilling = sejlStilling_Buttons.getToggledView();
-            if(pressedSejlstilling != null){
-                sejlstilling = pressedSejlstilling.getText().toString();
-            }
-
-            String kursStr = kursEditText.getText().toString();
-
-
-            // Fetching time ---------------------------------------------------------------
-
-            String timeStr = editTime.getText().toString();
-            if(timeStr.length() == 0){
-                timeStr = editTime.getHint().toString();
-            }
-
-            // Getting calender instance
-            Calendar calendar= Calendar.getInstance();
-            calendar.setTimeInMillis(System.currentTimeMillis());
-
-            // Setting minutes and hour
-            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeStr.substring(0, 2)));
-            calendar.set(Calendar.MINUTE, Integer.parseInt(timeStr.substring(3, 5)));
-
-            // Create Logpunkt from time in calendar
-            Logpunkt logpunkt = new Logpunkt( new Date(calendar.getTimeInMillis()) );
-            logpunkt.setVindretning( vindretning_input.getText().toString() );
-            logpunkt.setStroem( strømretning_input.getText().toString() );
-            logpunkt.setKurs( kursStr.equals("") ? -1 : Integer.parseInt(kursStr) );
-            logpunkt.setSejlfoering( sejlføring );
-            logpunkt.setSejlfoering( sejlstilling );
-            logpunkt.setNote( noteEditText.getText().toString() );
-
-            LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
-            logpunktDAO.addLogpunkt(GlobalTogt.getEtape(getContext()), logpunkt);
-
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .remove(this)
-                    .commit();
-
+            createLogpunkt();
         }else if(v == resetTimeButton){
             editTime.setText("");
         }
     }
 
-    public void toggleMOBPosition(boolean entering) {
+    private void createLogpunkt() {
+        // Henter hals
+        Button btn_styrbord = getView().findViewById(R.id.hals_styrbord_btn);
+        Button pressedHals = hals_Buttons.getToggledView();
+        String hals = "";
+        if( pressedHals != null ){
+            hals = "-";
+            hals += pressedHals == btn_styrbord ? "sb" : "bb";
+        }
+
+
+
+        // Henter sejlføring
+        String sejlføring = "";
+        //Øverste sejldel
+        if(fBtn.isSelected()) sejlføring += fBtn.getText().toString();
+        else if(øBtn.isSelected()) sejlføring += øBtn.getText().toString();
+        //Nederste sejl del
+        if(n1Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n1Btn.getText().toString() : n1Btn.getText().toString();
+        else if(n2Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n2Btn.getText().toString() : n2Btn.getText().toString();
+        else if(n3Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n3Btn.getText().toString() : n3Btn.getText().toString();
+        //Sætsammen med hals
+        sejlføring += hals;
+
+        // Henter sejlstilling
+        String sejlstilling = "";
+        Button pressedSejlstilling = sejlStilling_Buttons.getToggledView();
+        if(pressedSejlstilling != null){
+            sejlstilling = pressedSejlstilling.getText().toString();
+        }
+
+        String kursStr = kursEditText.getText().toString();
+
+
+        // Fetching time ---------------------------------------------------------------
+
+        String timeStr = editTime.getText().toString();
+        if(timeStr.length() == 0){
+            timeStr = editTime.getHint().toString();
+        }
+
+        // Getting calender instance
+        Calendar calendar= Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+
+        // Setting minutes and hour
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeStr.substring(0, 2)));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(timeStr.substring(3, 5)));
+
+        // Create Logpunkt from time in calendar
+        Logpunkt logpunkt = new Logpunkt( new Date(calendar.getTimeInMillis()) );
+        logpunkt.setVindretning( vindretning_input.getText().toString() );
+        logpunkt.setStroem( strømretning_input.getText().toString() );
+        logpunkt.setKurs( kursStr.equals("") ? -1 : Integer.parseInt(kursStr) );
+        logpunkt.setSejlfoering( sejlføring );
+        logpunkt.setSejlfoering( sejlstilling );
+
+        logpunkt.setNote( noteFrag.getNoteText());
+
+        LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
+        logpunktDAO.addLogpunkt(GlobalTogt.getEtape(getContext()), logpunkt);
+
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .remove(this)
+                .commit();
+    }
+
+    private void toggleMOBPosition() {
         FrameLayout mob_container = getView().findViewById(R.id.mob_container);
         CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(mob_container.getLayoutParams());
-        if(entering) {
+        if(mobIsDown) {
             params.gravity = Gravity.TOP;
         } else {
             params.gravity = Gravity.BOTTOM;
         }
+        mobIsDown = !mobIsDown;
         mob_container.setLayoutParams(params);
     }
 

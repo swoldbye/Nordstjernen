@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
 
-        <!--Mand over bord ==========================-->
+<!--Mand over bord ==========================-->
         <FrameLayout
             android:id="@+id/mob_container"
             android:layout_width="105dp"
@@ -47,7 +47,7 @@
 
 
 
-        <!-- SCROLL VIEW =================================================   -->
+<!-- SCROLL VIEW =================================================   -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -63,7 +63,7 @@
                 tools:context=".MainActivity">
 
 
-                <!-- TID =====================================-->
+<!-- TID =====================================-->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -101,7 +101,7 @@
                         app:layout_constraintStart_toEndOf="@+id/editTime"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <!--PLACEHOLDER FOR POSITION KOORDINAT===============================-->
+<!--PLACEHOLDER FOR POSITION KOORDINAT===============================-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -109,7 +109,7 @@
 
                 <View style="@style/Divider" />
 
-                <!-- VINDRETNING =====================================-->
+<!-- VINDRETNING =====================================-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -194,7 +194,7 @@
                 </LinearLayout>
 
 
-                <!-- VINDHASTIGHED =====================================-->
+<!-- VINDHASTIGHED =====================================-->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -238,7 +238,7 @@
 
                 <View style="@style/Divider" />
 
-            <!--STRØM-->
+<!--STRØM-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -542,7 +542,6 @@
                             android:layout_width="140dp"
                             android:text="Styrbord"
                             android:textSize="20dp" />
-                        />
 
                         <Space style="@style/EvenSpace" />
 
@@ -591,51 +590,41 @@
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <!--NOTE-->
                 <View style="@style/Divider" />
 
-
-                <!-- NOTE ======================================-->
-                <EditText
-                    android:id="@+id/noteEditText"
+                <fragment
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="25dp"
-                    android:background="@drawable/background"
-                    android:backgroundTint="#EEEEEE"
-                    android:ems="10"
-                    android:hint="Note"
-                    android:inputType="textMultiLine"
-                    android:paddingHorizontal="10sp"
-                    android:paddingTop="7sp"
-                    android:paddingBottom="15sp"
-                    android:textColor="@color/textColor"
-                    android:textColorHint="#000000"
-                    android:textSize="22sp" />
+                    android:layout_height="0dp"
+                    android:id="@+id/fragment_opretLog_note"
+                    android:layout_weight="1"
+                    android:name="com.example.skibslogapp.view.opretLog.Note"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="75sp"
-                    android:layout_marginTop="15sp"
-                    android:orientation="horizontal">
+<!--                Placeholder images for "Record" and "Take image"-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginHorizontal="75sp"-->
+<!--                    android:layout_marginTop="15sp"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <ImageButton
-                        android:id="@+id/imageButton2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="#00FFFFFF"
-                        app:srcCompat="@drawable/imageedit_1_9579847328" />
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/imageButton2"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="#00FFFFFF"-->
+<!--                        app:srcCompat="@drawable/imageedit_1_9579847328" />-->
 
-                    <ImageButton
-                        android:id="@+id/imageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="#00FFFFFF"
-                        app:srcCompat="@drawable/imageedit_1_4276958480" />
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/imageButton"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="#00FFFFFF"-->
+<!--                        app:srcCompat="@drawable/imageedit_1_4276958480" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
                 <!-- OPRET BUTTON =====================================-->
                 <Button
@@ -651,6 +640,7 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
+<!--                TODO Skal dette TextView slettes?-->
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="0dp"
