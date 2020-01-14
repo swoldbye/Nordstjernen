@@ -114,7 +114,15 @@ public class Main_akt extends AppCompatActivity {
                 } else if (itemid == R.id.nav_etape_oversigt) {
 
                 } else if (itemid == R.id.nav_opret_log) {
-                    changeFragFromMenu(opretLog_frag);
+                    Fragment postOversigt = new PostActivity();
+
+                    /*
+                    Sending a bundle to postOversigt where opret_log will be created
+                     */
+                    Bundle args = new Bundle();
+                    args.putString("SideMenu","true");
+                    postOversigt.setArguments(args);
+                    changeFragFromMenu(postOversigt);
 
                 } else if (itemid == R.id.nav_log_oversigt) {
                     //changeFragFromMenu(logOversigt_frag);

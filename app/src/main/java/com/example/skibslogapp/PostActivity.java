@@ -20,6 +20,11 @@ public class PostActivity extends Fragment implements PostOversigt.OnPostOversig
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_post, container, false);
+
+        //Passing bundle from Main_akt to postOversigt. This is for navigating with the SideMenu
+        Bundle args = getArguments();
+        postOversigt.setArguments(args);
+
         addOversigtFrag();
 
         return view;

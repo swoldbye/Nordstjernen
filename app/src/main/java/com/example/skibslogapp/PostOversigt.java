@@ -35,6 +35,8 @@ public class PostOversigt extends Fragment implements View.OnClickListener, Togt
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_post_oversigt, container, false);
 
+
+
         openCloseButton = view.findViewById(R.id.openCloseButton);
         openCloseButton.setOnClickListener(this);
 
@@ -45,6 +47,24 @@ public class PostOversigt extends Fragment implements View.OnClickListener, Togt
         setList();
 
         TogtDAO.addTogtObserver(this);
+
+        /*
+        This is to fix the that it that the we can also access postOversigt.
+        If a Bundle is sent from Main_akt, when navigating to opretLog, the PostActivity will first be createt
+        and in the PostActivity passes the Bundle to PostOversigt. The reason for passing the Bundle many times is because
+        we need to access the openCloseButton to set the text so we can use the OnPostOversigtListener.
+         */
+        Bundle args = getArguments();
+        if(args != null){
+            if(args.containsKey("SideMenu")){
+                System.out.println("Bundle recieved");
+
+                mCallback.showOpretPost();
+                openCloseButton.setText("close");
+
+                args.clear();
+            }
+        }
 
         return view;
     }
