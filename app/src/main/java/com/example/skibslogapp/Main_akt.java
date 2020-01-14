@@ -111,7 +111,8 @@ public class Main_akt extends AppCompatActivity {
                 //Add functionalities to the menu items.
 
                 if (itemid == R.id.nav_opret_togt) {
-//                    changeFragFromMenu()
+                    changeFragFromMenu(opretTogt_frag);
+
                 } else if (itemid == R.id.nav_togt_oversigt) {
                     changeFragFromMenu(togtOversigt_frag);
 
