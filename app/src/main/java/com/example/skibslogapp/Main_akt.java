@@ -123,11 +123,9 @@ public class Main_akt extends AppCompatActivity {
 
 
                 }else if (itemid == R.id.nav_email){
-                    //System.out.println("before mailIntent");
                     //todo: Make sure you can get back from this frag fragmentTransaction.addToBackStack(null);
                     changeFragFromMenu(udata);
-                    //System.out.println("after mailIntent");
-
+                    //fragmentTransaction.addToBackStack("udata");
 
                 }else {
                     //rework this________________________________
