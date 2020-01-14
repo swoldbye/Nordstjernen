@@ -28,6 +28,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.skibslogapp.view.EtapeOversigt_frag;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.OpretTogt_frag;
@@ -50,6 +51,7 @@ public class Main_akt extends AppCompatActivity {
     private TogtOversigt_frag togtOversigt_frag;
     private LogOversigt_frag logOversigt_frag;
     private OpretTogt_frag opretTogt_frag;
+    private EtapeOversigt_frag etapeOversigt_frag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +112,7 @@ public class Main_akt extends AppCompatActivity {
                 togtOversigt_frag = new TogtOversigt_frag();
                 opretTogt_frag = new OpretTogt_frag();
                 opretLog_frag = new OpretLog_frag();
-
+                etapeOversigt_frag = new EtapeOversigt_frag();
 
                 int itemid = menuItem.getItemId();
 
@@ -126,6 +128,7 @@ public class Main_akt extends AppCompatActivity {
 
 
                 } else if (itemid == R.id.nav_etape_oversigt) {
+                    changeFragFromMenu(etapeOversigt_frag);
 
                 }else if (itemid == R.id.nav_opret_log){
                     changeFragFromMenu(opretLog_frag);
