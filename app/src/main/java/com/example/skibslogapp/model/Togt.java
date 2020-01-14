@@ -1,13 +1,15 @@
 package com.example.skibslogapp.model;
 
+import android.widget.ArrayAdapter;
 
+import java.util.ArrayList;
 import android.text.TextUtils;
-
 import androidx.annotation.NonNull;
-
 import java.util.Locale;
 
 public class Togt {
+
+    static ArrayList togt = new ArrayList<Logpunkt>();
 
     private long id = -1;
     private String name;
