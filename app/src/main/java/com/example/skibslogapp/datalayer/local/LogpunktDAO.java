@@ -14,7 +14,7 @@ import java.util.List;
 
 public class LogpunktDAO {
 
-    // Connector to tshe database
+    // Connector to the database
     private SQLiteConnector connector;
     private Context context;
 
@@ -27,7 +27,7 @@ public class LogpunktDAO {
     /**
      * Add a Logpunkt to the database. A new unique ID will be generated for
      * the Logpunkt, and set to the 'id' field.
-     * The Logpunkt will be connected to the Etape, such that following calls
+     * The Logpunkt will be connected to the Etape, such that following calls to
      * getEtaper(...) will include the Logpunkt in the returned list.
      *
      * @param etape The Etape to add the Logpunkt to
@@ -47,12 +47,18 @@ public class LogpunktDAO {
         ContentValues row = new ContentValues();
 
         row.put( "etape", etape.getId() );
-        row.put( "date", logpunkt.getDate().getTime() );
+        row.put( "dato", logpunkt.getDate().getTime() );
+        row.put( "dato_opret", logpunkt.getDate().getTime() );
+        row.put( "laengdegrad", logpunkt.getLaengdegrad() );
+        row.put( "breddegrad", logpunkt.getBreddegrad() );
         row.put( "note", logpunkt.getNote() );
         row.put( "vindretning", logpunkt.getVindretning() );
+        row.put( "vindhastighed", logpunkt.getVindhastighed());
         row.put( "sejlfoering", logpunkt.getSejlfoering() );
         row.put( "mandOverBord", logpunkt.getMandOverBord() );
         row.put( "sejlstilling", logpunkt.getSejlstilling() );
+        row.put( "stroemretning", logpunkt.getStroemRetning() );
+        row.put( "stroemhastighed", logpunkt.getStroemhastighed());
 
         /* Only add these elements if they've been manually set ( != 1 ) */
         if( logpunkt.getRoere() >= 0 )
@@ -93,13 +99,18 @@ public class LogpunktDAO {
 
         // Create logpunkter
         while( cursor.moveToNext() ){
-            Logpunkt logpunkt = new Logpunkt( new Date( cursor.getLong(cursor.getColumnIndex("date"))));
-            logpunkt.setId( cursor.getInt( cursor.getColumnIndex("id")));
+            Logpunkt logpunkt = new Logpunkt( new Date( cursor.getLong(cursor.getColumnIndex("dato"))));
 
+            logpunkt.setId( cursor.getInt( cursor.getColumnIndex("id")));
             logpunkt.setEtapeId(etape.getId());
             logpunkt.setTogtId(etape.getTogtId());
-
+            logpunkt.setCreationDate( new Date( cursor.getLong(cursor.getColumnIndex("dato_opret"))) );
+            logpunkt.setLaengdegrad( cursor.getDouble(cursor.getColumnIndex("laengdegrad")));
+            logpunkt.setBreddegrad( cursor.getDouble(cursor.getColumnIndex("breddegrad")));
             logpunkt.setVindretning( cursor.getString( cursor.getColumnIndex("vindretning") ));
+            logpunkt.setVindhastighed( cursor.getInt( cursor.getColumnIndex("vindhastighed")));
+            logpunkt.setStroemRetning( cursor.getString( cursor.getColumnIndex("stroemretning") ));
+            logpunkt.setStroemhastighed( cursor.getInt( cursor.getColumnIndex("stroemhastighed")));
             logpunkt.setSejlfoering( cursor.getString( cursor.getColumnIndex("sejlfoering") ));
             logpunkt.setSejlstilling( cursor.getString( cursor.getColumnIndex("sejlstilling") ));
             logpunkt.setNote( cursor.getString( cursor.getColumnIndex("note") ));
@@ -123,6 +134,20 @@ public class LogpunktDAO {
         database.close();
 
         return logpunkter;
+    }
+
+
+    /**
+     * Deletes a Logpunkt from the database
+     *
+     * @param logpunkt The Logpunkt to delete from the database (compares the ID with id in database)
+     * @throws DAOException If the Logpunkt doesn't exist in the database
+     */
+    public void deleteLogpunkt(Logpunkt logpunkt) throws DAOException {
+        if( !logpunktExists(logpunkt) )
+            throw new DAOException(String.format("Couldn't find Logpunkt with ID %d in the database", logpunkt.getId()));
+        SQLiteDatabase database = connector.getReadableDatabase();
+        database.delete("logpunkter", "id="+logpunkt.getId(), null);
     }
 
 

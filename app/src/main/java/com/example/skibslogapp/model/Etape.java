@@ -1,7 +1,5 @@
 package com.example.skibslogapp.model;
 
-import androidx.annotation.NonNull;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
