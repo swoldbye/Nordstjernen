@@ -49,7 +49,6 @@ public class UdtagData_frag extends Fragment implements View.OnClickListener {
         StringBuilder data = csvdata.make();
 
         try {
-
             Context context = getActivity();
             //saving the file into device
             FileOutputStream out = context.openFileOutput("data.csv", Context.MODE_PRIVATE);
@@ -65,6 +64,7 @@ public class UdtagData_frag extends Fragment implements View.OnClickListener {
             fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             fileIntent.putExtra(Intent.EXTRA_STREAM, path);
             startActivity(Intent.createChooser(fileIntent, "Send mail"));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
