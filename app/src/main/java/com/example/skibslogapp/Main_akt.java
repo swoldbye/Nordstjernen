@@ -50,7 +50,9 @@ public class Main_akt extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
 //      Sæt Toolbar
@@ -103,14 +105,14 @@ public class Main_akt extends AppCompatActivity {
                 opretTogt_frag = new OpretTogt_frag();
 
 
+
                 int itemid = menuItem.getItemId();
 
                 //Add functionalities to the menu items.
 
-                if (itemid == R.id.nav_opret_togt){
-                    changeFragFromMenu(opretTogt_frag);
-
-                }else if (itemid == R.id.nav_togt_oversigt){
+                if (itemid == R.id.nav_opret_togt) {
+//                    changeFragFromMenu()
+                } else if (itemid == R.id.nav_togt_oversigt) {
                     changeFragFromMenu(togtOversigt_frag);
 
                 } else if (itemid == R.id.nav_opret_etape) {
