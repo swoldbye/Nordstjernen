@@ -70,7 +70,6 @@ public class TabLayout_frag extends Fragment {
         third.add(new LogInstans("22:10", "qwer", "qwer", "qwer", "qwer", "qwer"));
 
 
-
         etapper.add(first);
         etapper.add(second);
         etapper.add(third);
@@ -128,7 +127,11 @@ public class TabLayout_frag extends Fragment {
         return view;
     }
 
-    public void closeTabs(){ appBarLayout.setVisibility(View.GONE);}
+    public void closeTabs() {
+        appBarLayout.setVisibility(View.GONE);
+    }
 
-    public void openTabs(){appBarLayout.setVisibility(View.VISIBLE);}
+    public void openTabs() {
+        appBarLayout.setVisibility(View.VISIBLE);
+    }
 }
