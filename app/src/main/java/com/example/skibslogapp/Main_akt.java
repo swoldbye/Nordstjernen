@@ -57,7 +57,7 @@ public class Main_akt extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-//      Sæt Toolbar
+//      Set Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
