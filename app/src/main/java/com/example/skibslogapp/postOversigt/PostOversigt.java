@@ -1,34 +1,28 @@
-package com.example.skibslogapp;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
+package com.example.skibslogapp.postOversigt;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.skibslogapp.R;
 import com.example.skibslogapp.model.LogInstans;
-import com.google.android.material.tabs.TabItem;
-import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class PostOversigt extends Fragment implements View.OnClickListener{
+public class PostOversigt extends Fragment{
 
     public static final String ARG_PAGE = "arg_page";
 
     RecyclerView postRecyclerView;
     Button openCloseButton;
-    OnPostOversigtListener mCallback;
     List<LogInstans> logs;
     int position;
 
@@ -36,8 +30,7 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
     private RecyclerView.LayoutManager mLayoutManager;
 
 
-    public PostOversigt(OnPostOversigtListener mCallback, List<LogInstans> logs) {
-        this.mCallback = mCallback;
+    public PostOversigt(List<LogInstans> logs) {
         this.logs = logs;
     }
 
@@ -50,13 +43,10 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
 //        Bundle arguments = getArguments();
 //        int dayNumber = arguments.getInt(ARG_PAGE);
 
-        openCloseButton = view.findViewById(R.id.openCloseButton);
-        openCloseButton.setOnClickListener(this);
+
 
 //        day = view.findViewById(R.id.timeOfDay);
 //        day.setText(dayNumber);
-
-
 
 
         //tempLogs.addAll(Togt.getTogter());
@@ -93,31 +83,5 @@ public class PostOversigt extends Fragment implements View.OnClickListener{
 //        fragment.setArguments(args);
 //        return fragment;
 //    }
-
-    public void setList(LogInstans nyeste){
-        return;
-        /*tempLogs.add(nyeste);
-        PostListAdapter adapter = new PostListAdapter(getActivity(), R.layout.postlist_view_layout, tempLogs);
-        postListView.setAdapter(adapter);
-        openCloseButton.setText("open");*/
-    }
-
-
-
-    public void onClick(View v){
-        if(v == openCloseButton){
-            if(openCloseButton.getText().toString().equals("open")) {
-                mCallback.showOpretPost();
-                openCloseButton.setText("close");
-            }else{
-                mCallback.hideOpretPost();
-                openCloseButton.setText("open");
-            }
-        }
-    }
-
-    public interface OnPostOversigtListener{
-        void hideOpretPost();
-        void showOpretPost();
-    }
 }
+

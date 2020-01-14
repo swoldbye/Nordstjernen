@@ -1,13 +1,17 @@
-package com.example.skibslogapp;
-
-import android.view.ViewGroup;
+package com.example.skibslogapp.postOversigt;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+
+import com.example.skibslogapp.model.LogInstans;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * TODO use FragmentStatePagerAdapter because we will be working with dynamic no. of tabs
@@ -16,11 +20,17 @@ public class PageAdapter extends FragmentStatePagerAdapter {
 
     private int numOfTabs; // The total number of tabs
     Fragment fragment = null;
+    ArrayList<List<LogInstans>> etapper = new ArrayList<>();
 
-    public PageAdapter(FragmentManager fragmentManager, int numOfTabs){
+
+
+    public PageAdapter(FragmentManager fragmentManager, int numOfTabs, ArrayList<List<LogInstans>> etapper){
         super(fragmentManager);
         this.numOfTabs = numOfTabs;
+        this.etapper = etapper;
     }
+
+
 
     /**
      * This decides which fragments to call from which tab
@@ -39,9 +49,9 @@ public class PageAdapter extends FragmentStatePagerAdapter {
 //                break;
 //            }
 //        }
-//        return fragment;
-        PostActivity postActivity = new PostActivity();
-        return postActivity;
+//      return fragment;
+        PostOversigt postOversigt = new PostOversigt(etapper.get(position));
+        return postOversigt;
 
 
 //        return PostActivity.newInstance(position);
@@ -90,7 +100,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
      */
     @Override
     public int getCount() {
-        return 10;
+        return etapper.size();
     }
 
 

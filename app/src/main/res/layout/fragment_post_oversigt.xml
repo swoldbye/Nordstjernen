@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".PostOversigt"
+    tools:context=".postOversigt.PostOversigt"
     android:weightSum="100">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -19,11 +19,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <Button
-        android:id="@+id/openCloseButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="open" />
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.skibslogapp;
+package com.example.skibslogapp.postOversigt;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.skibslogapp.R;
 import com.example.skibslogapp.model.LogInstans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.NoteViewHolder> {

@@ -1,0 +1,71 @@
+package com.example.skibslogapp.postOversigt;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+
+import com.example.skibslogapp.R;
+import com.example.skibslogapp.view.OpretLog_frag;
+import com.google.android.material.tabs.TabLayout;
+
+public class PostActivity extends Fragment implements View.OnClickListener {
+
+    TabLayout_frag tabLayout_frag = new TabLayout_frag();
+    OpretLog_frag opretLog_frag = new OpretLog_frag();
+    FrameLayout opretPostContainerFrame;
+
+    Button openButton;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_post_container, container, false);
+
+        opretPostContainerFrame = view.findViewById(R.id.opretPostContainerFrame);
+        openButton = view.findViewById(R.id.OpenButton);
+        openButton.setOnClickListener(this);
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .add(R.id.tabOversigtContainerFrame, tabLayout_frag)
+                .commit();
+
+        return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == openButton){
+            if(openButton.getText().toString() == "open"){
+                expandPost();
+            }else{
+                closePost();
+            }
+        }
+    }
+
+    private void expandPost(){
+        getActivity().getSupportFragmentManager().beginTransaction()
+                //.setCustomAnimations(R.anim.slide_up, R.anim.slide_up)
+                .add(R.id.opretPostContainerFrame, opretLog_frag)//.addToBackStack(null)
+                .commit();
+        tabLayout_frag.closeTabs();
+        openButton.setText("close");
+    }
+
+    private void closePost(){
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .remove(opretLog_frag)
+                .commit();
+        tabLayout_frag.openTabs();
+        openButton.setText("open");
+    }
+}

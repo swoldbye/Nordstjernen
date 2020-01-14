@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PostActivity"
+    tools:context=".postOversigt.PostActivity"
     android:paddingTop="?attr/actionBarSize">
 
 
@@ -18,17 +18,14 @@
             android:id="@+id/postOversigtContainerFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="70"
-            >
+            android:layout_weight="95">
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/opretPostContainerFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="30"
-            />
-
+            android:layout_weight="5" />
     </LinearLayout>
 
 
