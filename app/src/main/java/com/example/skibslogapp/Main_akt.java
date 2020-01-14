@@ -102,15 +102,16 @@ public class Main_akt extends AppCompatActivity {
                 logOversigt_frag = new LogOversigt_frag();
                 togtOversigt_frag = new TogtOversigt_frag();
 
+
                 int itemid = menuItem.getItemId();
 
                 //Tilføj funktionalitet til menu items
 
                 if (itemid == R.id.nav_opret_togt) {
-
+//                    changeFragFromMenu()
 
                 } else if (itemid == R.id.nav_togt_oversigt) {
-                    //changeFragFromMenu(togtOversigt_frag);
+                    changeFragFromMenu(togtOversigt_frag);
 
                 } else if (itemid == R.id.nav_opret_etape) {
 
