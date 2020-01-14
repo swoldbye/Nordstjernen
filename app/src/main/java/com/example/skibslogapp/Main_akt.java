@@ -1,5 +1,6 @@
 package com.example.skibslogapp;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -67,6 +69,8 @@ public class Main_akt extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
         }
     }
+
+
 
     /**
      * Hvis denne metode bliver sat til en hvis menu, så kan man trykke på tre prikker i top højre hjørne
@@ -211,5 +215,9 @@ public class Main_akt extends AppCompatActivity {
     public void showToolbar() {
         this.getSupportActionBar().show();
     }
+
+
+
+
 
 }
