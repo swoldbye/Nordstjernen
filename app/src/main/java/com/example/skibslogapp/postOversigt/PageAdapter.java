@@ -20,11 +20,11 @@ public class PageAdapter extends FragmentStatePagerAdapter {
 
     private int numOfTabs; // The total number of tabs
     Fragment fragment = null;
-    ArrayList<List<Logpunkt>> etapper = new ArrayList<>();
+    List<List<Logpunkt>> etapper = new ArrayList<>();
 
 
 
-    public PageAdapter(FragmentManager fragmentManager, int numOfTabs, ArrayList<List<Logpunkt>> etapper){
+    public PageAdapter(FragmentManager fragmentManager, int numOfTabs, List<List<Logpunkt>> etapper){
         super(fragmentManager);
         this.numOfTabs = numOfTabs;
         this.etapper = etapper;

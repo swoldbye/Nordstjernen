@@ -14,16 +14,23 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.google.android.material.tabs.TabLayout;
 
 public class PostActivity extends Fragment implements View.OnClickListener {
 
-    TabLayout_frag tabLayout_frag = new TabLayout_frag();
+
+    Button openButton;
+    Togt togt;
+
+    TabLayout_frag tabLayout_frag;
     OpretLog_frag opretLog_frag = new OpretLog_frag();
     FrameLayout opretPostContainerFrame;
 
-    Button openButton;
+    public PostActivity(Togt togt) {
+        this.togt = togt;
+    }
 
     @Nullable
     @Override
@@ -34,6 +41,9 @@ public class PostActivity extends Fragment implements View.OnClickListener {
         openButton = view.findViewById(R.id.OpenButton);
         openButton.setOnClickListener(this);
 
+
+        tabLayout_frag = new TabLayout_frag(togt);
+
         getActivity().getSupportFragmentManager().beginTransaction()
                 .add(R.id.tabOversigtContainerFrame, tabLayout_frag)
                 .commit();
@@ -43,16 +53,16 @@ public class PostActivity extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(v == openButton){
-            if(openButton.getText().toString() == "open"){
+        if (v == openButton) {
+            if (openButton.getText().toString() == "open") {
                 expandPost();
-            }else{
+            } else {
                 closePost();
             }
         }
     }
 
-    private void expandPost(){
+    private void expandPost() {
         getActivity().getSupportFragmentManager().beginTransaction()
                 //.setCustomAnimations(R.anim.slide_up, R.anim.slide_up)
                 .add(R.id.opretPostContainerFrame, opretLog_frag)//.addToBackStack(null)
@@ -61,7 +71,7 @@ public class PostActivity extends Fragment implements View.OnClickListener {
         openButton.setText("close");
     }
 
-    private void closePost(){
+    private void closePost() {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .remove(opretLog_frag)
                 .commit();

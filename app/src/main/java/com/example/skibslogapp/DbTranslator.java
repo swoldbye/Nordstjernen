@@ -1,9 +1,14 @@
 package com.example.skibslogapp;
 
+import android.content.Context;
 import android.util.Log;
 
 
+import com.example.skibslogapp.datalayer.local.EtapeDAO;
+import com.example.skibslogapp.datalayer.local.LogpunktDAO;
+import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Logpunkt;
+import com.example.skibslogapp.model.Togt;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -11,32 +16,43 @@ import java.util.List;
 
 public class DbTranslator {
 
-    /*
-    This class will temporarily emulate obtaining data about 'etapper' from the database, and turn them into
-    a 2D array which, through the use of public methods, be obtained from the class.
-     */
+    ArrayList<List<Logpunkt>> logs2D = new ArrayList<>();
+    EtapeDAO etapeDAO;
+    LogpunktDAO logpunktDAO;
 
-    List<List<Logpunkt>> etappeLogs = new ArrayList<>();
-
-
-    void makeList(){
-        List<Logpunkt> logOne = new ArrayList<>();
-        //logOne.add(new Logpunkt("1", "1", "1", "1", "1", "1"));
-
-
-        List<Logpunkt> logTwo = new ArrayList<>();
-        //logOne.add(new Logpunkt("2", "2", "2", "2", "2", "2"));
-
-        List<Logpunkt> logThree = new ArrayList<>();
-        //logOne.add(new Logpunkt("3", "3", "3", "3", "3", "3"));
-
-        etappeLogs.add(logOne);
-        etappeLogs.add(logTwo);
-        etappeLogs.add(logThree);
+    public DbTranslator(Context context) {
+        etapeDAO = new EtapeDAO(context);
+        logpunktDAO = new LogpunktDAO(context);
     }
 
-    public List<List<Logpunkt>> getEtappeLogs(){
-        return etappeLogs;
+    private List<Etape> getEtapper(Togt togt) {
+        List<Etape> etapper = new ArrayList<>();
+        etapper = etapeDAO.getEtaper(togt);
+        return etapper;
     }
 
+    private List<Logpunkt> getLogpunkter(Etape etape) {
+        List<Logpunkt> logs1D = new ArrayList<>();
+        logs1D = logpunktDAO.getLogpunkter(etape);
+        return logs1D;
+    }
+
+    public List<List<Logpunkt>> getList(Togt togt) {
+        List<Etape> etapper = etapeDAO.getEtaper(togt);
+        for (Etape e : etapper) {
+            List<Logpunkt> logs = getLogpunkter(e);
+            logs2D.add(logs);
+        }
+        return logs2D;
+    }
 }
+
+
+
+
+
+
+
+
+
+

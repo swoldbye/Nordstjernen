@@ -7,11 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.skibslogapp.DbTranslator;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.model.Logpunkt;
+import com.example.skibslogapp.model.Togt;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 
@@ -25,11 +29,14 @@ import java.util.List;
 public class TabLayout_frag extends Fragment {
 
     private static final String TAG = "TabLayout_frag";
-    ArrayList<List<Logpunkt>> etapper = new ArrayList<>();
+    List<List<Logpunkt>> etapper = new ArrayList<>();
     TabLayout tabLayout;
     AppBarLayout appBarLayout;
+    DbTranslator dbTranslator;
+    Togt togt;
 
-    public TabLayout_frag() {
+    public TabLayout_frag(Togt togt) {
+        this.togt = togt;
     }
 
     @Override
@@ -41,52 +48,69 @@ public class TabLayout_frag extends Fragment {
         tabLayout = view.findViewById(R.id.tabLayout);
         appBarLayout = view.findViewById(R.id.AppBarLayout);
 
+        return view;
+    }
 
-        ArrayList<Logpunkt> first = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Logpunkt logpunkt = new Logpunkt();
-            logpunkt.setDate(new Date(System.currentTimeMillis()));
-            logpunkt.setKurs(100);
-            logpunkt.setSejlfoering("ag");
-            logpunkt.setNote("Et eller andet.");
-            logpunkt.setSejlfoering("NNØ");
-            logpunkt.setNote("Dette er en note");
-            first.add(logpunkt);
-        }
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 
-        ArrayList<Logpunkt> second = new ArrayList<>();
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        for (int i = 0; i < 10; i++) {
-            Logpunkt logpunkt = new Logpunkt();
-            logpunkt.setDate(new Date(System.currentTimeMillis()));
-            logpunkt.setKurs(100);
-            logpunkt.setSejlfoering("ag");
-            logpunkt.setNote("Et eller andet.");
-            logpunkt.setSejlfoering("NNØ");
-            logpunkt.setNote("Dette er en note");
-            second.add(logpunkt);
-        }
-        ArrayList<Logpunkt> third = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Logpunkt logpunkt = new Logpunkt();
-            logpunkt.setDate(new Date(System.currentTimeMillis()));
-            logpunkt.setKurs(100);
-            logpunkt.setSejlfoering("ag");
-            logpunkt.setNote("Et eller andet.");
-            logpunkt.setSejlfoering("NNØ");
-            logpunkt.setNote("Dette er en note");
-            third.add(logpunkt);
-        }
 
-        etapper.add(first);
-        etapper.add(second);
-        etapper.add(third);
+
+//
+//        ArrayList<Logpunkt> first = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            Logpunkt logpunkt = new Logpunkt();
+//            logpunkt.setDate(new Date(System.currentTimeMillis()));
+//            logpunkt.setKurs(100);
+//            logpunkt.setSejlfoering("ag");
+//            logpunkt.setNote("Et eller andet.");
+//            logpunkt.setSejlfoering("NNØ");
+//            logpunkt.setNote("Dette er en note");
+//            first.add(logpunkt);
+//        }
+//
+//        ArrayList<Logpunkt> second = new ArrayList<>();
+//
+//        for (int i = 0; i < 10; i++) {
+//            Logpunkt logpunkt = new Logpunkt();
+//            logpunkt.setDate(new Date(System.currentTimeMillis()));
+//            logpunkt.setKurs(100);
+//            logpunkt.setSejlfoering("ag");
+//            logpunkt.setNote("Et eller andet.");
+//            logpunkt.setSejlfoering("NNØ");
+//            logpunkt.setNote("Dette er en note");
+//            second.add(logpunkt);
+//        }
+//        ArrayList<Logpunkt> third = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            Logpunkt logpunkt = new Logpunkt();
+//            logpunkt.setDate(new Date(System.currentTimeMillis()));
+//            logpunkt.setKurs(100);
+//            logpunkt.setSejlfoering("ag");
+//            logpunkt.setNote("Et eller andet.");
+//            logpunkt.setSejlfoering("NNØ");
+//            logpunkt.setNote("Dette er en note");
+//            third.add(logpunkt);
+//        }
+//
+//        etapper.add(first);
+//        etapper.add(second);
+//        etapper.add(third);
 
         TabLayout tabLayout;
         final ViewPager viewPager;
         PageAdapter pageAdapter;
 
         Log.d(TAG, "onCreateView: Started.");
+
+        //get logs
+        dbTranslator = new DbTranslator(getContext());
+        etapper = dbTranslator.getList(togt);
 
         tabLayout = view.findViewById(R.id.tabLayout);
         viewPager = view.findViewById(R.id.viewPager);
@@ -132,7 +156,6 @@ public class TabLayout_frag extends Fragment {
         //tabLayout.setTabsFromPagerAdapter(pageAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        return view;
     }
 
     public void closeTabs() {

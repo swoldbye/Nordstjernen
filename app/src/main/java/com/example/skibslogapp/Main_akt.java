@@ -28,6 +28,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.skibslogapp.model.GlobalTogt;
+import com.example.skibslogapp.postOversigt.PostActivity;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.OpretTogt_frag;
@@ -74,7 +76,7 @@ public class Main_akt extends AppCompatActivity {
         configureNavigationDrawer();
 
         if (savedInstanceState == null) {
-            Fragment fragment = new PostActivity();
+            Fragment fragment = new PostActivity(GlobalTogt.getTogt(this));
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
         }
     }

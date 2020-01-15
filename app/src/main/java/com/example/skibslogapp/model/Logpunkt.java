@@ -41,7 +41,6 @@ public class Logpunkt {
         this.mandOverBord = mandOverBord;
         this.sejlfoering = sejlfoering;
         this.sejlstilling = sejlstilling;
-        this.stroem = stroem;
         this.note = note;
     }
 
