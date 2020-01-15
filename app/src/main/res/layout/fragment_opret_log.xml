@@ -15,12 +15,13 @@
         <FrameLayout
             android:layout_width="105dp"
             android:layout_height="105dp"
-            android:clipToPadding="false"
-            android:elevation="1dp"
-            android:outlineProvider="none"
             android:padding="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            android:outlineProvider="none"
+            android:elevation="1dp"
+            android:clipToPadding="false"
+            >
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/mob_button"
@@ -40,485 +41,626 @@
                 android:text="MOB"
                 android:textColor="@color/colorPrimary"
                 android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
         </FrameLayout>
 
-        <LinearLayout
+
+
+        <!-- SCROLL VIEW =================================================   -->
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            app:layout_constraintStart_toStartOf="parent">
 
 
-            <!-- SCROLL VIEW =================================================   -->
-            <ScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                tools:context=".MainActivity">
 
 
+                <!-- TID =====================================-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/editTime"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:imeOptions="actionDone"
+                        android:inputType="time"
+                        android:maxLength="5"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textColorHint="#757575"
+                        android:textSize="40sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/resetTimeButton"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginEnd="80dp"
+                        android:layout_marginRight="80dp"
+                        android:layout_weight="1"
+                        android:background="#FFFFFF"
+                        android:text="NU"
+                        android:textSize="24sp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/editTime"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--PLACEHOLDER FOR POSITION KOORDINAT===============================-->
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                <View style="@style/Divider" />
+
+                <!-- VINDRETNING =====================================-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
+                    android:layout_marginBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    tools:context=".MainActivity">
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/vindretning_text"
+                        style="@style/SmallTitle"
+                        android:layout_marginBottom="5dp"
+                        android:text="Vindretning" />
 
-                    <!-- TID =====================================-->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp">
 
-                        <EditText
-                            android:id="@+id/editTime"
-                            android:layout_width="150dp"
+                        <TextView
+                            android:id="@+id/vindretning_input"
+                            android:layout_width="75sp"
                             android:layout_height="wrap_content"
-                            android:ems="10"
-                            android:imeOptions="actionDone"
-                            android:inputType="time"
-                            android:maxLength="5"
+                            android:text="PLA"
                             android:textAlignment="center"
-                            android:textColor="#000000"
-                            android:textColorHint="#757575"
-                            android:textSize="40sp"
+                            android:textColor="@color/textColor"
+                            android:textSize="25sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <Button
-                            android:id="@+id/resetTimeButton"
+                            android:id="@+id/vindretning_delete"
                             android:layout_width="50sp"
-                            android:layout_height="50dp"
-                            android:layout_weight="1"
-                            android:background="#FFFFFF"
-                            android:text="NU"
-                            android:textSize="24sp"
-                            android:visibility="visible"
+                            android:layout_height="50sp"
+                            android:backgroundTint="#FFFFFF"
+                            android:text="X"
+                            android:textColor="#2D2F31"
+                            android:textSize="22sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/editTime"
+                            app:layout_constraintStart_toEndOf="@+id/vindretning_input"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                    <View style="@style/Divider" />
-
-                    <!-- VINDRETNING =====================================-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/vindretning_text"
-                            style="@style/SmallTitle"
-                            android:layout_marginBottom="15dp"
-                            android:text="Vindretning" />
+                        <Space style="@style/EvenSpace" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="20dp">
+                        <Button
+                            android:id="@+id/nordButton"
+                            style="@style/DefaultButton"
+                            android:text="N" />
 
-                            <TextView
-                                android:id="@+id/vindretning_input"
-                                android:layout_width="75sp"
-                                android:layout_height="wrap_content"
-                                android:text="PLA"
-                                android:textAlignment="center"
-                                android:textColor="@color/textColor"
-                                android:textSize="25sp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                        <Space style="@style/EvenSpace" />
 
-                            <Button
-                                android:id="@+id/vindretning_delete"
-                                android:layout_width="50sp"
-                                android:layout_height="50sp"
-                                android:backgroundTint="#FFFFFF"
-                                android:text="X"
-                                android:textColor="#2D2F31"
-                                android:textSize="22sp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/vindretning_input"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <Button
+                            android:id="@+id/østButton"
+                            style="@style/DefaultButton"
+                            android:text="Ø" />
 
+                        <Space style="@style/EvenSpace" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                        <Button
+                            android:id="@+id/sydButton"
+                            style="@style/DefaultButton"
+                            android:text="S" />
 
-                            <Space style="@style/EvenSpace" />
+                        <Space style="@style/EvenSpace" />
 
-                            <Button
-                                android:id="@+id/nordButton"
-                                style="@style/DefaultButton"
-                                android:text="N" />
+                        <Button
+                            android:id="@+id/vestButton"
+                            style="@style/DefaultButton"
+                            android:text="V" />
 
-                            <Space style="@style/EvenSpace" />
+                        <Space style="@style/EvenSpace" />
 
-                            <Button
-                                android:id="@+id/østButton"
-                                style="@style/DefaultButton"
-                                android:text="Ø" />
-
-                            <Space style="@style/EvenSpace" />
-
-                            <Button
-                                android:id="@+id/sydButton"
-                                style="@style/DefaultButton"
-                                android:text="S" />
-
-                            <Space style="@style/EvenSpace" />
-
-                            <Button
-                                android:id="@+id/vestButton"
-                                style="@style/DefaultButton"
-                                android:text="V" />
-
-                            <Space style="@style/EvenSpace" />
-
-                        </LinearLayout>
                     </LinearLayout>
+                </LinearLayout>
 
 
-                    <!-- VINDHASTIGHED =====================================-->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp">
-
-                        <EditText
-                            android:id="@+id/vindhastighed_edittext"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="80dp"
-                            android:layout_marginEnd="80dp"
-                            android:digits="0123456789"
-                            android:ems="10"
-                            android:hint="Vindhastighed"
-                            android:imeOptions="actionNext"
-                            android:inputType="numberSigned"
-                            android:maxLength="4"
-                            android:paddingHorizontal="0dp"
-                            android:textColor="@color/textColor"
-                            android:textColorHint="@color/textColor"
-                            android:textSize="22sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <!-- Unit -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:text="m/s"
-                            android:textColor="@color/textColor"
-                            android:textSize="22sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/vindhastighed_edittext"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <View style="@style/Divider" />
+                <!-- VINDHASTIGHED =====================================-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
 
 
-                    <!-- Sejlstilling =====================================-->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/SmallTitle"
-                            android:text="Sejlstilling" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <Space style="@style/EvenSpace" />
-
-                            <Button
-                                android:id="@+id/læ"
-                                style="@style/DefaultButton"
-                                android:text="læ"
-                                android:textColor="#000000" />
-
-                            <Space style="@style/EvenSpace" />
-
-                            <Button
-                                android:id="@+id/ag"
-                                style="@style/DefaultButton"
-                                android:text="ag" />
-
-                            <Space style="@style/EvenSpace" />
-
-                            <Button
-                                android:id="@+id/ha"
-                                style="@style/DefaultButton"
-                                android:text="bi" />
-
-                            <Space style="@style/EvenSpace" />
-
-                            <Button
-                                android:id="@+id/fo"
-                                style="@style/DefaultButton"
-                                android:text="fo" />
-
-                            <Space style="@style/EvenSpace" />
-
-                            <Button
-                                android:id="@+id/bi"
-                                style="@style/DefaultButton"
-                                android:text="ha" />
-
-                            <Space style="@style/EvenSpace" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-
-                    <!-- ANTALROERE =====================================-->
                     <EditText
-                        android:id="@+id/antalRoereEditText"
+                        android:id="@+id/vindhastighed_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="80dp"
                         android:layout_marginEnd="80dp"
                         android:digits="0123456789"
                         android:ems="10"
-                        android:hint="Antal Roere"
+                        android:hint="Vindhastighed"
                         android:imeOptions="actionNext"
                         android:inputType="numberSigned"
+                        android:maxLength="4"
+                        android:paddingHorizontal="0dp"
                         android:textColor="@color/textColor"
                         android:textColorHint="@color/textColor"
-                        android:textSize="22sp" />
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-
-                    <View style="@style/Divider" />
-
-                    <!-- SEJLFØRING =====================================-->
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <!-- Unit -->
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:layout_marginRight="8dp"
+                        android:text="m/s"
+                        android:textColor="@color/textColor"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/vindhastighed_edittext"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            style="@style/SmallTitle"
-                            android:text="Sejlføring" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                <View style="@style/Divider" />
 
-                            <Space style="@style/EvenSpace" />
+            <!--STRØM-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
-                            <Button
-                                android:id="@+id/fButton"
-                                style="@style/DefaultButton"
-                                android:text="F" />
+                    <TextView
+                        android:id="@+id/stroemning_text"
+                        style="@style/SmallTitle"
+                        android:layout_width="127dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Strømning" />
 
-                            <Space style="@style/EvenSpace" />
-
-                            <Button
-                                android:id="@+id/øButton"
-                                style="@style/DefaultButton"
-                                android:text="Ø" />
-
-                            <Space style="@style/EvenSpace" />
-
-                            <Button
-                                android:id="@+id/n1Button"
-                                style="@style/DefaultButton"
-                                android:text="N1" />
-
-                            <Space style="@style/EvenSpace" />
-
-                            <Button
-                                android:id="@+id/n2Button"
-                                style="@style/DefaultButton"
-                                android:text="N2" />
-
-                            <Space style="@style/EvenSpace" />
-
-                            <Button
-                                android:id="@+id/n3Button"
-                                style="@style/DefaultButton"
-                                android:text="N3" />
-
-                            <Space style="@style/EvenSpace" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-
-                    <!-- HALS-SWITCH =====================================-->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/SmallTitle"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginBottom="10dp"
-                            android:letterSpacing="0"
-                            android:text="Hals" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <Space style="@style/EvenSpace" />
-
-                            <Button
-                                android:id="@+id/hals_bagbord_btn"
-                                style="@style/DefaultButton"
-                                android:layout_width="140dp"
-                                android:text="Bagbord"
-                                android:textSize="20dp" />
-
-                            <Space
-                                style="@style/EvenSpace"
-                                android:layout_weight="0.1" />
-
-                            <Button
-                                android:id="@+id/hals_styrbord_btn"
-                                style="@style/DefaultButton"
-                                android:layout_width="140dp"
-                                android:text="Styrbord"
-                                android:textSize="20dp" />
-                            />
-
-                            <Space style="@style/EvenSpace" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <View style="@style/Divider" />
-
-
-                    <!-- Kurs  =====================================-->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp">
+                        android:layout_marginBottom="20dp">
 
-                        <EditText
-                            android:id="@+id/kursEditText"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/strøm_input"
+                            android:layout_width="75sp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="80dp"
-                            android:layout_marginEnd="80dp"
-                            android:ems="10"
-                            android:hint="Kurs"
-                            android:imeOptions="actionDone"
-                            android:inputType="time"
-                            android:maxLength="3"
+                            android:text="PLA"
+                            android:textAlignment="center"
                             android:textColor="@color/textColor"
-                            android:textColorHint="@color/textColor"
-                            android:textSize="22sp"
+                            android:textSize="25sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <!-- Unit -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:text="°"
-                            android:textColor="@color/textColor"
-                            android:textSize="30sp"
+                        <Button
+                            android:id="@+id/strøm_delete"
+                            android:layout_width="50sp"
+                            android:layout_height="50sp"
+                            android:backgroundTint="#FFFFFF"
+                            android:text="X"
+                            android:textColor="#2D2F31"
+                            android:textSize="22sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/kursEditText"
+                            app:layout_constraintStart_toEndOf="@+id/strøm_input"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <View style="@style/Divider" />
-
-
-                    <!-- NOTE ======================================-->
-                    <EditText
-                        android:id="@+id/noteEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="25dp"
-                        android:background="@drawable/background"
-                        android:backgroundTint="#EEEEEE"
-                        android:ems="10"
-                        android:hint="Note"
-                        android:inputType="textMultiLine"
-                        android:paddingHorizontal="10sp"
-                        android:paddingTop="7sp"
-                        android:paddingBottom="15sp"
-                        android:textColor="@color/textColor"
-                        android:textColorHint="#000000"
-                        android:textSize="22sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="75sp"
-                        android:layout_marginTop="15sp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <ImageButton
-                            android:id="@+id/imageButton2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="#00FFFFFF"
-                            app:srcCompat="@drawable/imageedit_1_9579847328" />
+                        <Space style="@style/EvenSpace" />
 
-                        <ImageButton
-                            android:id="@+id/imageButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="#00FFFFFF"
-                            app:srcCompat="@drawable/imageedit_1_4276958480" />
+                        <Button
+                            android:id="@+id/nordButton_strøm"
+                            style="@style/DefaultButton"
+                            android:text="N" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/østButton_strøm"
+                            style="@style/DefaultButton"
+                            android:text="Ø" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/sydButton_strøm"
+                            style="@style/DefaultButton"
+                            android:text="S" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/vestButton_strøm"
+                            style="@style/DefaultButton"
+                            android:text="V" />
+
+                        <Space style="@style/EvenSpace" />
 
                     </LinearLayout>
+                </LinearLayout>
 
-                    <!-- OPRET BUTTON =====================================-->
-                    <Button
-                        android:id="@+id/opretButton"
-                        android:layout_width="150dp"
-                        android:layout_height="60dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="25dp"
-                        android:backgroundTint="@color/colorPrimary"
-                        android:text="Opret"
-                        android:textAllCaps="false"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+<!--STRØMHASTIGHED=============================-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <EditText
+                        android:id="@+id/strømhastighed_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="80dp"
+                        android:layout_marginEnd="80dp"
+                        android:digits="0123456789"
+                        android:ems="10"
+                        android:hint="Hastighed"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberSigned"
+                        android:maxLength="4"
+                        android:paddingHorizontal="0dp"
+                        android:textColor="@color/textColor"
+                        android:textColorHint="@color/textColor"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Unit -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="knob"
+                        android:textColor="@color/textColor"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/strømhastighed_edittext"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <View style="@style/Divider" />
+
+                <!-- Sejlstilling =====================================-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/SmallTitle"
+                        android:text="Sejlstilling" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/læ"
+                            style="@style/DefaultButton"
+                            android:text="læ"
+                            android:textColor="#000000" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/ag"
+                            style="@style/DefaultButton"
+                            android:text="ag" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/ha"
+                            style="@style/DefaultButton"
+                            android:text="bi" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/fo"
+                            style="@style/DefaultButton"
+                            android:text="fo" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/bi"
+                            style="@style/DefaultButton"
+                            android:text="ha" />
+
+                        <Space style="@style/EvenSpace" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <!-- ANTALROERE =====================================-->
+                <EditText
+                    android:id="@+id/antalRoereEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginEnd="80dp"
+                    android:digits="0123456789"
+                    android:ems="10"
+                    android:hint="Antal Roere"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberSigned"
+                    android:textColor="@color/textColor"
+                    android:textColorHint="@color/textColor"
+                    android:textSize="22sp" />
+
+
+                <View style="@style/Divider" />
+
+                <!-- SEJLFØRING =====================================-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/SmallTitle"
+                        android:text="Sejlføring" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/fButton"
+                            style="@style/DefaultButton"
+                            android:text="F" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/øButton"
+                            style="@style/DefaultButton"
+                            android:text="Ø" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/n1Button"
+                            style="@style/DefaultButton"
+                            android:text="N1" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/n2Button"
+                            style="@style/DefaultButton"
+                            android:text="N2" />
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/n3Button"
+                            style="@style/DefaultButton"
+                            android:text="N3" />
+
+                        <Space style="@style/EvenSpace" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <!-- HALS-SWITCH =====================================-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/SmallTitle"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:letterSpacing="0"
+                        android:text="Hals" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal">
+
+                        <Space style="@style/EvenSpace" />
+
+                        <Button
+                            android:id="@+id/hals_bagbord_btn"
+                            style="@style/DefaultButton"
+                            android:layout_width="140dp"
+                            android:text="Bagbord"
+                            android:textSize="20dp" />
+
+                        <Space
+                            style="@style/EvenSpace"
+                            android:layout_weight="0.1" />
+
+                        <Button
+                            android:id="@+id/hals_styrbord_btn"
+                            style="@style/DefaultButton"
+                            android:layout_width="140dp"
+                            android:text="Styrbord"
+                            android:textSize="20dp" />
+                        />
+
+                        <Space style="@style/EvenSpace" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View style="@style/Divider" />
+
+
+                <!-- Kurs  =====================================-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <EditText
+                        android:id="@+id/kursEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="80dp"
+                        android:layout_marginEnd="80dp"
+                        android:ems="10"
+                        android:hint="Kurs"
+                        android:imeOptions="actionDone"
+                        android:inputType="time"
+                        android:maxLength="3"
+                        android:textColor="@color/textColor"
+                        android:textColorHint="@color/textColor"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Unit -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="°"
+                        android:textColor="@color/textColor"
+                        android:textSize="30sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/kursEditText"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View style="@style/Divider" />
+
+
+                <!-- NOTE ======================================-->
+                <EditText
+                    android:id="@+id/noteEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="25dp"
+                    android:background="@drawable/background"
+                    android:backgroundTint="#EEEEEE"
+                    android:ems="10"
+                    android:hint="Note"
+                    android:inputType="textMultiLine"
+                    android:paddingHorizontal="10sp"
+                    android:paddingTop="7sp"
+                    android:paddingBottom="15sp"
+                    android:textColor="@color/textColor"
+                    android:textColorHint="#000000"
+                    android:textSize="22sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="75sp"
+                    android:layout_marginTop="15sp"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/imageButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#00FFFFFF"
+                        app:srcCompat="@drawable/imageedit_1_9579847328" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#00FFFFFF"
+                        app:srcCompat="@drawable/imageedit_1_4276958480" />
 
                 </LinearLayout>
-            </ScrollView>
-        </LinearLayout>
+
+                <!-- OPRET BUTTON =====================================-->
+                <Button
+                    android:id="@+id/opretButton"
+                    android:layout_width="150dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Opret"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginEnd="131dp"
+                    android:layout_marginRight="131dp"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

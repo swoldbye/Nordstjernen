@@ -5,16 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".postOversigt.PostOversigt"
+    tools:context=".PostOversigt"
     android:weightSum="100">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/postRecyclerView"
+    <ListView
+        android:id="@+id/postListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="99.9"
-        android:scrollbars="vertical"
-        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

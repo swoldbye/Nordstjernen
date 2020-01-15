@@ -44,8 +44,6 @@ import com.google.android.material.navigation.NavigationView;
  */
 public class Main_akt extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
-
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private DrawerLayout drawerLayout;
@@ -58,11 +56,12 @@ public class Main_akt extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d(TAG, "onCreate: Started.");
-
 //      Sæt Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
 
         configureNavigationDrawer();
 
@@ -110,8 +109,8 @@ public class Main_akt extends AppCompatActivity {
                 if (itemid == R.id.nav_opret_togt){
 
 
-                }else if (itemid == R.id.nav_togt_oversigt){
-                    changeFragFromMenu(togtOversigt_frag);
+                } else if (itemid == R.id.nav_togt_oversigt) {
+                    //changeFragFromMenu(togtOversigt_frag);
 
                 }else if (itemid == R.id.nav_opret_etape){
 
@@ -121,8 +120,8 @@ public class Main_akt extends AppCompatActivity {
                 }else if (itemid == R.id.nav_opret_log){
                     changeFragFromMenu(opretLog_frag);
 
-                }else if (itemid == R.id.nav_log_oversigt){
-                    changeFragFromMenu(logOversigt_frag);
+                } else if (itemid == R.id.nav_log_oversigt) {
+                    //changeFragFromMenu(logOversigt_frag);
 
                 }else {
                     Toast.makeText(Main_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",
@@ -195,14 +194,14 @@ public class Main_akt extends AppCompatActivity {
     /**
      * Ved at kalde denne metode gemmes toolbar
      */
-    public void hideToolbar(){
+    public void hideToolbar() {
         this.getSupportActionBar().hide();
     }
 
     /**
      * Ved at kalde denne metode vises toolbar
      */
-    public void showToolbar(){
+    public void showToolbar() {
         this.getSupportActionBar().show();
     }
 
