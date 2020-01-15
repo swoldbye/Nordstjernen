@@ -3,32 +3,129 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/etapeHeaderFragment"
     tools:context=".view.EtapeOversigt_frag">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:id="@+id/headerFragment"
-            android:background="@color/lightGrey">
+            android:id="@+id/frameLayout"
+            android:layout_width="108dp"
+            android:layout_height="108dp"
+            android:clipToPadding="false"
+            android:elevation="1dp"
+            android:outlineProvider="none"
+            android:padding="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/opretEtapeBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/colorPrimary"
+                android:clickable="true"
+                android:elevation="20dp"
+                android:focusable="true"
+                app:rippleColor="@android:color/darker_gray" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="20dp"
+                android:gravity="center"
+                android:text="Opret Etape"
+                android:textColor="@color/offWhite"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
         </FrameLayout>
 
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="625dp"
-            android:id="@+id/etapeRecycleViewFragment">
+            android:layout_width="108dp"
+            android:layout_height="108dp"
+            android:padding="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:outlineProvider="none"
+            android:elevation="1dp"
+            android:clipToPadding="false">
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/etapeMailBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/colorPrimary"
+                android:clickable="true"
+                android:elevation="20dp"
+                android:focusable="true"
+                app:rippleColor="@android:color/darker_gray"
+                android:src="@drawable/baseline_mail_outline_white_18dp"/>
 
 
         </FrameLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/etapeTogtText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Togt navn årstal"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/skibsNavnText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Vikingeskib"
+                android:paddingBottom="18dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/etapeHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="Etaper"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/togtRecycView"
+                android:layout_width="match_parent"
+                android:layout_height="651dp"
+                android:background="@color/white"
+                android:padding="10dp"
+                android:scrollbars="vertical" />
+
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 </FrameLayout>

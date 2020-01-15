@@ -4,11 +4,11 @@ package com.example.skibslogapp.view;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.skibslogapp.R;
 
@@ -17,6 +17,7 @@ import com.example.skibslogapp.R;
  */
 public class EtapeOversigt_frag extends Fragment {
 
+    private TextView togt, ship, header;
 
 
     public EtapeOversigt_frag() {
@@ -30,23 +31,9 @@ public class EtapeOversigt_frag extends Fragment {
         View view = inflater.inflate(R.layout.fragment_etape_oversigt, container, false);
         // Inflate the layout for this fragment
 
-        EtapeHeaderFrag_frag etapeHeaderFrag_frag = (EtapeHeaderFrag_frag)
-                getChildFragmentManager().findFragmentById(R.id.etapeHeaderFragment);
-
-        EtapeListFrag_frag etapeListFrag_frag = (EtapeListFrag_frag)
-                getChildFragmentManager().findFragmentById(R.id.etapeListFragment);
-
-        if (null == etapeHeaderFrag_frag){
-            etapeHeaderFrag_frag = new EtapeHeaderFrag_frag();
-            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-            fragmentTransaction.add(R.id.headerFragment,etapeHeaderFrag_frag);
-        }
-
-        if (null == etapeListFrag_frag){
-            etapeListFrag_frag = new EtapeListFrag_frag();
-            FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-            fragmentTransaction.add(R.id.etapeRecycleViewFragment,etapeListFrag_frag);
-        }
+        togt = view.findViewById(R.id.etapeTogtText);
+        ship = view.findViewById(R.id.skibsNavnText);
+        header = view.findViewById(R.id.etapeHeader);
 
         return view;
     }
