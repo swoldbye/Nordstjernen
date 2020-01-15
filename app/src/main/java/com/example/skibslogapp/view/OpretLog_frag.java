@@ -28,7 +28,6 @@ import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.model.Togt;
-import com.example.skibslogapp.model.LogInstans;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.utility.ToggleViewList;
 

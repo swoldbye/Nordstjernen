@@ -24,6 +24,17 @@ public class Logpunkt {
 
     int hals = -1;
 
+    public Logpunkt(Date date, String vindretning, int kurs, boolean mandOverBord, String sejlfoering, String sejlstilling, String stroem, String note){
+        this.date = date;
+        this.vindretning = vindretning;
+        this.kurs = kurs;
+        this.mandOverBord = mandOverBord;
+        this.sejlfoering = sejlfoering;
+        this.sejlstilling = sejlstilling;
+        this.stroem = stroem;
+        this.note = note;
+    }
+
 
     public Logpunkt(){
         this(null);

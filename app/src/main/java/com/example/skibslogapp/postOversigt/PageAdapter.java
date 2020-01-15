@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.skibslogapp.model.LogInstans;
+import com.example.skibslogapp.model.Logpunkt;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -20,11 +20,11 @@ public class PageAdapter extends FragmentStatePagerAdapter {
 
     private int numOfTabs; // The total number of tabs
     Fragment fragment = null;
-    ArrayList<List<LogInstans>> etapper = new ArrayList<>();
+    ArrayList<List<Logpunkt>> etapper = new ArrayList<>();
 
 
 
-    public PageAdapter(FragmentManager fragmentManager, int numOfTabs, ArrayList<List<LogInstans>> etapper){
+    public PageAdapter(FragmentManager fragmentManager, int numOfTabs, ArrayList<List<Logpunkt>> etapper){
         super(fragmentManager);
         this.numOfTabs = numOfTabs;
         this.etapper = etapper;

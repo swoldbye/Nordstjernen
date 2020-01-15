@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.skibslogapp.R;
-import com.example.skibslogapp.model.LogInstans;
+import com.example.skibslogapp.model.Logpunkt;
 
 import java.util.List;
 
@@ -23,14 +23,14 @@ public class PostOversigt extends Fragment{
 
     RecyclerView postRecyclerView;
     Button openCloseButton;
-    List<LogInstans> logs;
+    List<Logpunkt> logs;
     int position;
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
 
-    public PostOversigt(List<LogInstans> logs) {
+    public PostOversigt(List<Logpunkt> logs) {
         this.logs = logs;
     }
 

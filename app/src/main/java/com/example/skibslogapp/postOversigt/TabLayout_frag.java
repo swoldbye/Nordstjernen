@@ -2,6 +2,7 @@ package com.example.skibslogapp.postOversigt;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.util.LogPrinter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.skibslogapp.R;
-import com.example.skibslogapp.model.LogInstans;
+import com.example.skibslogapp.model.Logpunkt;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +25,7 @@ import java.util.List;
 public class TabLayout_frag extends Fragment {
 
     private static final String TAG = "TabLayout_frag";
-    ArrayList<List<LogInstans>> etapper = new ArrayList<>();
+    ArrayList<List<Logpunkt>> etapper = new ArrayList<>();
     TabLayout tabLayout;
     AppBarLayout appBarLayout;
 
@@ -39,36 +41,42 @@ public class TabLayout_frag extends Fragment {
         tabLayout = view.findViewById(R.id.tabLayout);
         appBarLayout = view.findViewById(R.id.AppBarLayout);
 
-        ArrayList<LogInstans> first = new ArrayList<>();
-        first.add(new LogInstans("10:39", "asdf", "asdf", "asf", "asdf", "asdf"));
-        first.add(new LogInstans("12:39", "1", "2", "3", "4", "5"));
-        first.add(new LogInstans("10:39", "asdf", "asdf", "asf", "asdf", "asdf"));
-        first.add(new LogInstans("12:39", "1", "2", "3", "4", "5"));
-        first.add(new LogInstans("10:39", "asdf", "asdf", "asf", "asdf", "asdf"));
-        first.add(new LogInstans("12:39", "1", "2", "3", "4", "5"));
-        first.add(new LogInstans("10:39", "asdf", "asdf", "asf", "asdf", "asdf"));
-        first.add(new LogInstans("12:39", "1", "2", "3", "4", "5"));
-        first.add(new LogInstans("10:39", "asdf", "asdf", "asf", "asdf", "asdf"));
-        first.add(new LogInstans("12:39", "1", "2", "3", "4", "5"));
 
+        ArrayList<Logpunkt> first = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Logpunkt logpunkt = new Logpunkt();
+            logpunkt.setDate(new Date(System.currentTimeMillis()));
+            logpunkt.setKurs(100);
+            logpunkt.setSejlfoering("ag");
+            logpunkt.setNote("Et eller andet.");
+            logpunkt.setSejlfoering("NNØ");
+            logpunkt.setNote("Dette er en note");
+            first.add(logpunkt);
+        }
 
-        ArrayList<LogInstans> second = new ArrayList<>();
-        second.add(new LogInstans("22:10", "qwer", "qwer", "qwer", "qwer", "qwer"));
-        second.add(new LogInstans("22:10", "qwer", "qwer", "qwer", "qwer", "qwer"));
-        second.add(new LogInstans("22:10", "qwer", "qwer", "qwer", "qwer", "qwer"));
-        second.add(new LogInstans("22:10", "qwer", "qwer", "qwer", "qwer", "qwer"));
-        second.add(new LogInstans("22:10", "qwer", "qwer", "qwer", "qwer", "qwer"));
-        second.add(new LogInstans("22:10", "qwer", "qwer", "qwer", "qwer", "qwer"));
-        second.add(new LogInstans("22:10", "qwer", "qwer", "qwer", "qwer", "qwer"));
-        second.add(new LogInstans("22:10", "qwer", "qwer", "qwer", "qwer", "qwer"));
-        second.add(new LogInstans("22:10", "qwer", "qwer", "qwer", "qwer", "qwer"));
-        second.add(new LogInstans("22:10", "qwer", "qwer", "qwer", "qwer", "qwer"));
+        ArrayList<Logpunkt> second = new ArrayList<>();
 
-        ArrayList<LogInstans> third = new ArrayList<>();
-        third.add(new LogInstans("22:10", "qwer", "qwer", "qwer", "qwer", "qwer"));
-        third.add(new LogInstans("22:10", "qwer", "qwer", "qwer", "qwer", "qwer"));
-        third.add(new LogInstans("22:10", "qwer", "qwer", "qwer", "qwer", "qwer"));
-
+        for (int i = 0; i < 10; i++) {
+            Logpunkt logpunkt = new Logpunkt();
+            logpunkt.setDate(new Date(System.currentTimeMillis()));
+            logpunkt.setKurs(100);
+            logpunkt.setSejlfoering("ag");
+            logpunkt.setNote("Et eller andet.");
+            logpunkt.setSejlfoering("NNØ");
+            logpunkt.setNote("Dette er en note");
+            second.add(logpunkt);
+        }
+        ArrayList<Logpunkt> third = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Logpunkt logpunkt = new Logpunkt();
+            logpunkt.setDate(new Date(System.currentTimeMillis()));
+            logpunkt.setKurs(100);
+            logpunkt.setSejlfoering("ag");
+            logpunkt.setNote("Et eller andet.");
+            logpunkt.setSejlfoering("NNØ");
+            logpunkt.setNote("Dette er en note");
+            third.add(logpunkt);
+        }
 
         etapper.add(first);
         etapper.add(second);

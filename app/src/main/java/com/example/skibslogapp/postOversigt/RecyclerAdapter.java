@@ -9,13 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.skibslogapp.R;
-import com.example.skibslogapp.model.LogInstans;
+import com.example.skibslogapp.model.Logpunkt;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.NoteViewHolder> {
 
-    private List<LogInstans> mTempLogs;
+    private List<Logpunkt> mTempLogs;
 
     public static class NoteViewHolder extends RecyclerView.ViewHolder{
 
@@ -37,7 +40,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.NoteVi
         }
     }
 
-    public RecyclerAdapter(List<LogInstans> tempLogs){
+    public RecyclerAdapter(List<Logpunkt> tempLogs){
         mTempLogs = tempLogs;
     }
 
@@ -49,13 +52,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.NoteVi
         return nvh;
     }
 
+    SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
+
     @Override
     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
-        LogInstans current = mTempLogs.get(position);
-        holder.tidTextView.setText(current.getTid());
+        Logpunkt current = mTempLogs.get(position);
+        holder.tidTextView.setText(localDateFormat.format(current.getDate()));
         holder.vindretningTextView.setText(current.getVindretning());
-        holder.kursTextView.setText(current.getKurs());
-        holder.sejlføringTextView.setText(current.getSejlføring());
+        holder.kursTextView.setText(current.getKursString());
+        holder.sejlføringTextView.setText(current.getSejlfoering());
         holder.sejlstillingTextView.setText(current.getSejlstilling());
         holder.noteTextView.setText(current.getNote());
     }
