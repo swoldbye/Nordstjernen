@@ -136,6 +136,11 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
                 AppCompatActivity activity = (AppCompatActivity)view.getContext();
                 activity.getSupportFragmentManager()
                         .beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.enter_right_to_left,
+                                R.anim.exit_right_to_left,
+                                R.anim.enter_left_to_right,
+                                R.anim.exit_left_to_right)
                         .replace(R.id.fragContainer,new EtapeOversigt_frag(togt))
                         .addToBackStack(null)
                         .commit();
