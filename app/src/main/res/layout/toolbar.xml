@@ -64,7 +64,7 @@
                 android:layout_height="match_parent"></TextView>
 
             <TextView
-                android:id="@+id/Besætning"
+                android:id="@+id/Besaetning"
                 android:text="Hello"
                 android:textColor="@color/white"
                 android:layout_width="200dp"

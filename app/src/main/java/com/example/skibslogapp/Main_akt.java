@@ -36,6 +36,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.GlobalStore;
@@ -61,7 +62,7 @@ public class Main_akt extends AppCompatActivity {
     private TogtOversigt_frag togtOversigt_frag;
     private LogOversigt_frag logOversigt_frag;
     private OpretTogt_frag opretTogt_frag;
-    private TextView mSkipperView;
+    private TextView mSkipperView, mTogtView, mBesaetningView;
     private GlobalStore model;
 
 
@@ -83,19 +84,38 @@ public class Main_akt extends AppCompatActivity {
         }
 
         mSkipperView = findViewById(R.id.Skipper);
+        mTogtView = findViewById(R.id.togt);
+        mBesaetningView = findViewById(R.id.Besaetning);
+
+
+
+
         model = ViewModelProviders.of(this).get(GlobalStore.class);
-        final Observer<String> nameObserver = new Observer<String>() {
+        final Observer<Togt> togtObserver = new Observer<Togt>() {
             @Override
-            public void onChanged(String s) {
-                mSkipperView.setText(s);
+            public void onChanged(Togt s) {
+                mSkipperView.setText(s.getSkipper());
+                mTogtView.setText(s.getName());
+                //mBesaetningView.setText(s);
             }
         };
         //MutableLiveData<String> data = model.getCurrentSkipper(this);
 
         GlobalStore.setContext(this);
-        MutableLiveData<String> data = GlobalStore.getCurrentSkipper();
-        data.observe(this, nameObserver);
-        mSkipperView.setText(data.getValue());
+        //MutableLiveData<String> data = GlobalStore.getCurrentSkipper();
+        MutableLiveData<Togt> togtData = GlobalStore.getCurrentTogt();
+        togtData.observe(this, togtObserver);
+        //mSkipperView.setText(data.getValue());
+
+        final Observer<Etape> etapeObserver = new Observer<Etape>() {
+            @Override
+            public void onChanged(Etape s) {
+                mBesaetningView.setText(s.toString());
+            }
+        };
+
+        MutableLiveData<Etape> etapeData = GlobalStore.getCurrentEtape();
+        etapeData.observe(this,etapeObserver);
 
 
         configureNavigationDrawer();

@@ -28,9 +28,9 @@ public class GlobalStore extends ViewModel {
 
     private static Etape etape;
     private static Togt togt;
-    private static MutableLiveData<String> currentTogt;     //From Togt
+    private static MutableLiveData<Togt> currentTogt;     //From Togt
     private static MutableLiveData<String> currentSkipper;  //From Togt
-    private static MutableLiveData<String> currentBesaetning; //From Etape
+    private static MutableLiveData<Etape> currentEtape; //From Etape
     //static SharedPreferences DBpref;
     static Context context;
     static SaveLocal DBpref;
@@ -43,54 +43,13 @@ public class GlobalStore extends ViewModel {
     protected void onCleared() {
 
         DBpref.storeTogt(togt.getId());
-        DBpref.storeEtappe(etape.getId());
+//        DBpref.storeEtappe(etape.getId());
         super.onCleared();
     }
 
     public GlobalStore(){
         System.out.println("Using GlobalStore singel constructor");
     }
-
-
-
-
-    /*
-    Methods used though out the code to set the current Togt and Etape
-    */
-    public static void setCurrentTogt(Togt togt){
-    setTogt(togt);
-    DBpref.storeTogt(togt.getId());
-
-    if(currentTogt==null){
-        currentTogt = new MutableLiveData<String>();
-    }
-    currentTogt.setValue(togt.getName());
-
-    if(currentSkipper==null){
-        currentSkipper = new MutableLiveData<String>();
-    }
-    currentSkipper.setValue(togt.getSkipper());
-
-    }
-
-    public static void setCurretEtape(Etape etape){
-        setEtape(etape);
-        DBpref.storeEtappe(etape.getId());
-        if(currentBesaetning==null){
-            currentTogt = new MutableLiveData<String>();
-        }
-
-        /*
-        Here we need the number of crew membrs of the current etape.
-         */
-        //currentTogt.setValue(etape.);
-
-    }
-
-
-
-
-
 
     /*
     Getters and Setters
@@ -99,12 +58,15 @@ public class GlobalStore extends ViewModel {
     public static void setEtape(Etape etape) {
         GlobalStore.etape = etape;
         DBpref.storeEtappe(etape.getId());
+        currentEtape.setValue(etape);
     }
 
     public static void setTogt(Togt togt) {
         GlobalStore.togt = togt;
         DBpref.storeTogt(togt.getId());
-        currentSkipper.setValue(togt.getSkipper());
+        currentTogt.setValue(togt);
+
+        //currentSkipper.setValue(togt.getSkipper());
     }
 
     public static void setContext(Context context) {
@@ -113,43 +75,27 @@ public class GlobalStore extends ViewModel {
     }
 
 
-
-    public static Etape getCurrentEtape(){ return etape;}
-
-
     /*
-    getter for mutable data
+    getter for mutable data. Data object that is beeing observed
      */
 
-    public static MutableLiveData<String> getCurrentBesaetning() {
-        if(currentBesaetning ==null){
-            currentBesaetning = new MutableLiveData<String>();
+    public static MutableLiveData<Etape> getCurrentEtape() {
+        if(currentEtape==null){
+            etape = DBpref.getEtape(togt);
+            currentEtape = new MutableLiveData<>();
+            currentEtape.setValue(etape);
         }
 
-
-
-        return currentBesaetning;
-
-    }
-
-    public static MutableLiveData<String> getCurrentSkipper() {
-        if(currentSkipper==null){
-            togt = DBpref.getTogt();
-            currentSkipper = new MutableLiveData<>();
-            currentSkipper.setValue(togt.getSkipper());
-        }
-
-        return currentSkipper;
+        return currentEtape;
     }
 
 
-
-    public MutableLiveData<String> getCurrentTogt() {
+    public static MutableLiveData<Togt> getCurrentTogt() {
 
         if(currentTogt==null){
             togt = DBpref.getTogt();
             currentTogt = new MutableLiveData<>();
-            currentTogt.setValue(togt.getName());
+            currentTogt.setValue(togt);
         }
 
         return currentTogt;
@@ -157,42 +103,10 @@ public class GlobalStore extends ViewModel {
 
 
 
-/*
-    private static void saveTogtDBPref(long togtId){
-        DBpref = context.getSharedPreferences("SharedPrefC3", context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = DBpref.edit();
-        editor.putLong(TOGT_TAG, togtId);
-        editor.apply();
-
-    }
-
-    private static void saveEtapeDBPref(long etapeId){
-        DBpref = context.getSharedPreferences("SharedPrefC3", context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = DBpref.edit();
-        editor.putLong(ETAPPE_TAG, etapeId);
-        editor.apply();
-    }
-
-
-    private static void getTogtDBPref(){
-        stringList[0] = pref.getString(TOGT_TAG,"-");
-
-    }
-
-*/
-
-
-
-
-
-    //For testing
-
-
-
-
-
-
-
+    /*
+    Inner class for accessing shared preferences. It savas the ids of the current Togt and Etape, fetch them from the database
+    and returns to the GlobalStore.
+     */
     static class SaveLocal extends AppCompatActivity {
 
 
@@ -228,7 +142,7 @@ public class GlobalStore extends ViewModel {
         }
 
         public Togt getTogt(){
-           togtid = pref.getLong(TOGT_TAG,11);
+           togtid = pref.getLong(TOGT_TAG,-1);
 
 
            //Searching for the togt
