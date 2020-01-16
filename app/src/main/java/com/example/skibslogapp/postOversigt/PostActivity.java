@@ -25,7 +25,7 @@ public class PostActivity extends Fragment implements View.OnClickListener {
     Togt togt;
 
     TabLayout_frag tabLayout_frag;
-    OpretLog_frag opretLog_frag = new OpretLog_frag();
+    OpretLog_frag opretLog_frag;
     FrameLayout opretPostContainerFrame;
 
     public PostActivity(Togt togt) {
@@ -43,10 +43,19 @@ public class PostActivity extends Fragment implements View.OnClickListener {
 
 
         tabLayout_frag = new TabLayout_frag(togt);
+        opretLog_frag = new OpretLog_frag();
+
 
         getActivity().getSupportFragmentManager().beginTransaction()
                 .add(R.id.tabOversigtContainerFrame, tabLayout_frag)
                 .commit();
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .add(R.id.opretPostContainerFrame, opretLog_frag)
+                .commit();
+
+        opretPostContainerFrame.setVisibility(View.GONE);
+
 
         return view;
     }
@@ -54,27 +63,24 @@ public class PostActivity extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == openButton) {
-            if (openButton.getText().toString() == "open") {
-                expandPost();
-            } else {
-                closePost();
-            }
+//            if (openButton.getText().toString() == "open") {
+//                expandPost();
+//            } else {
+//                closePost();
+//            }
+
         }
     }
 
     private void expandPost() {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                //.setCustomAnimations(R.anim.slide_up, R.anim.slide_up)
-                .add(R.id.opretPostContainerFrame, opretLog_frag)//.addToBackStack(null)
-                .commit();
+        opretPostContainerFrame.setVisibility(View.VISIBLE);
+
         tabLayout_frag.closeTabs();
         openButton.setText("close");
     }
 
     private void closePost() {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .remove(opretLog_frag)
-                .commit();
+        opretPostContainerFrame.setVisibility(View.GONE);
         tabLayout_frag.openTabs();
         openButton.setText("open");
     }

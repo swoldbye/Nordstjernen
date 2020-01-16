@@ -28,7 +28,6 @@ public class GlobalTogt {
             }
             return togt;
         }
-
         return togt;
     }
 

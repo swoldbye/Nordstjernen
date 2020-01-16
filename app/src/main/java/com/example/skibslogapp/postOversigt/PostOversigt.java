@@ -17,7 +17,7 @@ import com.example.skibslogapp.model.Logpunkt;
 
 import java.util.List;
 
-public class PostOversigt extends Fragment{
+public class PostOversigt extends Fragment {
 
     public static final String ARG_PAGE = "arg_page";
 
@@ -44,11 +44,8 @@ public class PostOversigt extends Fragment{
 //        int dayNumber = arguments.getInt(ARG_PAGE);
 
 
-
 //        day = view.findViewById(R.id.timeOfDay);
 //        day.setText(dayNumber);
-
-
 
 
         //tempLogs.addAll(Togt.getTogter());
