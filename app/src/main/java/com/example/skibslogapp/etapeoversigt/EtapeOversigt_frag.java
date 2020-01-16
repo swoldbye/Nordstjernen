@@ -49,14 +49,12 @@ public class EtapeOversigt_frag extends Fragment {
         togt_text.setText(togt.getName());
         skib_text.setText(togt.getSkib());
 
-        togt = GlobalTogt.getTogt(getContext());
         EtapeDAO etapeDAO = new EtapeDAO(getContext());
         List<Etape> etaper = etapeDAO.getEtaper(togt);
 
         // Etape Liste
         recyclerView = view.findViewById(R.id.etape_recyclerview);
         recyclerView.setHasFixedSize(true);
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
         listAdapter = new EtapeListAdapter(etaper);
@@ -71,6 +69,7 @@ public class EtapeOversigt_frag extends Fragment {
     private void createEtape() {
         EtapeDAO etapeDAO = new EtapeDAO(getContext());
         Etape newEtape = new Etape();
+        newEtape.setStartDestination("København");
         etapeDAO.addEtape(togt, newEtape);
         listAdapter.addEtape(newEtape);
         recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);

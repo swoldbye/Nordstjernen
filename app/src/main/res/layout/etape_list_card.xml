@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- Number box -->
             <androidx.cardview.widget.CardView
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
@@ -30,6 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/etape_number_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="10"
@@ -97,7 +99,6 @@
         android:rotation="90"
         android:layerType="software"
         android:layout_marginLeft="10dp"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="@id/etape_list_destination_circle"
         app:layout_constraintBottom_toTopOf="@id/etape_card"

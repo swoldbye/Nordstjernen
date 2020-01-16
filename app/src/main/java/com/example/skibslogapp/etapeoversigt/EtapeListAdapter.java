@@ -1,13 +1,11 @@
 package com.example.skibslogapp.etapeoversigt;
 
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.skibslogapp.R;
@@ -26,7 +24,8 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
         this.etaper = etaper;
     }
 
-    public void addEtape(Etape etape){
+    // Add an Etape to the list
+    void addEtape(Etape etape){
         etaper.add(etape);
         notifyItemInserted(etaper.size()-1);
     }
@@ -56,9 +55,10 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
 
         if( getItemViewType(position) == 0){
             Etape etape = etaper.get((position)/2);
-            holder.setDestination("Roskilde Havn", etape.getStartDate(), position==0);
+            holder.setDestination( etape.getStartDestination(), etape.getStartDate(), position==0);
         }else{
-            holder.setEtape(etaper.get((position-1)/2));
+            int etapePosition = (position-1)/2;
+            holder.setEtape(etaper.get(etapePosition), etapePosition+1);
         }
     }
 
@@ -81,20 +81,10 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
 
 
         // Updates the etape of the ViewHolder, changes the date to fit the Etape
-        void setEtape(Etape etape){
+        void setEtape(Etape etape, int listIndex){
             this.etape = etape;
-
-            // Update the card information
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(etape.getStartDate());
-
-            String dateString = String.format( Locale.US, "%02d/%02d %02d:%02d",
-                    cal.get(Calendar.DAY_OF_MONTH),
-                    cal.get(Calendar.MONTH)+1,
-                    cal.get(Calendar.HOUR_OF_DAY),
-                    cal.get(Calendar.MINUTE));
-
-            ((TextView) view.findViewById(R.id.etapeDate)).setText(dateString);
+            String indexString = Integer.toString(listIndex);
+            ((TextView) view.findViewById(R.id.etape_number_text)).setText(indexString);
         }
 
         void setDestination(String destination, Date date, boolean isFirst){
@@ -112,7 +102,7 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
                     cal.get(Calendar.MONTH)+1
             );
 
-            ((TextView) view.findViewById(R.id.etape_destination_text)).setText(destination);
+            ((TextView) view.findViewById(R.id.etape_destination_text)).setText(destination == null ? "-" : destination);
             ((TextView) view.findViewById(R.id.etape_dato_text)).setText(dateString);
         }
     }

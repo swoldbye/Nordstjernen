@@ -10,6 +10,7 @@ public class Etape {
     private long togtId = -1;
     private Date startDate = null;
     private Date endDate = null;
+    private String startDestination = null;
 
     /**
      * Constructs a new Etape object. Note that this will NOT
@@ -33,11 +34,12 @@ public class Etape {
     }
 
 
-    public Etape(long id, long togtId, Date startDate, Date endDate) {
+    public Etape(long id, long togtId, Date startDate, Date endDate, String startDestination) {
         this.id = id;
         this.togtId = togtId;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.startDestination = startDestination;
     }
 
 
@@ -93,6 +95,13 @@ public class Etape {
         this.togtId = togtId;
     }
 
+    public void setStartDestination(String startDestination){
+        this.startDestination = startDestination;
+    }
+
+    public String getStartDestination(){
+        return startDestination;
+    }
 
     @Override
     public String toString(){

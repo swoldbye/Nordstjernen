@@ -43,37 +43,6 @@
         </FrameLayout>
 
 
-        <FrameLayout
-            android:layout_width="108dp"
-            android:layout_height="108dp"
-            android:clipToPadding="false"
-            android:elevation="1dp"
-            android:outlineProvider="none"
-            android:padding="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/etapeMailBtn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/colorPrimary"
-                android:clickable="true"
-                android:elevation="20dp"
-                android:focusable="true"
-                app:fabCustomSize="78dp"
-                app:maxImageSize="40dp"
-                app:rippleColor="@android:color/darker_gray"
-                android:src="@drawable/ic_mail_outline_black_24dp"
-                android:tint="@color/white"
-                android:scaleType="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                />
-        </FrameLayout>
-
-
-
 
 
         <LinearLayout
