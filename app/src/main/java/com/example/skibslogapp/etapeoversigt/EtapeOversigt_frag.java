@@ -4,8 +4,6 @@ package com.example.skibslogapp.etapeoversigt;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +26,7 @@ import java.util.List;
  */
 public class EtapeOversigt_frag extends Fragment {
 
-    private TextView togt_text, skib_text, header_text;
+    private TextView togt_text, skib_text;
     private Togt togt;
     private FloatingActionButton createEtape_button;
     private EtapeListAdapter listAdapter;
@@ -37,9 +35,7 @@ public class EtapeOversigt_frag extends Fragment {
 
     public EtapeOversigt_frag(Togt togt) {
         this.togt = togt;
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,7 +45,6 @@ public class EtapeOversigt_frag extends Fragment {
 
         togt_text = view.findViewById(R.id.etapeTogtText);
         skib_text = view.findViewById(R.id.skibsNavnText);
-        header_text = view.findViewById(R.id.etapeHeader);
 
         togt_text.setText(togt.getName());
         skib_text.setText(togt.getSkib());

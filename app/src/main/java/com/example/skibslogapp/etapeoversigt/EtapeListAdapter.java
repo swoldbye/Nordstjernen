@@ -2,6 +2,7 @@ package com.example.skibslogapp.etapeoversigt;
 
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.example.skibslogapp.R;
 import com.example.skibslogapp.model.Etape;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,37 +31,54 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
         notifyItemInserted(etaper.size()-1);
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position%2;
+    }
+
     @NonNull
     @Override
     public EtapeListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // create a new view
-        CardView cardView = (CardView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.etape_list_item, parent, false);
-        return new EtapeListViewHolder(cardView);
+        EtapeListViewHolder viewHolder;
+        if( viewType == 0 ){
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.etape_list_destination, parent, false);
+            viewHolder = new EtapeListViewHolder(view, false);
+        }else{
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.etape_list_card, parent, false);
+            viewHolder = new EtapeListViewHolder(view, true);
+        }
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull EtapeListViewHolder holder, int position) {
-        holder.setEtape( etaper.get(position) );
-    }
 
+        if( getItemViewType(position) == 0){
+            Etape etape = etaper.get((position)/2);
+            holder.setDestination("Roskilde Havn", etape.getStartDate(), position==0);
+        }else{
+            holder.setEtape(etaper.get((position-1)/2));
+        }
+    }
 
     @Override
     public int getItemCount() {
-        return etaper.size();
+        return etaper.size()*2;
     }
-
-
 
 
     class EtapeListViewHolder extends RecyclerView.ViewHolder{
         private Etape etape;
-        private CardView cardView;
+        private View view;
+        private boolean isEtapeCard;
 
-        EtapeListViewHolder(CardView cardView) {
-            super(cardView);
-            this.cardView = cardView;
+        EtapeListViewHolder(View view, boolean isEtapeCard) {
+            super(view);
+            this.view = view;
+            this.isEtapeCard = isEtapeCard;
         }
+
 
         // Updates the etape of the ViewHolder, changes the date to fit the Etape
         void setEtape(Etape etape){
@@ -75,7 +94,26 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
                     cal.get(Calendar.HOUR_OF_DAY),
                     cal.get(Calendar.MINUTE));
 
-            ((TextView) cardView.findViewById(R.id.etapeDate)).setText(dateString);
+            ((TextView) view.findViewById(R.id.etapeDate)).setText(dateString);
+        }
+
+        void setDestination(String destination, Date date, boolean isFirst){
+            if( isFirst ){
+                (view.findViewById(R.id.etape_list_destination_line)).setVisibility(View.GONE);
+            }else{
+                (view.findViewById(R.id.etape_list_destination_line)).setVisibility(View.VISIBLE);
+            }
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            String dateString = String.format( Locale.US, "%02d:%02d  %02d/%02d",
+                    cal.get(Calendar.HOUR_OF_DAY),
+                    cal.get(Calendar.MINUTE),
+                    cal.get(Calendar.DAY_OF_MONTH),
+                    cal.get(Calendar.MONTH)+1
+            );
+
+            ((TextView) view.findViewById(R.id.etape_destination_text)).setText(destination);
+            ((TextView) view.findViewById(R.id.etape_dato_text)).setText(dateString);
         }
     }
 }
