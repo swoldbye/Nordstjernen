@@ -72,10 +72,6 @@
                 />
         </FrameLayout>
 
-
-
-
-
         <LinearLayout
             android:id="@+id/etape_header"
             android:layout_width="match_parent"
@@ -121,6 +117,7 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/etape_recyclerview"

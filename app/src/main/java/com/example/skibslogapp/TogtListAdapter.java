@@ -122,7 +122,7 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
         public TogtListViewHolder(@NonNull View itemView) {
             super(itemView);
             togtName = itemView.findViewById(R.id.togtNameListItem);
-            delete = itemView.findViewById(R.id.togtDelete);
+//            delete = itemView.findViewById(R.id.togtDelete);
             delete.setOnClickListener((View view) -> {
                 delete(getAdapterPosition());
             });
