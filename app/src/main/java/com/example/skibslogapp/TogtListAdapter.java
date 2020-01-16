@@ -24,7 +24,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -70,8 +72,22 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
      */
     @Override
     public void onBindViewHolder(@NonNull TogtListViewHolder holder, final int position) {
+
+        Calendar dateFormat = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM");
+        String date = simpleDateFormat.format(dateFormat.getTime());
+
+        Calendar yearFormat = Calendar.getInstance();
+        SimpleDateFormat simpleYearFormat = new SimpleDateFormat("yyyy");
+        String year = simpleYearFormat.format(yearFormat.getTime());
+
+
         Togt currTogt = togtArrayList.get(position);
         holder.togtName.setText(currTogt.getName());
+        holder.ship.setText(currTogt.getSkib());
+        holder.startDest.setText(currTogt.getStartDestination());
+        holder.date.setText(date);
+        holder.year.setText(year);
     }
 
     /**
@@ -83,25 +99,21 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
         return togtArrayList.size();
     }
 
-    /**
-     * This function removes an item from the togtArrayList, and thus from the RecycleView.
-     * It also notifies any any registered observers that the item previously located at <code>position</code>
-     * has been removed from the data set. The items previously located at and after
-     * <code>position</code> may now be found at <code>oldPosition - 1</code>.
-     *
-     * @param position The position the element is in the RecycleView
-     */
-    public void delete(int position){
-        Togt togt = togtArrayList.get(position);
-        togtArrayList.remove(position);
-        TogtDAO togtDAO = new TogtDAO(mContext);
-        togtDAO.deleteTogt(togt);
-        notifyItemRemoved(position);
-    }
-
-    public void goToTogt(int position){
-
-    }
+//    /**
+//     * This function removes an item from the togtArrayList, and thus from the RecycleView.
+//     * It also notifies any any registered observers that the item previously located at <code>position</code>
+//     * has been removed from the data set. The items previously located at and after
+//     * <code>position</code> may now be found at <code>oldPosition - 1</code>.
+//     *
+//     * @param position The position the element is in the RecycleView
+//     */
+//    public void delete(int position){
+//        Togt togt = togtArrayList.get(position);
+//        togtArrayList.remove(position);
+//        TogtDAO togtDAO = new TogtDAO(mContext);
+//        togtDAO.deleteTogt(togt);
+//        notifyItemRemoved(position);
+//    }
 
     /**
      * The ViewHolder design pattern can be applied when using a custom adapter.
@@ -116,16 +128,15 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
      */
     public class TogtListViewHolder extends RecyclerView.ViewHolder{
 
-        TextView togtName;
-        ImageView delete;
+        TextView togtName,ship,startDest,date,year;
 
         public TogtListViewHolder(@NonNull View itemView) {
             super(itemView);
             togtName = itemView.findViewById(R.id.togtNameListItem);
-            delete = itemView.findViewById(R.id.togtDelete);
-            delete.setOnClickListener((View view) -> {
-                delete(getAdapterPosition());
-            });
+            ship = itemView.findViewById(R.id.shipName);
+            startDest = itemView.findViewById(R.id.startDestCard);
+            date = itemView.findViewById(R.id.togtDate);
+            year = itemView.findViewById(R.id.year);
             itemView.setOnClickListener( (View view) -> {
                 int position = getAdapterPosition();
                 Togt togt = togtArrayList.get(position);
