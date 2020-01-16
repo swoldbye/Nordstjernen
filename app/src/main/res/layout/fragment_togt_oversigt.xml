@@ -20,8 +20,6 @@
             android:elevation="1dp"
             android:clipToPadding="false">
 
-
-
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/opretTogtBtn"
                 android:layout_width="match_parent"
@@ -41,7 +39,6 @@
                 android:textColor="@color/offWhite"
                 android:textSize="22sp"
                 android:textStyle="bold" />
-
         </FrameLayout>
 
         <LinearLayout

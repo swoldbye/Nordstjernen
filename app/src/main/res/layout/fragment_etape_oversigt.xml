@@ -5,14 +5,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/etapeHeaderFragment"
-    tools:context=".view.EtapeOversigt_frag">
+    tools:context=".etapeoversigt.EtapeOversigt_frag">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <FrameLayout
-            android:id="@+id/frameLayout"
             android:layout_width="108dp"
             android:layout_height="108dp"
             android:clipToPadding="false"
@@ -39,20 +38,20 @@
                 android:gravity="center"
                 android:text="Opret Etape"
                 android:textColor="@color/offWhite"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
+                android:textSize="20sp"
+                android:textStyle="bold"/>
         </FrameLayout>
+
 
         <FrameLayout
             android:layout_width="108dp"
             android:layout_height="108dp"
+            android:clipToPadding="false"
+            android:elevation="1dp"
+            android:outlineProvider="none"
             android:padding="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:outlineProvider="none"
-            android:elevation="1dp"
-            android:clipToPadding="false">
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/etapeMailBtn"
@@ -62,17 +61,29 @@
                 android:clickable="true"
                 android:elevation="20dp"
                 android:focusable="true"
+                app:fabCustomSize="78dp"
+                app:maxImageSize="40dp"
                 app:rippleColor="@android:color/darker_gray"
-                android:src="@drawable/baseline_mail_outline_white_18dp"/>
-
-
+                android:src="@drawable/ic_mail_outline_black_24dp"
+                android:tint="@color/white"
+                android:scaleType="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
         </FrameLayout>
 
+
+
+
+
         <LinearLayout
+            android:id="@+id/etape_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/lightGrey"
+            android:elevation="8dp"
+            app:layout_constraintBottom_toTopOf="@id/etape_recyclerview"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -109,20 +120,17 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="30sp"
                 android:textStyle="bold" />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/togtRecycView"
-                android:layout_width="match_parent"
-                android:layout_height="651dp"
-                android:background="@color/white"
-                android:padding="10dp"
-                android:scrollbars="vertical" />
-
         </LinearLayout>
 
-
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/etape_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/etape_header"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
