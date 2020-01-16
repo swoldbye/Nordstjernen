@@ -4,6 +4,8 @@ package com.example.skibslogapp.etapeoversigt;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,7 +35,9 @@ public class EtapeOversigt_frag extends Fragment {
     private RecyclerView recyclerView;
 
 
-    public EtapeOversigt_frag( Togt togt ) {
+    public EtapeOversigt_frag(Togt togt) {
+        this.togt = togt;
+
     }
 
 
@@ -47,6 +51,8 @@ public class EtapeOversigt_frag extends Fragment {
         skib_text = view.findViewById(R.id.skibsNavnText);
         header_text = view.findViewById(R.id.etapeHeader);
 
+        togt_text.setText(togt.getName());
+        skib_text.setText(togt.getSkib());
 
         togt = GlobalTogt.getTogt(getContext());
         EtapeDAO etapeDAO = new EtapeDAO(getContext());
