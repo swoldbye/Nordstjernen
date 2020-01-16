@@ -14,7 +14,7 @@ import com.example.skibslogapp.model.Logpunkt;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.NoteViewHolder> {
 
     private List<Logpunkt> mTempLogs;
 
@@ -38,64 +38,34 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    public static class OpretLogHolder extends RecyclerView.ViewHolder {
-        public OpretLogHolder(@NonNull View itemView) {
-            super(itemView);
-        }
-    }
-
-
-    @Override
-    public int getItemViewType(int position) {
-        if (position < (getItemCount() - 1)) {
-            return 0;
-        } else {
-            return 1;
-        }
-    }
-
     public RecyclerAdapter(List<Logpunkt> tempLogs) {
         mTempLogs = tempLogs;
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case 0:
-                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.new_note_layout, parent, false);
-                return new NoteViewHolder(v);
-            case 1:
-                View v2 = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_opret_log, parent, false);
-                return new OpretLogHolder(v2);
-        }
-        return null;
+    public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.new_note_layout, parent, false);
+        return new NoteViewHolder(v);
     }
 
 
     SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
 
-
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        switch (holder.getItemViewType()){
-            case 0:
-                NoteViewHolder noteViewHolder = (NoteViewHolder) holder;
-                Logpunkt current = mTempLogs.get(position);
-                noteViewHolder.tidTextView.setText(localDateFormat.format(current.getDate()));
-                noteViewHolder.vindretningTextView.setText(current.getVindretning());
-                noteViewHolder.kursTextView.setText(current.getKursString());
-                noteViewHolder.sejlføringTextView.setText(current.getSejlfoering());
-                noteViewHolder.sejlstillingTextView.setText(current.getSejlstilling());
-                noteViewHolder.noteTextView.setText(current.getNote());
-                break;
-            case 1:
-                break;
-        }
+    public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
+        Logpunkt current = mTempLogs.get(position);
+        holder.tidTextView.setText(localDateFormat.format(current.getDate()));
+        holder.vindretningTextView.setText(current.getVindretning());
+        holder.kursTextView.setText(current.getKursString());
+        holder.sejlføringTextView.setText(current.getSejlfoering());
+        holder.sejlstillingTextView.setText(current.getSejlstilling());
+        holder.noteTextView.setText(current.getNote());
     }
 
     @Override
     public int getItemCount() {
-        return mTempLogs.size() + 1;
+        return mTempLogs.size();
     }
 }

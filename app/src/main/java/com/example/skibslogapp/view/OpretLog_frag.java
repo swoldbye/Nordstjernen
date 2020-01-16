@@ -74,6 +74,12 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     Button opretButton;
 
+
+    Button openButton;
+    FrameLayout buttonFrame;
+    FrameLayout opretPostWrapper;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +109,11 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
+
+        openButton = view.findViewById(R.id.Open_Button);
+        buttonFrame = view.findViewById(R.id.Button_Frame);
+        opretPostWrapper = view.findViewById(R.id.opret_post_wrapper);
+
 
         //Tidsslet
         editTime = (EditText) view.findViewById(R.id.editTime);
@@ -171,6 +182,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         n2Btn.createRelation(n3Btn);
 
         //On click Listeners:
+        openButton.setOnClickListener(this);
+
         vindNordBtn.setOnClickListener(this);
         vindØstBtn.setOnClickListener(this);
         vindSydBtn.setOnClickListener(this);
@@ -303,6 +316,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             }
         });
 
+        opretPostWrapper.setVisibility(View.GONE);
         return view;
     }
 
@@ -423,6 +437,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         } else if (v == fBtn || v == øBtn || v == n1Btn || v == n2Btn || v == n3Btn) {
             KingButton btn = (KingButton) v;
             btn.kingSelected();
+        } else if(v == openButton) {
+                opretPostWrapper.setVisibility(View.VISIBLE);
+                buttonFrame.setVisibility(View.GONE);
         } else if (v == opretButton || v == mob) {
 
             // Position testKoordinat = testKoordinates.getKoordinates();
@@ -493,10 +510,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
             System.out.printf("Created logpunkt: %s", logpunkt.toString());
 
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .remove(this)
-                    .commit();
+            buttonFrame.setVisibility(View.VISIBLE);
+            opretPostWrapper.setVisibility(View.GONE);
+
 
         } else if (v == resetTimeButton) {
             editTime.setText("");

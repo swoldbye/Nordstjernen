@@ -38,8 +38,6 @@ public class PostActivity extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_post_container, container, false);
 
         opretPostContainerFrame = view.findViewById(R.id.opretPostContainerFrame);
-        openButton = view.findViewById(R.id.OpenButton);
-        openButton.setOnClickListener(this);
 
 
         tabLayout_frag = new TabLayout_frag(togt);
@@ -54,7 +52,7 @@ public class PostActivity extends Fragment implements View.OnClickListener {
                 .add(R.id.opretPostContainerFrame, opretLog_frag)
                 .commit();
 
-        opretPostContainerFrame.setVisibility(View.GONE);
+        //opretPostContainerFrame.setVisibility(View.GONE);
 
 
         return view;
@@ -62,14 +60,7 @@ public class PostActivity extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v == openButton) {
-//            if (openButton.getText().toString() == "open") {
-//                expandPost();
-//            } else {
-//                closePost();
-//            }
 
-        }
     }
 
     private void expandPost() {

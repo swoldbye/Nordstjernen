@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:animateLayoutChanges="true">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,36 +12,29 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="100"
+        android:animateLayoutChanges="true"
         app:layout_constraintBottom_toBottomOf="parent">
 
 
-            <FrameLayout
-                android:id="@+id/tabOversigtContainerFrame"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_weight="70"></FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/opretPostContainerFrame"
-                android:animateLayoutChanges="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tabOversigtContainerFrame"
-                app:layout_constraintVertical_bias="1.0"
-                android:layout_weight="30"
-                android:elevation="10dp"/>
-
-        <Button
-            android:id="@+id/OpenButton"
+        <FrameLayout
+            android:id="@+id/tabOversigtContainerFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="open"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:layout_weight="70"
+            app:layout_constraintTop_toTopOf="parent"></FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/opretPostContainerFrame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="30"
+            android:animateLayoutChanges="true"
+            android:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabOversigtContainerFrame"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
