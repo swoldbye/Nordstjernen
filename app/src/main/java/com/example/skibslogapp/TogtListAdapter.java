@@ -1,7 +1,9 @@
 package com.example.skibslogapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentController;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.skibslogapp.datalayer.local.TogtDAO;
+import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
 import com.example.skibslogapp.model.Togt;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,13 +34,11 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
 
     private List<Togt> togtArrayList;
     private Context mContext;
-//    private OnTogtListener togtListener;
 
     public TogtListAdapter(List<Togt> list, Context context) {
         togtArrayList = list;
         mContext = context;
 
-//        this.togtListener = onTogtListener;
     }
 
     /**
@@ -95,6 +99,10 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
         notifyItemRemoved(position);
     }
 
+    public void goToTogt(int position){
+
+    }
+
     /**
      * The ViewHolder design pattern can be applied when using a custom adapter.
      *
@@ -106,7 +114,7 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
      * A ViewHolder holds the reference to the id of the view resource and calls to the resource
      * will not be required. Thus performance of the application increases.
      */
-    public class TogtListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class TogtListViewHolder extends RecyclerView.ViewHolder{
 
         TextView togtName;
         ImageView delete;
@@ -114,18 +122,24 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
         public TogtListViewHolder(@NonNull View itemView) {
             super(itemView);
             togtName = itemView.findViewById(R.id.togtNameListItem);
-//            edit = itemView.findViewById(R.id.togtEdit);
             delete = itemView.findViewById(R.id.togtDelete);
-            delete.setOnClickListener(this::onClick);
-        }
-
-        /**
-         * This function will delete the List element that is clicked on, and erase it from the
-         * DB.
-         */
-        @Override
-        public void onClick(View v) {
-            delete(getAdapterPosition());
+            delete.setOnClickListener((View view) -> {
+                delete(getAdapterPosition());
+            });
+            itemView.setOnClickListener( (View view) -> {
+                int position = getAdapterPosition();
+                Togt togt = togtArrayList.get(position);
+//                    EtapeOversigt_frag etapeOversigt_frag = new EtapeOversigt_frag(togt);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putLong("ID", togt.getId());
+//                    etapeOversigt_frag.setArguments(bundle);
+                AppCompatActivity activity = (AppCompatActivity)view.getContext();
+                activity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragContainer,new EtapeOversigt_frag(togt))
+                        .addToBackStack(null)
+                        .commit();
+            });
         }
     }
 }

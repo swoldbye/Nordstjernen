@@ -107,7 +107,7 @@ public class Main_akt extends AppCompatActivity {
                 togtOversigt_frag = new TogtOversigt_frag();
                 opretTogt_frag = new OpretTogt_frag();
                 opretLog_frag = new OpretLog_frag();
-                etapeOversigt_frag = new EtapeOversigt_frag( GlobalTogt.getTogt(getApplicationContext()) );
+                etapeOversigt_frag = new EtapeOversigt_frag();
 
                 int itemid = menuItem.getItemId();
 

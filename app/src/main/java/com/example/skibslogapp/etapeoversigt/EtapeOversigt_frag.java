@@ -4,6 +4,8 @@ package com.example.skibslogapp.etapeoversigt;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,8 +33,8 @@ public class EtapeOversigt_frag extends Fragment {
     private FloatingActionButton createEtape_button;
 
 
-    public EtapeOversigt_frag( Togt togt ) {
-
+    public EtapeOversigt_frag(Togt togt) {
+        this.togt = togt;
 
     }
 
@@ -67,11 +69,4 @@ public class EtapeOversigt_frag extends Fragment {
 
         return view;
     }
-
-
-
-
-
-
-
 }
