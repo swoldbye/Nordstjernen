@@ -10,6 +10,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Handler;
 import android.text.Editable;
@@ -30,7 +31,8 @@ import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.R;
-import com.example.skibslogapp.view.opretLog.Note;
+import com.example.skibslogapp.view.opretLog.LogNote_frag;
+import com.example.skibslogapp.view.opretLog.LogViewModel;
 import com.example.skibslogapp.view.utility.KingButton;
 import com.example.skibslogapp.view.utility.ToggleViewList;
 
@@ -39,7 +41,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class OpretLog_frag extends Fragment implements View.OnClickListener {
-    private Note noteFrag;
+    private LogNote_frag noteFrag;
 
     private boolean mobIsDown = true;
 
@@ -65,14 +67,16 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     ToggleButtonList sejlStilling_Buttons;
     private ToggleButtonList sejlføring_Buttons;
     Button opretButton;
+    LogViewModel logVM;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
+        logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
 
-        //Tidsslet
-        editTime = (EditText) view.findViewById(R.id.editTime);
+                //Tidsslet
+                editTime = (EditText) view.findViewById(R.id.editTime);
         resetTimeButton = (Button) view.findViewById(R.id.resetTimeButton);
 
         //Vind Retning
@@ -102,15 +106,15 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         //Opret Post
         opretButton = (Button) view.findViewById(R.id.opretButton);
 
-        //Note
+        //LogNote_frag
 //        noteEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 //            @Override
 //            public void onFocusChange(View v, boolean hasFocus) {
 //                toggleMOBPosition(hasFocus);
 //            }
 //        });
-//        noteFrag = new Note();
-        noteFrag = (Note) getChildFragmentManager().findFragmentById(R.id.fragment_opretLog_note);
+//        noteFrag = new LogNote_frag();
+        noteFrag = (LogNote_frag) getChildFragmentManager().findFragmentById(R.id.fragment_opretLog_note);
         noteFrag.setListener(() -> {
             toggleMOBPosition();
         });
@@ -449,7 +453,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         logpunkt.setSejlfoering( sejlføring );
         logpunkt.setSejlfoering( sejlstilling );
 
-        logpunkt.setNote( noteFrag.getNoteText());
+//        logpunkt.setNote( noteFrag.getNoteText());
+        logpunkt.setNote( logVM.getNoteTxt());
 
         LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
         logpunktDAO.addLogpunkt(GlobalTogt.getEtape(getContext()), logpunkt);
