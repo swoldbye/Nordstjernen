@@ -31,7 +31,10 @@ public class EtapeOversigt_frag extends Fragment {
     private FloatingActionButton createEtape_button;
 
 
-    public EtapeOversigt_frag( ) {}
+    public EtapeOversigt_frag( Togt togt ) {
+
+
+    }
 
 
     @Override

@@ -23,6 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
+import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.OpretTogt_frag;
@@ -106,7 +107,7 @@ public class Main_akt extends AppCompatActivity {
                 togtOversigt_frag = new TogtOversigt_frag();
                 opretTogt_frag = new OpretTogt_frag();
                 opretLog_frag = new OpretLog_frag();
-                etapeOversigt_frag = new EtapeOversigt_frag();
+                etapeOversigt_frag = new EtapeOversigt_frag( GlobalTogt.getTogt(getApplicationContext()) );
 
                 int itemid = menuItem.getItemId();
 
