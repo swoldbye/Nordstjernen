@@ -29,11 +29,11 @@ public class EtapeOversigt_frag extends Fragment {
     private TextView togt_text, skib_text, header_text;
     private Togt togt;
     private FloatingActionButton createEtape_button;
+    private EtapeListAdapter listAdapter;
+    private RecyclerView recyclerView;
 
 
     public EtapeOversigt_frag( Togt togt ) {
-
-
     }
 
 
@@ -47,31 +47,32 @@ public class EtapeOversigt_frag extends Fragment {
         skib_text = view.findViewById(R.id.skibsNavnText);
         header_text = view.findViewById(R.id.etapeHeader);
 
+
         togt = GlobalTogt.getTogt(getContext());
         EtapeDAO etapeDAO = new EtapeDAO(getContext());
         List<Etape> etaper = etapeDAO.getEtaper(togt);
 
-        RecyclerView recyclerView = view.findViewById(R.id.etape_recyclerview);
+        // Etape Liste
+        recyclerView = view.findViewById(R.id.etape_recyclerview);
         recyclerView.setHasFixedSize(true);
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerView.Adapter adapter = new EtapeListAdapter(etaper);
-        recyclerView.setAdapter(adapter);
+        listAdapter = new EtapeListAdapter(etaper);
+        recyclerView.setAdapter(listAdapter);
 
-
-        view.findViewById(R.id.etapeMailBtn).setOnClickListener((View v) -> {
-            etapeDAO.addEtape(togt, new Etape());
-            List<Etape> etaper2 = etapeDAO.getEtaper(togt);
-            recyclerView.setAdapter(new EtapeListAdapter(etaper2) );
-        });
-
+        // Opret Etape Button
+        view.findViewById(R.id.etapeOpretButton).setOnClickListener((View v) -> this.createEtape());
         return view;
     }
 
 
-
-
-
-
+    private void createEtape() {
+        EtapeDAO etapeDAO = new EtapeDAO(getContext());
+        Etape newEtape = new Etape();
+        etapeDAO.addEtape(togt, newEtape);
+        listAdapter.addEtape(newEtape);
+        recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
+    }
 
 }
