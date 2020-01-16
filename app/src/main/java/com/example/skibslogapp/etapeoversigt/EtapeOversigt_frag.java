@@ -84,8 +84,9 @@ public class EtapeOversigt_frag extends Fragment {
     }
 
     private void openDialog() {
-        OpretEtapeDialogBox dialogBox = new OpretEtapeDialogBox();
+        OpretEtapeDialogBox dialogBox = new OpretEtapeDialogBox(togt);
         dialogBox.show(getFragmentManager(),"Dialog box");
+
     }
 
 }
