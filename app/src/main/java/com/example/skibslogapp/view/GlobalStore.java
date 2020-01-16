@@ -18,7 +18,6 @@ import java.util.List;
 Extendt ViewModel so that we get access to the onCleaned method.
  */
 
-
 public class GlobalStore extends ViewModel {
 
 
@@ -43,13 +42,10 @@ public class GlobalStore extends ViewModel {
     protected void onCleared() {
 
         DBpref.storeTogt(togt.getId());
-//        DBpref.storeEtappe(etape.getId());
+        DBpref.storeEtappe(etape.getId());
         super.onCleared();
     }
 
-    public GlobalStore(){
-        System.out.println("Using GlobalStore singel constructor");
-    }
 
     /*
     Getters and Setters
@@ -58,12 +54,21 @@ public class GlobalStore extends ViewModel {
     public static void setEtape(Etape etape) {
         GlobalStore.etape = etape;
         DBpref.storeEtappe(etape.getId());
+
+        if(currentEtape == null){
+            currentEtape = new MutableLiveData<Etape>();
+        }
         currentEtape.setValue(etape);
     }
 
     public static void setTogt(Togt togt) {
         GlobalStore.togt = togt;
         DBpref.storeTogt(togt.getId());
+
+        if(currentTogt == null){
+            currentTogt = new MutableLiveData<Togt>();
+        }
+
         currentTogt.setValue(togt);
 
         //currentSkipper.setValue(togt.getSkipper());
@@ -109,7 +114,7 @@ public class GlobalStore extends ViewModel {
      */
     static class SaveLocal extends AppCompatActivity {
 
-
+        private long etapeId;
         private long togtid;
         private SharedPreferences pref;
         private final String TOGT_TAG = "Test_Current Togt id";
@@ -142,7 +147,7 @@ public class GlobalStore extends ViewModel {
         }
 
         public Togt getTogt(){
-           togtid = pref.getLong(TOGT_TAG,-1);
+           togtid = pref.getLong(TOGT_TAG,1);
 
 
            //Searching for the togt
@@ -163,7 +168,7 @@ public class GlobalStore extends ViewModel {
         }
 
         public Etape getEtape(Togt togt){
-            long etapeId = pref.getLong(TOGT_TAG,-1);
+            etapeId = pref.getLong(TOGT_TAG,1);
 
             List<Etape> allEtaper = etapeDatabase.getEtaper(togt);
 
@@ -179,20 +184,6 @@ public class GlobalStore extends ViewModel {
             return defaultReturnEtape;
 
         }
-
-
-
-       /* public String[] getCurrentState(){
-            String[] stringList = new String[2];
-            stringList[0] = pref.getString(TOGT_TAG,"-");
-            stringList[1] = pref.getString(ETAPPE_TAG,"-");
-            return stringList;
-        }
-
-*/
-
-
-
 
     }
 }

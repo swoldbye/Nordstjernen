@@ -424,7 +424,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
             Togt testTogt = new Togt("Randers");
             Etape testEtape = new Etape();
-
+            testEtape.setId(1);
             testTogt.setSkipper("Troels");
             GlobalStore.setTogt(testTogt);
             GlobalStore.setEtape(testEtape);

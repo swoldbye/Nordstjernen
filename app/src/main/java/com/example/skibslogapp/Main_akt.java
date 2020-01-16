@@ -110,12 +110,12 @@ public class Main_akt extends AppCompatActivity {
         final Observer<Etape> etapeObserver = new Observer<Etape>() {
             @Override
             public void onChanged(Etape s) {
-                mBesaetningView.setText(s.toString());
+                mBesaetningView.setText(Integer.toString((int)s.getId()));
             }
         };
 
-        MutableLiveData<Etape> etapeData = GlobalStore.getCurrentEtape();
-        etapeData.observe(this,etapeObserver);
+       // MutableLiveData<Etape> etapeData = GlobalStore.getCurrentEtape();
+       // etapeData.observe(this,etapeObserver);
 
 
         configureNavigationDrawer();
