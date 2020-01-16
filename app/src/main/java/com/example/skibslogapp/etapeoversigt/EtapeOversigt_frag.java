@@ -49,6 +49,9 @@ public class EtapeOversigt_frag extends Fragment {
         skib_text = view.findViewById(R.id.skibsNavnText);
         header_text = view.findViewById(R.id.etapeHeader);
 
+        togt_text.setText(togt.getName());
+        skib_text.setText(togt.getSkib());
+
         togt = GlobalTogt.getTogt(getContext());
         EtapeDAO etapeDAO = new EtapeDAO(getContext());
         List<Etape> etaper = etapeDAO.getEtaper(togt);
