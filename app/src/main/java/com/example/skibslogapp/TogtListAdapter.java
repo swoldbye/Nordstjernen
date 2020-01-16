@@ -123,9 +123,9 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
             super(itemView);
             togtName = itemView.findViewById(R.id.togtNameListItem);
 //            delete = itemView.findViewById(R.id.togtDelete);
-            delete.setOnClickListener((View view) -> {
-                delete(getAdapterPosition());
-            });
+//            delete.setOnClickListener((View view) -> {
+//                delete(getAdapterPosition());
+//            });
             itemView.setOnClickListener( (View view) -> {
                 int position = getAdapterPosition();
                 Togt togt = togtArrayList.get(position);

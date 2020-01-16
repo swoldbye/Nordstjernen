@@ -3,6 +3,7 @@ package com.example.skibslogapp.etapeoversigt;
 
 import android.os.Bundle;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.skibslogapp.OpretEtapeDialogBox;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.model.Etape;
@@ -68,7 +70,7 @@ public class EtapeOversigt_frag extends Fragment {
         recyclerView.setAdapter(listAdapter);
 
         // Opret Etape Button
-        view.findViewById(R.id.etapeOpretButton).setOnClickListener((View v) -> this.createEtape());
+        view.findViewById(R.id.etapeOpretButton).setOnClickListener((View v) -> this.openDialog());
         return view;
     }
 
@@ -79,6 +81,11 @@ public class EtapeOversigt_frag extends Fragment {
         etapeDAO.addEtape(togt, newEtape);
         listAdapter.addEtape(newEtape);
         recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
+    }
+
+    private void openDialog() {
+        OpretEtapeDialogBox dialogBox = new OpretEtapeDialogBox();
+        dialogBox.show(getFragmentManager(),"Dialog box");
     }
 
 }
