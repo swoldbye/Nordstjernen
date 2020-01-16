@@ -102,7 +102,6 @@ public class Main_akt extends AppCompatActivity {
         //MutableLiveData<String> data = model.getCurrentSkipper(this);
 
         GlobalStore.setContext(this);
-        //MutableLiveData<String> data = GlobalStore.getCurrentSkipper();
         MutableLiveData<Togt> togtData = GlobalStore.getCurrentTogt();
         togtData.observe(this, togtObserver);
         //mSkipperView.setText(data.getValue());

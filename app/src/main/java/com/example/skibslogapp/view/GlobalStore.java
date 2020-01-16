@@ -70,8 +70,6 @@ public class GlobalStore extends ViewModel {
         }
 
         currentTogt.setValue(togt);
-
-        //currentSkipper.setValue(togt.getSkipper());
     }
 
     public static void setContext(Context context) {
