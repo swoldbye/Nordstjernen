@@ -74,6 +74,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     Button opretButton;
 
+    GlobalStore model = new GlobalStore();
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -416,8 +418,10 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         }
         else if (v == opretButton || v == mob) {
 
-            // Position testKoordinat = testKoordinates.getKoordinates();
-           // testKoordinat.printKoordinates();
+           //Test Observer with LiveData
+            String newName = "This is a new name";
+            model.getCurrentSkipper().setValue(newName);
+
 
             // Henter hals
             Button btn_styrbord = getView().findViewById(R.id.hals_styrbord_btn);

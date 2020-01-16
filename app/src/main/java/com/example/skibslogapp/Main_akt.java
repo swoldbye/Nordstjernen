@@ -2,8 +2,10 @@ package com.example.skibslogapp;
 
 import android.Manifest;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -28,6 +35,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.skibslogapp.model.GlobalTogt;
+import com.example.skibslogapp.model.Togt;
+import com.example.skibslogapp.view.GlobalStore;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.OpretTogt_frag;
@@ -51,11 +61,18 @@ public class Main_akt extends AppCompatActivity {
     private LogOversigt_frag logOversigt_frag;
     private OpretTogt_frag opretTogt_frag;
 
+    private TextView mSkipperView;
+    private GlobalStore model;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+
 
 //      Sæt Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -66,6 +83,18 @@ public class Main_akt extends AppCompatActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
         }
 
+        mSkipperView = findViewById(R.id.Skipper);
+        model = ViewModelProviders.of(this).get(GlobalStore.class);
+        final Observer<String> nameObserver = new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                mSkipperView.setText(s);
+            }
+        };
+
+        model.getCurrentSkipper().observe(this, nameObserver);
+
+
 
         configureNavigationDrawer();
 
@@ -73,6 +102,8 @@ public class Main_akt extends AppCompatActivity {
             Fragment fragment = new PostActivity();
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
         }
+
+
     }
 
 
@@ -221,6 +252,8 @@ public class Main_akt extends AppCompatActivity {
     public void showToolbar() {
         this.getSupportActionBar().show();
     }
+
+
 
 
 
