@@ -1,6 +1,7 @@
 package com.example.skibslogapp;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Menu;
@@ -60,7 +61,6 @@ public class Main_akt extends AppCompatActivity {
     private TogtOversigt_frag togtOversigt_frag;
     private LogOversigt_frag logOversigt_frag;
     private OpretTogt_frag opretTogt_frag;
-
     private TextView mSkipperView;
     private GlobalStore model;
 
@@ -72,12 +72,11 @@ public class Main_akt extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-
-
 //      Sæt Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
+
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
@@ -91,9 +90,12 @@ public class Main_akt extends AppCompatActivity {
                 mSkipperView.setText(s);
             }
         };
+        //MutableLiveData<String> data = model.getCurrentSkipper(this);
 
-        model.getCurrentSkipper().observe(this, nameObserver);
-
+        GlobalStore.setContext(this);
+        MutableLiveData<String> data = GlobalStore.getCurrentSkipper();
+        data.observe(this, nameObserver);
+        mSkipperView.setText(data.getValue());
 
 
         configureNavigationDrawer();
@@ -254,9 +256,9 @@ public class Main_akt extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onDestroy() {
 
-
-
-
-
+        super.onDestroy();
+    }
 }

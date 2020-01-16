@@ -35,6 +35,7 @@ import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Position.PositionController;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.utility.KingButton;
 import com.example.skibslogapp.view.utility.ToggleViewList;
 
@@ -74,7 +75,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     Button opretButton;
 
-    GlobalStore model = new GlobalStore();
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -419,8 +420,11 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         else if (v == opretButton || v == mob) {
 
            //Test Observer with LiveData
-            String newName = "This is a new name";
-            model.getCurrentSkipper().setValue(newName);
+
+            Togt testTogt = new Togt("Randers");
+            testTogt.setSkipper("Troels");
+            GlobalStore.setContext(getActivity());
+            GlobalStore.setTogt(testTogt);
 
 
             // Henter hals
