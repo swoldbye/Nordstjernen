@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#05192E</color>
-    <color name="colorPrimaryDark">#05192E</color>
+    <color name="colorPrimary">#193668</color>
+    <color name="colorPrimaryDark">#193668</color>
     <color name="colorAccent">#D1DBE6</color>
     <color name="grey">#DDDDDD</color>
-    <color name="textColor">#05192E</color>
+    <color name="textColor">#193668</color>
     <color name="BenjaminMooreMarineBlue">#1e3f5a</color>
     <color name="offWhite">#f2f2f2</color>
     <color name="white">#ffffff</color>
