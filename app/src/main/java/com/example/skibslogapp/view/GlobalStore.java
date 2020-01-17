@@ -155,8 +155,8 @@ public class GlobalStore extends ViewModel {
 
 
            //Searching for the togt
-            List<Togt> allTogter =  TESTTogtDatabase.getTogter();
-            //List<Togt> allTogter = togtDatabase.getTogter();
+            //List<Togt> allTogter =  TESTTogtDatabase.getTogter();
+            List<Togt> allTogter = togtDatabase.getTogter();
 
             for (Togt a : allTogter) {
                 if (a.getId() == togtid) {
