@@ -37,5 +37,71 @@
         android:textColor="@color/colorPrimary"
         android:id="@+id/inputStartDest"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Besætning"
+        android:textStyle="bold"
+        android:textSize="20dp"
+
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="5dp"
+        android:paddingLeft="5dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listRecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="5dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp">
+
+        <EditText
+            android:id="@+id/navnIndput"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="Navn"
+            android:inputType="text"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorPrimary" />
+
+
+        <FrameLayout
+            android:layout_width="111dp"
+            android:layout_height="108dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="50dp"
+            android:clipToPadding="false"
+
+            android:layout_weight="0"
+            android:padding="20dp">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/etapeMailBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:clickable="true"
+                android:elevation="20dp"
+                android:focusable="true"
+                android:scaleType="center"
+                android:src="@drawable/ic_add_black_24dp"
+                android:tint="@color/white"
+
+                />
+        </FrameLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
