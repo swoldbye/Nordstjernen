@@ -58,8 +58,7 @@ public class Togt {
     }
 
     public boolean equals(Togt togt){
-        return
-                id == togt.id &&
+        return  id == togt.id &&
                 TextUtils.equals(name, togt.name) &&
                 TextUtils.equals(skib, togt.skib) &&
                 TextUtils.equals(skipper, togt.skipper) &&

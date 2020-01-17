@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Togt;
+import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 /**
@@ -23,18 +24,13 @@ import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
  */
 public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
-    private String[] skibsListe ={"Havhingsten","Skjoldungen","Helge Ask","Ottar","Skib5","Skib6"};
+    private String[] skibsListe ={"Havhingsten","Skjoldungen","Helge Ask","Ottar"};
     private MaterialBetterSpinner betterSpinner;
     private EditText togtName, skipper, startDest;
     private View opretBtn;
 
-    public OpretTogt_frag() {
-
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_opret_togt, container, false);
 
         togtName = view.findViewById(R.id.togtNavn);
@@ -65,19 +61,15 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
         if (view == opretBtn && togtet.length() <= 0){
             togtName.setError("Der skal indtastes et navn til togtet!");
-            return;
 
         }else if (view == opretBtn && kaptajn.length() <= 0){
             skipper.setError("Der skal intastes et navn på skipperen!");
-            return;
 
         }else if (view == opretBtn && togtStartDest.length() <= 0){
             startDest.setError("Vælg hvor togtet skal startes fra!");
-            return;
 
         }else {
             if (view == opretBtn){
-
 
                 TogtOversigt_frag togtOversigt_frag = new TogtOversigt_frag();
 
