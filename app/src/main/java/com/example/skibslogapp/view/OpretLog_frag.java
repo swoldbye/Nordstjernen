@@ -42,15 +42,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class OpretLog_frag extends Fragment implements View.OnClickListener {
-    private LogWind_frag windFrag;
-    private LogNote_frag noteFrag;
 
     private boolean mobIsDown = true;
 
     private int timeStringLengthBefore = 0;
     private String finalSejlføring = "";
     private String styrbordEllerBagbord = "";
-    private String sejlStilling = "";
 
     //button colors:
     int basicColor;
@@ -58,10 +55,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     Button resetTimeButton;
     KingButton fBtn, øBtn, n1Btn, n2Btn, n3Btn;
-    EditText kursEditText, antalRoereEditText, editTime;
+    EditText kursEditText, editTime;
     View mob;
     ToggleButtonList hals_Buttons;
-    ToggleButtonList sejlStilling_Buttons;
     private ToggleButtonList sejlføring_Buttons;
     Button opretButton;
     LogViewModel logVM;
@@ -72,8 +68,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
         logVM.reset();
-
-        windFrag = (LogWind_frag) getChildFragmentManager().findFragmentById(R.id.fragment_opretLog_wind);
 
                 //Tidsslet
                 editTime = (EditText) view.findViewById(R.id.editTime);
@@ -86,8 +80,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         kursEditText = (EditText) view.findViewById(R.id.kursEditText);
 
 
-        //Antal Roere
-        antalRoereEditText = (EditText) view.findViewById(R.id.antalRoereEditText);
 
 
         //Opret Post
@@ -101,7 +93,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 //            }
 //        });
 //        noteFrag = new LogNote_frag();
-        noteFrag = (LogNote_frag) getChildFragmentManager().findFragmentById(R.id.fragment_opretLog_note);
+        //Reference to implement listener
+        LogNote_frag noteFrag = (LogNote_frag) getChildFragmentManager().findFragmentById(R.id.fragment_opretLog_note);
         noteFrag.setListener(() -> {
             toggleMOBPosition();
         });
@@ -114,13 +107,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             view.findViewById(R.id.hals_styrbord_btn)
         );
 
-        sejlStilling_Buttons = new ToggleButtonList(
-            view.findViewById(R.id.læ),
-            view.findViewById(R.id.ag),
-            view.findViewById(R.id.ha),
-            view.findViewById(R.id.fo),
-            view.findViewById(R.id.bi)
-        );
 
         fBtn = view.findViewById(R.id.fButton);
         øBtn = view.findViewById(R.id.øButton);
@@ -320,12 +306,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         //Sætsammen med hals
         sejlføring += hals;
 
-        // Henter sejlstilling
-        String sejlstilling = "";
-        Button pressedSejlstilling = sejlStilling_Buttons.getToggledView();
-        if(pressedSejlstilling != null){
-            sejlstilling = pressedSejlstilling.getText().toString();
-        }
 
         String kursStr = kursEditText.getText().toString();
 
@@ -353,10 +333,10 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         //TODO Strømhastighed
         logpunkt.setKurs( kursStr.equals("") ? -1 : Integer.parseInt(kursStr) );
         logpunkt.setSejlfoering( sejlføring );
-        logpunkt.setSejlfoering( sejlstilling );
+        logpunkt.setSejlstilling( logVM.getSailPosition() );
+        logpunkt.setRoere(logVM.getCurrRowers());
 
-//        logpunkt.setNote( noteFrag.getNoteText());
-        logpunkt.setNote( logVM.getNoteTxt());
+        logpunkt.setNote( logVM.getNoteTxt() );
 
         LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
         logpunktDAO.addLogpunkt(GlobalTogt.getEtape(getContext()), logpunkt);

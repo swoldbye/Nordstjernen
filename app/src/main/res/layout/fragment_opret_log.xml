@@ -378,81 +378,89 @@
 <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
                 <View style="@style/Divider" />
 
+                <fragment
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fragment_opretLog_sailsAndRowers"
+                    android:layout_weight="1"
+                    android:name="com.example.skibslogapp.view.opretLog.LogSailsAndRowers_frag"/>
+
+
 <!-- Sejlstilling =====================================-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:gravity="center_horizontal"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        style="@style/SmallTitle"
-                        android:text="Sejlstilling" />
+<!--                    <TextView-->
+<!--                        style="@style/SmallTitle"-->
+<!--                        android:text="Sejlstilling" />-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal">-->
 
-                        <Space style="@style/EvenSpace" />
+<!--                        <Space style="@style/EvenSpace" />-->
 
-                        <Button
-                            android:id="@+id/læ"
-                            style="@style/DefaultButton"
-                            android:text="læ"
-                            android:textColor="#000000" />
+<!--                        <Button-->
+<!--                            android:id="@+id/læ"-->
+<!--                            style="@style/DefaultButton"-->
+<!--                            android:text="læ"-->
+<!--                            android:textColor="#000000" />-->
 
-                        <Space style="@style/EvenSpace" />
+<!--                        <Space style="@style/EvenSpace" />-->
 
-                        <Button
-                            android:id="@+id/ag"
-                            style="@style/DefaultButton"
-                            android:text="ag" />
+<!--                        <Button-->
+<!--                            android:id="@+id/ag"-->
+<!--                            style="@style/DefaultButton"-->
+<!--                            android:text="ag" />-->
 
-                        <Space style="@style/EvenSpace" />
+<!--                        <Space style="@style/EvenSpace" />-->
 
-                        <Button
-                            android:id="@+id/ha"
-                            style="@style/DefaultButton"
-                            android:text="bi" />
+<!--                        <Button-->
+<!--                            android:id="@+id/ha"-->
+<!--                            style="@style/DefaultButton"-->
+<!--                            android:text="bi" />-->
 
-                        <Space style="@style/EvenSpace" />
+<!--                        <Space style="@style/EvenSpace" />-->
 
-                        <Button
-                            android:id="@+id/fo"
-                            style="@style/DefaultButton"
-                            android:text="fo" />
+<!--                        <Button-->
+<!--                            android:id="@+id/fo"-->
+<!--                            style="@style/DefaultButton"-->
+<!--                            android:text="fo" />-->
 
-                        <Space style="@style/EvenSpace" />
+<!--                        <Space style="@style/EvenSpace" />-->
 
-                        <Button
-                            android:id="@+id/bi"
-                            style="@style/DefaultButton"
-                            android:text="ha" />
+<!--                        <Button-->
+<!--                            android:id="@+id/bi"-->
+<!--                            style="@style/DefaultButton"-->
+<!--                            android:text="ha" />-->
 
-                        <Space style="@style/EvenSpace" />
+<!--                        <Space style="@style/EvenSpace" />-->
 
-                    </LinearLayout>
-                </LinearLayout>
+<!--                    </LinearLayout>-->
+<!--                </LinearLayout>-->
 
 
-                <!-- ANTALROERE =====================================-->
-                <EditText
-                    android:id="@+id/antalRoereEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginEnd="80dp"
-                    android:digits="0123456789"
-                    android:ems="10"
-                    android:hint="Antal Roere"
-                    android:imeOptions="actionDone"
-                    android:inputType="time"
-                    android:textColor="@color/textColor"
-                    android:textColorHint="@color/textColor"
-                    android:textSize="22sp" />
+<!--                &lt;!&ndash; ANTALROERE =====================================&ndash;&gt;-->
+<!--                <EditText-->
+<!--                    android:id="@+id/antalRoereEditText"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="80dp"-->
+<!--                    android:layout_marginEnd="80dp"-->
+<!--                    android:digits="0123456789"-->
+<!--                    android:ems="10"-->
+<!--                    android:hint="Antal Roere"-->
+<!--                    android:imeOptions="actionDone"-->
+<!--                    android:inputType="time"-->
+<!--                    android:textColor="@color/textColor"-->
+<!--                    android:textColorHint="@color/textColor"-->
+<!--                    android:textSize="22sp" />-->
 
 
                 <View style="@style/Divider" />

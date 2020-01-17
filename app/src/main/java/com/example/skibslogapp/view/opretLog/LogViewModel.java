@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel;
 public class LogViewModel extends ViewModel {
     private String noteTxt,
             windDirection, windSpeed,
-            waterCurrentDirection;
+            waterCurrentDirection,
+            sailPosition;
+    private int currRowers;
 
     public LogViewModel() {
         reset();
@@ -44,5 +46,19 @@ public class LogViewModel extends ViewModel {
     }
     public void setWaterCurrentDirection(String waterCurrentDirection) {
         this.waterCurrentDirection = waterCurrentDirection;
+    }
+
+    public String getSailPosition() {
+        return sailPosition;
+    }
+    public void setSailPosition(String sailPosition) {
+        this.sailPosition = sailPosition;
+    }
+
+    public int getCurrRowers() {
+        return currRowers;
+    }
+    public void setCurrRowers(String currRowers) {
+        this.currRowers = Integer.parseInt(currRowers);
     }
 }
