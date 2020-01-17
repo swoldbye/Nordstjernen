@@ -445,10 +445,39 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         } else if(v == openButton) {
             opretPostWrapper.setVisibility(View.VISIBLE);
             buttonFrame.setVisibility(View.GONE);
-        }else if(v == closeButton){
+        }else if(v == closeButton) {
             buttonFrame.setVisibility(View.VISIBLE);
             opretPostWrapper.setVisibility(View.GONE);
-        } else if (v == opretButton || v == mob) {
+        }else if( v == mob){
+            // Fetching time ---------------------------------------------------------------
+
+            String timeStr = editTime.getText().toString();
+            if (timeStr.length() == 0) {
+                timeStr = editTime.getHint().toString();
+            }
+
+            // Getting calender instance
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+
+            // Setting minutes and hour
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeStr.substring(0, 2)));
+            calendar.set(Calendar.MINUTE, Integer.parseInt(timeStr.substring(3, 5)));
+
+            // Create Logpunkt from time in calendar
+            Logpunkt logpunkt = new Logpunkt(new Date(calendar.getTimeInMillis()));
+            logpunkt.setMandOverBord(true);
+            logpunkt.setPosition(testKoordinates.getKoordinates());
+
+
+            LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
+            logpunktDAO.addLogpunkt(GlobalTogt.getEtape(getContext()), logpunkt);
+
+            System.out.printf("Created logpunkt: %s", logpunkt.toString());
+
+            buttonFrame.setVisibility(View.VISIBLE);
+            opretPostWrapper.setVisibility(View.GONE);
+        } else if (v == opretButton) {
 
             // Position testKoordinat = testKoordinates.getKoordinates();
             // testKoordinat.printKoordinates();

@@ -21,25 +21,19 @@
             android:id="@+id/tidTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="75"
+            android:layout_weight="190"
             android:gravity="center"
             android:text="TextView"
             android:textColor="@color/colorPrimary"
             android:textSize="25sp"
-            android:textStyle="bold"
+            android:textStyle="italic"
             />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="97"
-            android:text="" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:layout_marginLeft="5dp"
             android:layout_weight="25">
 
             <LinearLayout
