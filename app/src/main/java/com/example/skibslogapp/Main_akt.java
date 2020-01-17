@@ -29,10 +29,12 @@ import android.widget.EditText;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.AktivTogt;
+import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
+import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.OpretTogt_frag;
-import com.example.skibslogapp.view.TogtOversigt_frag;
+import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 import com.example.skibslogapp.view.UdtagData_frag;
 import com.google.android.material.navigation.NavigationView;
 
@@ -55,6 +57,8 @@ public class Main_akt extends AppCompatActivity {
     private AktivTogt model;
 
 
+    private EtapeOversigt_frag etapeOversigt_frag;
+    private Togt togt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +66,7 @@ public class Main_akt extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-//      Sæt Toolbar
+//      Set Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -70,6 +74,7 @@ public class Main_akt extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
 
@@ -115,11 +120,9 @@ public class Main_akt extends AppCompatActivity {
         configureNavigationDrawer();
 
         if (savedInstanceState == null) {
-            Fragment fragment = new PostActivity();
+            Fragment fragment = new TogtOversigt_frag();
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
         }
-
-
     }
 
 
@@ -157,7 +160,7 @@ public class Main_akt extends AppCompatActivity {
                 togtOversigt_frag = new TogtOversigt_frag();
                 opretTogt_frag = new OpretTogt_frag();
                 opretLog_frag = new OpretLog_frag();
-
+                etapeOversigt_frag = new EtapeOversigt_frag(togt);
 
                 int itemid = menuItem.getItemId();
 
@@ -173,6 +176,7 @@ public class Main_akt extends AppCompatActivity {
 
 
                 } else if (itemid == R.id.nav_etape_oversigt) {
+                    changeFragFromMenu(etapeOversigt_frag);
 
                 }else if (itemid == R.id.nav_opret_log){
                     changeFragFromMenu(opretLog_frag);
@@ -270,9 +274,7 @@ public class Main_akt extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onDestroy() {
 
-        super.onDestroy();
-    }
+
+
 }

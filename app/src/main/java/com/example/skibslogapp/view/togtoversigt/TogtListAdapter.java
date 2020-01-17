@@ -1,24 +1,21 @@
-package com.example.skibslogapp;
+package com.example.skibslogapp.view.togtoversigt;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.skibslogapp.datalayer.local.TogtDAO;
+import com.example.skibslogapp.R;
+import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
 import com.example.skibslogapp.model.Togt;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -28,13 +25,10 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
 
     private List<Togt> togtArrayList;
     private Context mContext;
-//    private OnTogtListener togtListener;
 
     public TogtListAdapter(List<Togt> list, Context context) {
         togtArrayList = list;
         mContext = context;
-
-//        this.togtListener = onTogtListener;
     }
 
     /**
@@ -66,8 +60,22 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
      */
     @Override
     public void onBindViewHolder(@NonNull TogtListViewHolder holder, final int position) {
+
+        Calendar dateFormat = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM");
+        String date = simpleDateFormat.format(dateFormat.getTime());
+
+        Calendar yearFormat = Calendar.getInstance();
+        SimpleDateFormat simpleYearFormat = new SimpleDateFormat("yyyy");
+        String year = simpleYearFormat.format(yearFormat.getTime());
+
+
         Togt currTogt = togtArrayList.get(position);
         holder.togtName.setText(currTogt.getName());
+        holder.ship.setText(currTogt.getSkib());
+        holder.startDest.setText("Fra " + currTogt.getStartDestination());
+        holder.date.setText(date);
+        holder.year.setText(year);
     }
 
     /**
@@ -79,21 +87,21 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
         return togtArrayList.size();
     }
 
-    /**
-     * This function removes an item from the togtArrayList, and thus from the RecycleView.
-     * It also notifies any any registered observers that the item previously located at <code>position</code>
-     * has been removed from the data set. The items previously located at and after
-     * <code>position</code> may now be found at <code>oldPosition - 1</code>.
-     *
-     * @param position The position the element is in the RecycleView
-     */
-    public void delete(int position){
-        Togt togt = togtArrayList.get(position);
-        togtArrayList.remove(position);
-        TogtDAO togtDAO = new TogtDAO(mContext);
-        togtDAO.deleteTogt(togt);
-        notifyItemRemoved(position);
-    }
+//    /**
+//     * This function removes an item from the togtArrayList, and thus from the RecycleView.
+//     * It also notifies any any registered observers that the item previously located at <code>position</code>
+//     * has been removed from the data set. The items previously located at and after
+//     * <code>position</code> may now be found at <code>oldPosition - 1</code>.
+//     *
+//     * @param position The position the element is in the RecycleView
+//     */
+//    public void delete(int position){
+//        Togt togt = togtArrayList.get(position);
+//        togtArrayList.remove(position);
+//        TogtDAO togtDAO = new TogtDAO(mContext);
+//        togtDAO.deleteTogt(togt);
+//        notifyItemRemoved(position);
+//    }
 
     /**
      * The ViewHolder design pattern can be applied when using a custom adapter.
@@ -106,26 +114,36 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
      * A ViewHolder holds the reference to the id of the view resource and calls to the resource
      * will not be required. Thus performance of the application increases.
      */
-    public class TogtListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class TogtListViewHolder extends RecyclerView.ViewHolder{
 
-        TextView togtName;
-        ImageView delete;
+        TextView togtName,ship,startDest,date,year;
 
         public TogtListViewHolder(@NonNull View itemView) {
             super(itemView);
-            togtName = itemView.findViewById(R.id.togtNameListItem);
-//            edit = itemView.findViewById(R.id.togtEdit);
-            delete = itemView.findViewById(R.id.togtDelete);
-            delete.setOnClickListener(this::onClick);
-        }
-
-        /**
-         * This function will delete the List element that is clicked on, and erase it from the
-         * DB.
-         */
-        @Override
-        public void onClick(View v) {
-            delete(getAdapterPosition());
+            togtName = itemView.findViewById(R.id.togtoversigt_card_name);
+            ship = itemView.findViewById(R.id.togtoversigt_card_shipname);
+            startDest = itemView.findViewById(R.id.togtoversigt_card_startdestination);
+            date = itemView.findViewById(R.id.togtoversigt_card_date);
+            year = itemView.findViewById(R.id.togtoversigt_card_year);
+            itemView.setOnClickListener( (View view) -> {
+                int position = getAdapterPosition();
+                Togt togt = togtArrayList.get(position);
+//                    EtapeOversigt_frag etapeOversigt_frag = new EtapeOversigt_frag(togt);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putLong("ID", togt.getId());
+//                    etapeOversigt_frag.setArguments(bundle);
+                AppCompatActivity activity = (AppCompatActivity)view.getContext();
+                activity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.enter_right_to_left,
+                                R.anim.exit_right_to_left,
+                                R.anim.enter_left_to_right,
+                                R.anim.exit_left_to_right)
+                        .replace(R.id.fragContainer,new EtapeOversigt_frag(togt))
+                        .addToBackStack(null)
+                        .commit();
+            });
         }
     }
 }
