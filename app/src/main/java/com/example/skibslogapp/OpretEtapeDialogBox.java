@@ -17,11 +17,16 @@ import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class OpretEtapeDialogBox extends AppCompatDialogFragment {
 
-    private EditText editSkipper, editStartDest;
+public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View.OnClickListener {
+
+    private EditText editSkipper, editStartDest,navnIndput ;
     private Togt togt;
+    private View addButton;
+    private List<String> besaetningList = new ArrayList<>();
 
     public OpretEtapeDialogBox(Togt togt) {
         this.togt = togt;
@@ -59,9 +64,18 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment {
 
         editSkipper = view.findViewById(R.id.inputSkipper);
         editStartDest = view.findViewById(R.id.inputStartDest);
+        navnIndput = view.findViewById(R.id.navnIndput);
+
+        addButton = view.findViewById(R.id.addButton);
+        addButton.setOnClickListener(this);
 
         return builder.create();
 
     }
 
+    @Override
+    public void onClick(View v) {
+        besaetningList.add(navnIndput.getText().toString());
+        System.out.println(navnIndput.getText().toString());
+    }
 }
