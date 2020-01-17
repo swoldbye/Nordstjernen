@@ -14,13 +14,13 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.utility.KingButton;
 
-public class LogSailsAndRowers_frag extends Fragment implements View.OnClickListener {
+public class LogSailPosAndRowers_frag extends Fragment implements View.OnClickListener {
     KingButton læ, ag, bi, fo, ha;
     EditText numberOfRowers;
     LogViewModel logVM;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_opret_log_sailsandrowers, container, false);
+        View view = inflater.inflate(R.layout.fragment_opret_log_sailposandrowers, container, false);
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
 
         //Sejlstilling

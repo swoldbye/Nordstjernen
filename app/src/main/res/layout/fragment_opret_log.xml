@@ -383,7 +383,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/fragment_opretLog_sailsAndRowers"
                     android:layout_weight="1"
-                    android:name="com.example.skibslogapp.view.opretLog.LogSailsAndRowers_frag"/>
+                    android:name="com.example.skibslogapp.view.opretLog.LogSailPosAndRowers_frag"/>
 
 
 <!-- Sejlstilling =====================================-->

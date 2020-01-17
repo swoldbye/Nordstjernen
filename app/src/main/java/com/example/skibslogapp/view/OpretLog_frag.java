@@ -58,7 +58,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     EditText kursEditText, editTime;
     View mob;
     ToggleButtonList hals_Buttons;
-    private ToggleButtonList sejlføring_Buttons;
     Button opretButton;
     LogViewModel logVM;
 
