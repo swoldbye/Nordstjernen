@@ -1,9 +1,6 @@
 package com.example.skibslogapp;
 
-import android.Manifest;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -13,33 +10,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.skibslogapp.model.Etape;
-import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Togt;
-import com.example.skibslogapp.view.GlobalStore;
+import com.example.skibslogapp.view.AktivTogt;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.OpretTogt_frag;
@@ -63,7 +52,7 @@ public class Main_akt extends AppCompatActivity {
     private LogOversigt_frag logOversigt_frag;
     private OpretTogt_frag opretTogt_frag;
     private TextView mSkipperView, mTogtView, mBesaetningView;
-    private GlobalStore model;
+    private AktivTogt model;
 
 
 
@@ -90,7 +79,7 @@ public class Main_akt extends AppCompatActivity {
 
 
 
-        model = ViewModelProviders.of(this).get(GlobalStore.class);
+        model = ViewModelProviders.of(this).get(AktivTogt.class);
         final Observer<Togt> togtObserver = new Observer<Togt>() {
             @Override
             public void onChanged(Togt s) {
@@ -101,8 +90,8 @@ public class Main_akt extends AppCompatActivity {
         };
         //MutableLiveData<String> data = model.getCurrentSkipper(this);
 
-        GlobalStore.setContext(this);
-        MutableLiveData<Togt> togtData = GlobalStore.getCurrentTogt();
+        AktivTogt.setContext(this);
+        MutableLiveData<Togt> togtData = AktivTogt.getCurrentTogt();
         togtData.observe(this, togtObserver);
         //mSkipperView.setText(data.getValue());
 
@@ -113,8 +102,8 @@ public class Main_akt extends AppCompatActivity {
             }
         };
 
-       // MutableLiveData<Etape> etapeData = GlobalStore.getCurrentEtape();
-       // etapeData.observe(this,etapeObserver);
+       MutableLiveData<Etape> etapeData = AktivTogt.getCurrentEtape();
+       etapeData.observe(this,etapeObserver);
 
 
         configureNavigationDrawer();

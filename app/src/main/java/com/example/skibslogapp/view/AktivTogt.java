@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
+import com.example.skibslogapp.datalayer.local.TESTEtapeDAO;
 import com.example.skibslogapp.datalayer.local.TESTTogtDAO;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Etape;
@@ -19,7 +20,7 @@ import java.util.List;
 Extendt ViewModel so that we get access to the onCleaned method.
  */
 
-public class GlobalStore extends ViewModel {
+public class AktivTogt extends ViewModel {
 
 
     //Using mutable livedata so that we can hvave public methods for updating values.
@@ -53,7 +54,7 @@ public class GlobalStore extends ViewModel {
      */
 
     public static void setEtape(Etape etape) {
-        GlobalStore.etape = etape;
+        AktivTogt.etape = etape;
         DBpref.storeEtappe(etape.getId());
 
         if(currentEtape == null){
@@ -63,7 +64,7 @@ public class GlobalStore extends ViewModel {
     }
 
     public static void setTogt(Togt togt) {
-        GlobalStore.togt = togt;
+        AktivTogt.togt = togt;
         DBpref.storeTogt(togt.getId());
 
         if(currentTogt == null){
@@ -74,7 +75,7 @@ public class GlobalStore extends ViewModel {
     }
 
     public static void setContext(Context context) {
-        GlobalStore.context = context;
+        AktivTogt.context = context;
         DBpref = new SaveLocal(context);
     }
 
@@ -109,7 +110,7 @@ public class GlobalStore extends ViewModel {
 
     /*
     Inner class for accessing shared preferences. It savas the ids of the current Togt and Etape, fetch them from the database
-    and returns to the GlobalStore.
+    and returns to the AktivTogt.
      */
     static class SaveLocal extends AppCompatActivity {
 
@@ -123,6 +124,7 @@ public class GlobalStore extends ViewModel {
 
         //Used for testing
         private TESTTogtDAO TESTTogtDatabase;
+        private TESTEtapeDAO TESTEtapeDatabase;
 
         private Context context;
 
@@ -133,9 +135,12 @@ public class GlobalStore extends ViewModel {
                 pref = context.getSharedPreferences("SharedPrefC3", context.MODE_PRIVATE);//Mode private so that no other application can access these data.
             }
 
+           // togtDatabase = new TogtDAO(context);
+           // etapeDatabase = new EtapeDAO(context);
+
+            //Databaser used for testing
+            TESTEtapeDatabase = new TESTEtapeDAO();
             TESTTogtDatabase = new TESTTogtDAO();
-            //togtDatabase = new TogtDAO(context);
-            etapeDatabase = new EtapeDAO(context);
         }
 
         public void storeTogt(long togtId) {
@@ -155,8 +160,8 @@ public class GlobalStore extends ViewModel {
 
 
            //Searching for the togt
-            //List<Togt> allTogter =  TESTTogtDatabase.getTogter();
-            List<Togt> allTogter = togtDatabase.getTogter();
+            List<Togt> allTogter =  TESTTogtDatabase.getTogter();
+            //List<Togt> allTogter = togtDatabase.getTogter();
 
             for (Togt a : allTogter) {
                 if (a.getId() == togtid) {
@@ -172,9 +177,9 @@ public class GlobalStore extends ViewModel {
         }
 
         public Etape getEtape(Togt togt){
-            etapeId = pref.getLong(TOGT_TAG,1);
-
-            List<Etape> allEtaper = etapeDatabase.getEtaper(togt);
+            etapeId = pref.getLong(ETAPPE_TAG,1);
+            List<Etape> allEtaper = TESTEtapeDatabase.getEtape(togt);
+            //List<Etape> allEtaper = etapeDatabase.getEtaper(togt);
 
             for (Etape a : allEtaper) {
                 if (a.getId() == etapeId) {
