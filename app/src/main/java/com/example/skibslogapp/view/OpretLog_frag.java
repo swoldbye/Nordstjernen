@@ -58,10 +58,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     Button resetTimeButton;
     KingButton fBtn, øBtn, n1Btn, n2Btn, n3Btn;
-    Button nordButton_Strøm, østButton_Strøm, sydButton_Strøm, vestButton_Strøm;
-    EditText kursEditText, antalRoereEditText, editTime, strømNingsretningEditText;
-    TextView strømretning_input;
-    Button strømningsretning_delete;
+    EditText kursEditText, antalRoereEditText, editTime;
     View mob;
     ToggleButtonList hals_Buttons;
     ToggleButtonList sejlStilling_Buttons;
@@ -84,11 +81,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
 
 
-        //Strøm Retning
-        nordButton_Strøm = (Button) view.findViewById(R.id.nordButton_strøm);
-        østButton_Strøm = (Button) view.findViewById(R.id.østButton_strøm);
-        sydButton_Strøm = (Button) view.findViewById(R.id.sydButton_strøm);
-        vestButton_Strøm = (Button) view.findViewById(R.id.vestButton_strøm);
 
         //Kurs
         kursEditText = (EditText) view.findViewById(R.id.kursEditText);
@@ -98,8 +90,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         antalRoereEditText = (EditText) view.findViewById(R.id.antalRoereEditText);
 
 
-        //Strømningshastighed
-        strømNingsretningEditText = view.findViewById(R.id.strømhastighed_edittext);
         //Opret Post
         opretButton = (Button) view.findViewById(R.id.opretButton);
 
@@ -144,10 +134,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
 
 
-        nordButton_Strøm.setOnClickListener(this);
-        østButton_Strøm.setOnClickListener(this);
-        sydButton_Strøm.setOnClickListener(this);
-        vestButton_Strøm.setOnClickListener(this);
 
         mob.setOnClickListener(this);
         opretButton.setOnClickListener(this);
@@ -161,12 +147,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         n2Btn.setOnClickListener(this);
         n3Btn.setOnClickListener(this);
 
-        strømretning_input = view.findViewById(R.id.strøm_input);
-        strømretning_input.setText("");
 
-        strømningsretning_delete = view.findViewById(R.id.strøm_delete);
-        strømningsretning_delete.setOnClickListener(this);
-        strømningsretning_delete.setVisibility(View.INVISIBLE);
+
 
         basicColor = getResources().getColor(R.color.grey);
         standOutColor = getResources().getColor(R.color.colorPrimary);
@@ -290,30 +272,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
 
 
-    private void strømDirectionLogic(String currDirection, String btnDirection, String counterDirection) {
-        if(!currDirection.contains(counterDirection)) {
-            switch(currDirection.length()) {
-                case 0:
-                    strømretning_input.setText(btnDirection);
-                    break;
 
-                case 1:
-                    if(btnDirection.equals("N") || btnDirection.equals("S")) strømretning_input.setText(btnDirection.concat(currDirection)); //Put in the front
-                    else strømretning_input.setText(currDirection.concat(btnDirection)); //Put in the back
-                    break;
-
-                case 2:
-                    if(currDirection.indexOf(btnDirection) == currDirection.lastIndexOf(btnDirection)) {
-                        if(currDirection.contains(btnDirection)) strømretning_input.setText(btnDirection.concat(currDirection)); //Put in front
-                        else if(btnDirection.equals("N") || btnDirection.equals("S"))
-                            strømretning_input.setText(currDirection.substring(0,1).concat(btnDirection).concat(currDirection.substring(1,2))); //Put in the middle
-                        else strømretning_input.setText(currDirection.concat(btnDirection)); //Put in the back
-                    }
-                    break;
-            }
-            strømningsretning_delete.setVisibility(View.VISIBLE);
-        }
-    }
 
 
 
@@ -325,16 +284,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
 
-        if(v == nordButton_Strøm) strømDirectionLogic(strømretning_input.getText().toString(), "N", "S");
-        else if(v == østButton_Strøm) strømDirectionLogic(strømretning_input.getText().toString(), "Ø", "V");
-        else if(v == sydButton_Strøm) strømDirectionLogic(strømretning_input.getText().toString(), "S", "N");
-        else if(v == vestButton_Strøm) strømDirectionLogic(strømretning_input.getText().toString(), "V", "Ø");
 
-        else if (v == strømningsretning_delete) {
-            strømretning_input.setText("");
-            strømningsretning_delete.setVisibility(View.INVISIBLE);
-        }
-        else if(v == fBtn || v == øBtn || v == n1Btn || v == n2Btn || v == n3Btn) {
+        if(v == fBtn || v == øBtn || v == n1Btn || v == n2Btn || v == n3Btn) {
             KingButton btn = (KingButton) v;
             btn.kingSelected();
         }
@@ -397,8 +348,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         // Create Logpunkt from time in calendar
         Logpunkt logpunkt = new Logpunkt( new Date(calendar.getTimeInMillis()) );
         logpunkt.setVindretning( logVM.getWindDirection() );
-        //TODO Vindhastighed?
-        logpunkt.setStroem( strømretning_input.getText().toString() );
+        //TODO Vindhastighed
+        logpunkt.setStroem( logVM.getWaterCurrentDirection() );
+        //TODO Strømhastighed
         logpunkt.setKurs( kursStr.equals("") ? -1 : Integer.parseInt(kursStr) );
         logpunkt.setSejlfoering( sejlføring );
         logpunkt.setSejlfoering( sejlstilling );

@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel;
 
 public class LogViewModel extends ViewModel {
     private String noteTxt,
-            windDirection, windSpeed;
+            windDirection, windSpeed,
+            waterCurrentDirection;
 
     public LogViewModel() {
         reset();
@@ -13,6 +14,8 @@ public class LogViewModel extends ViewModel {
     public void reset() {
         noteTxt = "";
         windDirection = "";
+        windSpeed = "";
+        waterCurrentDirection = "";
     }
     public String getNoteTxt() {
         return noteTxt;
@@ -34,5 +37,12 @@ public class LogViewModel extends ViewModel {
     }
     public void setWindSpeed(String windSpeed) {
         this.windSpeed = windSpeed;
+    }
+
+    public String getWaterCurrentDirection() {
+        return this.waterCurrentDirection;
+    }
+    public void setWaterCurrentDirection(String waterCurrentDirection) {
+        this.waterCurrentDirection = waterCurrentDirection;
     }
 }
