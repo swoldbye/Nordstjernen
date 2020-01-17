@@ -47,6 +47,13 @@ public class LogSailPosAndRowers_frag extends Fragment implements View.OnClickLi
 
         //Antal Roere
         numberOfRowers = (EditText) view.findViewById(R.id.antalRoereEditText);
+        numberOfRowers.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(numberOfRowers.getText().length() != 0)
+                    logVM.setCurrRowers(Integer.parseInt(numberOfRowers.getText().toString()));
+            }
+        });
 
         return view;
     }

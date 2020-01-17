@@ -44,6 +44,13 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
 
         //Vindhastighed
         vindHastighedEditTxt = view.findViewById(R.id.vindhastighed_edittext);
+        vindHastighedEditTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(vindHastighedEditTxt.getText().length() != 0)
+                    logVM.setWindSpeed(Integer.parseInt(vindHastighedEditTxt.getText().toString()));
+            }
+        });
 
         //On click Listeners:
         vindNordBtn.setOnClickListener(this);

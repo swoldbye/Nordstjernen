@@ -4,12 +4,13 @@ import androidx.lifecycle.ViewModel;
 
 public class LogViewModel extends ViewModel {
     private String time,
-            windDirection, windSpeed,
+            windDirection,
             waterCurrentDirection,
             sailPosition,
             sails, orientation,
             noteTxt;
-    private int waterSpeed,
+    private int windSpeed,
+            waterCurrentSpeed,
             currRowers,
             course;
 
@@ -18,15 +19,17 @@ public class LogViewModel extends ViewModel {
     }
 
     public void reset() {
-        noteTxt = "";
+        time = "";
         windDirection = "";
-        windSpeed = "";
+        windSpeed = -1;
         waterCurrentDirection = "";
+        waterCurrentSpeed = -1;
         sailPosition = "";
+        currRowers = 0;
         sails = "";
         orientation = "";
-        currRowers = 0;
         course = -1;
+        noteTxt = "";
     }
 
     public String getTime() {
@@ -43,10 +46,10 @@ public class LogViewModel extends ViewModel {
         this.windDirection = windDirection;
     }
 
-    public String getWindSpeed() {
+    public int getWindSpeed() {
         return windSpeed;
     }
-    public void setWindSpeed(String windSpeed) {
+    public void setWindSpeed(int windSpeed) {
         this.windSpeed = windSpeed;
     }
 
@@ -57,11 +60,11 @@ public class LogViewModel extends ViewModel {
         this.waterCurrentDirection = waterCurrentDirection;
     }
 
-    public int getWaterSpeed() {
-        return waterSpeed;
+    public int getWaterCurrentSpeed() {
+        return waterCurrentSpeed;
     }
-    public void setWaterSpeed(int waterSpeed) {
-        this.waterSpeed = waterSpeed;
+    public void setWaterCurrentSpeed(int waterCurrentSpeed) {
+        this.waterCurrentSpeed = waterCurrentSpeed;
     }
 
     public String getSailPosition() {
@@ -74,8 +77,8 @@ public class LogViewModel extends ViewModel {
     public int getCurrRowers() {
         return currRowers;
     }
-    public void setCurrRowers(String currRowers) {
-        this.currRowers = Integer.parseInt(currRowers);
+    public void setCurrRowers(int currRowers) {
+        this.currRowers = currRowers;
     }
 
     public String getSails() {

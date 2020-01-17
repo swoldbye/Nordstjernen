@@ -103,7 +103,7 @@
             android:ems="10"
             android:hint="Vindhastighed"
             android:imeOptions="actionDone"
-            android:inputType="numberSigned"
+            android:inputType="time"
             android:maxLength="4"
             android:paddingHorizontal="0dp"
             android:textColor="@color/textColor"

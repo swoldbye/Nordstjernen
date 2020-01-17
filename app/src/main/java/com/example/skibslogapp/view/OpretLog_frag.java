@@ -13,9 +13,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +20,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +32,6 @@ import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.opretLog.LogNote_frag;
 import com.example.skibslogapp.view.opretLog.LogViewModel;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -163,18 +158,16 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         // Create Logpunkt from time in calendar
         Logpunkt logpunkt = new Logpunkt( new Date(calendar.getTimeInMillis()) );
         logpunkt.setVindretning( logVM.getWindDirection() );
-        //TODO Vindhastighed
+        logpunkt.setVindhastighed( logVM.getWindSpeed() );
         logpunkt.setStroemRetning( logVM.getWaterCurrentDirection() );
-        //TODO Strømhastighed
-
-        logpunkt.setKurs(logVM.getCourse());
-        logpunkt.setSejlfoering( logVM.getSails().equals("") ? logVM.getSails().concat(logVM.getOrientation()) : logVM.getSails().concat("-" + logVM.getOrientation() ));
+        logpunkt.setStroemhastighed( logVM.getWaterCurrentSpeed() );
         logpunkt.setSejlstilling( logVM.getSailPosition() );
         logpunkt.setRoere(logVM.getCurrRowers());
-
+        logpunkt.setSejlfoering( logVM.getSails().equals("") ?
+                logVM.getSails().concat(logVM.getOrientation()) : logVM.getSails().concat("-" + logVM.getOrientation() ));
+        logpunkt.setKurs(logVM.getCourse());
         logpunkt.setNote( logVM.getNoteTxt() );
         logpunkt.setPosition(testKoordinates.getKoordinates());
-
 
         LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
         logpunktDAO.addLogpunkt(GlobalTogt.getEtape(getContext()), logpunkt);

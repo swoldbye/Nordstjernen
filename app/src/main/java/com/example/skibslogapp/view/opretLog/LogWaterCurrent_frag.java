@@ -16,9 +16,9 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.skibslogapp.R;
 
 public class LogWaterCurrent_frag extends Fragment implements View.OnClickListener {
-    private Button nordButton_Strøm, østButton_Strøm, sydButton_Strøm, vestButton_Strøm, strømningsretning_delete;
-    private TextView strømretning_input;
-    private EditText strømHastighed;
+    private Button currentNorthBtn, currentEastBtn, currentSouthBtn, currentWestBtn, currentResetBtn;
+    private TextView waterCurrentDirection;
+    private EditText waterCurrentSpeed;
     private LogViewModel logVM;
 
     @Nullable
@@ -28,36 +28,43 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
 
         //Strøm Retning
-        nordButton_Strøm = view.findViewById(R.id.nordButton_strøm);
-        østButton_Strøm = view.findViewById(R.id.østButton_strøm);
-        sydButton_Strøm = view.findViewById(R.id.sydButton_strøm);
-        vestButton_Strøm = view.findViewById(R.id.vestButton_strøm);
-        nordButton_Strøm.setOnClickListener(this);
-        østButton_Strøm.setOnClickListener(this);
-        sydButton_Strøm.setOnClickListener(this);
-        vestButton_Strøm.setOnClickListener(this);
-        strømningsretning_delete = view.findViewById(R.id.strøm_delete);
-        strømningsretning_delete.setOnClickListener(this);
-        strømningsretning_delete.setVisibility(View.INVISIBLE);
-        strømretning_input = view.findViewById(R.id.strøm_input);
-        strømretning_input.setText("");
+        currentNorthBtn = view.findViewById(R.id.nordButton_strøm);
+        currentEastBtn = view.findViewById(R.id.østButton_strøm);
+        currentSouthBtn = view.findViewById(R.id.sydButton_strøm);
+        currentWestBtn = view.findViewById(R.id.vestButton_strøm);
+        currentNorthBtn.setOnClickListener(this);
+        currentEastBtn.setOnClickListener(this);
+        currentSouthBtn.setOnClickListener(this);
+        currentWestBtn.setOnClickListener(this);
+        currentResetBtn = view.findViewById(R.id.strøm_delete);
+        currentResetBtn.setOnClickListener(this);
+        currentResetBtn.setVisibility(View.INVISIBLE);
+        waterCurrentDirection = view.findViewById(R.id.strøm_input);
+        waterCurrentDirection.setText("");
 
         //Strømningshastighed
-        strømHastighed = view.findViewById(R.id.strømhastighed_edittext);
+        waterCurrentSpeed = view.findViewById(R.id.strømhastighed_edittext);
+        waterCurrentSpeed.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(waterCurrentSpeed.getText().length() != 0)
+                    logVM.setWaterCurrentSpeed(Integer.parseInt(waterCurrentSpeed.getText().toString()));
+            }
+        });
 
         return view;
     }
 
     @Override
     public void onClick(View v) {
-        if(v == nordButton_Strøm) strømDirectionLogic( "N", "S");
-        else if(v == østButton_Strøm) strømDirectionLogic( "Ø", "V");
-        else if(v == sydButton_Strøm) strømDirectionLogic( "S", "N");
-        else if(v == vestButton_Strøm) strømDirectionLogic("V", "Ø");
-        else if (v == strømningsretning_delete) {
+        if(v == currentNorthBtn) strømDirectionLogic( "N", "S");
+        else if(v == currentEastBtn) strømDirectionLogic( "Ø", "V");
+        else if(v == currentSouthBtn) strømDirectionLogic( "S", "N");
+        else if(v == currentWestBtn) strømDirectionLogic("V", "Ø");
+        else if (v == currentResetBtn) {
             logVM.setWaterCurrentDirection("");
-            strømretning_input.setText(logVM.getWaterCurrentDirection());
-            strømningsretning_delete.setVisibility(View.INVISIBLE);
+            waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
+            currentResetBtn.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -66,18 +73,18 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
             switch(logVM.getWaterCurrentDirection().length()) {
                 case 0:
                     logVM.setWaterCurrentDirection(btnDirection);
-                    strømretning_input.setText(logVM.getWaterCurrentDirection());
+                    waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
                     break;
 
                 case 1:
                     if(btnDirection.equals("N") || btnDirection.equals("S")) {
                         logVM.setWaterCurrentDirection(btnDirection.concat(logVM.getWaterCurrentDirection())); //Put in the front
-                        strømretning_input.setText(logVM.getWaterCurrentDirection());
+                        waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
 
                     }
                     else {
                         logVM.setWaterCurrentDirection(logVM.getWaterCurrentDirection().concat(btnDirection)); //Put in the back
-                        strømretning_input.setText(logVM.getWaterCurrentDirection());
+                        waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
                     }
                     break;
 
@@ -85,20 +92,20 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
                     if(logVM.getWaterCurrentDirection().indexOf(btnDirection) == logVM.getWaterCurrentDirection().lastIndexOf(btnDirection)) {
                         if(logVM.getWaterCurrentDirection().contains(btnDirection)) {
                             logVM.setWaterCurrentDirection(btnDirection.concat(logVM.getWaterCurrentDirection())); //Put in front
-                            strømretning_input.setText(logVM.getWaterCurrentDirection());
+                            waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
                         }
                         else if(btnDirection.equals("N") || btnDirection.equals("S")) {
                             logVM.setWaterCurrentDirection(logVM.getWaterCurrentDirection().substring(0,1).concat(btnDirection).concat(logVM.getWaterCurrentDirection().substring(1,2))); //Put in the middle
-                            strømretning_input.setText(logVM.getWaterCurrentDirection());
+                            waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
                         }
                         else {
                             logVM.setWaterCurrentDirection(logVM.getWaterCurrentDirection().concat(btnDirection)); //Put in the back
-                            strømretning_input.setText(logVM.getWaterCurrentDirection());
+                            waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
                         }
                     }
                     break;
             }
-            strømningsretning_delete.setVisibility(View.VISIBLE);
+            currentResetBtn.setVisibility(View.VISIBLE);
         }
     }
 }
