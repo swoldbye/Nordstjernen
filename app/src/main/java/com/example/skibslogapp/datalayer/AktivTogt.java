@@ -1,4 +1,4 @@
-package com.example.skibslogapp.view;
+package com.example.skibslogapp.datalayer;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -15,74 +15,44 @@ import com.example.skibslogapp.model.Togt;
 
 import java.util.List;
 
-/*
-Extendt ViewModel so that we get access to the onCleaned method.
- */
 
+/**
+ * Class to statically store the 'current' Togt and Etape.
+ *
+ * The data will be stored in shared preferences, so they're kept
+ * if you close the app.
+ */
 public class AktivTogt extends ViewModel {
 
-
     //Using mutable livedata so that we can have public methods for updating values.
-
-    //Using the id to get the Togt and Etape from the DB.
-
     private static Etape etape;
     private static Togt togt;
     private static MutableLiveData<Togt> currentTogt;     //From Togt
-    private static MutableLiveData<String> currentSkipper;  //From Togt
     private static MutableLiveData<Etape> currentEtape; //From Etape
-    //static SharedPreferences DBpref;
-    static Context context;
-    static SaveLocal DBpref;
 
+    private static SaveLocal DBpref;
 
-    //For testing
-    private static MutableLiveData<String> currentName;
-
-
-    @Override
-    protected void onCleared() {
-
-        DBpref.storeTogt(togt.getId());
-        DBpref.storeEtappe(etape.getId());
-        super.onCleared();
-    }
-
-
-    /*
-    Getters and Setters
-     */
-
+    /** Set the current Etape */
     public static void setEtape(Etape etape) {
         AktivTogt.etape = etape;
         DBpref.storeEtappe(etape.getId());
-
         if(currentEtape == null){
             currentEtape = new MutableLiveData<Etape>();
         }
         currentEtape.setValue(etape);
     }
 
+    /** Get the current Togt */
     public static void setTogt(Togt togt) {
         AktivTogt.togt = togt;
         DBpref.storeTogt(togt.getId());
-
         if(currentTogt == null){
             currentTogt = new MutableLiveData<Togt>();
         }
-
         currentTogt.setValue(togt);
     }
 
-    public static void setContext(Context context) {
-        AktivTogt.context = context;
-        DBpref = new SaveLocal(context);
-    }
-
-
-    /*
-    Returns the current Togt
-     */
+    /** Returns the current Togt */
     public static Togt getTogt(){
         if(togt == null){
             togt = DBpref.getTogt();
@@ -90,52 +60,32 @@ public class AktivTogt extends ViewModel {
         return togt;
     }
 
-    /*
-    Returns the current Etape
-     */
-
+    /** Returns the current Etape */
     public static Etape getEtape(){
         if(etape == null){
             togt = DBpref.getTogt();
-            etape = DBpref.getEtape(togt);
-        }
+            etape = DBpref.getEtape(togt);  }
         return etape;
     }
 
 
-    /*
-    getter for mutable data. Data object that is beeing observed
-     */
-
-    public static MutableLiveData<Etape> getCurrentEtape() {
-        if(currentEtape==null){
-            etape = DBpref.getEtape(togt);
-            currentEtape = new MutableLiveData<>();
-            currentEtape.setValue(etape);
-        }
-
-        return currentEtape;
+    @Override
+    protected void onCleared() {
+        DBpref.storeTogt(togt.getId());
+        DBpref.storeEtappe(etape.getId());
+        super.onCleared();
     }
 
 
-    public static MutableLiveData<Togt> getCurrentTogt() {
-
-        if(currentTogt==null){
-            togt = DBpref.getTogt();
-            currentTogt = new MutableLiveData<>();
-            currentTogt.setValue(togt);
-        }
-
-        return currentTogt;
+    public static void setContext(Context context) {
+        DBpref = new SaveLocal(context);
     }
-
-
 
     /*
     Inner class for accessing shared preferences. It savas the ids of the current Togt and Etape, fetch them from the database
     and returns to the AktivTogt.
      */
-    static class SaveLocal extends AppCompatActivity {
+    static class SaveLocal {
 
         private long etapeId;
         private long togtid;
@@ -149,11 +99,7 @@ public class AktivTogt extends ViewModel {
         //private TESTTogtDAO TESTTogtDatabase;
        // private TESTEtapeDAO TESTEtapeDatabase;
 
-        private Context context;
-
-
         SaveLocal(Context context){
-            this.context = context.getApplicationContext();
             if(pref == null){
                 pref = context.getSharedPreferences("SharedPrefC3", context.MODE_PRIVATE);//Mode private so that no other application can access these data.
             }
@@ -181,11 +127,10 @@ public class AktivTogt extends ViewModel {
 
         /*
         Get the id of the togt from shared praferences and fetch the togt from the database.
-       If no togt is found, a default one will be created.
+        If no togt is found, a default one will be created.
          */
         public Togt getTogt(){
            togtid = pref.getLong(TOGT_TAG,1);
-
 
            //Searching for the togt
             //List<Togt> allTogter =  TESTTogtDatabase.getTogter();

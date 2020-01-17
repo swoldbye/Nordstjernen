@@ -15,9 +15,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -26,11 +23,9 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
-import com.example.skibslogapp.view.AktivTogt;
+import com.example.skibslogapp.datalayer.AktivTogt;
 import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
-import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.OpretTogt_frag;
@@ -77,7 +72,7 @@ public class Main_akt extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
-/* *************************UD KOMMENTERET INDTIL AT VI VED; HVOR VI SKAL BRUGE DET********************************************
+/* ************************* TODO: UD KOMMENTERET INDTIL AT VI VED; HVOR VI SKAL BRUGE DET********************************************
                         Dette skyldes at der vil blive ledt efter den nuværende etape i databasen og den findes ikke endnu så
                         så der bliver kastet en exception i EtapeDAO.
 
@@ -276,9 +271,5 @@ public class Main_akt extends AppCompatActivity {
     public void showToolbar() {
         this.getSupportActionBar().show();
     }
-
-
-
-
 
 }
