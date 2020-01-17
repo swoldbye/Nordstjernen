@@ -1,6 +1,5 @@
 package com.example.skibslogapp;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -19,19 +17,17 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
+import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.OpretTogt_frag;
-import com.example.skibslogapp.view.TogtOversigt_frag;
+import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 import com.example.skibslogapp.view.UdtagData_frag;
 import com.google.android.material.navigation.NavigationView;
 
@@ -50,6 +46,8 @@ public class Main_akt extends AppCompatActivity {
     private TogtOversigt_frag togtOversigt_frag;
     private LogOversigt_frag logOversigt_frag;
     private OpretTogt_frag opretTogt_frag;
+    private EtapeOversigt_frag etapeOversigt_frag;
+    private Togt togt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,20 +55,20 @@ public class Main_akt extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-//      Sæt Toolbar
+//      Set Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
-
 
         configureNavigationDrawer();
 
         if (savedInstanceState == null) {
-            Fragment fragment = new PostActivity();
+            Fragment fragment = new TogtOversigt_frag();
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
         }
     }
@@ -110,7 +108,7 @@ public class Main_akt extends AppCompatActivity {
                 togtOversigt_frag = new TogtOversigt_frag();
                 opretTogt_frag = new OpretTogt_frag();
                 opretLog_frag = new OpretLog_frag();
-
+                etapeOversigt_frag = new EtapeOversigt_frag(togt);
 
                 int itemid = menuItem.getItemId();
 
@@ -126,6 +124,7 @@ public class Main_akt extends AppCompatActivity {
 
 
                 } else if (itemid == R.id.nav_etape_oversigt) {
+                    changeFragFromMenu(etapeOversigt_frag);
 
                 }else if (itemid == R.id.nav_opret_log){
                     changeFragFromMenu(opretLog_frag);
