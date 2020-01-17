@@ -49,6 +49,19 @@ public class GlobalStoreTestSharedPreferences {
         TestListTogtDAO.add(test2);
         TestListTogtDAO.add(test3);
 
+
+        Etape testEtape1 = new Etape();
+        testEtape1.setId(1);
+        testEtape1.setTogtId(1);
+
+
+        Etape testEtape2 = new Etape();
+        testEtape2.setId(2);
+        testEtape2.setTogtId(1);
+
+        TestListEtapeDAO.add(testEtape1);
+        TestListEtapeDAO.add(testEtape2);
+
     }
 
     public void storeTogt(long togtId) {
@@ -85,10 +98,10 @@ public class GlobalStoreTestSharedPreferences {
         return defaultReturnTogt;
     }
 
-  /*  public Etape getEtape(Togt togt){
+  public Etape getEtape(Togt togt){
         long etapeId = pref.getLong(TOGT_TAG,-1);
 
-        List<Etape> allEtaper = etapeDatabase.getEtaper(togt);
+        List<Etape> allEtaper = TestListEtapeDAO;
 
         for (Etape a : allEtaper) {
             if (a.getId() == etapeId) {
@@ -102,7 +115,7 @@ public class GlobalStoreTestSharedPreferences {
         return defaultReturnEtape;
 
     }
-    */
+
 
 
   /*
@@ -130,6 +143,25 @@ public class GlobalStoreTestSharedPreferences {
 
 
     }
+
+
+
+
+    @Test
+    public void storeEtapeTest() {
+        init();
+        Etape unittestEtape = TestListEtapeDAO.get(0);
+        storeEtappe(unittestEtape.getId());
+
+
+        Etape returnEtape = getEtape(TestListTogtDAO.get(0));
+
+        assertEquals(unittestEtape.getId(),returnEtape.getId());
+        assertEquals(unittestEtape.getTogtId(),returnEtape.getTogtId());
+
+    }
+
+
 
 
 }
