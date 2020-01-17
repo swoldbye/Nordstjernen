@@ -23,11 +23,16 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
     EtapeListAdapter(List<Etape> etaper){
         this.etaper = etaper;
     }
-
+/*
     // Add an Etape to the list
     void addEtape(Etape etape){
         etaper.add(etape);
         notifyItemInserted(etaper.size()-1);
+    }*/
+
+    void updateEtapeList(List<Etape> etaper){
+        this.etaper = etaper;
+        notifyDataSetChanged();
     }
 
     @Override

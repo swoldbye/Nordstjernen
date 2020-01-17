@@ -11,6 +11,9 @@ public class Etape {
     private Date startDate = null;
     private Date endDate = null;
     private String startDestination = null;
+    private String slutDestination = null;
+    private String skipper = null;
+    private boolean started = false;
 
     /**
      * Constructs a new Etape object. Note that this will NOT
@@ -69,6 +72,30 @@ public class Etape {
     }
 
 
+    public String getSlutDestination() {
+        return slutDestination;
+    }
+
+    public void setSlutDestination(String slutDestination) {
+        this.slutDestination = slutDestination;
+    }
+
+    public String getSkipper() {
+        return skipper;
+    }
+
+    public void setSkipper(String skipper) {
+        this.skipper = skipper;
+    }
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
+    }
+
     /**
      * Returns the ID of the Etape. If the Etape hasn't been
      * added to the local database, the id will be -1.
@@ -86,7 +113,6 @@ public class Etape {
     }
 
 
-
     public long getTogtId() {
         return togtId;
     }
@@ -102,6 +128,9 @@ public class Etape {
     public String getStartDestination(){
         return startDestination;
     }
+
+
+
 
     @Override
     public String toString(){

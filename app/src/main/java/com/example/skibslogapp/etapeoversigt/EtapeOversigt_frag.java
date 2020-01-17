@@ -15,11 +15,11 @@ import android.widget.TextView;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.model.Etape;
-import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Togt;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +31,7 @@ public class EtapeOversigt_frag extends Fragment {
     private FloatingActionButton createEtape_button;
     private EtapeListAdapter listAdapter;
     private RecyclerView recyclerView;
+    private List<Etape> etaper;
 
 
     public EtapeOversigt_frag(Togt togt) {
@@ -50,7 +51,7 @@ public class EtapeOversigt_frag extends Fragment {
         skib_text.setText(togt.getSkib());
 
         EtapeDAO etapeDAO = new EtapeDAO(getContext());
-        List<Etape> etaper = etapeDAO.getEtaper(togt);
+        etaper = etapeDAO.getEtaper(togt);
 
         // Etape Liste
         recyclerView = view.findViewById(R.id.etape_recyclerview);
@@ -68,10 +69,24 @@ public class EtapeOversigt_frag extends Fragment {
 
     private void createEtape() {
         EtapeDAO etapeDAO = new EtapeDAO(getContext());
+
         Etape newEtape = new Etape();
-        newEtape.setStartDestination("København");
+        Random random = new Random();
+        String[] destinationer = {"København", "Nyborg", "Roskilde", "Kattinge", "Ejby", "Køge", "Odense", "Aalborg", "Stege", "Kalvehave", "Jylling", "Helsingør"};
+        newEtape.setStartDestination( destinationer[random.nextInt(destinationer.length) ]);
+        newEtape.setSkipper("Troels");
         etapeDAO.addEtape(togt, newEtape);
-        listAdapter.addEtape(newEtape);
+
+        // TODO: Change this when we when we have merged Togt
+        if( etaper.size() > 0 ){
+            Etape previousEtape = etaper.get(etaper.size()-1);
+            previousEtape.setSlutDestination( newEtape.getStartDestination() );
+            previousEtape.setEndDate( newEtape.getStartDate() );
+            etapeDAO.updateEtape(previousEtape);
+        }
+
+        etaper.add(newEtape);
+        listAdapter.updateEtapeList(etaper);
         recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
     }
 
