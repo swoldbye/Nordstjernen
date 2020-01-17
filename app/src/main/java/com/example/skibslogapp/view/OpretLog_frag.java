@@ -1,6 +1,5 @@
 package com.example.skibslogapp.view;
 
-
 import android.Manifest;
 import android.content.Context;
 import android.os.Bundle;
@@ -38,31 +37,26 @@ import java.util.Date;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class OpretLog_frag extends Fragment implements View.OnClickListener {
-    private boolean mobIsDown = true; //Starts with the "Man Over Bord" btn in the buttom of the page.
+    private boolean mobIsDown = true; //Starts with the "Mand Over Bord" btn in the button of the page.
+    private View mob;
+    private PositionController testCoordinates;
 
-
-
-    View mob;
-    PositionController testKoordinates;
-
-    String simpleDate3;
-    Button opretButton;
-    LogViewModel logVM;
+    private Button opretButton;
+    private LogViewModel logVM;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Activat logging of coordinates. This is placed in onCreate to ensure that the logging will start at
+        //Activate logging of coordinates. This is placed in onCreate to ensure that the logging will start at
         //The first time the logging is activated.
-        testKoordinates = new PositionController(getActivity().getApplicationContext(), this);
-
+        testCoordinates = new PositionController(getActivity().getApplicationContext(), this);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(grantResults[0] == PERMISSION_GRANTED){
-            testKoordinates.startMeassureKoordinat();
+            testCoordinates.startMeassureKoordinat();
             Toast.makeText(getActivity(), "Lokation er aktiveret", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(getActivity(), "Lokation er ikke aktiveret", Toast.LENGTH_SHORT).show();
@@ -81,23 +75,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
         logVM.reset();
 
-                //Tidsslet
-
-
-
-
-
         //Opret Post
         opretButton = (Button) view.findViewById(R.id.opretButton);
 
-        //LogNote_frag
-//        noteEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                toggleMOBPosition(hasFocus);
-//            }
-//        });
-//        noteFrag = new LogNote_frag();
         //Reference to implement listener
         LogNote_frag noteFrag = (LogNote_frag) getChildFragmentManager().findFragmentById(R.id.fragment_opretLog_note);
         noteFrag.setListener(this::toggleMOBPosition);
@@ -125,8 +105,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         v.clearFocus(); //Clears focus, which cascade into it resetting through OnFocusChange()
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//        toggleMOBPosition(getView().findViewById(R.id.noteEditText).hasFocus());
-//        toggleMOBPosition();
     }
 
     @Override
@@ -143,7 +121,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     }
 
     private void createLogpunkt() {
-
         // Fetching time ---------------------------------------------------------------
         String timeStr = logVM.getTime();
 
@@ -167,7 +144,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
                 logVM.getSails().concat(logVM.getOrientation()) : logVM.getSails().concat("-" + logVM.getOrientation() ));
         logpunkt.setKurs(logVM.getCourse());
         logpunkt.setNote( logVM.getNoteTxt() );
-        logpunkt.setPosition(testKoordinates.getKoordinates());
+        logpunkt.setPosition(testCoordinates.getKoordinates());
 
         LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
         logpunktDAO.addLogpunkt(GlobalTogt.getEtape(getContext()), logpunkt);
@@ -196,13 +173,13 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
         System.out.println("Measure koordinate");
-        testKoordinates.startMeassureKoordinat();
+        testCoordinates.startMeassureKoordinat();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         System.out.println("Stopping measure koordinates");
-        testKoordinates.removeLocationUpdates();
+        testCoordinates.removeLocationUpdates();
     }
 }
