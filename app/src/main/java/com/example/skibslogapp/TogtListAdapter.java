@@ -3,6 +3,7 @@ package com.example.skibslogapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -85,7 +86,7 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
         Togt currTogt = togtArrayList.get(position);
         holder.togtName.setText(currTogt.getName());
         holder.ship.setText(currTogt.getSkib());
-        holder.startDest.setText(currTogt.getStartDestination());
+        holder.startDest.setText("Fra " + currTogt.getStartDestination());
         holder.date.setText(date);
         holder.year.setText(year);
     }
@@ -132,11 +133,11 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
 
         public TogtListViewHolder(@NonNull View itemView) {
             super(itemView);
-            togtName = itemView.findViewById(R.id.togtNameListItem);
-            ship = itemView.findViewById(R.id.shipName);
-            startDest = itemView.findViewById(R.id.startDestCard);
-            date = itemView.findViewById(R.id.togtDate);
-            year = itemView.findViewById(R.id.year);
+            togtName = itemView.findViewById(R.id.togtoversigt_card_name);
+            ship = itemView.findViewById(R.id.togtoversigt_card_shipname);
+            startDest = itemView.findViewById(R.id.togtoversigt_card_startdestination);
+            date = itemView.findViewById(R.id.togtoversigt_card_date);
+            year = itemView.findViewById(R.id.togtoversigt_card_year);
             itemView.setOnClickListener( (View view) -> {
                 int position = getAdapterPosition();
                 Togt togt = togtArrayList.get(position);

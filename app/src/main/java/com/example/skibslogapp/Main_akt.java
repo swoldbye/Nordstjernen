@@ -69,7 +69,7 @@ public class Main_akt extends AppCompatActivity {
         configureNavigationDrawer();
 
         if (savedInstanceState == null) {
-            Fragment fragment = new PostActivity();
+            Fragment fragment = new TogtOversigt_frag();
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
         }
     }
