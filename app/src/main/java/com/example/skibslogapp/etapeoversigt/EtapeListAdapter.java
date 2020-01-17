@@ -1,13 +1,17 @@
 package com.example.skibslogapp.etapeoversigt;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.model.Etape;
 
@@ -90,6 +94,18 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
             this.etape = etape;
             String indexString = Integer.toString(listIndex);
             ((TextView) view.findViewById(R.id.etape_number_text)).setText(indexString);
+
+            // Change of card (entire card color, number text color and number container (number card) color)
+            Resources res = GlobalContext.get().getResources();
+            if( etape.getStatus() == Etape.Status.ACTIVE ){
+                ((CardView) view.findViewById(R.id.etape_card)).setCardBackgroundColor(res.getColor(R.color.colorAccent));
+                ((CardView) view.findViewById(R.id.etape_list_number_card)).setCardBackgroundColor(res.getColor(R.color.colorPrimary));
+                ((TextView) view.findViewById(R.id.etape_number_text)).setTextColor(res.getColor(R.color.white));
+            }else{
+                ((CardView) view.findViewById(R.id.etape_card)).setCardBackgroundColor(res.getColor(R.color.offWhite));
+                ((CardView) view.findViewById(R.id.etape_list_number_card)).setCardBackgroundColor(res.getColor(R.color.offWhite));
+                ((TextView) view.findViewById(R.id.etape_number_text)).setTextColor(res.getColor(R.color.colorPrimary));
+            }
         }
 
         void setDestination(String destination, Date date, boolean isFirst){

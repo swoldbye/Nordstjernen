@@ -18,6 +18,7 @@ import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -53,6 +54,18 @@ public class EtapeOversigt_frag extends Fragment {
         EtapeDAO etapeDAO = new EtapeDAO(getContext());
         etaper = etapeDAO.getEtaper(togt);
 
+        if( etaper.get(0).getStatus() == Etape.Status.NEW){
+            view.findViewById(R.id.etapeOpretButton).setVisibility(View.GONE);
+            view.findViewById(R.id.etape_recyclerview).setVisibility(View.GONE);
+            view.findViewById(R.id.etapeoversigt_start).setVisibility(View.VISIBLE);
+        }else{
+            view.findViewById(R.id.etapeOpretButton).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.etape_recyclerview).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.etapeoversigt_start).setVisibility(View.GONE);
+        }
+
+        view.findViewById(R.id.etapeoversigt_start_button).setOnClickListener((View v) -> startTogt());
+
         // Etape Liste
         recyclerView = view.findViewById(R.id.etape_recyclerview);
         recyclerView.setHasFixedSize(true);
@@ -60,6 +73,7 @@ public class EtapeOversigt_frag extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         listAdapter = new EtapeListAdapter(etaper);
         recyclerView.setAdapter(listAdapter);
+        recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
 
         // Opret Etape Button
         view.findViewById(R.id.etapeOpretButton).setOnClickListener((View v) -> this.createEtape());
@@ -67,10 +81,25 @@ public class EtapeOversigt_frag extends Fragment {
     }
 
 
+    private void startTogt() {
+        getView().findViewById(R.id.etapeOpretButton).setVisibility(View.VISIBLE);
+        getView().findViewById(R.id.etape_recyclerview).setVisibility(View.VISIBLE);
+        getView().findViewById(R.id.etapeoversigt_start).setVisibility(View.GONE);
+
+        Etape firstEtape = etaper.get(0);
+        firstEtape.setStatus(Etape.Status.ACTIVE);
+        firstEtape.setStartDate(new Date(System.currentTimeMillis()) );
+        listAdapter.updateEtapeList(etaper);
+
+        new EtapeDAO(getContext()).updateEtape(etaper.get(0));
+    }
+
+
     private void createEtape() {
         EtapeDAO etapeDAO = new EtapeDAO(getContext());
 
         Etape newEtape = new Etape();
+        newEtape.setStatus(Etape.Status.ACTIVE);
         Random random = new Random();
         String[] destinationer = {"København", "Nyborg", "Roskilde", "Kattinge", "Ejby", "Køge", "Odense", "Aalborg", "Stege", "Kalvehave", "Jylling", "Helsingør"};
         newEtape.setStartDestination( destinationer[random.nextInt(destinationer.length) ]);
@@ -82,6 +111,7 @@ public class EtapeOversigt_frag extends Fragment {
             Etape previousEtape = etaper.get(etaper.size()-1);
             previousEtape.setSlutDestination( newEtape.getStartDestination() );
             previousEtape.setEndDate( newEtape.getStartDate() );
+            previousEtape.setStatus(Etape.Status.FINISHED);
             etapeDAO.updateEtape(previousEtape);
         }
 
