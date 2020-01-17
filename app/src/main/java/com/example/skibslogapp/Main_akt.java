@@ -72,14 +72,18 @@ public class Main_akt extends AppCompatActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
         }
 
+
+        /*
+        Instanciation Livedata.
+         */
+
         mSkipperView = findViewById(R.id.Skipper);
         mTogtView = findViewById(R.id.togt);
         mBesaetningView = findViewById(R.id.Besaetning);
 
 
-
-
         model = ViewModelProviders.of(this).get(AktivTogt.class);
+
         final Observer<Togt> togtObserver = new Observer<Togt>() {
             @Override
             public void onChanged(Togt s) {
@@ -88,10 +92,11 @@ public class Main_akt extends AppCompatActivity {
                 //mBesaetningView.setText(s);
             }
         };
-        //MutableLiveData<String> data = model.getCurrentSkipper(this);
+
 
         AktivTogt.setContext(this);
         MutableLiveData<Togt> togtData = AktivTogt.getCurrentTogt();
+        //Adding observer to veriable currentTogt in GlobalStore
         togtData.observe(this, togtObserver);
         //mSkipperView.setText(data.getValue());
 
@@ -103,6 +108,7 @@ public class Main_akt extends AppCompatActivity {
         };
 
        MutableLiveData<Etape> etapeData = AktivTogt.getCurrentEtape();
+        //Adding observer to veriable currentEtape in GlobalStore
        etapeData.observe(this,etapeObserver);
 
 

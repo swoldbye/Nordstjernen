@@ -22,7 +22,7 @@ Extendt ViewModel so that we get access to the onCleaned method.
 public class AktivTogt extends ViewModel {
 
 
-    //Using mutable livedata so that we can hvave public methods for updating values.
+    //Using mutable livedata so that we can have public methods for updating values.
 
     //Using the id to get the Togt and Etape from the DB.
 
@@ -38,6 +38,7 @@ public class AktivTogt extends ViewModel {
 
     //For testing
     private static MutableLiveData<String> currentName;
+
 
     @Override
     protected void onCleared() {
@@ -76,6 +77,29 @@ public class AktivTogt extends ViewModel {
     public static void setContext(Context context) {
         AktivTogt.context = context;
         DBpref = new SaveLocal(context);
+    }
+
+
+    /*
+    Returns the current Togt
+     */
+    public static Togt getTogt(){
+        if(togt == null){
+            togt = DBpref.getTogt();
+        }
+        return togt;
+    }
+
+    /*
+    Returns the current Etape
+     */
+
+    public static Etape getEtape(){
+        if(etape == null){
+            togt = DBpref.getTogt();
+            etape = DBpref.getEtape(togt);
+        }
+        return etape;
     }
 
 
@@ -154,6 +178,11 @@ public class AktivTogt extends ViewModel {
            editor.apply();
         }
 
+
+        /*
+        Get the id of the togt from shared praferences and fetch the togt from the database.
+       If no togt is found, a default one will be created.
+         */
         public Togt getTogt(){
            togtid = pref.getLong(TOGT_TAG,1);
 
@@ -175,6 +204,11 @@ public class AktivTogt extends ViewModel {
             return defaultReturnTogt;
         }
 
+
+        /*
+        Get the id of the etape from shared praferences and fetch the Etape from the database.
+        @Param: Togt, the etapeDatabase use togt to get the etape.
+         */
         public Etape getEtape(Togt togt){
             etapeId = pref.getLong(ETAPPE_TAG,1);
             //List<Etape> allEtaper = TESTEtapeDatabase.getEtape(togt);
