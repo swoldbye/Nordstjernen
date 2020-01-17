@@ -149,6 +149,7 @@ public class TogtDAO {
     public static void removeTogtObserver( TogtObserver observer ) {
         togtObservers.remove(observer);
     }
+    // TODO: TOGT OBSERVER FUNCTIONALITY IS NOT UP TO DATE - either remove or update
 
     /**
      * Checks if the given Togt exists in the database
