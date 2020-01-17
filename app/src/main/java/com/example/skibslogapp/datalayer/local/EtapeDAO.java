@@ -58,7 +58,7 @@ public class EtapeDAO {
             row.put( "slutDestination", etape.getSlutDestination());
         if( etape.getSkipper() != null )
             row.put( "skipper", etape.getSkipper() );
-        row.put("started", etape.isStarted());
+        row.put("status", etape.getStatus() );
 
         long id = database.insert("etaper", "endDate", row);
         etape.setId(id);
@@ -119,10 +119,10 @@ public class EtapeDAO {
                 etape.setSkipper(cursor.getString(column));
             }
 
-            column = cursor.getColumnIndex("started");
+            column = cursor.getColumnIndex("status");
             if( !cursor.isNull(column) ){
                 // Converting integer value to boolean value
-                etape.setStarted(cursor.getInt(column) == 0);
+                etape.setStatus(cursor.getInt(column));
             }
 
             etaper.add( etape );
@@ -159,7 +159,7 @@ public class EtapeDAO {
             row.put( "slutDestination", etape.getSlutDestination());
         if( etape.getSkipper() != null )
             row.put( "skipper", etape.getSkipper() );
-        row.put("started", etape.isStarted());
+        row.put("status", etape.getStatus());
 
         database.update("etaper", row, "id="+etape.getId(), null );
 

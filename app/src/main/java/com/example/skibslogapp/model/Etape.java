@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Etape {
 
+
     private long id = -1;
     private long togtId = -1;
     private Date startDate = null;
@@ -13,7 +14,14 @@ public class Etape {
     private String startDestination = null;
     private String slutDestination = null;
     private String skipper = null;
-    private boolean started = false;
+    private int status = Status.NEW;
+
+    public class Status{
+        public static final int NEW = 0;
+        public static final int ACTIVE = 1;
+        public static final int FINISHED = 2;
+    }
+
 
     /**
      * Constructs a new Etape object. Note that this will NOT
@@ -88,12 +96,14 @@ public class Etape {
         this.skipper = skipper;
     }
 
-    public boolean isStarted() {
-        return started;
+    public int getStatus() {
+        return status;
     }
 
-    public void setStarted(boolean started) {
-        this.started = started;
+    public void setStatus(int status){
+        if( status < 0 || status > 2)
+            throw new RuntimeException(String.format("Etape Status ID %d is out of bounds (must be between 0 and 2)", status));
+        this.status = status;
     }
 
     /**
