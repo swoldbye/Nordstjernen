@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
+import com.example.skibslogapp.datalayer.local.TESTTogtDAO;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
@@ -120,6 +121,9 @@ public class GlobalStore extends ViewModel {
         private TogtDAO togtDatabase;
         private EtapeDAO etapeDatabase;
 
+        //Used for testing
+        private TESTTogtDAO TESTTogtDatabase;
+
         private Context context;
 
 
@@ -128,7 +132,9 @@ public class GlobalStore extends ViewModel {
             if(pref == null){
                 pref = context.getSharedPreferences("SharedPrefC3", context.MODE_PRIVATE);//Mode private so that no other application can access these data.
             }
-            togtDatabase = new TogtDAO(context);
+
+            TESTTogtDatabase = new TESTTogtDAO();
+            //togtDatabase = new TogtDAO(context);
             etapeDatabase = new EtapeDAO(context);
         }
 
@@ -149,8 +155,8 @@ public class GlobalStore extends ViewModel {
 
 
            //Searching for the togt
-
-            List<Togt> allTogter = togtDatabase.getTogter();
+            List<Togt> allTogter =  TESTTogtDatabase.getTogter();
+            //List<Togt> allTogter = togtDatabase.getTogter();
 
             for (Togt a : allTogter) {
                 if (a.getId() == togtid) {

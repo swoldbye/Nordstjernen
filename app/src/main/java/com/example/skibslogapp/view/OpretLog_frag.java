@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
+import com.example.skibslogapp.datalayer.local.TESTTogtDAO;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Position.PositionController;
@@ -422,10 +423,10 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
            //Test Observer with LiveData
 
-            Togt testTogt = new Togt("Randers");
+            TESTTogtDAO testTogtDatabase = new TESTTogtDAO();
+            Togt testTogt = testTogtDatabase.getTogter().get(0);
             Etape testEtape = new Etape();
             testEtape.setId(1);
-            testTogt.setSkipper("Troels");
             GlobalStore.setTogt(testTogt);
             GlobalStore.setEtape(testEtape);
 
