@@ -5,6 +5,7 @@ import com.example.skibslogapp.model.Position.Position;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class Logpunkt {
 
@@ -245,11 +246,11 @@ public class Logpunkt {
             id == otherPunkt.id     &&
             kurs == otherPunkt.kurs &&
             hals == otherPunkt.hals &&
-            sejlfoering == otherPunkt.sejlfoering &&
-            sejlstilling == otherPunkt.sejlstilling &&
-            vindretning == otherPunkt.vindretning &&
+            Objects.equals(sejlfoering, otherPunkt.sejlfoering) &&
+            Objects.equals(sejlstilling, otherPunkt.sejlstilling) &&
+            Objects.equals(vindretning, otherPunkt.vindretning) &&
             vindhastighed == otherPunkt.vindhastighed &&
-            stroemRetning == otherPunkt.stroemRetning &&
+            Objects.equals(stroemRetning, otherPunkt.stroemRetning) &&
             stroemhastighed == otherPunkt.stroemhastighed &&
             mandOverBord == otherPunkt.mandOverBord &&
             date.equals(otherPunkt.date) &&
