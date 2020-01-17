@@ -21,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class LogTime_frag extends Fragment implements View.OnClickListener {
-    String systemTime;
     Button resetTimeButton;
     EditText editTime;
     LogViewModel logVM;
@@ -51,12 +50,7 @@ public class LogTime_frag extends Fragment implements View.OnClickListener {
         };
         handler.postDelayed(r, 0000);
 
-        editTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                timeControl(hasFocus);
-            }
-        });
+        editTime.setOnFocusChangeListener((v, hasFocus) -> timeControl(hasFocus));
 
         editTime.addTextChangedListener(new TextWatcher() {
             @Override

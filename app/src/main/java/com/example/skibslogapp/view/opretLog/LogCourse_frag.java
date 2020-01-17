@@ -29,23 +29,16 @@ public class LogCourse_frag extends Fragment {
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
 
         kursEditText = view.findViewById(R.id.kursEditText);
-        kursEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
+        kursEditText.setOnFocusChangeListener((v, hasFocus) -> controlCourseInput());
+
+        kursEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if(actionId == EditorInfo.IME_ACTION_DONE) {
                 controlCourseInput();
+                v.clearFocus();
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
-        });
-        kursEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_DONE) {
-                    controlCourseInput();
-                    v.clearFocus();
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                }
-                return true;
-            }
+            return true;
         });
 
         return view;
