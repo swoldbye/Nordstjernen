@@ -1,32 +1,20 @@
-package com.example.skibslogapp;
+package com.example.skibslogapp.view.togtoversigt;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentController;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.skibslogapp.datalayer.local.TogtDAO;
+import com.example.skibslogapp.R;
 import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
 import com.example.skibslogapp.model.Togt;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -41,7 +29,6 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
     public TogtListAdapter(List<Togt> list, Context context) {
         togtArrayList = list;
         mContext = context;
-
     }
 
     /**
