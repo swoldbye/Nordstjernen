@@ -1,4 +1,4 @@
-package com.example.skibslogapp;
+package com.example.skibslogapp.TestGlobalStore;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,8 +17,8 @@ public class GlobalStoreTestSharedPreferences {
     private SharedPreferences pref;
     private final String TOGT_TAG = "UnitTest_Current Togt id";
     private final String ETAPPE_TAG = "UnitTest_Current Etappe ID";
-    private List<Togt> TestListTogtDAO;
-    private List<Etape> TestListEtapeDAO;
+    private TESTTogtDAO TestListTogtDAO;
+    private TESTEtapeDAO TestListEtapeDAO;
 
     private Context context;
 
@@ -30,37 +30,10 @@ public class GlobalStoreTestSharedPreferences {
         /*
         Using these instead of SQL
          */
-        TestListTogtDAO = new ArrayList<>();
-        TestListEtapeDAO = new ArrayList<>();
-
-        Togt test1 = new Togt("Test 1");
-        test1.setSkipper("skipper1");
-        test1.setId(1);
-
-        Togt test2 = new Togt("Test 2");
-        test2.setSkipper("skipper2");
-        test2.setId(2);
-
-        Togt test3 = new Togt("Test 3");
-        test3.setSkipper("skipper3");
-        test3.setId(3);
-
-        TestListTogtDAO.add(test1);
-        TestListTogtDAO.add(test2);
-        TestListTogtDAO.add(test3);
+        TestListTogtDAO = new TESTTogtDAO();
+        TestListEtapeDAO = new TESTEtapeDAO();
 
 
-        Etape testEtape1 = new Etape();
-        testEtape1.setId(1);
-        testEtape1.setTogtId(1);
-
-
-        Etape testEtape2 = new Etape();
-        testEtape2.setId(2);
-        testEtape2.setTogtId(1);
-
-        TestListEtapeDAO.add(testEtape1);
-        TestListEtapeDAO.add(testEtape2);
 
     }
 
@@ -83,7 +56,7 @@ public class GlobalStoreTestSharedPreferences {
 
         //Searching for the togt
 
-        List<Togt> allTogter = TestListTogtDAO;
+        List<Togt> allTogter = TestListTogtDAO.getTogter();
 
         for (Togt a : allTogter) {
             if (a.getId() == togtid) {
@@ -101,7 +74,7 @@ public class GlobalStoreTestSharedPreferences {
   public Etape getEtape(Togt togt){
         long etapeId = pref.getLong(TOGT_TAG,-1);
 
-        List<Etape> allEtaper = TestListEtapeDAO;
+        List<Etape> allEtaper = TestListEtapeDAO.getEtape(togt);
 
         for (Etape a : allEtaper) {
             if (a.getId() == etapeId) {
@@ -150,11 +123,13 @@ public class GlobalStoreTestSharedPreferences {
     @Test
     public void storeEtapeTest() {
         init();
-        Etape unittestEtape = TestListEtapeDAO.get(0);
+        Togt testTogt = TestListTogtDAO.getTogter().get(0);
+
+        Etape unittestEtape = TestListEtapeDAO.getEtape(testTogt).get(0);
         storeEtappe(unittestEtape.getId());
 
 
-        Etape returnEtape = getEtape(TestListTogtDAO.get(0));
+        Etape returnEtape = getEtape(testTogt);
 
         assertEquals(unittestEtape.getId(),returnEtape.getId());
         assertEquals(unittestEtape.getTogtId(),returnEtape.getTogtId());

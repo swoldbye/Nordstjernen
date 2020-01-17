@@ -8,8 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
-import com.example.skibslogapp.datalayer.local.TESTEtapeDAO;
-import com.example.skibslogapp.datalayer.local.TESTTogtDAO;
+
 import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
@@ -123,8 +122,8 @@ public class AktivTogt extends ViewModel {
         private EtapeDAO etapeDatabase;
 
         //Used for testing
-        private TESTTogtDAO TESTTogtDatabase;
-        private TESTEtapeDAO TESTEtapeDatabase;
+        //private TESTTogtDAO TESTTogtDatabase;
+       // private TESTEtapeDAO TESTEtapeDatabase;
 
         private Context context;
 
@@ -135,12 +134,12 @@ public class AktivTogt extends ViewModel {
                 pref = context.getSharedPreferences("SharedPrefC3", context.MODE_PRIVATE);//Mode private so that no other application can access these data.
             }
 
-           // togtDatabase = new TogtDAO(context);
-           // etapeDatabase = new EtapeDAO(context);
+           togtDatabase = new TogtDAO(context);
+           etapeDatabase = new EtapeDAO(context);
 
             //Databaser used for testing
-            TESTEtapeDatabase = new TESTEtapeDAO();
-            TESTTogtDatabase = new TESTTogtDAO();
+            //TESTEtapeDatabase = new TESTEtapeDAO();
+            //TESTTogtDatabase = new TESTTogtDAO();
         }
 
         public void storeTogt(long togtId) {
@@ -160,8 +159,8 @@ public class AktivTogt extends ViewModel {
 
 
            //Searching for the togt
-            List<Togt> allTogter =  TESTTogtDatabase.getTogter();
-            //List<Togt> allTogter = togtDatabase.getTogter();
+            //List<Togt> allTogter =  TESTTogtDatabase.getTogter();
+            List<Togt> allTogter = togtDatabase.getTogter();
 
             for (Togt a : allTogter) {
                 if (a.getId() == togtid) {
@@ -178,8 +177,8 @@ public class AktivTogt extends ViewModel {
 
         public Etape getEtape(Togt togt){
             etapeId = pref.getLong(ETAPPE_TAG,1);
-            List<Etape> allEtaper = TESTEtapeDatabase.getEtape(togt);
-            //List<Etape> allEtaper = etapeDatabase.getEtaper(togt);
+            //List<Etape> allEtaper = TESTEtapeDatabase.getEtape(togt);
+            List<Etape> allEtaper = etapeDatabase.getEtaper(togt);
 
             for (Etape a : allEtaper) {
                 if (a.getId() == etapeId) {

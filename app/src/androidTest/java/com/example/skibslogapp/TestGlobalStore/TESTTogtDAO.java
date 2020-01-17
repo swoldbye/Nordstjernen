@@ -1,4 +1,4 @@
-package com.example.skibslogapp.datalayer.local;
+package com.example.skibslogapp.TestGlobalStore;
 
 import com.example.skibslogapp.model.Togt;
 
