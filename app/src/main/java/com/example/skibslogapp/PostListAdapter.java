@@ -34,6 +34,7 @@ public class PostListAdapter extends ArrayAdapter<Logpunkt> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         Logpunkt logpunkt = getItem(position);
+        System.out.println(logpunkt);
 
         // Time
         Date date = logpunkt.getDate();
@@ -44,7 +45,7 @@ public class PostListAdapter extends ArrayAdapter<Logpunkt> {
         String vindretning = logpunkt.getVindretning();
         String sejlfoering = logpunkt.getSejlfoering();
         String sejlstilling = logpunkt.getSejlstilling();
-        String stroem = logpunkt.getStroem();
+        String stroem = logpunkt.getStroemRetning();
         String kurs = logpunkt.getKurs() > -1 ? Integer.toString(logpunkt.getKurs()) : "";
         String note = logpunkt.getNote();
 

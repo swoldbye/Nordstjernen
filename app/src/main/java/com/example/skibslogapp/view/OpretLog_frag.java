@@ -1,10 +1,13 @@
 package com.example.skibslogapp.view;
 
 
+import android.Manifest;
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,9 +26,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.GlobalTogt;
+import com.example.skibslogapp.model.Position.PositionController;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.opretLog.LogNote_frag;
@@ -35,14 +40,44 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
 public class OpretLog_frag extends Fragment implements View.OnClickListener {
     private boolean mobIsDown = true; //Starts with the "Man Over Bord" btn in the buttom of the page.
 
 
 
     View mob;
+    PositionController testKoordinates;
+
+    String simpleDate3;
     Button opretButton;
     LogViewModel logVM;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //Activat logging of coordinates. This is placed in onCreate to ensure that the logging will start at
+        //The first time the logging is activated.
+        testKoordinates = new PositionController(getActivity().getApplicationContext(), this);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0] == PERMISSION_GRANTED){
+            testKoordinates.startMeassureKoordinat();
+            Toast.makeText(getActivity(), "Lokation er aktiveret", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getActivity(), "Lokation er ikke aktiveret", Toast.LENGTH_SHORT).show();
+            // Will retur false if the user tabs "Bont ask me again/Permission denied".
+            // Returns true if the user previusly rejected the message and now try to access it again. -> Indication of user confussion
+            if (this.shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                Toast.makeText(getActivity(), "Lokation skal være aktiveret for at GPS lokation kan logges. Klik \"CLOSE\" og \"OPEN\" for at acceptere lokation", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -129,7 +164,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         Logpunkt logpunkt = new Logpunkt( new Date(calendar.getTimeInMillis()) );
         logpunkt.setVindretning( logVM.getWindDirection() );
         //TODO Vindhastighed
-        logpunkt.setStroem( logVM.getWaterCurrentDirection() );
+        logpunkt.setStroemRetning( logVM.getWaterCurrentDirection() );
         //TODO Strømhastighed
 
         logpunkt.setKurs(logVM.getCourse());
@@ -138,9 +173,13 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         logpunkt.setRoere(logVM.getCurrRowers());
 
         logpunkt.setNote( logVM.getNoteTxt() );
+        logpunkt.setPosition(testKoordinates.getKoordinates());
+
 
         LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
         logpunktDAO.addLogpunkt(GlobalTogt.getEtape(getContext()), logpunkt);
+
+        System.out.printf("Created logpunkt: %s", logpunkt.toString());
 
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
@@ -158,5 +197,19 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         }
         mobIsDown = !mobIsDown;
         mob_container.setLayoutParams(params);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        System.out.println("Measure koordinate");
+        testKoordinates.startMeassureKoordinat();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        System.out.println("Stopping measure koordinates");
+        testKoordinates.removeLocationUpdates();
     }
 }
