@@ -578,49 +578,55 @@
 
                 <View style="@style/Divider" />
 
-
-                <!-- Kurs  =====================================-->
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <fragment
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp">
+                    android:id="@+id/fragment_opretLog_course"
+                    android:layout_weight="1"
+                    android:name="com.example.skibslogapp.view.opretLog.LogCourse_frag"/>
 
-                    <EditText
-                        android:id="@+id/kursEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="80dp"
-                        android:layout_marginEnd="80dp"
-                        android:ems="10"
-                        android:hint="Styrekurs"
-                        android:imeOptions="actionDone"
-                        android:inputType="time"
-                        android:maxLength="3"
-                        android:textColor="@color/textColor"
-                        android:textColorHint="@color/textColor"
-                        android:textSize="22sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                &lt;!&ndash; Kurs  =====================================&ndash;&gt;-->
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginBottom="10dp">-->
 
-                    <!-- Unit -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
-                        android:text="°"
-                        android:textColor="@color/textColor"
-                        android:textSize="30sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/kursEditText"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                    <EditText-->
+<!--                        android:id="@+id/kursEditText"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="80dp"-->
+<!--                        android:layout_marginEnd="80dp"-->
+<!--                        android:ems="10"-->
+<!--                        android:hint="Styrekurs"-->
+<!--                        android:imeOptions="actionDone"-->
+<!--                        android:inputType="time"-->
+<!--                        android:maxLength="3"-->
+<!--                        android:textColor="@color/textColor"-->
+<!--                        android:textColorHint="@color/textColor"-->
+<!--                        android:textSize="22sp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                <!--NOTE-->
+<!--                    &lt;!&ndash; Unit &ndash;&gt;-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginRight="8dp"-->
+<!--                        android:text="°"-->
+<!--                        android:textColor="@color/textColor"-->
+<!--                        android:textSize="30sp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="@+id/kursEditText"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
                 <View style="@style/Divider" />
 
+<!--NOTE-->
                 <fragment
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

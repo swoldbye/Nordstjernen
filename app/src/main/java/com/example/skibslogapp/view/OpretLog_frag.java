@@ -2,8 +2,6 @@ package com.example.skibslogapp.view;
 
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -16,7 +14,6 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,9 +30,6 @@ import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.opretLog.LogNote_frag;
 import com.example.skibslogapp.view.opretLog.LogViewModel;
-import com.example.skibslogapp.view.opretLog.LogWind_frag;
-import com.example.skibslogapp.view.utility.KingButton;
-import com.example.skibslogapp.view.utility.ToggleViewList;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -46,12 +40,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     private int timeStringLengthBefore = 0;
 
-    //button colors:
-    int basicColor;
-    int standOutColor;
-
     Button resetTimeButton;
-    EditText kursEditText, editTime;
+    EditText editTime;
     View mob;
     Button opretButton;
     LogViewModel logVM;
@@ -70,12 +60,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
 
 
-        //Kurs
-        kursEditText = (EditText) view.findViewById(R.id.kursEditText);
-
-
-
-
         //Opret Post
         opretButton = (Button) view.findViewById(R.id.opretButton);
 
@@ -89,9 +73,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 //        noteFrag = new LogNote_frag();
         //Reference to implement listener
         LogNote_frag noteFrag = (LogNote_frag) getChildFragmentManager().findFragmentById(R.id.fragment_opretLog_note);
-        noteFrag.setListener(() -> {
-            toggleMOBPosition();
-        });
+        noteFrag.setListener(this::toggleMOBPosition);
 
         //Mand over bord
         mob = view.findViewById(R.id.mob_button);
@@ -101,15 +83,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         editTime.setOnClickListener(this);
         resetTimeButton.setOnClickListener(this);
-
-        basicColor = getResources().getColor(R.color.grey);
-        standOutColor = getResources().getColor(R.color.colorPrimary);
-
-        //On Editor Listeners
-//        antalRoereEditText.setOnEditorActionListener(clearFocusOnNextClick);
-//        kursEditText.setOnEditorActionListener(clearFocusOnNextClick);
-//        editTime.setOnEditorActionListener(clearFocusOnNextClick);
-//        strømNingsretningEditText.setOnEditorActionListener(clearFocusOnNextClick);
 
         final Handler handler =new Handler();
         final Runnable r = new Runnable() {
@@ -179,27 +152,10 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             }
         });
 
-        kursEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                String s = kursEditText.getText().toString();
-                try {
-                    if(Integer.parseInt(s) <= 360) {
-                        //Correct lesser inputs
-                        if(s.length() == 1) s = "00".concat(s);
-                        else if(s.length() == 2) s = "0".concat(s);
-                        kursEditText.setText(s);
-                    } else kursEditText.setText("");
-                } catch (NumberFormatException e) {} //Do nothing
 
-            }
-        });
 
         return view;
     }
-
-
-
 
     /**
      * Clears the focus when clicking the "Done" or "Next" button on the keyboard
@@ -219,16 +175,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 //        toggleMOBPosition();
     }
 
-
-
-
-
-
-
-
-
-
-
     @Override
     public void onClick(View v) {
 
@@ -245,7 +191,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     }
 
     private void createLogpunkt() {
-        String kursStr = kursEditText.getText().toString();
 
         // Fetching time ---------------------------------------------------------------
 
@@ -268,7 +213,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         //TODO Vindhastighed
         logpunkt.setStroem( logVM.getWaterCurrentDirection() );
         //TODO Strømhastighed
-        logpunkt.setKurs( kursStr.equals("") ? -1 : Integer.parseInt(kursStr) );
+        logpunkt.setKurs(logVM.getCourse());
         logpunkt.setSejlfoering( logVM.getSails().equals("") ? logVM.getSails().concat(logVM.getOrientation()) : logVM.getSails().concat("-" + logVM.getOrientation() ));
         logpunkt.setSejlstilling( logVM.getSailPosition() );
         logpunkt.setRoere(logVM.getCurrRowers());
@@ -294,48 +239,5 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         }
         mobIsDown = !mobIsDown;
         mob_container.setLayoutParams(params);
-    }
-
-
-    /**
-     * Implementation of the ToggleViewList specific for the buttons
-     * on the log entry creation page. */
-    private class ToggleButtonList extends ToggleViewList{
-
-        /* This constructor is necessary, as the default
-            parent class constructor takes 0 views. (ask Malte)*/
-        ToggleButtonList(View ... views){
-            super(views);
-        }
-
-        /**
-         * What to do when a view (in this case button) is disabled
-         * @param view The view (button) being disabled */
-        @Override
-        public void onViewUntoggled(View view) {
-            Button btn = (Button) view;
-            Resources res = btn.getContext().getResources();
-            btn.setBackgroundTintList( res.getColorStateList(R.color.grey) );
-            btn.setTextColor( res.getColorStateList(R.color.colorPrimary) );
-        }
-
-        /**
-         * What to do when a view (in this case button) is enabled
-         * @param view The view (button) being disabled */
-        @Override
-        public void onViewToggled(View view) {
-            Button btn = (Button) view;
-            Resources res = btn.getContext().getResources();
-            btn.setBackgroundTintList( res.getColorStateList(R.color.colorPrimary) );
-            btn.setTextColor( Color.WHITE );
-        }
-
-        /**
-         * We know we're using buttons, so to make life easier, we convert
-         * the views to buttons, before returning them         */
-        @Override
-        public Button getToggledView() {
-            return (Button) super.getToggledView();
-        }
     }
 }
