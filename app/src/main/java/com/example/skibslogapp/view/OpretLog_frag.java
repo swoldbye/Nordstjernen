@@ -42,22 +42,17 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class OpretLog_frag extends Fragment implements View.OnClickListener {
-
-    private boolean mobIsDown = true;
+    private boolean mobIsDown = true; //Starts with the "Man Over Bord" btn in the buttom of the page.
 
     private int timeStringLengthBefore = 0;
-    private String finalSejlføring = "";
-    private String styrbordEllerBagbord = "";
 
     //button colors:
     int basicColor;
     int standOutColor;
 
     Button resetTimeButton;
-    KingButton fBtn, øBtn, n1Btn, n2Btn, n3Btn;
     EditText kursEditText, editTime;
     View mob;
-    ToggleButtonList hals_Buttons;
     Button opretButton;
     LogViewModel logVM;
 
@@ -101,39 +96,11 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         //Mand over bord
         mob = view.findViewById(R.id.mob_button);
 
-        hals_Buttons = new ToggleButtonList(
-            view.findViewById(R.id.hals_bagbord_btn),
-            view.findViewById(R.id.hals_styrbord_btn)
-        );
-
-
-        fBtn = view.findViewById(R.id.fButton);
-        øBtn = view.findViewById(R.id.øButton);
-        n1Btn = view.findViewById(R.id.n1Button);
-        n2Btn = view.findViewById(R.id.n2Button);
-        n3Btn = view.findViewById(R.id.n3Button);
-        fBtn.createRelation(øBtn);
-        n1Btn.createRelation(n2Btn);
-        n1Btn.createRelation(n3Btn);
-        n2Btn.createRelation(n3Btn);
-
-
-
-
         mob.setOnClickListener(this);
         opretButton.setOnClickListener(this);
 
         editTime.setOnClickListener(this);
         resetTimeButton.setOnClickListener(this);
-
-        fBtn.setOnClickListener(this);
-        øBtn.setOnClickListener(this);
-        n1Btn.setOnClickListener(this);
-        n2Btn.setOnClickListener(this);
-        n3Btn.setOnClickListener(this);
-
-
-
 
         basicColor = getResources().getColor(R.color.grey);
         standOutColor = getResources().getColor(R.color.colorPrimary);
@@ -270,11 +237,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         FragmentTransaction fragmentTransaction;
 
 
-        if(v == fBtn || v == øBtn || v == n1Btn || v == n2Btn || v == n3Btn) {
-            KingButton btn = (KingButton) v;
-            btn.kingSelected();
-        }
-        else if (v == opretButton || v == mob) {
+        if (v == opretButton || v == mob) {
             createLogpunkt();
         }else if(v == resetTimeButton){
             editTime.setText("");
@@ -282,32 +245,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     }
 
     private void createLogpunkt() {
-        // Henter hals
-        Button btn_styrbord = getView().findViewById(R.id.hals_styrbord_btn);
-        Button pressedHals = hals_Buttons.getToggledView();
-        String hals = "";
-        if( pressedHals != null ){
-            hals = "-";
-            hals += pressedHals == btn_styrbord ? "sb" : "bb";
-        }
-
-
-
-        // Henter sejlføring
-        String sejlføring = "";
-        //Øverste sejldel
-        if(fBtn.isSelected()) sejlføring += fBtn.getText().toString();
-        else if(øBtn.isSelected()) sejlføring += øBtn.getText().toString();
-        //Nederste sejl del
-        if(n1Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n1Btn.getText().toString() : n1Btn.getText().toString();
-        else if(n2Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n2Btn.getText().toString() : n2Btn.getText().toString();
-        else if(n3Btn.isSelected()) sejlføring += sejlføring.length() > 0 ? "+" + n3Btn.getText().toString() : n3Btn.getText().toString();
-        //Sætsammen med hals
-        sejlføring += hals;
-
-
         String kursStr = kursEditText.getText().toString();
-
 
         // Fetching time ---------------------------------------------------------------
 
@@ -331,7 +269,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         logpunkt.setStroem( logVM.getWaterCurrentDirection() );
         //TODO Strømhastighed
         logpunkt.setKurs( kursStr.equals("") ? -1 : Integer.parseInt(kursStr) );
-        logpunkt.setSejlfoering( sejlføring );
+        logpunkt.setSejlfoering( logVM.getSails().equals("") ? logVM.getSails().concat(logVM.getOrientation()) : logVM.getSails().concat("-" + logVM.getOrientation() ));
         logpunkt.setSejlstilling( logVM.getSailPosition() );
         logpunkt.setRoere(logVM.getCurrRowers());
 

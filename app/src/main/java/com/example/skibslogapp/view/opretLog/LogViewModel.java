@@ -6,7 +6,8 @@ public class LogViewModel extends ViewModel {
     private String noteTxt,
             windDirection, windSpeed,
             waterCurrentDirection,
-            sailPosition;
+            sailPosition,
+            sails, orientation;
     private int currRowers;
 
     public LogViewModel() {
@@ -18,6 +19,10 @@ public class LogViewModel extends ViewModel {
         windDirection = "";
         windSpeed = "";
         waterCurrentDirection = "";
+        sailPosition = "";
+        sails = "";
+        orientation = "";
+        currRowers = 0;
     }
     public String getNoteTxt() {
         return noteTxt;
@@ -60,5 +65,19 @@ public class LogViewModel extends ViewModel {
     }
     public void setCurrRowers(String currRowers) {
         this.currRowers = Integer.parseInt(currRowers);
+    }
+
+    public String getSails() {
+        return sails;
+    }
+    public void setSails(String sails) {
+        this.sails = sails;
+    }
+
+    public String getOrientation() {
+        return orientation;
+    }
+    public void setOrientation(String orientation) {
+        this.orientation = orientation;
     }
 }
