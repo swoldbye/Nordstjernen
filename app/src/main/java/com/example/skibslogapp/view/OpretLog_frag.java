@@ -38,6 +38,8 @@ import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.utility.KingButton;
 import com.example.skibslogapp.view.utility.ToggleViewList;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -69,6 +71,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     private ToggleButtonList sejlføring_Buttons;
     EditText noteEditText;
     PositionController testKoordinates;
+    TextView closeButton;
 
     String simpleDate3;
 
@@ -110,6 +113,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
 
+        closeButton = view.findViewById(R.id.closeButton);
         openButton = view.findViewById(R.id.Open_Button);
         buttonFrame = view.findViewById(R.id.Button_Frame);
         opretPostWrapper = view.findViewById(R.id.opret_post_wrapper);
@@ -182,6 +186,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         n2Btn.createRelation(n3Btn);
 
         //On click Listeners:
+        closeButton.setOnClickListener(this);
         openButton.setOnClickListener(this);
 
         vindNordBtn.setOnClickListener(this);
@@ -438,8 +443,11 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
             KingButton btn = (KingButton) v;
             btn.kingSelected();
         } else if(v == openButton) {
-                opretPostWrapper.setVisibility(View.VISIBLE);
-                buttonFrame.setVisibility(View.GONE);
+            opretPostWrapper.setVisibility(View.VISIBLE);
+            buttonFrame.setVisibility(View.GONE);
+        }else if(v == closeButton){
+            buttonFrame.setVisibility(View.VISIBLE);
+            opretPostWrapper.setVisibility(View.GONE);
         } else if (v == opretButton || v == mob) {
 
             // Position testKoordinat = testKoordinates.getKoordinates();
