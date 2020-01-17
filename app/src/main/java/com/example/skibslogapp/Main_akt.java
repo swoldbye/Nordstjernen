@@ -3,6 +3,7 @@ package com.example.skibslogapp;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,8 +23,9 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
 import com.example.skibslogapp.model.Togt;
+import com.example.skibslogapp.datalayer.AktivTogt;
+import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.OpretTogt_frag;
@@ -46,6 +48,10 @@ public class Main_akt extends AppCompatActivity {
     private TogtOversigt_frag togtOversigt_frag;
     private LogOversigt_frag logOversigt_frag;
     private OpretTogt_frag opretTogt_frag;
+    private TextView mSkipperView, mTogtView, mBesaetningView;
+    private AktivTogt model;
+
+
     private EtapeOversigt_frag etapeOversigt_frag;
     private Togt togt;
 
@@ -59,12 +65,57 @@ public class Main_akt extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
+
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
+/* ************************* TODO: UD KOMMENTERET INDTIL AT VI VED; HVOR VI SKAL BRUGE DET********************************************
+                        Dette skyldes at der vil blive ledt efter den nuværende etape i databasen og den findes ikke endnu så
+                        så der bliver kastet en exception i EtapeDAO.
+
+
+
+        //Instanciation Livedata.
+
+
+        mSkipperView = findViewById(R.id.Skipper);
+        mTogtView = findViewById(R.id.togt);
+        mBesaetningView = findViewById(R.id.Besaetning);
+
+
+        model = ViewModelProviders.of(this).get(AktivTogt.class);
+
+        final Observer<Togt> togtObserver = new Observer<Togt>() {
+            @Override
+            public void onChanged(Togt s) {
+                mSkipperView.setText(s.getSkipper());
+                mTogtView.setText(s.getName());
+                //mBesaetningView.setText(s);
+            }
+        };
+
+
+        AktivTogt.setContext(this);
+        MutableLiveData<Togt> togtData = AktivTogt.getCurrentTogt();
+        //Adding observer to veriable currentTogt in GlobalStore
+        togtData.observe(this, togtObserver);
+        //mSkipperView.setText(data.getValue());
+
+        final Observer<Etape> etapeObserver = new Observer<Etape>() {
+            @Override
+            public void onChanged(Etape s) {
+                mBesaetningView.setText(Integer.toString((int)s.getId()));
+            }
+        };
+
+       MutableLiveData<Etape> etapeData = AktivTogt.getCurrentEtape();
+        //Adding observer to veriable currentEtape in GlobalStore
+       etapeData.observe(this,etapeObserver);
+
+*/
         configureNavigationDrawer();
 
         if (savedInstanceState == null) {
@@ -220,9 +271,5 @@ public class Main_akt extends AppCompatActivity {
     public void showToolbar() {
         this.getSupportActionBar().show();
     }
-
-
-
-
 
 }

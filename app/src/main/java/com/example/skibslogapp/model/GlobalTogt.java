@@ -22,9 +22,12 @@ public class GlobalTogt {
             List<Togt> togter = togtDAO.getTogter();
             if( togter.size() > 0 ){
                 togt = togter.get(0);
+                togt.setSkipper("PER");
             }else{
                 togt =  new Togt("Global Togt");
+                togt.setSkipper("PER");
                 togtDAO.addTogt(togt);
+
             }
             return togt;
         }

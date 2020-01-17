@@ -31,10 +31,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
+
+import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Position.PositionController;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.utility.KingButton;
 import com.example.skibslogapp.view.utility.ToggleViewList;
 
@@ -73,6 +76,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     String simpleDate3;
 
     Button opretButton;
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -416,8 +421,10 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         }
         else if (v == opretButton || v == mob) {
 
-            // Position testKoordinat = testKoordinates.getKoordinates();
-           // testKoordinat.printKoordinates();
+           //Test Observer with LiveData
+
+
+
 
             // Henter hals
             Button btn_styrbord = getView().findViewById(R.id.hals_styrbord_btn);
