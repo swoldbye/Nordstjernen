@@ -9,7 +9,8 @@ public class LogViewModel extends ViewModel {
             sailPosition,
             sails, orientation,
             noteTxt;
-    private int currRowers,
+    private int waterSpeed,
+            currRowers,
             course;
 
     public LogViewModel() {
@@ -54,6 +55,13 @@ public class LogViewModel extends ViewModel {
     }
     public void setWaterCurrentDirection(String waterCurrentDirection) {
         this.waterCurrentDirection = waterCurrentDirection;
+    }
+
+    public int getWaterSpeed() {
+        return waterSpeed;
+    }
+    public void setWaterSpeed(int waterSpeed) {
+        this.waterSpeed = waterSpeed;
     }
 
     public String getSailPosition() {

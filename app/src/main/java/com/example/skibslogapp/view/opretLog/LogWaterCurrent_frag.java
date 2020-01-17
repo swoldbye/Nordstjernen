@@ -16,10 +16,10 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.skibslogapp.R;
 
 public class LogWaterCurrent_frag extends Fragment implements View.OnClickListener {
-    Button nordButton_Strøm, østButton_Strøm, sydButton_Strøm, vestButton_Strøm, strømningsretning_delete;
-    TextView strømretning_input;
-    EditText strømNingsretningEditText;
-    LogViewModel logVM;
+    private Button nordButton_Strøm, østButton_Strøm, sydButton_Strøm, vestButton_Strøm, strømningsretning_delete;
+    private TextView strømretning_input;
+    private EditText strømHastighed;
+    private LogViewModel logVM;
 
     @Nullable
     @Override
@@ -43,8 +43,7 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
         strømretning_input.setText("");
 
         //Strømningshastighed
-        strømNingsretningEditText = view.findViewById(R.id.strømhastighed_edittext);
-
+        strømHastighed = view.findViewById(R.id.strømhastighed_edittext);
 
         return view;
     }

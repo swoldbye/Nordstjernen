@@ -131,6 +131,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         //TODO Vindhastighed
         logpunkt.setStroem( logVM.getWaterCurrentDirection() );
         //TODO Strømhastighed
+
         logpunkt.setKurs(logVM.getCourse());
         logpunkt.setSejlfoering( logVM.getSails().equals("") ? logVM.getSails().concat(logVM.getOrientation()) : logVM.getSails().concat("-" + logVM.getOrientation() ));
         logpunkt.setSejlstilling( logVM.getSailPosition() );
