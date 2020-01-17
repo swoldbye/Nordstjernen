@@ -1,10 +1,8 @@
 package com.example.skibslogapp.postOversigt;
 
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -72,7 +70,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.mob_note_layout, parent, false);
                 return new MOBViewHolder(v);
             default:
-                View vDef = LayoutInflater.from(parent.getContext()).inflate(R.layout.new_note_layout, parent, false);
+                View vDef = LayoutInflater.from(parent.getContext()).inflate(R.layout.standard_note_layout, parent, false);
                 return new NoteViewHolder(vDef);
         }
     }
