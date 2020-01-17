@@ -77,10 +77,14 @@ public class Main_akt extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
+/* *************************UD KOMMENTERET INDTIL AT VI VED; HVOR VI SKAL BRUGE DET********************************************
+                        Dette skyldes at der vil blive ledt efter den nuværende etape i databasen og den findes ikke endnu så
+                        så der bliver kastet en exception i EtapeDAO.
 
-        /*
-        Instanciation Livedata.
-         */
+
+
+        //Instanciation Livedata.
+
 
         mSkipperView = findViewById(R.id.Skipper);
         mTogtView = findViewById(R.id.togt);
@@ -116,7 +120,7 @@ public class Main_akt extends AppCompatActivity {
         //Adding observer to veriable currentEtape in GlobalStore
        etapeData.observe(this,etapeObserver);
 
-
+*/
         configureNavigationDrawer();
 
         if (savedInstanceState == null) {
