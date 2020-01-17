@@ -64,46 +64,53 @@
 
 
 <!-- TID =====================================-->
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <fragment
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fragment_opretLog_time"
+                    android:layout_weight="1"
+                    android:name="com.example.skibslogapp.view.opretLog.LogTime_frag"/>
 
-                    <EditText
-                        android:id="@+id/editTime"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:imeOptions="actionDone"
-                        android:inputType="time"
-                        android:maxLength="5"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textColorHint="#757575"
-                        android:textSize="40sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
 
-                    <Button
-                        android:id="@+id/resetTimeButton"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="80dp"
-                        android:layout_marginRight="80dp"
-                        android:layout_weight="1"
-                        android:background="#FFFFFF"
-                        android:text="NU"
-                        android:textSize="24sp"
-                        android:visibility="visible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/editTime"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                    <EditText-->
+<!--                        android:id="@+id/editTime"-->
+<!--                        android:layout_width="150dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:ems="10"-->
+<!--                        android:imeOptions="actionDone"-->
+<!--                        android:inputType="time"-->
+<!--                        android:maxLength="5"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="#000000"-->
+<!--                        android:textColorHint="#757575"-->
+<!--                        android:textSize="40sp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--PLACEHOLDER FOR POSITION KOORDINAT===============================-->
+<!--                    <Button-->
+<!--                        android:id="@+id/resetTimeButton"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:layout_marginEnd="80dp"-->
+<!--                        android:layout_marginRight="80dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="#FFFFFF"-->
+<!--                        android:text="NU"-->
+<!--                        android:textSize="24sp"-->
+<!--                        android:visibility="visible"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/editTime"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--&lt;!&ndash;PLACEHOLDER FOR POSITION KOORDINAT===============================&ndash;&gt;-->
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
 

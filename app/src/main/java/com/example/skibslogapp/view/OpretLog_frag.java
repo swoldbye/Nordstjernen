@@ -38,10 +38,8 @@ import java.util.Date;
 public class OpretLog_frag extends Fragment implements View.OnClickListener {
     private boolean mobIsDown = true; //Starts with the "Man Over Bord" btn in the buttom of the page.
 
-    private int timeStringLengthBefore = 0;
 
-    Button resetTimeButton;
-    EditText editTime;
+
     View mob;
     Button opretButton;
     LogViewModel logVM;
@@ -54,8 +52,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         logVM.reset();
 
                 //Tidsslet
-                editTime = (EditText) view.findViewById(R.id.editTime);
-        resetTimeButton = (Button) view.findViewById(R.id.resetTimeButton);
+
 
 
 
@@ -80,79 +77,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         mob.setOnClickListener(this);
         opretButton.setOnClickListener(this);
-
-        editTime.setOnClickListener(this);
-        resetTimeButton.setOnClickListener(this);
-
-        final Handler handler =new Handler();
-        final Runnable r = new Runnable() {
-            public void run() {
-                if(!editTime.hasFocus()) {
-                    handler.postDelayed(this, 1000);
-                    String simpleDate3 = new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime());
-                    editTime.setHint(simpleDate3);
-                }
-            }
-        };
-        handler.postDelayed(r, 0000);
-
-        editTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) editTime.setHint("");
-                else editTime.setHint(new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime()));
-
-                String time = editTime.getText().toString();
-                //Accept 3 digit input
-                if (time.length() == 1) {
-                    if(Integer.parseInt(time.substring(0,1)) < 10) {
-                        editTime.setText(time = "0".concat(time.substring(0,1).concat(":00")));
-                    }
-                }
-                if(time.length() == 3) {
-                    if (Integer.parseInt(time.substring(0,2)) < 24) {
-                        editTime.setText(time = time.concat("00"));
-                    }
-                }
-                if(time.length() == 4) {
-                    if(Integer.parseInt(time.substring(0,1)) < 10) {
-                        editTime.setText(time = "0".concat(time.substring(0,1).concat(":".concat(time.substring(1,2).concat(time.substring(3,4))))));
-                    }
-                    else if(Integer.parseInt(time.substring(0,2)) < 24) {
-                        editTime.setText(time = time.substring(0,2).concat(":").concat(time.substring(3,4).concat("0")));
-                    }
-                }
-                //Control for correct input
-                if(time.length() != 5 || time.lastIndexOf(":") != time.indexOf(":") //Control of string
-                        || Integer.parseInt(time.substring(0,2)) > 23 || Integer.parseInt(time.substring(3, 5)) > 59) { //Control of numbers
-                    editTime.setText("");
-                }
-            }
-        });
-
-        editTime.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                int timeStringLengthAfter = editTime.getText().toString().length();
-                if(timeStringLengthAfter > timeStringLengthBefore && timeStringLengthAfter == 2) { //Insert colon
-                    editTime.setText(getString(R.string.time_colon, editTime.getText()));
-                    editTime.setSelection(3);
-                }
-                timeStringLengthBefore = timeStringLengthAfter;
-            }
-        });
-
-
 
         return view;
     }
@@ -185,19 +109,13 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         if (v == opretButton || v == mob) {
             createLogpunkt();
-        }else if(v == resetTimeButton){
-            editTime.setText("");
         }
     }
 
     private void createLogpunkt() {
 
         // Fetching time ---------------------------------------------------------------
-
-        String timeStr = editTime.getText().toString();
-        if(timeStr.length() == 0){
-            timeStr = editTime.getHint().toString();
-        }
+        String timeStr = logVM.getTime();
 
         // Getting calender instance
         Calendar calendar= Calendar.getInstance();

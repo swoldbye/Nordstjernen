@@ -3,11 +3,12 @@ package com.example.skibslogapp.view.opretLog;
 import androidx.lifecycle.ViewModel;
 
 public class LogViewModel extends ViewModel {
-    private String noteTxt,
+    private String time,
             windDirection, windSpeed,
             waterCurrentDirection,
             sailPosition,
-            sails, orientation;
+            sails, orientation,
+            noteTxt;
     private int currRowers,
             course;
 
@@ -26,17 +27,17 @@ public class LogViewModel extends ViewModel {
         currRowers = 0;
         course = -1;
     }
-    public String getNoteTxt() {
-        return noteTxt;
+
+    public String getTime() {
+        return time;
+    }
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public void setNoteTxt(String noteTxt) {
-        this.noteTxt = noteTxt;
-    }
     public String getWindDirection() {
         return windDirection;
     }
-
     public void setWindDirection(String windDirection) {
         this.windDirection = windDirection;
     }
@@ -86,8 +87,14 @@ public class LogViewModel extends ViewModel {
     public int getCourse() {
         return course;
     }
-
     public void setCourse(int course) {
         this.course = course;
+    }
+
+    public String getNoteTxt() {
+        return noteTxt;
+    }
+    public void setNoteTxt(String noteTxt) {
+        this.noteTxt = noteTxt;
     }
 }
