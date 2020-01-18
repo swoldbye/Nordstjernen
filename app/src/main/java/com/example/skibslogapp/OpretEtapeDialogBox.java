@@ -42,11 +42,15 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     RecyclerView besaetning;
     private List<String> beseatningsList = null;
     RecyclerView.Adapter adapter;
+    private String skipper = "";
+    private String startDestination = "";
 
 
     public OpretEtapeDialogBox(Togt togt, Etape etape) {
         this.togt = togt;
        this.etape = etape;
+       skipper = togt.getSkipper();
+
 
        beseatningsList = etape.getBesaetning();
         System.out.println("BesætningsListe" +beseatningsList.size());
@@ -141,7 +145,15 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
 
     @Override
     public void onClick(View v) {
-        beseatningsList.add(navnIndput.getText().toString());
+
+        String navn =navnIndput.getText().toString();
+
+        if (navn.length() <= 0) {
+            navnIndput.setError("Der skal indtastes et navn til togtet!");
+            return;
+        }
+
+        beseatningsList.add(navn);
         System.out.println(navnIndput.getText().toString());
         navnIndput.setText("");
         adapter.notifyDataSetChanged();

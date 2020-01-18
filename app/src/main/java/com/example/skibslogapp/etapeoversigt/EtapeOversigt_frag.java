@@ -91,11 +91,9 @@ public class EtapeOversigt_frag extends Fragment {
     private void openDialog() {
         int numberOfEtape = new EtapeDAO(getContext()).getEtaper(togt).size();
         newEtape = new EtapeDAO(getContext()).getEtaper(togt).get(numberOfEtape-1);
-        newEtape.setBesaetning(getTestListe());
+
         OpretEtapeDialogBox dialogBox = new OpretEtapeDialogBox(togt,newEtape);
         dialogBox.show(getFragmentManager(),"Dialog box");
-
-
     }
 
 
