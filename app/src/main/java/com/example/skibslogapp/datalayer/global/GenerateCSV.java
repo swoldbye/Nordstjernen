@@ -33,9 +33,7 @@ public class GenerateCSV {
          */
         ArrayList<LogPunktStringDTO> logData = new ArrayList<>();
 
-        //=============================================================
-        // Might have to change the below
-        //_________________________________
+
 
         //Getting the togter in the DB
         TogtDAO togter = new TogtDAO(Contex);
@@ -49,7 +47,14 @@ public class GenerateCSV {
 
         //Getting the Logs
         LogpunktDAO logs = new LogpunktDAO(Contex);
-        int itlength = 3;
+
+        //=============================================================
+        /** @author Claes
+        Here we extract the data we want to use from the SQL DB to a temporary DTO,
+        Which can be used for making the CSV file. However it is optional to fill in
+         any points in a log so we have to check for null pointers.
+         */
+        int itlength = logs.getLogpunkter(etappen.get(0)).size();//3;
         for(int i=0; i<itlength; i++){
             LogPunktStringDTO punkt = new LogPunktStringDTO();
             //String note = logs.getLogpunkter(etappen.get(0)).get(i).getNote();
