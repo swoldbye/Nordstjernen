@@ -5,8 +5,6 @@ import com.google.android.gms.location.LocationRequest;
 /*
 This call contains the request that we do when measuring the koordinates
  */
-
-
 public class ForespoergselMaaling {
     private LocationRequest locationRequest;
     private final static int EXPIRATION_TIME = 100000;

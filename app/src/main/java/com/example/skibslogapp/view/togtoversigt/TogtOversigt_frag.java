@@ -2,7 +2,6 @@ package com.example.skibslogapp.view.togtoversigt;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Togt;
-import com.example.skibslogapp.view.OpretTogt_frag;
+import com.example.skibslogapp.view.oprettogt.OpretTogt_frag;
 
 import java.util.List;
 
