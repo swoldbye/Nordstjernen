@@ -1,4 +1,4 @@
-package com.example.skibslogapp.view.utility;
+package com.example.skibslogapp.view.opretEtape;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,9 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.skibslogapp.OpretEtapeDialogBox;
 import com.example.skibslogapp.R;
-import com.example.skibslogapp.TogtListAdapter;
+
 
 import java.util.List;
 

@@ -3,7 +3,6 @@ package com.example.skibslogapp.etapeoversigt;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.skibslogapp.OpretEtapeDialogBox;
+import com.example.skibslogapp.view.opretEtape.OpretEtapeDialogBox;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.model.Etape;

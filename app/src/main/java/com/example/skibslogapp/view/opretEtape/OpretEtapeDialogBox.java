@@ -1,35 +1,29 @@
-package com.example.skibslogapp;
+package com.example.skibslogapp.view.opretEtape;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.model.Etape;
-import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Togt;
-import com.example.skibslogapp.view.utility.CrewAdapter;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.skibslogapp.view.opretEtape.CrewAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -44,16 +38,16 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     RecyclerView.Adapter adapter;
     private String skipper = "";
     private String startDestination = "";
+    private Button annulerEtape, startEtape;
 
 
     public OpretEtapeDialogBox(Togt togt, Etape etape) {
         this.togt = togt;
        this.etape = etape;
-       skipper = togt.getSkipper();
-
-
+       skipper = etape.getSkipper();
+       startDestination= etape.getSlutDestination();
        beseatningsList = etape.getBesaetning();
-        System.out.println("BesætningsListe" +beseatningsList.size());
+       System.out.println("BesætningsListe" +beseatningsList.size());
     }
 
     @NonNull
@@ -65,7 +59,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         View view = inflater.inflate(R.layout.opret_etape_dialog_box,null);
 
         builder.setView(view)
-                .setNegativeButton("Anuller", new DialogInterface.OnClickListener() {
+               /* .setNegativeButton("Anuller", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -78,12 +72,23 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
                         String startDest = editStartDest.getText().toString();
                         EtapeDAO etapeDAO = new EtapeDAO(getContext());
                         etape.setBesaetning(beseatningsList);
+                        etape.setSkipper(skipper);
+                        etape.setStartDestination(startDest);
                         etapeDAO.addEtape(togt,etape);
 
 
 
                     }
-                });
+                })*/;
+
+
+        annulerEtape = view.findViewById(R.id.opretEtape_annuler_button);
+        annulerEtape.setOnClickListener(this);
+
+        startEtape = view.findViewById(R.id.opretEtape_start_button);
+        startEtape.setOnClickListener(this);
+
+
 
 
         editSkipper = view.findViewById(R.id.inputSkipper);
@@ -102,51 +107,42 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         besaetning.setAdapter(adapter);
         System.out.println("Adapter item count: " + adapter.getItemCount());
 
-
+        showSkipper();
+        showSlutDestination();
 
         return builder.create();
 
     }
 
-    /*
-
-    RecyclerView.Adapter adapter = new RecyclerView.Adapter<ListeelemViewholder>() {
-
-        private List<String> dataSet = null;
-
-        @Override
-        public int getItemCount()  {
-            return beseatningsList.size();
-        }
-
-        @Override
-        public ListeelemViewholder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = getLayoutInflater().inflate(R.layout.opret_etape_dialog_box_list_element, parent, false);
-            ListeelemViewholder vh = new ListeelemViewholder(view);
-            vh.nameElement = view.findViewById(R.id.listElementBesaetning);
-            vh.cancleBeseatning = view.findViewById(R.id.cancleBeseatning);
-            vh.cancleBeseatning.setOnClickListener(vh);
-            vh.cancleBeseatning.setBackgroundResource(android.R.drawable.list_selector_background);
-            return vh;
-        }
-
-        @Override
-        public void onBindViewHolder(ListeelemViewholder vh, int position) {
-            vh.nameElement.setText(beseatningsList.get(position));
-            vh.cancleBeseatning.setImageResource(android.R.drawable.ic_delete);
-        }
 
 
-        public void setDataset(List<String> dataset){
-            this.dataSet = dataset;
-        }
-    };
-*/
 
     @Override
     public void onClick(View v) {
 
         String navn =navnIndput.getText().toString();
+
+        if(v == annulerEtape){
+            getFragmentManager().beginTransaction()
+                    .remove(this)
+                    .commit();
+        }
+
+        if(v == startEtape){
+            String skipper = editSkipper.getText().toString();
+            String startDest = editStartDest.getText().toString();
+            EtapeDAO etapeDAO = new EtapeDAO(getContext());
+            etape.setBesaetning(beseatningsList);
+            etape.setSkipper(skipper);
+            etape.setStartDestination(startDest);
+            etapeDAO.addEtape(togt,etape);
+
+            getFragmentManager().beginTransaction()
+                    .remove(this)
+                    .commit();
+
+        }
+
 
         if (navn.length() <= 0) {
             navnIndput.setError("Der skal indtastes et navn til togtet!");
@@ -160,32 +156,25 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         clearFocusOnDone(v);
     }
 
-/*
-
-    class ListeelemViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView nameElement;
-        ImageView cancleBeseatning;
-
-        public ListeelemViewholder(View itemView) {
-            super(itemView);
-        }
-
-
-        @Override
-        public void onClick(View v) {
-            final int position = getAdapterPosition();
-
-            if(v ==cancleBeseatning) {
-                beseatningsList.remove(position);
-                adapter.notifyItemRemoved(position);
-            }
-        }
-    }
-*/
     private void clearFocusOnDone(View v) {
 
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
+
+    private void showSkipper(){
+        if(skipper.length()>0){
+            editSkipper.setText(skipper);
+        }
+    }
+
+
+    private void showSlutDestination(){
+
+        if(startDestination != null && startDestination.length()>0){
+            editStartDest.setText(startDestination);
+        }
     }
 }
 
