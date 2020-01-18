@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Position.Position;
 import com.example.skibslogapp.model.Logpunkt;
+import com.example.skibslogapp.model.Togt;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -76,7 +77,7 @@ public class LogpunktDAO {
         logpunkt.setEtapeId(etape.getId());
         logpunkt.setTogtId(etape.getTogtId());
 
-        new TogtDAO(context).togtUpdated(etape.getTogtId());
+        logpunktUpdated(logpunkt);
     }
 
 
@@ -153,6 +154,7 @@ public class LogpunktDAO {
             throw new DAOException(String.format("Couldn't find Logpunkt with ID %d in the database", logpunkt.getId()));
         SQLiteDatabase database = connector.getReadableDatabase();
         database.delete("logpunkter", "id="+logpunkt.getId(), null);
+        logpunktUpdated(logpunkt);
     }
 
 
@@ -191,10 +193,18 @@ public class LogpunktDAO {
             row.put( "hals", logpunkt.getHals() );
 
         database.update("logpunkter", row, "id="+logpunkt.getId(), null );
+
+
+        logpunktUpdated(logpunkt);
     }
 
 
 
+    public void logpunktUpdated(Logpunkt logpunkt){
+        Etape etape = new EtapeDAO(context).getEtape(logpunkt.getEtapeId());
+        TogtDAO togtDAO = new TogtDAO(context);
+        togtDAO.togtUpdated(etape.getTogtId());
+    }
 
     /**
      * Checks if the given Logpunkt exists in the database
