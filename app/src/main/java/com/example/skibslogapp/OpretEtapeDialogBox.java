@@ -26,6 +26,7 @@ import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Togt;
+import com.example.skibslogapp.view.utility.CrewAdapter;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -40,12 +41,13 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     private Etape etape;
     RecyclerView besaetning;
     private List<String> beseatningsList = null;
-
+    RecyclerView.Adapter adapter;
 
 
     public OpretEtapeDialogBox(Togt togt, Etape etape) {
         this.togt = togt;
        this.etape = etape;
+
        beseatningsList = etape.getBesaetning();
         System.out.println("BesætningsListe" +beseatningsList.size());
     }
@@ -53,7 +55,6 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        beseatningsList = new ArrayList<>();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -90,9 +91,10 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
 
         besaetning = view.findViewById(R.id.besaetningList);
 
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+        adapter = new CrewAdapter(beseatningsList,getContext());
+        besaetning.setLayoutManager(layoutManager);
 
-
-        besaetning.setLayoutManager(new LinearLayoutManager(getActivity()));
         besaetning.setAdapter(adapter);
         System.out.println("Adapter item count: " + adapter.getItemCount());
 
@@ -101,6 +103,8 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         return builder.create();
 
     }
+
+    /*
 
     RecyclerView.Adapter adapter = new RecyclerView.Adapter<ListeelemViewholder>() {
 
@@ -133,7 +137,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
             this.dataSet = dataset;
         }
     };
-
+*/
 
     @Override
     public void onClick(View v) {
@@ -144,7 +148,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         clearFocusOnDone(v);
     }
 
-
+/*
 
     class ListeelemViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView nameElement;
@@ -165,7 +169,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
             }
         }
     }
-
+*/
     private void clearFocusOnDone(View v) {
 
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);

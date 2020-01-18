@@ -21,7 +21,7 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.ListeelemViewh
     private Context context;
 
 
-CrewAdapter(List<String> dataSet, Context context){
+   public CrewAdapter(List<String> dataSet, Context context){
         this.dataSet = dataSet;
         this.context = context;
     }
@@ -30,8 +30,12 @@ CrewAdapter(List<String> dataSet, Context context){
     @Override
     public ListeelemViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.opret_etape_dialog_box_list_element, parent, false);
-        ListeelemViewholder vh = new ListeelemViewholder(view);
 
+        ListeelemViewholder vh = new ListeelemViewholder(view);
+        vh.nameElement = view.findViewById(R.id.listElementBesaetning);
+        vh.cancleBeseatning = view.findViewById(R.id.cancleBeseatning);
+        vh.cancleBeseatning.setOnClickListener(vh);
+        vh.cancleBeseatning.setBackgroundResource(android.R.drawable.list_selector_background);
         return vh;
     }
 
@@ -48,6 +52,7 @@ CrewAdapter(List<String> dataSet, Context context){
     public int getItemCount() {
         return dataSet.size();
     }
+
 
     class ListeelemViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView nameElement;
