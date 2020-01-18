@@ -22,11 +22,15 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
+import com.example.skibslogapp.model.Logpunkt;
+import com.example.skibslogapp.model.Position.Position;
 import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.OpretTogt_frag;
+import com.example.skibslogapp.view.redigerlogpunkt.RedigerLogpunkt_frag;
 import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 import com.example.skibslogapp.view.UdtagData_frag;
 import com.google.android.material.navigation.NavigationView;
@@ -121,7 +125,13 @@ public class Main_akt extends AppCompatActivity {
                     changeFragFromMenu(togtOversigt_frag);
 
                 } else if (itemid == R.id.nav_opret_etape) {
-
+                    Logpunkt logpunkt = new Logpunkt();
+                    logpunkt.setVindretning("NNØ");
+                    logpunkt.setPosition( new Position(23.2305, -49.1293) );
+                    logpunkt.setSejlfoering("F-N3");
+                    logpunkt.setNote("Vi sejler op ad åen");
+                    logpunkt.setStroemhastighed(5);
+                    changeFragFromMenu(new RedigerLogpunkt_frag(logpunkt));
 
                 } else if (itemid == R.id.nav_etape_oversigt) {
                     changeFragFromMenu(etapeOversigt_frag);
