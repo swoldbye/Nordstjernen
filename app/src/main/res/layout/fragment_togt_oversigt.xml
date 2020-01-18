@@ -40,6 +40,7 @@
                 android:textColor="@color/offWhite"
                 android:textSize="22sp"
                 android:textStyle="bold" />
+
         </FrameLayout>
 
         <LinearLayout
@@ -57,14 +58,17 @@
                 android:padding="15dp"
                 android:background="@color/white"
                 android:textColor="@color/colorPrimary"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:elevation="10dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/togtRecycView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
-                android:paddingBottom="125dp"
+                android:paddingTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="100dp"
                 android:clipToPadding="false"
                 android:background="@color/white"
                 android:scrollbars="vertical"/>
