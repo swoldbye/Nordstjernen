@@ -86,6 +86,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
                 etape.setStartDestination(togtStartDest);
                 etape.setSkipper(skipper);
 
+
                 // Gem i DB
                 TogtDAO togtDAO = new TogtDAO(getContext());
                 togtDAO.addTogt(togt);

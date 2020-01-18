@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.skibslogapp.GlobalContext;
+import com.example.skibslogapp.view.opretEtape.OpretEtapeDialogBox;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.global.GenerateCSV;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
@@ -41,6 +42,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -51,6 +53,8 @@ public class EtapeOversigt_frag extends Fragment {
 
     private TextView togt_text, skib_text;
     private Togt togt;
+    private Etape newEtape = null;
+    private FloatingActionButton createEtape_button;
     private EtapeListAdapter listAdapter;
     private RecyclerView recyclerView;
     private List<Etape> etaper;
@@ -179,7 +183,7 @@ public class EtapeOversigt_frag extends Fragment {
         recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
 
         // Opret Etape Button
-        view.findViewById(R.id.etapeOpretButton).setOnClickListener((View v) -> this.createEtape());
+        view.findViewById(R.id.etapeOpretButton).setOnClickListener((View v) -> this.openDialog());
         return view;
     }
 
@@ -199,6 +203,9 @@ public class EtapeOversigt_frag extends Fragment {
 
 
     private void createEtape() {
+
+
+
         EtapeDAO etapeDAO = new EtapeDAO(getContext());
 
         Etape newEtape = new Etape();
@@ -221,6 +228,24 @@ public class EtapeOversigt_frag extends Fragment {
         etaper.add(newEtape);
         listAdapter.updateEtapeList(etaper);
         recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
+    }
+
+    private void openDialog() {
+        int numberOfEtape = new EtapeDAO(getContext()).getEtaper(togt).size();
+        newEtape = new EtapeDAO(getContext()).getEtaper(togt).get(numberOfEtape-1);
+
+        OpretEtapeDialogBox dialogBox = new OpretEtapeDialogBox(togt,newEtape);
+        dialogBox.show(getFragmentManager(),"Dialog box");
+    }
+
+
+    private List<String> getTestListe(){
+        List<String> testListe = new ArrayList<>();
+        testListe.add("Troels");
+        testListe.add("Per");
+        testListe.add("Knud");
+
+        return testListe;
     }
 
     public void exportData() {

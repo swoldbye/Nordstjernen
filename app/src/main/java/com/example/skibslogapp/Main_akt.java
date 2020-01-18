@@ -108,7 +108,6 @@ public class Main_akt extends AppCompatActivity {
                 togtOversigt_frag = new TogtOversigt_frag();
                 opretTogt_frag = new OpretTogt_frag();
                 opretLog_frag = new OpretLog_frag();
-                etapeOversigt_frag = new EtapeOversigt_frag(togt);
 
                 int itemid = menuItem.getItemId();
 
@@ -124,7 +123,7 @@ public class Main_akt extends AppCompatActivity {
 
 
                 } else if (itemid == R.id.nav_etape_oversigt) {
-                    changeFragFromMenu(etapeOversigt_frag);
+
 
                 }else if (itemid == R.id.nav_opret_log){
                     changeFragFromMenu(opretLog_frag);

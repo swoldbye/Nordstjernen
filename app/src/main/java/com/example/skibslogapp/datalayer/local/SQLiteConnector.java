@@ -98,6 +98,7 @@ public class SQLiteConnector extends SQLiteOpenHelper {
                 "slutDestination TEXT," +
                 "skipper TEXT," +
                 "status INT," +
+                "besaetning TEXT," +
                 "PRIMARY KEY(id)," +
                 "FOREIGN KEY(togt) REFERENCES togter(id)"+
             ")"
