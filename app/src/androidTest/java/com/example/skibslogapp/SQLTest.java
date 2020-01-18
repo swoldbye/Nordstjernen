@@ -246,6 +246,12 @@ public class SQLTest {
         assertEquals( resultList.get(3), "Kristian");
         assertEquals( resultList.get(4), "Simon");
         assertEquals( resultList.get(5), "Malte");
+
+        // From string to list
+        besaetningString = "";
+        resultList = etapeDAO.besaetningToList(besaetningString);
+
+        assertEquals( resultList.size(), 0);
     }
 
 
@@ -271,6 +277,7 @@ public class SQLTest {
         loadedEtape = etapeDAO.getEtaper(togt).get(0);
         assertEquals( loadedEtape.getBesaetning().get(0), "Jacob");
         assertEquals( loadedEtape.getBesaetning().get(1), "Simon");
+
     }
 
 

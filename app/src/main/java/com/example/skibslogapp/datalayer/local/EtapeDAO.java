@@ -202,7 +202,15 @@ public class EtapeDAO {
     }
 
     public List<String> besaetningToList(String besaetningString ){
-        return new ArrayList<>(Arrays.asList(besaetningString.split(BESAETNING_SEPERATOR)));
+        String[] besaetningUnsorted = besaetningString.split(BESAETNING_SEPERATOR);
+        List<String> besaetningSorted = new ArrayList<>();
+
+        for( String navn : besaetningUnsorted ){
+            if( navn.length() > 0 ){
+                besaetningSorted.add(navn);
+            }
+        }
+        return besaetningSorted;
     }
 
 
