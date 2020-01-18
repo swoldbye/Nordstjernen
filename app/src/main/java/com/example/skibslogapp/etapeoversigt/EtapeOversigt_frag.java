@@ -44,12 +44,10 @@ public class EtapeOversigt_frag extends Fragment {
 
     private TextView togt_text, skib_text;
     private Togt togt;
-    private FloatingActionButton createEtape_button;
     private EtapeListAdapter listAdapter;
     private RecyclerView recyclerView;
     private List<Etape> etaper;
     private ImageButton togtInstilling;
-
 
     public EtapeOversigt_frag(Togt togt) {
         this.togt = togt;
