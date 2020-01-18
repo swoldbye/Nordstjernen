@@ -18,7 +18,7 @@ public class GenerateCSV {
 
         //Making a string for the CSV file
         StringBuilder data = new StringBuilder();
-        data.append("TogtID,EtapeID,Dato, Roere, vindretning, vindhastighed, StroemRetning, Kurs, Note, MandOverBord, BredeGrad, LeangdeGrad, SejlFoering,Sejlstilling");
+        data.append("TogtID,EtapeID,Dato,Roere,vindretning,vindhastighed,StroemRetning,Kurs,Note,MandOverBord,BredeGrad,LeangdeGrad,SejlFoering,Sejlstilling");
         for (int i = 0; i < logs.size(); i++) {
             data.append("\n" + logs.get(i).getTogtID() + "," +
                     logs.get(i).getEtapeID()+ "," + logs.get(i).getDato()+
