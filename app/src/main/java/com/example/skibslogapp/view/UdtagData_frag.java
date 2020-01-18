@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
-import com.example.skibslogapp.Main_akt;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.global.GenerateCSV;
 
@@ -51,16 +50,16 @@ public class UdtagData_frag extends Fragment implements View.OnClickListener {
         try {
             Context context = getActivity();
             //saving the file into device
-            FileOutputStream out = context.openFileOutput("data.csv", Context.MODE_PRIVATE);
+            FileOutputStream out = context.openFileOutput("EtapeData.csv", Context.MODE_PRIVATE);
             out.write((data.toString()).getBytes());
             out.close();
 
             //exporting
-            File filelocation = new File(context.getFilesDir(), "data.csv");
+            File filelocation = new File(context.getFilesDir(), "EtapeData.csv");
             Uri path = FileProvider.getUriForFile(context, "com.example.exportcsv.fileprovider", filelocation);
             Intent fileIntent = new Intent(Intent.ACTION_SEND);
             fileIntent.setType("text/csv");
-            fileIntent.putExtra(Intent.EXTRA_SUBJECT, "Data");
+            fileIntent.putExtra(Intent.EXTRA_SUBJECT, "EtapeData");
             fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             fileIntent.putExtra(Intent.EXTRA_STREAM, path);
             startActivity(Intent.createChooser(fileIntent, "Send mail"));

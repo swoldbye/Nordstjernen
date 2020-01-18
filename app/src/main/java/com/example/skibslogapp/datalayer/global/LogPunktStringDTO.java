@@ -112,19 +112,19 @@ public class LogPunktStringDTO {
     public void setSejlstilling(String sejlstilling) {
         Sejlstilling = sejlstilling;
     }
-
-    String TogtID = "ikke noteret";
-    String EtapeID = "ikke noteret";
-    String Dato = "ikke noteret";
-    String Roere = "ikke noteret";
-    String vindretning = "ikke noteret";
-    String vindhastighed= "ikke noteret";
-    String StroemRetning= "ikke noteret";
-    String Kurs = "ikke noteret";
-    String Note = "ikke noteret";
-    String MandOverBord = "ikke noteret";
-    String BredeGrad = "ikke noteret";
-    String HoejdeGrad = "ikke noteret";
-    String SejlFoering = "ikke noteret";
-    String Sejlstilling = "ikke noteret";
+    String missingDataMsg = "ikke noteret";
+    String TogtID = missingDataMsg;
+    String EtapeID = missingDataMsg;
+    String Dato = missingDataMsg;
+    String Roere = missingDataMsg;
+    String vindretning = missingDataMsg;
+    String vindhastighed= missingDataMsg;
+    String StroemRetning= missingDataMsg;
+    String Kurs = missingDataMsg;
+    String Note = missingDataMsg;
+    String MandOverBord = missingDataMsg;
+    String BredeGrad = missingDataMsg;
+    String HoejdeGrad = missingDataMsg;
+    String SejlFoering = missingDataMsg;
+    String Sejlstilling = missingDataMsg;
 }
