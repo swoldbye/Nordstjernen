@@ -36,17 +36,17 @@ public class UdtagData_frag extends Fragment implements View.OnClickListener {
         if (v == sendD) {
             //it seems it does not sense the the click on this button
             System.out.println("the send data button was clicked.");
-            Toast.makeText(getActivity(), "Dataen bliver pakken til drive",
+            Toast.makeText(getActivity(), "Dataen bliver pakken til export",
                     Toast.LENGTH_LONG).show();
-            export(v);
+            export();
 
         }
     }
 
-    public void export(View view) {
+    public void export() {
         //generate data
         GenerateCSV csvdata = new GenerateCSV();
-        StringBuilder data = csvdata.make();
+        StringBuilder data = csvdata.make(getContext());
 
         try {
             Context context = getActivity();
