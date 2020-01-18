@@ -156,6 +156,46 @@ public class LogpunktDAO {
     }
 
 
+
+    public void updateLogpunkt(Logpunkt logpunkt) throws DAOException {
+        if( !logpunktExists(logpunkt) )
+            throw new DAOException(String.format("Couldn't find Logpunkt with ID %d in the database", logpunkt.getId()));
+
+        // Create cursor for database rows
+        SQLiteDatabase database = connector.getReadableDatabase();
+
+        // Create row for databse
+        ContentValues row = new ContentValues();
+
+        row.put( "dato", logpunkt.getDate().getTime() );
+        row.put( "dato_opret", logpunkt.getDate().getTime() );
+        row.put( "breddegrad", logpunkt.getPosition() != null ? logpunkt.getPosition().getBreddegrad() : 0 );
+        row.put( "laengdegrad", logpunkt.getPosition() != null ? logpunkt.getPosition().getLaengdegrad() : 0 );
+        row.put( "note", logpunkt.getNote() );
+        row.put( "vindretning", logpunkt.getVindretning() );
+        row.put( "vindhastighed", logpunkt.getVindhastighed());
+        row.put( "sejlfoering", logpunkt.getSejlfoering() );
+        row.put( "mandOverBord", logpunkt.getMandOverBord() );
+        row.put( "sejlstilling", logpunkt.getSejlstilling() );
+        row.put( "stroemretning", logpunkt.getStroemRetning() );
+        row.put( "stroemhastighed", logpunkt.getStroemhastighed());
+
+        /* Only add these elements if they've been manually set ( != -1 ) */
+        if( logpunkt.getRoere() >= 0 )
+            row.put( "roere", logpunkt.getRoere() );
+
+        if( logpunkt.getKurs() >= 0 )
+            row.put( "kurs", logpunkt.getKurs() );
+
+        if( logpunkt.getHals() >= 0 )
+            row.put( "hals", logpunkt.getHals() );
+
+        database.update("logpunkter", row, "id="+logpunkt.getId(), null );
+    }
+
+
+
+
     /**
      * Checks if the given Logpunkt exists in the database
      * based on the ID.

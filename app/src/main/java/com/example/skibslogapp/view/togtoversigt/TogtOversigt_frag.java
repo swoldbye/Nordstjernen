@@ -1,19 +1,10 @@
-package com.example.skibslogapp.view;
+package com.example.skibslogapp.view.togtoversigt;
 
 
-import android.content.SharedPreferences;
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -21,11 +12,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.skibslogapp.Main_akt;
 import com.example.skibslogapp.R;
-import com.example.skibslogapp.TogtListAdapter;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Togt;
+import com.example.skibslogapp.view.oprettogt.OpretTogt_frag;
+
 import java.util.List;
 
 /**
@@ -35,17 +26,9 @@ import java.util.List;
  */
 public class TogtOversigt_frag extends Fragment implements View.OnClickListener {
 
-    private static final String TAG = "TogtOversigt_frag";
-
-    public TogtOversigt_frag() {
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_togt_oversigt, container, false);
-
-        Log.d(TAG,"onCreateView started");
 
         View opretTogt = view.findViewById(R.id.opretTogtBtn);
         opretTogt.setOnClickListener(this);

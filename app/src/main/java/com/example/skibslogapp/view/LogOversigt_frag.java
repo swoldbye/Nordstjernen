@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 
 public class LogOversigt_frag extends Fragment implements AdapterView.OnItemClickListener {
 

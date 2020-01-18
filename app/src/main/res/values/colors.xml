@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#05192E</color>
     <color name="colorPrimaryDark">#05192E</color>
-    <color name="colorAccent">#D1DBE6</color>
+    <color name="colorAccent">#E6E9F0</color>
     <color name="grey">#DDDDDD</color>
     <color name="textColor">#05192E</color>
     <color name="BenjaminMooreMarineBlue">#1e3f5a</color>
@@ -10,5 +10,8 @@
     <color name="yellow">#FFFF00</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="lightGrey">#F5F5F5</color>
+    <color name="black">#08000000</color>
+    <color name="insideCardSeparator">#9CB0C0</color>
     <color name="mobRød">#ff4d4d</color>
 </resources>
