@@ -119,7 +119,7 @@ public class LogpunktDAO {
             logpunkt.setSejlfoering( cursor.getString( cursor.getColumnIndex("sejlfoering") ));
             logpunkt.setSejlstilling( cursor.getString( cursor.getColumnIndex("sejlstilling") ));
             logpunkt.setNote( cursor.getString( cursor.getColumnIndex("note") ));
-            logpunkt.setMandOverBord( cursor.getInt( cursor.getColumnIndex("mandOverBord")) != 0 );
+            logpunkt.setMandOverBord( cursor.getInt(cursor.getColumnIndex("mandOverBord")) != 0 );
 
             // Integer values should only be set if they are not null in database,
             // otherwise default to -1 (class default value). Same for other int values
