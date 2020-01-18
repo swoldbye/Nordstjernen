@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/etape_list_destination_line"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/dotted_line"
+        android:tint="@color/colorPrimaryDark"
+        android:rotation="90"
+        android:layerType="software"
+        app:layout_constraintStart_toStartOf="@id/etape_list_destination_circle"
+        app:layout_constraintEnd_toEndOf="@+id/etape_list_destination_circle"
+        app:layout_constraintBottom_toTopOf="@id/etape_list_destination_circle"/>
+
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/etape_list_destination_circle"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_circle"
+        android:tint="@color/colorPrimaryDark"
+        android:layout_marginLeft="8dp"
+        android:padding="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/etape_destination_text"
+        app:layout_constraintTop_toTopOf="@+id/etape_destination_text"
+        />
+
+
+
+    <TextView
+        android:id="@+id/etape_destination_text"
+        android:layout_width="282dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="DESTINATION"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:paddingLeft="10dp"
+        app:layout_constraintStart_toEndOf="@id/etape_list_destination_circle"
+        app:layout_constraintTop_toTopOf="@id/etape_list_destination_line"
+        app:layout_constraintBottom_toBottomOf="@id/etape_list_destination_line"
+        />
+
+    <TextView
+        android:id="@+id/etape_dato_text"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="DATO"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:paddingLeft="10dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etape_destination_text"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

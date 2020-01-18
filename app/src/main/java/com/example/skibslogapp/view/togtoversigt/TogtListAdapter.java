@@ -11,12 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
+import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * This is a custom adapter for the RecycleView displaying the "Togts".
@@ -61,21 +64,22 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
     @Override
     public void onBindViewHolder(@NonNull TogtListViewHolder holder, final int position) {
 
-        Calendar dateFormat = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM");
-        String date = simpleDateFormat.format(dateFormat.getTime());
-
-        Calendar yearFormat = Calendar.getInstance();
-        SimpleDateFormat simpleYearFormat = new SimpleDateFormat("yyyy");
-        String year = simpleYearFormat.format(yearFormat.getTime());
-
-
         Togt currTogt = togtArrayList.get(position);
         holder.togtName.setText(currTogt.getName());
         holder.ship.setText(currTogt.getSkib());
         holder.startDest.setText("Fra " + currTogt.getStartDestination());
-        holder.date.setText(date);
-        holder.year.setText(year);
+
+        List<Etape> etaper = new EtapeDAO(mContext).getEtaper(currTogt);
+        Etape firstEtape = etaper.get(0);
+        if( firstEtape.getStatus() != Etape.Status.NEW ){
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(firstEtape.getStartDate());
+            holder.date.setText(String.format(Locale.US, "%02d/%02d", cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH) ));
+            holder.year.setText(String.format(Locale.US, "%d", cal.get(Calendar.YEAR)));
+        }else{
+            holder.date.setText("Ikke påbegyndt");
+            holder.year.setText("");
+        }
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.example.skibslogapp.view;
+package com.example.skibslogapp.view.oprettogt;
 
 import android.os.Bundle;
 
@@ -14,7 +14,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
+import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
@@ -56,14 +58,14 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
         String ship = betterSpinner.getText().toString();
         String togtet = togtName.getText().toString();
-        String kaptajn = skipper.getText().toString();
+        String skipper = this.skipper.getText().toString();
         String togtStartDest = startDest.getText().toString();
 
         if (view == opretBtn && togtet.length() <= 0){
             togtName.setError("Der skal indtastes et navn til togtet!");
 
-        }else if (view == opretBtn && kaptajn.length() <= 0){
-            skipper.setError("Der skal intastes et navn på skipperen!");
+        }else if (view == opretBtn && skipper.length() <= 0){
+            this.skipper.setError("Der skal intastes et navn på skipperen!");
 
         }else if (view == opretBtn && togtStartDest.length() <= 0){
             startDest.setError("Vælg hvor togtet skal startes fra!");
@@ -73,16 +75,23 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
                 TogtOversigt_frag togtOversigt_frag = new TogtOversigt_frag();
 
+                // Opret Togt
                 Togt togt = new Togt(togtet);
                 togt.setSkib(ship);
                 togt.setStartDestination(togtStartDest);
-                togt.setSkipper(kaptajn);
+                togt.setSkipper(skipper);
 
+                // Opret Etape
+                Etape etape = new Etape(); // Første etape for togtet (ikke startet)
+                etape.setStartDestination(togtStartDest);
+                etape.setSkipper(skipper);
+
+                // Gem i DB
                 TogtDAO togtDAO = new TogtDAO(getContext());
                 togtDAO.addTogt(togt);
+                new EtapeDAO(getContext()).addEtape(togt, etape);
 
                 Toast.makeText(this.getContext(),"Togt oprettet!",Toast.LENGTH_LONG).show();
-
                 changeFragment(togtOversigt_frag);
             }
         }

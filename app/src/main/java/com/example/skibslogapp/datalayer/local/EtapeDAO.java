@@ -52,6 +52,13 @@ public class EtapeDAO {
             row.put( "startDate", etape.getStartDate().getTime() );
         if( etape.getEndDate() != null )
             row.put( "endDate", etape.getEndDate().getTime() );
+        if( etape.getStartDestination() != null )
+            row.put( "startDestination", etape.getStartDestination() );
+        if( etape.getSlutDestination() != null)
+            row.put( "slutDestination", etape.getSlutDestination());
+        if( etape.getSkipper() != null )
+            row.put( "skipper", etape.getSkipper() );
+        row.put("status", etape.getStatus() );
 
         long id = database.insert("etaper", "endDate", row);
         etape.setId(id);
@@ -83,22 +90,42 @@ public class EtapeDAO {
 
             int column = -1;
 
-            long id = cursor.getInt( cursor.getColumnIndex("id"));
-            long togtId = cursor.getInt( cursor.getColumnIndex("togt"));
+            Etape etape = new Etape();
+            etape.setId(cursor.getInt( cursor.getColumnIndex("id")));
+            etape.setTogtId(cursor.getInt( cursor.getColumnIndex("togt")));
 
-            Date startDate = null;
             column = cursor.getColumnIndex("startDate");
             if( !cursor.isNull(column) ){
-                startDate = new Date(cursor.getLong(column));
+                etape.setStartDate(new Date(cursor.getLong(column)));
             }
 
-            Date endDate = null;
             column = cursor.getColumnIndex("endDate");
             if( !cursor.isNull(column) ){
-                endDate = new Date(cursor.getLong(column));
+                etape.setEndDate(new Date(cursor.getLong(column)));
             }
 
-            etaper.add( new Etape(id, togtId, startDate, endDate) );
+            column = cursor.getColumnIndex("startDestination");
+            if( !cursor.isNull(column) ){
+                etape.setStartDestination(cursor.getString(column));
+            }
+
+            column = cursor.getColumnIndex("slutDestination");
+            if( !cursor.isNull(column) ){
+                etape.setSlutDestination(cursor.getString(column));
+            }
+
+            column = cursor.getColumnIndex("skipper");
+            if( !cursor.isNull(column) ){
+                etape.setSkipper(cursor.getString(column));
+            }
+
+            column = cursor.getColumnIndex("status");
+            if( !cursor.isNull(column) ){
+                // Converting integer value to boolean value
+                etape.setStatus(cursor.getInt(column));
+            }
+
+            etaper.add( etape );
         }
         cursor.close();
 
@@ -126,6 +153,13 @@ public class EtapeDAO {
             row.put( "startDate", etape.getStartDate().getTime() );
         if( etape.getEndDate() != null )
             row.put( "endDate", etape.getEndDate().getTime() );
+        if( etape.getStartDestination() != null )
+            row.put( "startDestination", etape.getStartDestination() );
+        if( etape.getSlutDestination() != null)
+            row.put( "slutDestination", etape.getSlutDestination());
+        if( etape.getSkipper() != null )
+            row.put( "skipper", etape.getSkipper() );
+        row.put("status", etape.getStatus());
 
         database.update("etaper", row, "id="+etape.getId(), null );
 
