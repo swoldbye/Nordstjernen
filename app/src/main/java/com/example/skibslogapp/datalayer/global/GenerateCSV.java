@@ -6,6 +6,7 @@ import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Etape;
+import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.model.Togt;
 
 import java.util.ArrayList;
@@ -20,9 +21,11 @@ public class GenerateCSV {
         StringBuilder data = new StringBuilder();
         data.append("TogtID,EtapeID,Dato, Roere, vindretning, vindhastighed, StroemRetning, Kurs, Note, MandOverBord, BredeGrad, HoejdeGrad, SejlFoering,Sejlstilling");
         for (int i = 0; i < logs.size(); i++) {
-            data.append("\n" + String.valueOf(i) + "," +
-                    String.valueOf(i * i)+ "," + String.valueOf(i + i)+
-                    "," + String.valueOf(i * 5)+ "," + "NNV"+","+logs.get(i).getNote());
+            data.append("\n" + logs.get(i).getTogtID() + "," +
+                    logs.get(i).getEtapeID()+ "," + logs.get(i).getDato()+
+                    "," + logs.get(i).getRoere()+ "," + logs.get(i).getVindretning()+
+                    "," + logs.get(i).getVindhastighed()+"," + logs.get(i).getStroemRetning()+
+                    "," + logs.get(i).getKurs()+","+logs.get(i).getNote());
         }
         return data;
     }
@@ -47,6 +50,7 @@ public class GenerateCSV {
 
         //Getting the Logs
         LogpunktDAO logs = new LogpunktDAO(Contex);
+        List<Logpunkt> Logs = logs.getLogpunkter(etappen.get(0));
 
         //=============================================================
         /** @author Claes
@@ -54,12 +58,11 @@ public class GenerateCSV {
         Which can be used for making the CSV file. However it is optional to fill in
          any points in a log so we have to check for null pointers.
          */
-        int itlength = logs.getLogpunkter(etappen.get(0)).size();//3;
+        int itlength = Logs.size();
         for(int i=0; i<itlength; i++){
             LogPunktStringDTO punkt = new LogPunktStringDTO();
-            //String note = logs.getLogpunkter(etappen.get(0)).get(i).getNote();
-            if(logs.getLogpunkter(etappen.get(0)).get(i).getNote() != null){
-                String note = logs.getLogpunkter(etappen.get(0)).get(i).getNote();
+            if(Logs.get(i).getNote() != null){
+                String note = Logs.get(i).getNote();
                 punkt.setNote(note);
             }
             logData.add(punkt);
