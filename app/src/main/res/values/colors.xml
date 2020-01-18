@@ -12,5 +12,5 @@
     <color name="lightGrey">#F5F5F5</color>
     <color name="black">#08000000</color>
     <color name="insideCardSeparator">#9CB0C0</color>
-    <color name="mobRød">#ff4d4d</color>
+    <color name="red">#FF0000</color>
 </resources>

@@ -1,7 +1,10 @@
 package com.example.skibslogapp.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class Etape {
@@ -14,6 +17,8 @@ public class Etape {
     private String startDestination = null;
     private String slutDestination = null;
     private String skipper = null;
+    private List<String> besaetningList = new ArrayList<>() ;
+
     private int status = Status.NEW;
 
     public class Status{
@@ -22,6 +27,22 @@ public class Etape {
         public static final int FINISHED = 2;
     }
 
+
+    public List<String> getBesaetning() {
+        return besaetningList;
+    }
+
+    public void setBesaetning(List<String> besaetningList) {
+        this.besaetningList = besaetningList;
+    }
+
+    public void addBesaetningsMedlem(String ... navne){
+        besaetningList.addAll(Arrays.asList(navne));
+    }
+
+    public boolean removeBesaetningsMedlem(String navn){
+        return besaetningList.remove(navn);
+    }
 
     /**
      * Constructs a new Etape object. Note that this will NOT

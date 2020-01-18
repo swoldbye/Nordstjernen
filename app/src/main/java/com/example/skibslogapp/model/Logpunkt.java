@@ -23,9 +23,9 @@ public class Logpunkt {
     private boolean mandOverBord = false;
 
     private String vindretning = null;
-    private int vindhastighed = 0;
+    private int vindhastighed = -1;
     private String stroemRetning = null;
-    private int stroemhastighed = 0;
+    private int stroemhastighed = -1;
     private int kurs = -1;
     private String note = null;
 
