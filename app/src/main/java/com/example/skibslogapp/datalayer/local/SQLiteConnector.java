@@ -94,6 +94,7 @@ public class SQLiteConnector extends SQLiteOpenHelper {
                 "togt INTEGER," +
                 "startDate INTEGER NOT NULL," +
                 "endDate INTEGER," +
+                "besaetning TEXT," +
                 "PRIMARY KEY(id)," +
                 "FOREIGN KEY(togt) REFERENCES togter(id)"+
             ")"

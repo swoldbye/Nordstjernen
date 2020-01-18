@@ -4,12 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.model.Togt;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,7 +39,6 @@ public class EtapeDAO {
      * @param etape The Etape to add to the
      */
     public void addEtape( Togt togt, Etape etape ){
-
         TogtDAO togtDAO = new TogtDAO(context);
 
         if( !togtDAO.togtExists(togt) )
@@ -52,6 +52,7 @@ public class EtapeDAO {
             row.put( "startDate", etape.getStartDate().getTime() );
         if( etape.getEndDate() != null )
             row.put( "endDate", etape.getEndDate().getTime() );
+        row.put("besaetning", besaetningToString(etape.getBesaetning()));
 
         long id = database.insert("etaper", "endDate", row);
         etape.setId(id);
@@ -82,23 +83,26 @@ public class EtapeDAO {
         while( cursor.moveToNext() ){
 
             int column = -1;
+            Etape etape = new Etape();
 
-            long id = cursor.getInt( cursor.getColumnIndex("id"));
-            long togtId = cursor.getInt( cursor.getColumnIndex("togt"));
+            etape.setId(cursor.getInt( cursor.getColumnIndex("id")));
+            etape.setTogtId(cursor.getInt( cursor.getColumnIndex("togt")));
 
-            Date startDate = null;
             column = cursor.getColumnIndex("startDate");
             if( !cursor.isNull(column) ){
-                startDate = new Date(cursor.getLong(column));
+                etape.setStartDate(new Date(cursor.getLong(column)));
             }
 
-            Date endDate = null;
             column = cursor.getColumnIndex("endDate");
             if( !cursor.isNull(column) ){
-                endDate = new Date(cursor.getLong(column));
+                etape.setEndDate(new Date(cursor.getLong(column)));
             }
 
-            etaper.add( new Etape(id, togtId, startDate, endDate) );
+            etape.setBesaetning( besaetningToList(cursor.getString(cursor.getColumnIndex("besaetning"))));
+
+            cursor.getColumnIndex("besaetning");
+
+            etaper.add( etape );
         }
         cursor.close();
 
@@ -126,6 +130,8 @@ public class EtapeDAO {
             row.put( "startDate", etape.getStartDate().getTime() );
         if( etape.getEndDate() != null )
             row.put( "endDate", etape.getEndDate().getTime() );
+
+        row.put("besaetning", besaetningToString(etape.getBesaetning()));
 
         database.update("etaper", row, "id="+etape.getId(), null );
 
@@ -172,6 +178,31 @@ public class EtapeDAO {
         int rowCount = cursor.getCount();
         cursor.close();
         return rowCount > 0;
+    }
+
+
+
+
+    // Besaetnings conversion -------------------------------------------------
+    // Methods are public for testing
+
+    public static final String BESAETNING_SEPERATOR = ";";
+
+    public String besaetningToString(List<String> besaetning){
+        StringBuilder besaetningString = new StringBuilder();
+        boolean isFirst = true;
+        for( String navn : besaetning ) {
+            if (isFirst)
+                isFirst = false;
+            else
+                besaetningString.append(BESAETNING_SEPERATOR);
+            besaetningString.append(navn);
+        }
+        return besaetningString.toString();
+    }
+
+    public List<String> besaetningToList(String besaetningString ){
+        return new ArrayList<>(Arrays.asList(besaetningString.split(BESAETNING_SEPERATOR)));
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.skibslogapp.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +13,7 @@ public class Etape {
     private long togtId = -1;
     private Date startDate = null;
     private Date endDate = null;
-    private List<String> besaetningList = null;
+    private List<String> besaetningList = new ArrayList<>() ;
 
     public List<String> getBesaetning() {
         return besaetningList;
@@ -20,6 +21,14 @@ public class Etape {
 
     public void setBesaetning(List<String> besaetningList) {
         this.besaetningList = besaetningList;
+    }
+
+    public void addBesaetningsMedlem(String ... navne){
+        besaetningList.addAll(Arrays.asList(navne));
+    }
+
+    public boolean removeBesaetningsMedlem(String navn){
+        return besaetningList.remove(navn);
     }
 
     /**
