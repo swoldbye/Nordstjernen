@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.skibslogapp.R;
@@ -24,6 +25,14 @@ public class RedigerLogpunkt_frag extends Fragment {
                         course,
                         note;
     private Logpunkt logpunkt;
+    ConstraintLayout    timeConta,
+                        positionConta,
+                        windConta,
+                        waterConta,
+                        sailsOrRowersConta,
+                        sailsConta,
+                        courseConta,
+                        noteConta;
 
     public RedigerLogpunkt_frag(Logpunkt logpunkt){
         this.logpunkt = logpunkt;
@@ -46,7 +55,14 @@ public class RedigerLogpunkt_frag extends Fragment {
         course = view.findViewById(R.id.editLogCourseInfo);
         note = view.findViewById(R.id.editLogNoteInfo);
 
-
+        timeConta = view.findViewById(R.id.editLogTimeContainer);
+        positionConta = view.findViewById(R.id.editLogPositionContainer);
+        windConta = view.findViewById(R.id.editLogWindContainer);
+        waterConta = view.findViewById(R.id.editLogWaterCurrentContainer);
+        sailsOrRowersConta = view.findViewById(R.id.editLogSailsOrRowersContainer);
+        sailsConta = view.findViewById(R.id.editLogSailsPositionContainer);
+        courseConta = view.findViewById(R.id.editLogCourseContainer);
+        noteConta = view.findViewById(R.id.editLogNoteContainer);
 
         updateInformation();
 
