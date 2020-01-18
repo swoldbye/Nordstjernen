@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:tag="togt_oversigt"
     tools:context=".view.togtoversigt.TogtOversigt_frag">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -62,7 +63,9 @@
                 android:id="@+id/togtRecycView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="10dp"
+
+                android:paddingBottom="125dp"
+                android:clipToPadding="false"
                 android:background="@color/white"
                 android:scrollbars="vertical"/>
 
