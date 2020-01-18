@@ -32,6 +32,7 @@ public class EtapeOversigt_frag extends Fragment {
 
     private TextView togt_text, skib_text, header_text;
     private Togt togt;
+    private Etape newEtape = null;
     private FloatingActionButton createEtape_button;
     private EtapeListAdapter listAdapter;
     private RecyclerView recyclerView;
@@ -77,14 +78,15 @@ public class EtapeOversigt_frag extends Fragment {
 
     private void createEtape() {
         EtapeDAO etapeDAO = new EtapeDAO(getContext());
-        Etape newEtape = new Etape();
+        newEtape = new Etape();
         etapeDAO.addEtape(togt, newEtape);
         listAdapter.addEtape(newEtape);
         recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
     }
 
     private void openDialog() {
-        OpretEtapeDialogBox dialogBox = new OpretEtapeDialogBox(togt);
+        newEtape = new Etape();
+        OpretEtapeDialogBox dialogBox = new OpretEtapeDialogBox(togt,newEtape);
         dialogBox.show(getFragmentManager(),"Dialog box");
 
     }

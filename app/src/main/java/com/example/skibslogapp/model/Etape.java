@@ -1,7 +1,9 @@
 package com.example.skibslogapp.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class Etape {
@@ -10,6 +12,15 @@ public class Etape {
     private long togtId = -1;
     private Date startDate = null;
     private Date endDate = null;
+    private List<String> besaetningList = null;
+
+    public List<String> getBesaetning() {
+        return besaetningList;
+    }
+
+    public void setBesaetning(List<String> besaetningList) {
+        this.besaetningList = besaetningList;
+    }
 
     /**
      * Constructs a new Etape object. Note that this will NOT

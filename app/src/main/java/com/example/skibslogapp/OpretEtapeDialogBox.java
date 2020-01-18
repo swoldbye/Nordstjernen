@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,19 +36,22 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     private EditText editSkipper, editStartDest,navnIndput ;
     private Togt togt;
     private View addButton;
-    private List<String> besaetningList = new ArrayList<>();
+    private Etape etape;
     RecyclerView besaetning;
+    private List<String> beseatningsList = null;
 
 
 
-    public OpretEtapeDialogBox(Togt togt) {
+    public OpretEtapeDialogBox(Togt togt, Etape etape) {
         this.togt = togt;
+       this.etape = etape;
+       beseatningsList = etape.getBesaetning();
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        besaetningList = new ArrayList<>();
+        beseatningsList = new ArrayList<>();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -60,13 +64,13 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
 
                     }
                 })
-                .setPositiveButton("Start", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Start Etape", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String skipper = editSkipper.getText().toString();
                         String startDest = editStartDest.getText().toString();
                         EtapeDAO etapeDAO = new EtapeDAO(getContext());
-                        Etape etape = new Etape();
+                        etape.setBesaetning(beseatningsList);
                         etapeDAO.addEtape(togt,etape);
 
 
@@ -74,8 +78,6 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
                     }
                 });
 
-        besaetningList.add("ASDKASKDH");
-        besaetningList.add("ASDKASKDH");
 
         editSkipper = view.findViewById(R.id.inputSkipper);
         editStartDest = view.findViewById(R.id.inputStartDest);
@@ -99,7 +101,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     RecyclerView.Adapter adapter = new RecyclerView.Adapter<ListeelemViewholder>() {
         @Override
         public int getItemCount()  {
-            return besaetningList.size();
+            return beseatningsList.size();
         }
 
         @Override
@@ -115,7 +117,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
 
         @Override
         public void onBindViewHolder(ListeelemViewholder vh, int position) {
-            vh.nameElement.setText(besaetningList.get(position));
+            vh.nameElement.setText(beseatningsList.get(position));
             vh.cancleBeseatning.setImageResource(android.R.drawable.ic_delete);
         }
     };
@@ -123,11 +125,12 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
 
     @Override
     public void onClick(View v) {
-        besaetningList.add(navnIndput.getText().toString());
+        beseatningsList.add(navnIndput.getText().toString());
         System.out.println(navnIndput.getText().toString());
+        navnIndput.setText("");
         adapter.notifyDataSetChanged();
+        clearFocusOnDone(v);
     }
-
 
 
 
@@ -143,16 +146,22 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         @Override
         public void onClick(View v) {
             final int position = getAdapterPosition();
-            final String besaetningsmedlem = besaetningList.get(position);
 
             if(v ==cancleBeseatning) {
 
-                besaetningList.remove(position);
+                beseatningsList.remove(position);
                 adapter.notifyItemRemoved(position);
             }
         }
     }
 
+    private void clearFocusOnDone(View v) {
+
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
 }
+
+
 
 
