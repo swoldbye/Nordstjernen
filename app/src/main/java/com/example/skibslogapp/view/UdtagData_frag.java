@@ -47,6 +47,10 @@ public class UdtagData_frag extends Fragment implements View.OnClickListener {
         GenerateCSV csvdata = new GenerateCSV();
         StringBuilder data = csvdata.make(getContext(),0,0);
 
+        /**
+         * @author Claes
+         * below we gernerate a CSV file form a String and then export it
+         */
         try {
             Context context = getActivity();
             //saving the file into device
