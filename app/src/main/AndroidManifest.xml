@@ -35,7 +35,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/LogbookAppTheme">
-        <activity android:name=".Main_akt">
+        <activity
+            android:name=".Main_akt"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
