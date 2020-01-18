@@ -46,6 +46,8 @@ public class RedigerLogpunkt_frag extends Fragment {
         course = view.findViewById(R.id.editLogCourseInfo);
         note = view.findViewById(R.id.editLogNoteInfo);
 
+
+
         updateInformation();
 
         return view;

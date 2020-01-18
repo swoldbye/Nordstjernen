@@ -127,7 +127,7 @@ public class Main_akt extends AppCompatActivity {
                 } else if (itemid == R.id.nav_opret_etape) {
                     Logpunkt logpunkt = new Logpunkt();
                     logpunkt.setVindretning("NNØ");
-//                    logpunkt.setPosition( new Position(23.2305, -49.1293) );
+                    logpunkt.setPosition( new Position(23.2305, -49.1293) );
                     logpunkt.setSejlfoering("F-N3");
                     logpunkt.setNote("Vi sejler op ad åen");
                     logpunkt.setStroemhastighed(5);
