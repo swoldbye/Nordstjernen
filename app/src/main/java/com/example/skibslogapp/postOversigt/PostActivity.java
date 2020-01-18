@@ -13,7 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.datalayer.local.TogtDAO;
+import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.google.android.material.tabs.TabLayout;
@@ -30,6 +33,12 @@ public class PostActivity extends Fragment implements View.OnClickListener {
 
     public PostActivity(Togt togt) {
         this.togt = togt;
+    }
+
+    public PostActivity(Etape etape){
+        TogtDAO togtDAO = new TogtDAO(GlobalContext.get());
+        Togt tempTogt = togtDAO.getTogt(etape.getTogtId());
+        this.togt = tempTogt;
     }
 
     @Nullable

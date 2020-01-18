@@ -31,6 +31,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
     private EditText togtName, skipper, startDest;
     private View opretBtn;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_opret_togt, container, false);
@@ -40,6 +41,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         startDest = view.findViewById(R.id.startDestEdit);
         opretBtn = view.findViewById(R.id.opretBtn);
         opretBtn.setOnClickListener(this);
+
 
         ArrayAdapter<String> dropDownShip = new ArrayAdapter<String>(this.getContext(),
                 android.R.layout.simple_dropdown_item_1line, skibsListe);
@@ -69,7 +71,6 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
         }else if (view == opretBtn && togtStartDest.length() <= 0){
             startDest.setError("Vælg hvor togtet skal startes fra!");
-
         }else {
             if (view == opretBtn){
 

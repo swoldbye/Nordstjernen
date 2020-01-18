@@ -113,6 +113,6 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return "Dag " + (position + 1);
+        return "E-" + (position + 1);
     }
 }

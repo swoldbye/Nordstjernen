@@ -3,17 +3,14 @@ package com.example.skibslogapp.view;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
+
 
 import android.os.Handler;
 import android.text.Editable;
@@ -57,7 +54,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     TextView closeButton;
 
 
-
     Button openButton;
     FrameLayout buttonFrame;
     FrameLayout opretPostWrapper;
@@ -73,10 +69,10 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(grantResults[0] == PERMISSION_GRANTED){
+        if (grantResults[0] == PERMISSION_GRANTED) {
             testCoordinates.startMeassureKoordinat();
             Toast.makeText(getActivity(), "Lokation er aktiveret", Toast.LENGTH_LONG).show();
-        }else{
+        } else {
             Toast.makeText(getActivity(), "Lokation er ikke aktiveret", Toast.LENGTH_SHORT).show();
             // Will retur false if the user tabs "Bont ask me again/Permission denied".
             // Returns true if the user previusly rejected the message and now try to access it again. -> Indication of user confussion
@@ -113,6 +109,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         closeButton.setOnClickListener(this);
         openButton.setOnClickListener(this);
 
+        opretPostWrapper.setVisibility(View.GONE);
+
         return view;
     }
 
@@ -120,7 +118,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
      * Clears the focus when clicking the "Done" or "Next" button on the keyboard
      */
     private TextView.OnEditorActionListener clearFocusOnNextClick = (v, keyCode, event) -> {
-        if(keyCode == EditorInfo.IME_ACTION_DONE || keyCode == EditorInfo.IME_ACTION_NEXT) {
+        if (keyCode == EditorInfo.IME_ACTION_DONE || keyCode == EditorInfo.IME_ACTION_NEXT) {
             clearFocusOnDone(v);
         }
         return true;
@@ -136,6 +134,12 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v == opretButton || v == mob) {
             createLogpunkt(v == mob);
+        }else if(v == openButton){
+            buttonFrame.setVisibility(View.GONE);
+            opretPostWrapper.setVisibility(View.VISIBLE);
+        }else if(v == closeButton){
+            opretPostWrapper.setVisibility(View.GONE);
+            buttonFrame.setVisibility(View.VISIBLE);
         }
     }
 
@@ -144,7 +148,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         String timeStr = logVM.getTime();
 
         // Getting calender instance
-        Calendar calendar= Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
 
         // Setting minutes and hour
@@ -152,17 +156,17 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         calendar.set(Calendar.MINUTE, Integer.parseInt(timeStr.substring(3, 5)));
 
         // Create Logpunkt from time in calendar
-        Logpunkt logpunkt = new Logpunkt( new Date(calendar.getTimeInMillis()) );
-        logpunkt.setVindretning( logVM.getWindDirection() );
-        logpunkt.setVindhastighed( logVM.getWindSpeed() );
-        logpunkt.setStroemRetning( logVM.getWaterCurrentDirection() );
-        logpunkt.setStroemhastighed( logVM.getWaterCurrentSpeed() );
-        logpunkt.setSejlstilling( logVM.getSailPosition() );
+        Logpunkt logpunkt = new Logpunkt(new Date(calendar.getTimeInMillis()));
+        logpunkt.setVindretning(logVM.getWindDirection());
+        logpunkt.setVindhastighed(logVM.getWindSpeed());
+        logpunkt.setStroemRetning(logVM.getWaterCurrentDirection());
+        logpunkt.setStroemhastighed(logVM.getWaterCurrentSpeed());
+        logpunkt.setSejlstilling(logVM.getSailPosition());
         logpunkt.setRoere(logVM.getCurrRowers());
-        logpunkt.setSejlfoering( logVM.getSails().equals("") ?
-                logVM.getSails().concat(logVM.getOrientation()) : logVM.getSails().concat("-" + logVM.getOrientation() ));
+        logpunkt.setSejlfoering(logVM.getSails().equals("") ?
+                logVM.getSails().concat(logVM.getOrientation()) : logVM.getSails().concat("-" + logVM.getOrientation()));
         logpunkt.setKurs(logVM.getCourse());
-        logpunkt.setNote( logVM.getNoteTxt() );
+        logpunkt.setNote(logVM.getNoteTxt());
         logpunkt.setPosition(testCoordinates.getKoordinates());
         logpunkt.setMandOverBord(mandOverBord);
 
@@ -171,16 +175,15 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         System.out.printf("Created logpunkt: %s", logpunkt.toString());
 
-            buttonFrame.setVisibility(View.VISIBLE);
-            opretPostWrapper.setVisibility(View.GONE);
+        buttonFrame.setVisibility(View.VISIBLE);
+        opretPostWrapper.setVisibility(View.GONE);
 
-        }
     }
 
     private void toggleMOBPosition() {
         FrameLayout mob_container = getView().findViewById(R.id.mob_container);
         CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(mob_container.getLayoutParams());
-        if(mobIsDown) {
+        if (mobIsDown) {
             params.gravity = Gravity.TOP;
         } else {
             params.gravity = Gravity.BOTTOM;

@@ -110,7 +110,7 @@ public class TogtDAO {
      * Retrieves a Togt based on the ID. Not meant to be used
      * outside of the class.
      */
-    private Togt getTogt(long id){
+    public Togt getTogt(long id){
         SQLiteDatabase database = connector.getReadableDatabase();
         Cursor cursor = database.rawQuery("SELECT * FROM togter WHERE id="+id+";", null);
 
