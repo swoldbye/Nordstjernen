@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.skibslogapp.model.Etape;
+import com.example.skibslogapp.model.Position.Position;
 import com.example.skibslogapp.model.Logpunkt;
 
 import java.util.Date;
@@ -49,8 +50,8 @@ public class LogpunktDAO {
         row.put( "etape", etape.getId() );
         row.put( "dato", logpunkt.getDate().getTime() );
         row.put( "dato_opret", logpunkt.getDate().getTime() );
-        row.put( "laengdegrad", logpunkt.getLaengdegrad() );
-        row.put( "breddegrad", logpunkt.getBreddegrad() );
+        row.put( "breddegrad", logpunkt.getPosition() != null ? logpunkt.getPosition().getBreddegrad() : 0 );
+        row.put( "laengdegrad", logpunkt.getPosition() != null ? logpunkt.getPosition().getLaengdegrad() : 0 );
         row.put( "note", logpunkt.getNote() );
         row.put( "vindretning", logpunkt.getVindretning() );
         row.put( "vindhastighed", logpunkt.getVindhastighed());
@@ -105,8 +106,12 @@ public class LogpunktDAO {
             logpunkt.setEtapeId(etape.getId());
             logpunkt.setTogtId(etape.getTogtId());
             logpunkt.setCreationDate( new Date( cursor.getLong(cursor.getColumnIndex("dato_opret"))) );
-            logpunkt.setLaengdegrad( cursor.getDouble(cursor.getColumnIndex("laengdegrad")));
-            logpunkt.setBreddegrad( cursor.getDouble(cursor.getColumnIndex("breddegrad")));
+
+            // Getting position
+            double laengde = cursor.getDouble(cursor.getColumnIndex("laengdegrad"));
+            double bredde = cursor.getDouble(cursor.getColumnIndex("breddegrad"));
+            logpunkt.setPosition( laengde != 0 && bredde != 0 ? new Position(bredde, laengde) : null );
+
             logpunkt.setVindretning( cursor.getString( cursor.getColumnIndex("vindretning") ));
             logpunkt.setVindhastighed( cursor.getInt( cursor.getColumnIndex("vindhastighed")));
             logpunkt.setStroemRetning( cursor.getString( cursor.getColumnIndex("stroemretning") ));
@@ -149,6 +154,46 @@ public class LogpunktDAO {
         SQLiteDatabase database = connector.getReadableDatabase();
         database.delete("logpunkter", "id="+logpunkt.getId(), null);
     }
+
+
+
+    public void updateLogpunkt(Logpunkt logpunkt) throws DAOException {
+        if( !logpunktExists(logpunkt) )
+            throw new DAOException(String.format("Couldn't find Logpunkt with ID %d in the database", logpunkt.getId()));
+
+        // Create cursor for database rows
+        SQLiteDatabase database = connector.getReadableDatabase();
+
+        // Create row for databse
+        ContentValues row = new ContentValues();
+
+        row.put( "dato", logpunkt.getDate().getTime() );
+        row.put( "dato_opret", logpunkt.getDate().getTime() );
+        row.put( "breddegrad", logpunkt.getPosition() != null ? logpunkt.getPosition().getBreddegrad() : 0 );
+        row.put( "laengdegrad", logpunkt.getPosition() != null ? logpunkt.getPosition().getLaengdegrad() : 0 );
+        row.put( "note", logpunkt.getNote() );
+        row.put( "vindretning", logpunkt.getVindretning() );
+        row.put( "vindhastighed", logpunkt.getVindhastighed());
+        row.put( "sejlfoering", logpunkt.getSejlfoering() );
+        row.put( "mandOverBord", logpunkt.getMandOverBord() );
+        row.put( "sejlstilling", logpunkt.getSejlstilling() );
+        row.put( "stroemretning", logpunkt.getStroemRetning() );
+        row.put( "stroemhastighed", logpunkt.getStroemhastighed());
+
+        /* Only add these elements if they've been manually set ( != -1 ) */
+        if( logpunkt.getRoere() >= 0 )
+            row.put( "roere", logpunkt.getRoere() );
+
+        if( logpunkt.getKurs() >= 0 )
+            row.put( "kurs", logpunkt.getKurs() );
+
+        if( logpunkt.getHals() >= 0 )
+            row.put( "hals", logpunkt.getHals() );
+
+        database.update("logpunkter", row, "id="+logpunkt.getId(), null );
+    }
+
+
 
 
     /**
