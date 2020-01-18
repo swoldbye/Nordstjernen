@@ -47,6 +47,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         this.togt = togt;
        this.etape = etape;
        beseatningsList = etape.getBesaetning();
+        System.out.println("BesætningsListe" +beseatningsList.size());
     }
 
     @NonNull
@@ -89,8 +90,11 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
 
         besaetning = view.findViewById(R.id.besaetningList);
 
+
+
         besaetning.setLayoutManager(new LinearLayoutManager(getActivity()));
         besaetning.setAdapter(adapter);
+        System.out.println("Adapter item count: " + adapter.getItemCount());
 
 
 
@@ -99,6 +103,9 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     }
 
     RecyclerView.Adapter adapter = new RecyclerView.Adapter<ListeelemViewholder>() {
+
+        private List<String> dataSet = null;
+
         @Override
         public int getItemCount()  {
             return beseatningsList.size();
@@ -119,6 +126,11 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         public void onBindViewHolder(ListeelemViewholder vh, int position) {
             vh.nameElement.setText(beseatningsList.get(position));
             vh.cancleBeseatning.setImageResource(android.R.drawable.ic_delete);
+        }
+
+
+        public void setDataset(List<String> dataset){
+            this.dataSet = dataset;
         }
     };
 
