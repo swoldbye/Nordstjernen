@@ -93,7 +93,7 @@ public class EtapeOversigt_frag extends Fragment {
                         dialogBoxHeadline.setText("Er du sikker på du vil slette togtet?");
                         dialogBoxHeadline.setTextSize(20f);
                         dialogBoxHeadline.setTypeface(null, Typeface.BOLD);
-                        dialogBoxHeadline.setPadding(20,4,4,4);
+                        dialogBoxHeadline.setPadding(60,60,60,4);
                         dialogBoxHeadline.setTextColor(getResources().getColor(R.color.colorPrimary));
 
                         builder.setCustomTitle(dialogBoxHeadline)
