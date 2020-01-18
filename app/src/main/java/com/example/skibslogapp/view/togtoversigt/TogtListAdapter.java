@@ -1,31 +1,25 @@
-package com.example.skibslogapp;
+package com.example.skibslogapp.view.togtoversigt;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentController;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.skibslogapp.datalayer.local.TogtDAO;
+import com.example.skibslogapp.R;
+import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
+import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * This is a custom adapter for the RecycleView displaying the "Togts".
@@ -38,7 +32,6 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
     public TogtListAdapter(List<Togt> list, Context context) {
         togtArrayList = list;
         mContext = context;
-
     }
 
     /**
@@ -70,8 +63,23 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
      */
     @Override
     public void onBindViewHolder(@NonNull TogtListViewHolder holder, final int position) {
+
         Togt currTogt = togtArrayList.get(position);
         holder.togtName.setText(currTogt.getName());
+        holder.ship.setText(currTogt.getSkib());
+        holder.startDest.setText("Fra " + currTogt.getStartDestination());
+
+        List<Etape> etaper = new EtapeDAO(mContext).getEtaper(currTogt);
+        Etape firstEtape = etaper.get(0);
+        if( firstEtape.getStatus() != Etape.Status.NEW ){
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(firstEtape.getStartDate());
+            holder.date.setText(String.format(Locale.US, "%02d/%02d", cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH) ));
+            holder.year.setText(String.format(Locale.US, "%d", cal.get(Calendar.YEAR)));
+        }else{
+            holder.date.setText("Ikke påbegyndt");
+            holder.year.setText("");
+        }
     }
 
     /**
@@ -83,25 +91,21 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
         return togtArrayList.size();
     }
 
-    /**
-     * This function removes an item from the togtArrayList, and thus from the RecycleView.
-     * It also notifies any any registered observers that the item previously located at <code>position</code>
-     * has been removed from the data set. The items previously located at and after
-     * <code>position</code> may now be found at <code>oldPosition - 1</code>.
-     *
-     * @param position The position the element is in the RecycleView
-     */
-    public void delete(int position){
-        Togt togt = togtArrayList.get(position);
-        togtArrayList.remove(position);
-        TogtDAO togtDAO = new TogtDAO(mContext);
-        togtDAO.deleteTogt(togt);
-        notifyItemRemoved(position);
-    }
-
-    public void goToTogt(int position){
-
-    }
+//    /**
+//     * This function removes an item from the togtArrayList, and thus from the RecycleView.
+//     * It also notifies any any registered observers that the item previously located at <code>position</code>
+//     * has been removed from the data set. The items previously located at and after
+//     * <code>position</code> may now be found at <code>oldPosition - 1</code>.
+//     *
+//     * @param position The position the element is in the RecycleView
+//     */
+//    public void delete(int position){
+//        Togt togt = togtArrayList.get(position);
+//        togtArrayList.remove(position);
+//        TogtDAO togtDAO = new TogtDAO(mContext);
+//        togtDAO.deleteTogt(togt);
+//        notifyItemRemoved(position);
+//    }
 
     /**
      * The ViewHolder design pattern can be applied when using a custom adapter.
@@ -116,16 +120,15 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
      */
     public class TogtListViewHolder extends RecyclerView.ViewHolder{
 
-        TextView togtName;
-        ImageView delete;
+        TextView togtName,ship,startDest,date,year;
 
         public TogtListViewHolder(@NonNull View itemView) {
             super(itemView);
-            togtName = itemView.findViewById(R.id.togtNameListItem);
-//            delete = itemView.findViewById(R.id.togtDelete);
-//            delete.setOnClickListener((View view) -> {
-//                delete(getAdapterPosition());
-//            });
+            togtName = itemView.findViewById(R.id.togtoversigt_card_name);
+            ship = itemView.findViewById(R.id.togtoversigt_card_shipname);
+            startDest = itemView.findViewById(R.id.togtoversigt_card_startdestination);
+            date = itemView.findViewById(R.id.togtoversigt_card_date);
+            year = itemView.findViewById(R.id.togtoversigt_card_year);
             itemView.setOnClickListener( (View view) -> {
                 int position = getAdapterPosition();
                 Togt togt = togtArrayList.get(position);

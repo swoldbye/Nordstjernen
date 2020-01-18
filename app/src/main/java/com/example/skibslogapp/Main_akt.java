@@ -23,12 +23,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
-import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
-import com.example.skibslogapp.view.OpretTogt_frag;
-import com.example.skibslogapp.view.TogtOversigt_frag;
+import com.example.skibslogapp.view.oprettogt.OpretTogt_frag;
+import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 import com.example.skibslogapp.view.UdtagData_frag;
 import com.google.android.material.navigation.NavigationView;
 
@@ -69,7 +68,7 @@ public class Main_akt extends AppCompatActivity {
         configureNavigationDrawer();
 
         if (savedInstanceState == null) {
-            Fragment fragment = new PostActivity();
+            Fragment fragment = new TogtOversigt_frag();
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
         }
     }

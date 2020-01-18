@@ -273,6 +273,37 @@ public class SQLTest {
         assertEquals( loadedEtape.getBesaetning().get(1), "Simon");
     }
 
+    @Test
+    public void updateLogpunktTest(){
+
+        setupTestData();
+
+        // Load etape
+        Etape loadedEtape = etapeDAO.getEtaper(togtDAO.getTogter().get(0)).get(0);
+
+        // Loaded logpunkt
+        Logpunkt loadedLogpunkt = logpunktDAO.getLogpunkter(loadedEtape).get(0);
+        assertTrue(loadedLogpunkt.equals(logpunkt));
+
+        // Change values
+        loadedLogpunkt.setNote("Hello world");
+        loadedLogpunkt.setStroemhastighed(10);
+        loadedLogpunkt.setVindretning("NNØ");
+
+        assertFalse(loadedLogpunkt.equals(logpunkt));
+
+        // Update to database
+        logpunktDAO.updateLogpunkt(loadedLogpunkt);
+
+        // Reload logpunkt
+        Logpunkt loadedLogpunkt2 = logpunktDAO.getLogpunkter(loadedEtape).get(0);
+        Log.d("Update logpunkt test", "Logpunkt 1: " + loadedLogpunkt);
+        Log.d("Update logpunkt test", "Logpunkt 2: " + loadedLogpunkt2);
+        assertTrue(loadedLogpunkt.equals(loadedLogpunkt2));
+
+    }
+
+
 
 
 

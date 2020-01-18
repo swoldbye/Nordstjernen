@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--STRØM-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/stroemning_text"
+            style="@style/SmallTitle"
+            android:layout_width="127dp"
+            android:layout_marginBottom="5dp"
+            android:text="Strømning" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/strøm_input"
+                android:layout_width="75sp"
+                android:layout_height="wrap_content"
+                android:text="PLA"
+                android:textAlignment="center"
+                android:textColor="@color/textColor"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/strøm_delete"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:backgroundTint="#FFFFFF"
+                android:text="X"
+                android:textColor="#2D2F31"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/strøm_input"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space style="@style/EvenSpace" />
+
+            <Button
+                android:id="@+id/nordButton_strøm"
+                style="@style/DefaultButton"
+                android:text="N" />
+
+            <Space style="@style/EvenSpace" />
+
+            <Button
+                android:id="@+id/østButton_strøm"
+                style="@style/DefaultButton"
+                android:text="Ø" />
+
+            <Space style="@style/EvenSpace" />
+
+            <Button
+                android:id="@+id/sydButton_strøm"
+                style="@style/DefaultButton"
+                android:text="S" />
+
+            <Space style="@style/EvenSpace" />
+
+            <Button
+                android:id="@+id/vestButton_strøm"
+                style="@style/DefaultButton"
+                android:text="V" />
+
+            <Space style="@style/EvenSpace" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--STRØMHASTIGHED=============================-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+    <EditText
+        android:id="@+id/strømhastighed_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
+        android:digits="0123456789"
+        android:ems="10"
+        android:hint="Hastighed"
+        android:imeOptions="actionDone"
+        android:inputType="time"
+        android:maxLength="4"
+        android:paddingHorizontal="0dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Unit -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:text="knob"
+        android:textColor="@color/textColor"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/strømhastighed_edittext"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

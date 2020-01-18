@@ -9,11 +9,24 @@ import java.util.Objects;
 
 public class Etape {
 
+
     private long id = -1;
     private long togtId = -1;
     private Date startDate = null;
     private Date endDate = null;
+    private String startDestination = null;
+    private String slutDestination = null;
+    private String skipper = null;
     private List<String> besaetningList = new ArrayList<>() ;
+
+    private int status = Status.NEW;
+
+    public class Status{
+        public static final int NEW = 0;
+        public static final int ACTIVE = 1;
+        public static final int FINISHED = 2;
+    }
+
 
     public List<String> getBesaetning() {
         return besaetningList;
@@ -53,11 +66,12 @@ public class Etape {
     }
 
 
-    public Etape(long id, long togtId, Date startDate, Date endDate) {
+    public Etape(long id, long togtId, Date startDate, Date endDate, String startDestination) {
         this.id = id;
         this.togtId = togtId;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.startDestination = startDestination;
     }
 
 
@@ -87,6 +101,32 @@ public class Etape {
     }
 
 
+    public String getSlutDestination() {
+        return slutDestination;
+    }
+
+    public void setSlutDestination(String slutDestination) {
+        this.slutDestination = slutDestination;
+    }
+
+    public String getSkipper() {
+        return skipper;
+    }
+
+    public void setSkipper(String skipper) {
+        this.skipper = skipper;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status){
+        if( status < 0 || status > 2)
+            throw new RuntimeException(String.format("Etape Status ID %d is out of bounds (must be between 0 and 2)", status));
+        this.status = status;
+    }
+
     /**
      * Returns the ID of the Etape. If the Etape hasn't been
      * added to the local database, the id will be -1.
@@ -104,7 +144,6 @@ public class Etape {
     }
 
 
-
     public long getTogtId() {
         return togtId;
     }
@@ -112,6 +151,16 @@ public class Etape {
     public void setTogtId(long togtId) {
         this.togtId = togtId;
     }
+
+    public void setStartDestination(String startDestination){
+        this.startDestination = startDestination;
+    }
+
+    public String getStartDestination(){
+        return startDestination;
+    }
+
+
 
 
     @Override

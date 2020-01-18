@@ -52,7 +52,15 @@ public class EtapeDAO {
             row.put( "startDate", etape.getStartDate().getTime() );
         if( etape.getEndDate() != null )
             row.put( "endDate", etape.getEndDate().getTime() );
+        if( etape.getStartDestination() != null )
+            row.put( "startDestination", etape.getStartDestination() );
+        if( etape.getSlutDestination() != null)
+            row.put( "slutDestination", etape.getSlutDestination());
+        if( etape.getSkipper() != null )
+            row.put( "skipper", etape.getSkipper() );
+        row.put("status", etape.getStatus() );
         row.put("besaetning", besaetningToString(etape.getBesaetning()));
+
 
         long id = database.insert("etaper", "endDate", row);
         etape.setId(id);
@@ -83,8 +91,8 @@ public class EtapeDAO {
         while( cursor.moveToNext() ){
 
             int column = -1;
-            Etape etape = new Etape();
 
+            Etape etape = new Etape();
             etape.setId(cursor.getInt( cursor.getColumnIndex("id")));
             etape.setTogtId(cursor.getInt( cursor.getColumnIndex("togt")));
 
@@ -96,6 +104,27 @@ public class EtapeDAO {
             column = cursor.getColumnIndex("endDate");
             if( !cursor.isNull(column) ){
                 etape.setEndDate(new Date(cursor.getLong(column)));
+            }
+
+            column = cursor.getColumnIndex("startDestination");
+            if( !cursor.isNull(column) ){
+                etape.setStartDestination(cursor.getString(column));
+            }
+
+            column = cursor.getColumnIndex("slutDestination");
+            if( !cursor.isNull(column) ){
+                etape.setSlutDestination(cursor.getString(column));
+            }
+
+            column = cursor.getColumnIndex("skipper");
+            if( !cursor.isNull(column) ){
+                etape.setSkipper(cursor.getString(column));
+            }
+
+            column = cursor.getColumnIndex("status");
+            if( !cursor.isNull(column) ){
+                // Converting integer value to boolean value
+                etape.setStatus(cursor.getInt(column));
             }
 
             etape.setBesaetning( besaetningToList(cursor.getString(cursor.getColumnIndex("besaetning"))));
@@ -130,6 +159,13 @@ public class EtapeDAO {
             row.put( "startDate", etape.getStartDate().getTime() );
         if( etape.getEndDate() != null )
             row.put( "endDate", etape.getEndDate().getTime() );
+        if( etape.getStartDestination() != null )
+            row.put( "startDestination", etape.getStartDestination() );
+        if( etape.getSlutDestination() != null)
+            row.put( "slutDestination", etape.getSlutDestination());
+        if( etape.getSkipper() != null )
+            row.put( "skipper", etape.getSkipper() );
+        row.put("status", etape.getStatus());
 
         row.put("besaetning", besaetningToString(etape.getBesaetning()));
 

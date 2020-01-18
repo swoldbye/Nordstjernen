@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- Button -->
         <FrameLayout
             android:layout_width="108dp"
             android:layout_height="108dp"
@@ -43,50 +44,21 @@
         </FrameLayout>
 
 
-        <FrameLayout
-            android:layout_width="108dp"
-            android:layout_height="108dp"
-            android:clipToPadding="false"
-            android:elevation="1dp"
-            android:outlineProvider="none"
-            android:padding="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/etapeMailBtn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/colorPrimary"
-                android:clickable="true"
-                android:elevation="20dp"
-                android:focusable="true"
-                app:fabCustomSize="78dp"
-                app:maxImageSize="40dp"
-                app:rippleColor="@android:color/darker_gray"
-                android:src="@drawable/ic_mail_outline_black_24dp"
-                android:tint="@color/white"
-                android:scaleType="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                />
-        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/etape_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/lightGrey"
+            android:background="@color/white"
             android:elevation="8dp"
-            app:layout_constraintBottom_toTopOf="@id/etape_recyclerview"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/etapeTogtText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Togt navn årstal"
+                android:hint="TOGTNAVN"
                 android:padding="8dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
@@ -98,36 +70,36 @@
                 android:id="@+id/skibsNavnText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Vikingeskib"
+                android:hint="SKIB"
                 android:paddingBottom="18dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
                 android:textColorHint="@color/colorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/etapeHeader"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:text="Etaper"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
-                android:textSize="30sp"
-                android:textStyle="bold" />
         </LinearLayout>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/etape_recyclerview"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/white"
-            android:padding="10dp"
-            android:scrollbars="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/etape_header"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/etape_header"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <include layout="@layout/etape_oversigt_starttogt"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/etape_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:scrollbars="vertical"
+                android:paddingBottom="110dp"
+                android:paddingTop="25dp"
+                android:clipToPadding="false"
+                />
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
