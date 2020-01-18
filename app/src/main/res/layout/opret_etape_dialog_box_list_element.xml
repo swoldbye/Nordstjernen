@@ -12,7 +12,8 @@
             <TextView
                 android:id="@+id/listElementBesaetning"
                 android:layout_width="200dp"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp"
+                android:paddingLeft="5dp"/>
 
             <ImageView
                 android:id="@+id/cancleBeseatning"

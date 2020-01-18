@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.model.Etape;
+import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Togt;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -93,7 +94,6 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
 
 
 
-
         return builder.create();
 
     }
@@ -148,7 +148,6 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
             final int position = getAdapterPosition();
 
             if(v ==cancleBeseatning) {
-
                 beseatningsList.remove(position);
                 adapter.notifyItemRemoved(position);
             }

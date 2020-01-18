@@ -23,6 +23,7 @@ import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Togt;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -77,6 +78,9 @@ public class EtapeOversigt_frag extends Fragment {
 
 
     private void createEtape() {
+
+
+
         EtapeDAO etapeDAO = new EtapeDAO(getContext());
         newEtape = new Etape();
         etapeDAO.addEtape(togt, newEtape);
@@ -85,10 +89,23 @@ public class EtapeOversigt_frag extends Fragment {
     }
 
     private void openDialog() {
-        newEtape = new Etape();
+        int numberOfEtape = new EtapeDAO(getContext()).getEtaper(togt).size();
+        newEtape = new EtapeDAO(getContext()).getEtaper(togt).get(numberOfEtape-1);
+        newEtape.setBesaetning(getTestListe());
         OpretEtapeDialogBox dialogBox = new OpretEtapeDialogBox(togt,newEtape);
         dialogBox.show(getFragmentManager(),"Dialog box");
 
+
+    }
+
+
+    private List<String> getTestListe(){
+        List<String> testListe = new ArrayList<>();
+        testListe.add("Troels");
+        testListe.add("Per");
+        testListe.add("Knud");
+
+        return testListe;
     }
 
 }
