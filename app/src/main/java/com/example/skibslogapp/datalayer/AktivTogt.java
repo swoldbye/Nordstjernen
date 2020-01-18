@@ -32,11 +32,18 @@ public class AktivTogt extends ViewModel {
 
     private static SaveLocal DBpref;
 
+
+
     /** Set the current Etape */
     public static void setEtape(Etape etape) {
-        AktivTogt.etape = etape;
-        DBpref.storeEtappe(etape.getId());
-        if(currentEtape == null){
+
+        if(etape==null){
+            DBpref.storeEtappe(-1);
+        }else {
+            AktivTogt.etape = etape;
+            DBpref.storeEtappe(etape.getId());
+        }
+        if (currentEtape == null) {
             currentEtape = new MutableLiveData<Etape>();
         }
         currentEtape.setValue(etape);
@@ -44,10 +51,16 @@ public class AktivTogt extends ViewModel {
 
     /** Get the current Togt */
     public static void setTogt(Togt togt) {
-        AktivTogt.togt = togt;
-        DBpref.storeTogt(togt.getId());
-        if(currentTogt == null){
-            currentTogt = new MutableLiveData<Togt>();
+        //If no current togt, set the default value of -1 in shared preferences
+        if(togt==null){
+            DBpref.storeTogt(-1);
+        }else {
+
+            AktivTogt.togt = togt;
+            DBpref.storeTogt(togt.getId());
+            if (currentTogt == null) {
+                currentTogt = new MutableLiveData<Togt>();
+            }
         }
         currentTogt.setValue(togt);
     }
@@ -66,6 +79,16 @@ public class AktivTogt extends ViewModel {
             togt = DBpref.getTogt();
             etape = DBpref.getEtape(togt);  }
         return etape;
+    }
+
+
+    /** Returns the current Togt  for LiveData*/
+    public static MutableLiveData<Togt> getCurrentTogt() {
+        return currentTogt;
+    }
+    /** Returns the current Etape  for LiveData*/
+    public static MutableLiveData<Etape> getCurrentEtape() {
+        return currentEtape;
     }
 
 
@@ -130,23 +153,26 @@ public class AktivTogt extends ViewModel {
         If no togt is found, a default one will be created.
          */
         public Togt getTogt(){
-           togtid = pref.getLong(TOGT_TAG,1);
+           togtid = pref.getLong(TOGT_TAG,-1);
 
-           //Searching for the togt
-            //List<Togt> allTogter =  TESTTogtDatabase.getTogter();
-            List<Togt> allTogter = togtDatabase.getTogter();
+           //If no current togt
+           if(togtid ==-1){
+                return null;
+            }else {
+                //Searching for the togt
+                //List<Togt> allTogter =  TESTTogtDatabase.getTogter();
+                List<Togt> allTogter = togtDatabase.getTogter();
 
-            for (Togt a : allTogter) {
-                if (a.getId() == togtid) {
-                    return a;
+                for (Togt a : allTogter) {
+                    if (a.getId() == togtid) {
+                        return a;
+                    }
                 }
             }
-
             //If the togt do not exist
-            Togt defaultReturnTogt = new Togt("Default");
-            defaultReturnTogt.setSkipper("default skipper");
 
-            return defaultReturnTogt;
+
+            return null;
         }
 
 
@@ -155,21 +181,24 @@ public class AktivTogt extends ViewModel {
         @Param: Togt, the etapeDatabase use togt to get the etape.
          */
         public Etape getEtape(Togt togt){
-            etapeId = pref.getLong(ETAPPE_TAG,1);
-            //List<Etape> allEtaper = TESTEtapeDatabase.getEtape(togt);
-            List<Etape> allEtaper = etapeDatabase.getEtaper(togt);
+            etapeId = pref.getLong(ETAPPE_TAG,-1);
 
-            for (Etape a : allEtaper) {
-                if (a.getId() == etapeId) {
-                    return a;
+
+            //If no current etape
+            if(togtid ==-1){
+                return null;
+            }else {
+
+                //List<Etape> allEtaper = TESTEtapeDatabase.getEtape(togt);
+                List<Etape> allEtaper = etapeDatabase.getEtaper(togt);
+
+                for (Etape a : allEtaper) {
+                    if (a.getId() == etapeId) {
+                        return a;
+                    }
                 }
             }
-
-            //If the togt do not exist
-            Etape defaultReturnEtape = new Etape();
-
-            return defaultReturnEtape;
-
+            return null;
         }
 
     }

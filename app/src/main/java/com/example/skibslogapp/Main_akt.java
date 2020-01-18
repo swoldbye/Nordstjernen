@@ -76,8 +76,6 @@ public class Main_akt extends AppCompatActivity {
                         Dette skyldes at der vil blive ledt efter den nuværende etape i databasen og den findes ikke endnu så
                         så der bliver kastet en exception i EtapeDAO.
 
-
-
         //Instanciation Livedata.
 
 
@@ -91,9 +89,12 @@ public class Main_akt extends AppCompatActivity {
         final Observer<Togt> togtObserver = new Observer<Togt>() {
             @Override
             public void onChanged(Togt s) {
-                mSkipperView.setText(s.getSkipper());
-                mTogtView.setText(s.getName());
-                //mBesaetningView.setText(s);
+                if(s!=null){
+                    mSkipperView.setText(s.getSkipper());
+                    mTogtView.setText(s.getName());
+                    //mBesaetningView.setText(s);
+                }
+
             }
         };
 
@@ -107,13 +108,20 @@ public class Main_akt extends AppCompatActivity {
         final Observer<Etape> etapeObserver = new Observer<Etape>() {
             @Override
             public void onChanged(Etape s) {
-                mBesaetningView.setText(Integer.toString((int)s.getId()));
+
+                if(s!=null) {
+                    mBesaetningView.setText(Integer.toString((int) s.getId()));
+                }
             }
         };
 
        MutableLiveData<Etape> etapeData = AktivTogt.getCurrentEtape();
         //Adding observer to veriable currentEtape in GlobalStore
        etapeData.observe(this,etapeObserver);
+
+
+
+
 
 */
         configureNavigationDrawer();
