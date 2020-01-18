@@ -60,48 +60,6 @@ public class TabLayout_frag extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
 
-
-//
-//        ArrayList<Logpunkt> first = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            Logpunkt logpunkt = new Logpunkt();
-//            logpunkt.setDate(new Date(System.currentTimeMillis()));
-//            logpunkt.setKurs(100);
-//            logpunkt.setSejlfoering("ag");
-//            logpunkt.setNote("Et eller andet.");
-//            logpunkt.setSejlfoering("NNØ");
-//            logpunkt.setNote("Dette er en note");
-//            first.add(logpunkt);
-//        }
-//
-//        ArrayList<Logpunkt> second = new ArrayList<>();
-//
-//        for (int i = 0; i < 10; i++) {
-//            Logpunkt logpunkt = new Logpunkt();
-//            logpunkt.setDate(new Date(System.currentTimeMillis()));
-//            logpunkt.setKurs(100);
-//            logpunkt.setSejlfoering("ag");
-//            logpunkt.setNote("Et eller andet.");
-//            logpunkt.setSejlfoering("NNØ");
-//            logpunkt.setNote("Dette er en note");
-//            second.add(logpunkt);
-//        }
-//        ArrayList<Logpunkt> third = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            Logpunkt logpunkt = new Logpunkt();
-//            logpunkt.setDate(new Date(System.currentTimeMillis()));
-//            logpunkt.setKurs(100);
-//            logpunkt.setSejlfoering("ag");
-//            logpunkt.setNote("Et eller andet.");
-//            logpunkt.setSejlfoering("NNØ");
-//            logpunkt.setNote("Dette er en note");
-//            third.add(logpunkt);
-//        }
-//
-//        etapper.add(first);
-//        etapper.add(second);
-//        etapper.add(third);
-
         TabLayout tabLayout;
         final ViewPager viewPager;
         PageAdapter pageAdapter;
