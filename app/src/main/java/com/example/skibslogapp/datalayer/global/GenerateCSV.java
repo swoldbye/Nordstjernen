@@ -14,10 +14,10 @@ import java.util.List;
 
 public class GenerateCSV {
     Context Contex;
-    public StringBuilder make(Context cont){
+    public StringBuilder make(Context cont, int Togt, int Etape){
         //TODO: consider to implement this so that we do not need to hava a context
         Contex = cont;
-        ArrayList<LogPunktStringDTO> logs = getTogtFromDB();
+        ArrayList<LogPunktStringDTO> logs = getTogtFromDB(Togt, Etape);
         StringBuilder data = new StringBuilder();
         data.append("TogtID,EtapeID,Dato, Roere, vindretning, vindhastighed, StroemRetning, Kurs, Note, MandOverBord, BredeGrad, HoejdeGrad, SejlFoering,Sejlstilling");
         for (int i = 0; i < logs.size(); i++) {
@@ -30,7 +30,7 @@ public class GenerateCSV {
         return data;
     }
 
-    public ArrayList<LogPunktStringDTO> getTogtFromDB(){
+    public ArrayList<LogPunktStringDTO> getTogtFromDB(int Togt, int Etape){
         /**
          @param logData a list with one string pr. log point, ready to be put into a .csv file
          */
@@ -46,11 +46,11 @@ public class GenerateCSV {
         EtapeDAO dao = new EtapeDAO(Contex);
         //Todo: this needs to take the togt the User wants to export.
         //not just togt nr. 1.
-        List<Etape> etappen = dao.getEtaper(dbTogter.get(0));
+        List<Etape> etappen = dao.getEtaper(dbTogter.get(Togt));
 
         //Getting the Logs
         LogpunktDAO logs = new LogpunktDAO(Contex);
-        List<Logpunkt> Logs = logs.getLogpunkter(etappen.get(0));
+        List<Logpunkt> Logs = logs.getLogpunkter(etappen.get(Etape));
 
         //=============================================================
         /** @author Claes
