@@ -55,6 +55,7 @@ public class UdtagData_frag extends Fragment implements View.OnClickListener {
             Context context = getActivity();
             //saving the file into device
             FileOutputStream out = context.openFileOutput("EtapeData.csv", Context.MODE_PRIVATE);
+            //out.write('\ufeff'); //this was intended for allowing utf-8 in the csv file.
             out.write((data.toString()).getBytes());
             out.close();
 

@@ -2,12 +2,16 @@ package com.example.skibslogapp.etapeoversigt;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -26,6 +30,7 @@ import android.widget.Toast;
 
 import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.datalayer.global.GenerateCSV;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Etape;
@@ -33,6 +38,8 @@ import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -80,8 +87,9 @@ public class EtapeOversigt_frag extends Fragment {
                 switch (item.getItemId()){
 
                     case R.id.exportTogt:
-
+                        exportData();
                         Toast.makeText(getActivity(),"Togt exportet",Toast.LENGTH_SHORT).show();
+
                         return true;
 
                     case R.id.deleteTogt:
@@ -213,5 +221,39 @@ public class EtapeOversigt_frag extends Fragment {
         etaper.add(newEtape);
         listAdapter.updateEtapeList(etaper);
         recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
+    }
+
+    public void exportData() {
+        //generate data
+        GenerateCSV csvdata = new GenerateCSV();
+        StringBuilder data = csvdata.make(getContext(),0,0);
+
+        /**
+         * @author Claes
+         * below we gernerate a CSV file form a String and then export it
+         */
+        try {
+            Context context = getActivity();
+            //saving the file into device
+            FileOutputStream out = context.openFileOutput("EtapeData.csv", Context.MODE_PRIVATE);
+            //out.write('\ufeff'); //this was intended for allowing utf-8 in the csv file.
+            out.write((data.toString()).getBytes());
+            out.close();
+
+            //exporting
+            File filelocation = new File(context.getFilesDir(), "EtapeData.csv");
+            Uri path = FileProvider.getUriForFile(context, "com.example.exportcsv.fileprovider", filelocation);
+            Intent fileIntent = new Intent(Intent.ACTION_SEND);
+            fileIntent.setType("text/csv");
+            fileIntent.putExtra(Intent.EXTRA_SUBJECT, "EtapeData");
+            fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            fileIntent.putExtra(Intent.EXTRA_STREAM, path);
+            startActivity(Intent.createChooser(fileIntent, "Send mail"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

@@ -15,7 +15,6 @@ public class GenerateCSV {
 
         Contex = cont;
         ArrayList<LogPunktStringDTO> logs = getEtapeFromDB(cont, Togt, Etape);
-
         //Making a string for the CSV file
         StringBuilder data = new StringBuilder();
         data.append("TogtID,EtapeID,Dato,Roere,vindretning,vindhastighed,StroemRetning,Kurs,Note,MandOverBord,BredeGrad,LeangdeGrad,SejlFoering,Sejlstilling");
