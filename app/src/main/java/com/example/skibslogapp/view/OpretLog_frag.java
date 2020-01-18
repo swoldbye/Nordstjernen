@@ -109,18 +109,12 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
-        LogOversigt_frag logOversigt_frag;
-        FragmentManager fragmentManager;
-        FragmentTransaction fragmentTransaction;
-
-
         if (v == opretButton || v == mob) {
-            createLogpunkt();
+            createLogpunkt(v == mob);
         }
     }
 
-    private void createLogpunkt() {
+    private void createLogpunkt(boolean mandOverBord) {
         // Fetching time ---------------------------------------------------------------
         String timeStr = logVM.getTime();
 
@@ -145,6 +139,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         logpunkt.setKurs(logVM.getCourse());
         logpunkt.setNote( logVM.getNoteTxt() );
         logpunkt.setPosition(testCoordinates.getKoordinates());
+        logpunkt.setMandOverBord(mandOverBord);
 
         LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
         logpunktDAO.addLogpunkt(GlobalTogt.getEtape(getContext()), logpunkt);
