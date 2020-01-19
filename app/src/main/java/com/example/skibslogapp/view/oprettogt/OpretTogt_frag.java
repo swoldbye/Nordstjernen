@@ -1,7 +1,9 @@
 package com.example.skibslogapp.view.oprettogt;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
+import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
@@ -30,6 +33,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
     private MaterialBetterSpinner betterSpinner;
     private EditText togtName, skipper, startDest;
     private View opretBtn;
+    private View annullerText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,8 +42,10 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         togtName = view.findViewById(R.id.togtNavn);
         skipper = view.findViewById(R.id.skipperEdit);
         startDest = view.findViewById(R.id.startDestEdit);
-        opretBtn = view.findViewById(R.id.opretBtn);
+        opretBtn = view.findViewById(R.id.oprettogt_opretbutotn);
         opretBtn.setOnClickListener(this);
+        annullerText = view.findViewById(R.id.oprettogt_annuller);
+        annullerText.setOnClickListener(this);
 
         ArrayAdapter<String> dropDownShip = new ArrayAdapter<String>(this.getContext(),
                 android.R.layout.simple_dropdown_item_1line, skibsListe);
@@ -67,8 +73,11 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         }else if (view == opretBtn && skipper.length() <= 0){
             this.skipper.setError("Der skal intastes et navn på skipperen!");
 
-        }else if (view == opretBtn && togtStartDest.length() <= 0){
+        }else if (view == opretBtn && togtStartDest.length() <= 0) {
             startDest.setError("Vælg hvor togtet skal startes fra!");
+
+        }else if (view == annullerText){
+            getActivity().getSupportFragmentManager().popBackStack();
 
         }else {
             if (view == opretBtn){
@@ -92,17 +101,11 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
                 new EtapeDAO(getContext()).addEtape(togt, etape);
 
                 Toast.makeText(this.getContext(),"Togt oprettet!",Toast.LENGTH_LONG).show();
-                changeFragment(togtOversigt_frag);
+
+                getActivity().getSupportFragmentManager().popBackStack();
             }
         }
     }
 
-
-    private void changeFragment(Fragment fragment){
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragContainer,fragment);
-        fragmentTransaction.commit();
-    }
 
 }

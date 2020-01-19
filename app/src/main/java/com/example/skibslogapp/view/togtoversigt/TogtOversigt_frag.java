@@ -52,22 +52,11 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener 
      */
     @Override
     public void onClick(View v) {
-        OpretTogt_frag opretTogt_frag = new OpretTogt_frag();
-        changeFragment(opretTogt_frag);
+        getActivity().getSupportFragmentManager()
+            .beginTransaction()
+            .setCustomAnimations(R.anim.slide_upslow2, R.anim.slide_upslow, R.anim.slide_downslow2, R.anim.slide_downslow)
+            .add(R.id.fragContainer, new OpretTogt_frag())
+            .addToBackStack(null)
+            .commit();
     }
-
-    /**
-     * Helper function for the onClick() function.
-     *
-     * @param fragment The fragment that will be changed to.
-     */
-    private void changeFragment(Fragment fragment){
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragContainer,fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
-
-
 }

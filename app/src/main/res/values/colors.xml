@@ -12,5 +12,6 @@
     <color name="black">#08000000</color>
     <color name="insideCardSeparator">#9CB0C0</color>
     <color name="red">#FF0000</color>
+    <color name="greyDark">#999999</color>
 
 </resources>
