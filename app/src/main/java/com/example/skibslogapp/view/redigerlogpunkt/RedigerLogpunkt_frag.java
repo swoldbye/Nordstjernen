@@ -1,16 +1,30 @@
 package com.example.skibslogapp.view.redigerlogpunkt;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.model.Logpunkt;
+import com.example.skibslogapp.view.opretLog.LogCourse_frag;
+import com.example.skibslogapp.view.opretLog.LogNote_frag;
+import com.example.skibslogapp.view.opretLog.LogSailPosAndRowers_frag;
+import com.example.skibslogapp.view.opretLog.LogSails_frag;
+import com.example.skibslogapp.view.opretLog.LogWaterCurrent_frag;
+import com.example.skibslogapp.view.opretLog.LogWind_frag;
 
 public class RedigerLogpunkt_frag extends Fragment {
     private TextView    time,
@@ -25,14 +39,6 @@ public class RedigerLogpunkt_frag extends Fragment {
                         course,
                         note;
     private Logpunkt logpunkt;
-    ConstraintLayout    timeConta,
-                        positionConta,
-                        windConta,
-                        waterConta,
-                        sailsOrRowersConta,
-                        sailsConta,
-                        courseConta,
-                        noteConta;
 
     public RedigerLogpunkt_frag(Logpunkt logpunkt){
         this.logpunkt = logpunkt;
@@ -55,14 +61,27 @@ public class RedigerLogpunkt_frag extends Fragment {
         course = view.findViewById(R.id.editLogCourseInfo);
         note = view.findViewById(R.id.editLogNoteInfo);
 
-        timeConta = view.findViewById(R.id.editLogTimeContainer);
-        positionConta = view.findViewById(R.id.editLogPositionContainer);
+        ConstraintLayout
+                windConta,
+                waterConta,
+                sailsOrRowersConta,
+                sailsConta,
+                courseConta,
+                noteConta;
+
         windConta = view.findViewById(R.id.editLogWindContainer);
         waterConta = view.findViewById(R.id.editLogWaterCurrentContainer);
         sailsOrRowersConta = view.findViewById(R.id.editLogSailsOrRowersContainer);
         sailsConta = view.findViewById(R.id.editLogSailsPositionContainer);
         courseConta = view.findViewById(R.id.editLogCourseContainer);
         noteConta = view.findViewById(R.id.editLogNoteContainer);
+
+        windConta.setOnClickListener(v -> openFragmentDialog(R.id.fragment_opretLog_wind, new LogWind_frag()));
+        waterConta.setOnClickListener(v -> openFragmentDialog(R.id.fragment_opretLog_waterCurrent, new LogWaterCurrent_frag()));
+        sailsOrRowersConta.setOnClickListener(v -> openFragmentDialog(R.id.fragment_opretLog_sailsAndRowers, new LogSailPosAndRowers_frag()));
+        sailsConta.setOnClickListener(v -> openFragmentDialog(R.id.fragment_opretLog_sails, new LogSails_frag()));
+        courseConta.setOnClickListener(v -> openFragmentDialog(R.id.fragment_opretLog_course, new LogCourse_frag()));
+        noteConta.setOnClickListener(v -> openFragmentDialog(R.id.fragment_opretLog_note, new LogNote_frag()));
 
         updateInformation();
 
@@ -86,5 +105,71 @@ public class RedigerLogpunkt_frag extends Fragment {
         sails.setText(logpunkt.getSejloeringString() != null && !logpunkt.getSejloeringString().equals("") ? logpunkt.getSejloeringString() : "-");
         course.setText(logpunkt.getKursString() != null && !logpunkt.getKursString().equals("") ? logpunkt.getKursString() : "-");
         note.setText(logpunkt.getNote() != null && !logpunkt.getNote().equals("") ? logpunkt.getNote() : "-");
+    }
+
+    private void openFragmentDialog(int fragID, Fragment frag) {
+        System.out.println("prik");
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+
+        EditDialogFragment edf = EditDialogFragment.newInstance(fragID, frag);
+        edf.show(ft, "testshow");
+    }
+
+    /**
+     * Dialog box to show fragment to edit information
+     */
+    public static class EditDialogFragment extends DialogFragment {
+        private int fragID;
+        private Fragment frag;
+
+        private EditDialogFragment(int fragID, Fragment frag) {
+            this.fragID = fragID;
+            this.frag = frag;
+        }
+
+        public static EditDialogFragment newInstance(int fragID, Fragment frag) {
+            System.out.println("newInstance initiated");
+//            Fragment frag = view.findViewById(fragID);
+
+            Bundle args = new Bundle();
+
+            EditDialogFragment fragment = new EditDialogFragment(fragID, frag);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Nullable
+        @Override
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            System.out.println("onCreateView initiated");
+
+            return inflater.inflate(R.layout.fragment_rediger_logpunkt_dialogfragment, container);
+//            return super.onCreateView(inflater, container, savedInstanceState);
+        }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+
+            Dialog dialog = getDialog();
+            if (dialog != null) {
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+        }
+
+        @Override
+        public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+            System.out.println("onViewCreated initiated");
+//            frag = this.getChildFragmentManager().beginTransaction().add(frag).commit();
+//            FragmentTransaction fragTrans = getFragmentManager().beginTransaction();
+//            fragTrans.add(R.id.fragment_opretLog_wind, new LogWind_frag());
+//            fragTrans.commit();
+//            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentManager fragmentManager = getChildFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.editFragContainer, frag);
+            fragmentTransaction.commit();
+        }
     }
 }

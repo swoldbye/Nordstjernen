@@ -101,7 +101,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/editLogWind"
@@ -145,7 +147,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/editLogWaterCurrent"
@@ -187,7 +191,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/editLogSailsOrRowers"
@@ -221,7 +227,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/editLogSailsPosition"
@@ -254,7 +262,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/editLogCourse"
@@ -288,7 +298,9 @@
             android:layout_height="fill_parent"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            tools:layout_editor_absoluteY="173dp">
+            tools:layout_editor_absoluteY="173dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/editLogNote"
