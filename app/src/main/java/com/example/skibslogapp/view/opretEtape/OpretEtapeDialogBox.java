@@ -22,6 +22,7 @@ import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,8 @@ import java.util.List;
 
 public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View.OnClickListener {
 
-    private EditText editSkipper, editStartDest, navnInput;
+    private TextInputLayout skipperInput, startDestInput;
+    private EditText navnInput;
     private Togt togt;
     private View addButton;
     private Etape previousEtape;
@@ -69,8 +71,9 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         startEtape = view.findViewById(R.id.opretEtape_start_button);
         startEtape.setOnClickListener(this);
 
-        editSkipper = view.findViewById(R.id.inputSkipper);
-        editStartDest = view.findViewById(R.id.inputStartDest);
+        skipperInput = view.findViewById(R.id.opretetape_skipper);
+        startDestInput = view.findViewById(R.id.opretetape_startdest);
+
         navnInput = view.findViewById(R.id.navnIndput);
 
         addButton = view.findViewById(R.id.addButton);
@@ -94,8 +97,8 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
 
     @Override
     public void onClick(View v) {
-        editSkipper.setError(null);
-        editStartDest.setError(null);
+        skipperInput.setError(null);
+        startDestInput.setError(null);
         navnInput.setError(null);
 
         if (v == annullerEtape) {
@@ -105,34 +108,37 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         }
 
         if (v == startEtape) {
-            String skipper = editSkipper.getText().toString();
-            String startDest = editStartDest.getText().toString();
+            String skipper = skipperInput.getEditText().getText().toString();
+            String startDest = startDestInput.getEditText().getText().toString();
 
-            /*
-            Ensure that we have a slutdestination for the former previousEtape
-             */
             if (startDest.length() <= 0) {
-                editStartDest.setError("Der skal indtastes en start destinationt!");
+                startDestInput.setError("Der skal indtastes en start destinationt!");
                 return;
             }
-                EtapeDAO etapeDAO = new EtapeDAO(getContext());
 
-                // Create new Etape
-                Etape newEtape = new Etape();
-                newEtape.setBesaetning(beseatningsList);
-                newEtape.setSkipper(skipper);
-                newEtape.setStartDestination(startDest);
-                etapeDAO.addEtape(togt, newEtape);
+            if ( skipper.length() <= 0){
+                skipperInput.setError("Der skal indtastes en skipper!");
+                return;
+            }
 
-                // Update previous Etape
-                previousEtape.setStatus(Etape.Status.FINISHED);
-                previousEtape.setSlutDestination(startDest);
-                etapeDAO.updateEtape(previousEtape);
+            EtapeDAO etapeDAO = new EtapeDAO(getContext());
 
-                scrollTobuttom();
-                getFragmentManager().beginTransaction()
-                        .remove(this)
-                        .commit();
+            // Create new Etape
+            Etape newEtape = new Etape();
+            newEtape.setBesaetning(beseatningsList);
+            newEtape.setSkipper(skipper);
+            newEtape.setStartDestination(startDest);
+            etapeDAO.addEtape(togt, newEtape);
+
+            // Update previous Etape
+            previousEtape.setStatus(Etape.Status.FINISHED);
+            previousEtape.setSlutDestination(startDest);
+            etapeDAO.updateEtape(previousEtape);
+
+            scrollTobuttom();
+            getFragmentManager().beginTransaction()
+                    .remove(this)
+                    .commit();
         }
 
 
@@ -165,7 +171,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
      */
     private void showSkipper(){
         if(skipper.length() > 0){
-            editSkipper.setText(skipper);
+            skipperInput.getEditText().setText(skipper);
         }
     }
 
@@ -174,7 +180,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
      */
     private void showSlutDestination(){
         if(startDestination != null && startDestination.length()>0){
-            editStartDest.setText(startDestination);
+            startDestInput.getEditText().setText(startDestination);
         }
     }
 
