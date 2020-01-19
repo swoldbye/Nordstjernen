@@ -35,6 +35,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
     private View opretBtn;
     private View annullerText;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_opret_togt, container, false);
@@ -46,6 +47,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         opretBtn.setOnClickListener(this);
         annullerText = view.findViewById(R.id.oprettogt_annuller);
         annullerText.setOnClickListener(this);
+
 
         ArrayAdapter<String> dropDownShip = new ArrayAdapter<String>(this.getContext(),
                 android.R.layout.simple_dropdown_item_1line, skibsListe);
