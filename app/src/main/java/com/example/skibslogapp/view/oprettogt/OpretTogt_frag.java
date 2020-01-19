@@ -48,7 +48,6 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         annullerText = view.findViewById(R.id.oprettogt_annuller);
         annullerText.setOnClickListener(this);
 
-
         ArrayAdapter<String> dropDownShip = new ArrayAdapter<String>(this.getContext(),
                 android.R.layout.simple_dropdown_item_1line, skibsListe);
         betterSpinner = view.findViewById(R.id.skibsListe);
@@ -63,6 +62,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         togtName.setError(null);
         skipper.setError(null);
         startDest.setError(null);
+        betterSpinner.setError(null);
 
         String ship = betterSpinner.getText().toString();
         String togtet = togtName.getText().toString();
@@ -77,6 +77,9 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
         }else if (view == opretBtn && togtStartDest.length() <= 0) {
             startDest.setError("Vælg hvor togtet skal startes fra!");
+
+        }else if (view == opretBtn && ship.length() <= 0){
+            betterSpinner.setError("Vælg et skib!");
 
         }else if (view == annullerText){
             getActivity().getSupportFragmentManager().popBackStack();
@@ -109,6 +112,4 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
             }
         }
     }
-
-
 }

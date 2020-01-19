@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -89,14 +90,14 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         scrollTobuttom();
 
         return builder.create();
-
     }
-
-
-
 
     @Override
     public void onClick(View v) {
+        editSkipper.setError(null);
+        editStartDest.setError(null);
+        navnInput.setError(null);
+
         if (v == annullerEtape) {
             getFragmentManager().beginTransaction()
                     .remove(this)
