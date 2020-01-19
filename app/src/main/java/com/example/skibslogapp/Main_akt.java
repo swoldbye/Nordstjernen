@@ -1,5 +1,6 @@
 package com.example.skibslogapp;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -17,10 +19,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
 import com.example.skibslogapp.model.Togt;
@@ -41,6 +47,8 @@ import com.google.android.material.navigation.NavigationView;
  */
 public class Main_akt extends AppCompatActivity {
 
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
     private DrawerLayout drawerLayout;
     private OpretLog_frag opretLog_frag;
     private TogtOversigt_frag togtOversigt_frag;
@@ -55,7 +63,7 @@ public class Main_akt extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-//      Set Toolbar
+//      Sæt Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -64,6 +72,7 @@ public class Main_akt extends AppCompatActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
+
 
         configureNavigationDrawer();
 
@@ -219,9 +228,5 @@ public class Main_akt extends AppCompatActivity {
     public void showToolbar() {
         this.getSupportActionBar().show();
     }
-
-
-
-
 
 }
