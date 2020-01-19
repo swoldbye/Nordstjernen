@@ -1,12 +1,12 @@
 package com.example.skibslogapp.view.redigerlogpunkt;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +16,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.model.Logpunkt;
@@ -23,6 +24,7 @@ import com.example.skibslogapp.view.opretLog.LogCourse_frag;
 import com.example.skibslogapp.view.opretLog.LogNote_frag;
 import com.example.skibslogapp.view.opretLog.LogSailPosAndRowers_frag;
 import com.example.skibslogapp.view.opretLog.LogSails_frag;
+import com.example.skibslogapp.view.opretLog.LogViewModel;
 import com.example.skibslogapp.view.opretLog.LogWaterCurrent_frag;
 import com.example.skibslogapp.view.opretLog.LogWind_frag;
 
@@ -39,6 +41,7 @@ public class RedigerLogpunkt_frag extends Fragment {
                         course,
                         note;
     private Logpunkt logpunkt;
+    private LogViewModel logVM;
 
     public RedigerLogpunkt_frag(Logpunkt logpunkt){
         this.logpunkt = logpunkt;
@@ -48,6 +51,10 @@ public class RedigerLogpunkt_frag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rediger_logpunkt, container, false);
         ((TextView) view.findViewById(R.id.test_text)).setText(logpunkt.toString());
+        logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
+        logVM.reset();
+
+        logVM.prepareEditableCopy(logpunkt);
 
         time = view.findViewById(R.id.editLogTimeInfo);
         latitude = view.findViewById(R.id.editLogLatitude);
@@ -109,33 +116,39 @@ public class RedigerLogpunkt_frag extends Fragment {
 
     private void openFragmentDialog(int fragID, Fragment frag) {
         System.out.println("prik");
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
 
+        EditDialogFragment edf = EditDialogFragment.newInstance(frag);
 
-        EditDialogFragment edf = EditDialogFragment.newInstance(fragID, frag);
-        edf.show(ft, "testshow");
+        edf.show(ft, "edf");
+    }
+
+    private void cancel() {
+        System.out.println("Cancel called");
+        logVM.prepareEditableCopy(logpunkt); //Resets all the information
+        updateInformation();
+    }
+    private void save() {
+        logpunkt.setInformation(logVM);
+        updateInformation();
     }
 
     /**
      * Dialog box to show fragment to edit information
      */
     public static class EditDialogFragment extends DialogFragment {
-        private int fragID;
         private Fragment frag;
 
-        private EditDialogFragment(int fragID, Fragment frag) {
-            this.fragID = fragID;
+        private EditDialogFragment(Fragment frag) {
             this.frag = frag;
         }
 
-        public static EditDialogFragment newInstance(int fragID, Fragment frag) {
+        public static EditDialogFragment newInstance(Fragment frag) {
             System.out.println("newInstance initiated");
-//            Fragment frag = view.findViewById(fragID);
-
             Bundle args = new Bundle();
-
-            EditDialogFragment fragment = new EditDialogFragment(fragID, frag);
+            EditDialogFragment fragment = new EditDialogFragment(frag);
             fragment.setArguments(args);
+
             return fragment;
         }
 
@@ -143,14 +156,17 @@ public class RedigerLogpunkt_frag extends Fragment {
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             System.out.println("onCreateView initiated");
-
             return inflater.inflate(R.layout.fragment_rediger_logpunkt_dialogfragment, container);
-//            return super.onCreateView(inflater, container, savedInstanceState);
         }
 
         @Override
         public void onStart() {
             super.onStart();
+
+            TextView cancelTxt = getView().findViewById(R.id.editLogpunktDialogCancel);
+            cancelTxt.setOnClickListener(v -> cancelEdit());
+            Button saveBtn = getView().findViewById(R.id.editLogpunktDialogSave);
+            saveBtn.setOnClickListener(v -> saveEdit());
 
             Dialog dialog = getDialog();
             if (dialog != null) {
@@ -161,15 +177,37 @@ public class RedigerLogpunkt_frag extends Fragment {
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             System.out.println("onViewCreated initiated");
-//            frag = this.getChildFragmentManager().beginTransaction().add(frag).commit();
-//            FragmentTransaction fragTrans = getFragmentManager().beginTransaction();
-//            fragTrans.add(R.id.fragment_opretLog_wind, new LogWind_frag());
-//            fragTrans.commit();
-//            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             FragmentManager fragmentManager = getChildFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.editFragContainer, frag);
+            fragmentTransaction.replace(R.id.editLogpunktFragContainer, frag);
             fragmentTransaction.commit();
+        }
+
+        @Override
+        public void onCancel(@NonNull DialogInterface dialog) {
+            RedigerLogpunkt_frag frag = (RedigerLogpunkt_frag) getParentFragment();
+            if(frag != null){
+                System.out.println("Parent found, cancel information");
+                frag.cancel();
+            }
+        }
+        /**
+         * Ikke kalde dismiss på Dialog men DialogFragment
+         */
+
+        private boolean cancelEdit() {
+            getDialog().cancel();
+            return false;
+        }
+
+        private boolean saveEdit() {
+            RedigerLogpunkt_frag frag = (RedigerLogpunkt_frag) getParentFragment();
+            if(frag != null){
+                System.out.println("Parent found, save information");
+                frag.save();
+            }
+            dismiss();
+            return false;
         }
     }
 }

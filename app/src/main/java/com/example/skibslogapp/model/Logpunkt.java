@@ -1,6 +1,7 @@
 package com.example.skibslogapp.model;
 
 import com.example.skibslogapp.model.Position.Position;
+import com.example.skibslogapp.view.opretLog.LogViewModel;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -300,5 +301,18 @@ public class Logpunkt {
                 roere >= 0 ? roere : "-",
                 note != null ? note : "-"
         );
+    }
+
+    public void setInformation(LogViewModel logVM) {
+        this.setVindretning( logVM.getWindDirection() );
+        this.setVindhastighed( logVM.getWindSpeed() );
+        this.setStroemRetning( logVM.getWaterCurrentDirection() );
+        this.setStroemhastighed( logVM.getWaterCurrentSpeed() );
+        this.setSejlstilling( logVM.getSailPosition() );
+        this.setRoere(logVM.getCurrRowers());
+        this.setSejlfoering( logVM.getSails().equals("") ?
+                logVM.getSails().concat(logVM.getOrientation()) : logVM.getSails().concat("-" + logVM.getOrientation() ));
+        this.setKurs(logVM.getCourse());
+        this.setNote( logVM.getNoteTxt() );
     }
 }

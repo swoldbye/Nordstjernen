@@ -44,15 +44,20 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
 
         //Strømningshastighed
         waterCurrentSpeed = view.findViewById(R.id.strømhastighed_edittext);
-        waterCurrentSpeed.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(waterCurrentSpeed.getText().length() != 0)
-                    logVM.setWaterCurrentSpeed(Integer.parseInt(waterCurrentSpeed.getText().toString()));
-            }
+        waterCurrentSpeed.setOnFocusChangeListener((v, hasFocus) -> {
+            if(waterCurrentSpeed.getText().length() != 0)
+                logVM.setWaterCurrentSpeed(Integer.parseInt(waterCurrentSpeed.getText().toString()));
         });
 
+        updateViewInfo();
+
         return view;
+    }
+
+    private void updateViewInfo() {
+        waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
+        currentResetBtn.setVisibility(waterCurrentDirection.getText() != null && waterCurrentDirection.getText().length() != 0 ? View.VISIBLE : View.INVISIBLE);
+        waterCurrentSpeed.setText(Integer.toString(logVM.getWaterCurrentSpeed()));
     }
 
     @Override
@@ -66,6 +71,19 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
             waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
             currentResetBtn.setVisibility(View.INVISIBLE);
         }
+    }
+
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//
+//    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        logVM.setWaterCurrentSpeed(Integer.parseInt(waterCurrentSpeed.getText().toString()));
+
     }
 
     private void strømDirectionLogic(String btnDirection, String counterDirection) {

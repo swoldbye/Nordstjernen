@@ -134,16 +134,17 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         // Create Logpunkt from time in calendar
         Logpunkt logpunkt = new Logpunkt( new Date(calendar.getTimeInMillis()) );
-        logpunkt.setVindretning( logVM.getWindDirection() );
-        logpunkt.setVindhastighed( logVM.getWindSpeed() );
-        logpunkt.setStroemRetning( logVM.getWaterCurrentDirection() );
-        logpunkt.setStroemhastighed( logVM.getWaterCurrentSpeed() );
-        logpunkt.setSejlstilling( logVM.getSailPosition() );
-        logpunkt.setRoere(logVM.getCurrRowers());
-        logpunkt.setSejlfoering( logVM.getSails().equals("") ?
-                logVM.getSails().concat(logVM.getOrientation()) : logVM.getSails().concat("-" + logVM.getOrientation() ));
-        logpunkt.setKurs(logVM.getCourse());
-        logpunkt.setNote( logVM.getNoteTxt() );
+        logpunkt.setInformation(logVM);
+//        logpunkt.setVindretning( logVM.getWindDirection() );
+//        logpunkt.setVindhastighed( logVM.getWindSpeed() );
+//        logpunkt.setStroemRetning( logVM.getWaterCurrentDirection() );
+//        logpunkt.setStroemhastighed( logVM.getWaterCurrentSpeed() );
+//        logpunkt.setSejlstilling( logVM.getSailPosition() );
+//        logpunkt.setRoere(logVM.getCurrRowers());
+//        logpunkt.setSejlfoering( logVM.getSails().equals("") ?
+//                logVM.getSails().concat(logVM.getOrientation()) : logVM.getSails().concat("-" + logVM.getOrientation() ));
+//        logpunkt.setKurs(logVM.getCourse());
+//        logpunkt.setNote( logVM.getNoteTxt() );
         logpunkt.setPosition(testCoordinates.getKoordinates());
 
         LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
