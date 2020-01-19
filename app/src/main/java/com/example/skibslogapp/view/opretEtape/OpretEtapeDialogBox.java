@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,7 +39,8 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     RecyclerView.Adapter adapter;
     private String skipper = "";
     private String startDestination = "";
-    private Button annulerEtape, startEtape;
+    private TextView annulerEtape;
+    private Button startEtape;
     private Etape newEtape;
 
     public OpretEtapeDialogBox(Togt togt, Etape etape) {
