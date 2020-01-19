@@ -2,6 +2,7 @@ package com.example.skibslogapp.etapeoversigt;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,7 +94,15 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
         void setEtape(Etape etape, int listIndex){
             this.etape = etape;
             String indexString = Integer.toString(listIndex);
+
+            String skipper = "<b>"+etape.getSkipper()+"</b>";
+            int besaetningTal = etape.getBesaetning().size();
+            String besaetning = "<b>"+besaetningTal+"</b>";
+
             ((TextView) view.findViewById(R.id.etape_number_text)).setText(indexString);
+
+            ((TextView) view.findViewById(R.id.skipperTextEtapeKort)).setText(Html.fromHtml("Skipper: "+skipper));
+            ((TextView) view.findViewById(R.id.besaetningTextEtapeKort)).setText(Html.fromHtml("Besætning: "+besaetning));
 
             // Change of card (entire card color, number text color and number container (number card) color)
             Resources res = GlobalContext.get().getResources();

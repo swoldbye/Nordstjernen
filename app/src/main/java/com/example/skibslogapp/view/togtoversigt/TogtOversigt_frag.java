@@ -42,7 +42,7 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener 
         RecyclerView.Adapter adapter = new TogtListAdapter(togtList,getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
+        recyclerView.smoothScrollToPosition(adapter.getItemCount()-1);
         return view;
     }
 
