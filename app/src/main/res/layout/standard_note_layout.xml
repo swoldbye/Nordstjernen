@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    app:cardBackgroundColor="@color/lightGrey"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="3dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="25"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tidTextView"
+                android:layout_width="40sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="tid"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/vindretningTextView"
+                android:layout_width="40sp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="vind"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/sejlføringTextView"
+                android:layout_width="40sp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="føring"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/sejlstillingTextView"
+                android:layout_width="40sp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="stilling"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/kursTextView"
+                android:layout_width="40sp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="kurs"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/NoteTextView"
+                android:layout_width="40sp"
+                android:layout_height="35sp"
+                android:layout_weight="8"
+                android:text="Here is an arbitrary note"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25sp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

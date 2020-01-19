@@ -35,6 +35,16 @@ public class Logpunkt {
 
 
 
+    public Logpunkt(Date date, String vindretning, int kurs, boolean mandOverBord, String sejlfoering, String sejlstilling, String stroem, String note){
+        this.date = date;
+        this.vindretning = vindretning;
+        this.kurs = kurs;
+        this.mandOverBord = mandOverBord;
+        this.sejlfoering = sejlfoering;
+        this.sejlstilling = sejlstilling;
+        this.note = note;
+    }
+
 
     private int hals = -1;
 
