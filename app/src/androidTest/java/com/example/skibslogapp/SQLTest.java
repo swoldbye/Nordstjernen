@@ -123,11 +123,30 @@ public class SQLTest {
         togtDAO.addTogt(togt);
         assertNull( observer.getTogt()  );
 
+        // Testing adds
+        assertNull( observer.getTogt()  );
         etapeDAO.addEtape(togt, etape);
-        assertTrue( observer.getTogt().equals(togt) );
+        assertEquals(observer.getTogt(), togt);
 
+        assertNull( observer.getTogt()  );
         logpunktDAO.addLogpunkt(etape, logpunkt);
-        assertTrue( observer.getTogt().equals(togt) );
+        assertEquals(observer.getTogt(), togt);
+
+        // Testing Updates
+        assertNull( observer.getTogt()  );
+        etape.setStatus(Etape.Status.FINISHED);
+        etapeDAO.updateEtape(etape);
+        assertEquals(observer.getTogt(), togt);
+
+
+        // Testing deletes
+        assertNull( observer.getTogt()  );
+        logpunktDAO.deleteLogpunkt(logpunkt);
+        assertEquals(observer.getTogt(), togt);
+
+        assertNull( observer.getTogt()  );
+        etapeDAO.deleteEtape(etape);
+        assertEquals(observer.getTogt(), togt);
 
         SQLiteConnector.enableTestMode(false, context);
     }
