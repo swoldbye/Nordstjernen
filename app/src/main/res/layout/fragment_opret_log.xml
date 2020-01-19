@@ -68,7 +68,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="bottom|start"
-                        android:backgroundTint="@color/mobRød"
+                        android:backgroundTint="@color/red"
                         android:clickable="true"
                         android:elevation="20dp"
                         android:focusable="true"
