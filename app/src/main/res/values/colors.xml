@@ -14,4 +14,5 @@
     <color name="insideCardSeparator">#9CB0C0</color>
     <color name="red">#e63900
     </color>
+    <color name="greyDark">#999999</color>
 </resources>
