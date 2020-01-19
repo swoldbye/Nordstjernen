@@ -49,7 +49,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
        //Setting the etape to active.
        newEtape.setStatus(Etape.Status.ACTIVE);
        skipper = etape.getSkipper();
-       startDestination= etape.getSlutDestination();
+
        beseatningsList = etape.getBesaetning();
        System.out.println("BesætningsListe" + beseatningsList.size());
     }
