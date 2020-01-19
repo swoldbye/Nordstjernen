@@ -44,6 +44,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     public OpretEtapeDialogBox(Togt togt, Etape etape) {
         this.togt = togt;
        this.etape = etape;
+
        etape.setStatus(Etape.Status.FINISHED);
        newEtape = new Etape();
        //Setting the etape to active.
@@ -102,25 +103,35 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     @Override
     public void onClick(View v) {
 
-        String navn =navnIndput.getText().toString();
+    String navn = navnIndput.getText().toString();
+    String skipper = editSkipper.getText().toString();
+    String startDest = editStartDest.getText().toString();
 
-        if(v == annulerEtape){
-            getFragmentManager().beginTransaction()
-                    .remove(this)
-                    .commit();
+    if (v == annulerEtape) {
+        getFragmentManager().beginTransaction()
+                .remove(this)
+                .commit();
+    }
+
+    if (v == startEtape) {
+
+        /*
+        Ensure that we have a slutdestination for the former etape
+         */
+        if (startDest.length() <= 0) {
+            editStartDest.setError("Der skal indtastes en start destinationt!");
+            return;
         }
 
-        if(v == startEtape){
-            String skipper = editSkipper.getText().toString();
-            String startDest = editStartDest.getText().toString();
             EtapeDAO etapeDAO = new EtapeDAO(getContext());
             newEtape.setBesaetning(beseatningsList);
             newEtape.setSkipper(skipper);
             newEtape.setStartDestination(startDest);
+            etape.setSlutDestination(startDest);
             //Update the previus etape to status  FINISHED
             etapeDAO.updateEtape(etape);
             //Adding the new etape to database - NB: The new etape is beeing active in the constructor OpretEtapeDialogBox
-            etapeDAO.addEtape(togt,newEtape);
+            etapeDAO.addEtape(togt, newEtape);
             scrollTobuttom();
             getFragmentManager().beginTransaction()
                     .remove(this)
@@ -128,21 +139,20 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
 
         }
 
-        if(v  == addButton) {
+        if (v == addButton) {
             if (navn.length() <= 0) {
-                navnIndput.setError("Der skal indtastes et navn til togtet!");
+                navnIndput.setError("Der skal indtastes et navn på et besætningsmedlem!");
                 return;
-            }else{
+            } else {
                 beseatningsList.add(navn);
                 System.out.println(navnIndput.getText().toString());
                 navnIndput.setText("");
                 adapter.notifyDataSetChanged();
-                besaetning.smoothScrollToPosition(adapter.getItemCount()-1);
+                besaetning.smoothScrollToPosition(adapter.getItemCount() - 1);
                 clearFocusOnDone(v);
             }
         }
     }
-
 
     /**
      * Makes the keyboard dissapere
