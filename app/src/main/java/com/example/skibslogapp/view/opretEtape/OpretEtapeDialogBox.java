@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,9 +43,11 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     private TextView annulerEtape;
     private Button startEtape;
     private Etape newEtape;
+    private EtapeDAO etapeDAO;
+
 
     public OpretEtapeDialogBox(Togt togt, Etape etape) {
-        this.togt = togt;
+       this.togt = togt;
        this.etape = etape;
 
        etape.setStatus(Etape.Status.FINISHED);
@@ -96,51 +99,50 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         scrollTobuttom();
 
         return builder.create();
-
     }
-
-
-
 
     @Override
     public void onClick(View v) {
 
-    String navn = navnIndput.getText().toString();
-    String skipper = editSkipper.getText().toString();
-    String startDest = editStartDest.getText().toString();
+        editSkipper.setError(null);
+        editStartDest.setError(null);
+        navnIndput.setError(null);
 
-    if (v == annulerEtape) {
-        getFragmentManager().beginTransaction()
-                .remove(this)
-                .commit();
-    }
+        String navn = navnIndput.getText().toString();
+        String skipper = editSkipper.getText().toString();
+        String startDest = editStartDest.getText().toString();
+        int besaetning = etape.getBesaetning().size();
 
-    if (v == startEtape) {
-
-        /*
-        Ensure that we have a slutdestination for the former etape
-         */
-        if (startDest.length() <= 0) {
-            editStartDest.setError("Der skal indtastes en start destinationt!");
-            return;
-        }
-
-            EtapeDAO etapeDAO = new EtapeDAO(getContext());
-            newEtape.setBesaetning(beseatningsList);
-            newEtape.setSkipper(skipper);
-            newEtape.setStartDestination(startDest);
-            etape.setSlutDestination(startDest);
-            //Update the previus etape to status  FINISHED
-            etapeDAO.updateEtape(etape);
-            //Adding the new etape to database - NB: The new etape is beeing active in the constructor OpretEtapeDialogBox
-            etapeDAO.addEtape(togt, newEtape);
-            scrollTobuttom();
+        if (v == annulerEtape) {
             getFragmentManager().beginTransaction()
                     .remove(this)
                     .commit();
+        }else if (v == startEtape && skipper.length() <= 0){
+            editSkipper.setError("Der skal indtastes en skipper!");
 
+        }else if (v == startEtape && startDest.length() <= 0){
+            editStartDest.setError("Der skal indtastes en start destination!");
+
+        }else if (v == startEtape && besaetning <= 0){
+            navnIndput.setError("Der er ikke tilføjet nogen besaetning til etapen!");
+
+        }else{
+            if (v == startEtape){
+                EtapeDAO etapeDAO = new EtapeDAO(getContext());
+                newEtape.setBesaetning(beseatningsList);
+                newEtape.setSkipper(skipper);
+                newEtape.setStartDestination(startDest);
+                etape.setSlutDestination(startDest);
+                //Update the previus etape to status  FINISHED
+                etapeDAO.updateEtape(etape);
+                //Adding the new etape to database - NB: The new etape is beeing active in the constructor OpretEtapeDialogBox
+                etapeDAO.addEtape(togt, newEtape);
+                scrollTobuttom();
+                getFragmentManager().beginTransaction()
+                        .remove(this)
+                        .commit();
+            }
         }
-
         if (v == addButton) {
             if (navn.length() <= 0) {
                 navnIndput.setError("Der skal indtastes et navn på et besætningsmedlem!");
@@ -150,10 +152,37 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
                 System.out.println(navnIndput.getText().toString());
                 navnIndput.setText("");
                 adapter.notifyDataSetChanged();
-                besaetning.smoothScrollToPosition(adapter.getItemCount() - 1);
+//                    besaetning.smoothScrollToPosition(adapter.getItemCount() - 1);
                 clearFocusOnDone(v);
             }
         }
+
+
+//        if (v == startEtape) {
+//
+//            /*
+//            Ensure that we have a slutdestination for the former etape
+//             */
+//            if (startDest.length() <= 0) {
+//                editStartDest.setError("Der skal indtastes en start destinationt!");
+//                return;
+//            }
+//
+//                EtapeDAO etapeDAO = new EtapeDAO(getContext());
+//                newEtape.setBesaetning(beseatningsList);
+//                newEtape.setSkipper(skipper);
+//                newEtape.setStartDestination(startDest);
+//                etape.setSlutDestination(startDest);
+//                //Update the previus etape to status  FINISHED
+//                etapeDAO.updateEtape(etape);
+//                //Adding the new etape to database - NB: The new etape is beeing active in the constructor OpretEtapeDialogBox
+//                etapeDAO.addEtape(togt, newEtape);
+//                scrollTobuttom();
+//                getFragmentManager().beginTransaction()
+//                        .remove(this)
+//                        .commit();
+//
+//            }
     }
 
     /**
