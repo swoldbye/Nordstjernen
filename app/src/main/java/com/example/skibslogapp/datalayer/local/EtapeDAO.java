@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class EtapeDAO {
@@ -89,54 +90,82 @@ public class EtapeDAO {
         Cursor cursor = database.rawQuery("SELECT * FROM etaper WHERE togt=" + togt.getId() + ";", null);
         // Load data from each row
         while (cursor.moveToNext()) {
-
-            int column = -1;
-
-            Etape etape = new Etape();
-            etape.setId(cursor.getInt(cursor.getColumnIndex("id")));
-            etape.setTogtId(cursor.getInt(cursor.getColumnIndex("togt")));
-
-            column = cursor.getColumnIndex("startDate");
-            if (!cursor.isNull(column)) {
-                etape.setStartDate(new Date(cursor.getLong(column)));
-            }
-
-            column = cursor.getColumnIndex("endDate");
-            if (!cursor.isNull(column)) {
-                etape.setEndDate(new Date(cursor.getLong(column)));
-            }
-
-            column = cursor.getColumnIndex("startDestination");
-            if (!cursor.isNull(column)) {
-                etape.setStartDestination(cursor.getString(column));
-            }
-
-            column = cursor.getColumnIndex("slutDestination");
-            if (!cursor.isNull(column)) {
-                etape.setSlutDestination(cursor.getString(column));
-            }
-
-            column = cursor.getColumnIndex("skipper");
-            if (!cursor.isNull(column)) {
-                etape.setSkipper(cursor.getString(column));
-            }
-
-            column = cursor.getColumnIndex("status");
-            if (!cursor.isNull(column)) {
-                // Converting integer value to boolean value
-                etape.setStatus(cursor.getInt(column));
-            }
-
-
-            etape.setBesaetning(besaetningToList(cursor.getString(cursor.getColumnIndex("besaetning"))));
-
-            //cursor.getColumnIndex("besaetning");
-
-            etaper.add(etape);
+            etaper.add(buildEtape(cursor));
         }
         cursor.close();
 
         return etaper;
+    }
+
+    /**
+     * Loads the Etape with the given Etape ID from the database.
+     *
+     * @param id ID of the Etape in the database (larger than 1)
+     * @return New Etape object with information from database
+     * @throws DAOException If the Etape with the given ID doesn't exist in the database
+     */
+    public Etape getEtape(long id) {
+        SQLiteDatabase database = connector.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM etaper WHERE id=" + id + ";", null);
+
+        Etape etape = null;
+        if (cursor.moveToNext()) {
+            etape = buildEtape(cursor);
+        } else {
+            throw new DAOException(String.format(Locale.US, "Couldn't find Etape with ID %d in the database", id));
+        }
+        cursor.close();
+
+        return etape;
+    }
+
+
+    /**
+     * Build an Etape object from a cursor, which contains points to an Etape
+     * row from the database.
+     */
+    private Etape buildEtape(Cursor cursor) {
+
+        Etape etape = new Etape();
+        etape.setId(cursor.getInt(cursor.getColumnIndex("id")));
+        etape.setTogtId(cursor.getInt(cursor.getColumnIndex("togt")));
+
+        int column;
+
+        column = cursor.getColumnIndex("startDate");
+        if (!cursor.isNull(column)) {
+            etape.setStartDate(new Date(cursor.getLong(column)));
+        }
+
+        column = cursor.getColumnIndex("endDate");
+        if (!cursor.isNull(column)) {
+            etape.setEndDate(new Date(cursor.getLong(column)));
+        }
+
+        column = cursor.getColumnIndex("startDestination");
+        if (!cursor.isNull(column)) {
+            etape.setStartDestination(cursor.getString(column));
+        }
+
+        column = cursor.getColumnIndex("slutDestination");
+        if (!cursor.isNull(column)) {
+            etape.setSlutDestination(cursor.getString(column));
+        }
+
+        column = cursor.getColumnIndex("skipper");
+        if (!cursor.isNull(column)) {
+            etape.setSkipper(cursor.getString(column));
+        }
+
+        column = cursor.getColumnIndex("status");
+        if (!cursor.isNull(column)) {
+            // Converting integer value to boolean value
+            etape.setStatus(cursor.getInt(column));
+        }
+
+        etape.setBesaetning(besaetningToList(cursor.getString(cursor.getColumnIndex("besaetning"))));
+
+        return etape;
     }
 
     /**
@@ -197,6 +226,7 @@ public class EtapeDAO {
 
         // Delete Etape
         connector.getReadableDatabase().delete("etaper", "id=" + etape.getId(), null);
+        new TogtDAO(context).togtUpdated(etape.getTogtId());
     }
 
 

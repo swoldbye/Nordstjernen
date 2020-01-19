@@ -57,12 +57,17 @@ public class Togt {
         this.skipper = skipper;
     }
 
-    public boolean equals(Togt togt){
-        return  id == togt.id &&
-                TextUtils.equals(name, togt.name) &&
-                TextUtils.equals(skib, togt.skib) &&
-                TextUtils.equals(skipper, togt.skipper) &&
-                TextUtils.equals(startDestination, togt.startDestination);
+    @Override
+    public boolean equals(Object obj){
+        if( obj.getClass() == this.getClass() ){
+            Togt togt = (Togt) obj;
+            return  id == togt.id &&
+                    TextUtils.equals(name, togt.name) &&
+                    TextUtils.equals(skib, togt.skib) &&
+                    TextUtils.equals(skipper, togt.skipper) &&
+                    TextUtils.equals(startDestination, togt.startDestination);
+        }
+        return false;
     }
 
 
