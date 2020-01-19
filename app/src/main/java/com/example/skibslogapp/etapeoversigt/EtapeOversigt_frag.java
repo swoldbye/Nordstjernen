@@ -186,8 +186,9 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
         recyclerView.setLayoutManager(layoutManager);
         listAdapter = new EtapeListAdapter(etaper);
         recyclerView.setAdapter(listAdapter);
-        recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
 
+        //Auto scroll to buttom
+        scrollToButtom();
         // Opret Etape Button
         view.findViewById(R.id.etapeOpretButton).setOnClickListener((View v) -> this.openDialog());
         return view;
@@ -295,6 +296,15 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
         this.togt = togt;
         etaper = etapeDAO.getEtaper(togt);
         listAdapter.updateEtapeList(etaper);
-        recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
+        scrollToButtom();
+
+    }
+
+    private void scrollToButtom(){
+        if(listAdapter.getItemCount()>0){
+            recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
+
+
+        }
     }
 }
