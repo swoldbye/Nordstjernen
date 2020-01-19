@@ -4,16 +4,17 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginStart="50dp"
-    android:layout_marginEnd="70dp">
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:gravity="center_horizontal"
-        android:text="Opret Etape"
-        android:layout_margin="20dp"
+        android:text="Ny Etape"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"/>
 
@@ -21,13 +22,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/TextInput">
+        android:theme="@style/TextInput"
+        android:layout_marginTop="20dp">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
             android:hint="Skipper"
             android:inputType="text"
             android:textColor="@color/colorPrimary"
@@ -44,8 +43,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
             android:layout_marginBottom="20dp"
             android:hint="Start Destination"
             android:inputType="text"
@@ -55,72 +52,79 @@
 
 
 
-    <TextView
+    <!-- BESAETNING -->
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Besætning"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="5dp"
-        android:paddingLeft="5dp"/>
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp">
 
-     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/besaetningList"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="5dp"
-        >
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp">
-
-        <EditText
-            android:id="@+id/navnIndput"
-            android:layout_width="110dp"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="Navn"
-            android:inputType="text"
-            android:textColor="@color/colorPrimary" />
+            android:text="Besætning"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <View style="@style/Divider"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="@color/colorPrimaryDark"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/besaetningList"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            >
+        </androidx.recyclerview.widget.RecyclerView>
 
 
-        <FrameLayout
-            android:layout_width="111dp"
-            android:layout_height="108dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginEnd="-28dp"
-            android:layout_marginRight="50dp"
-            android:layout_weight="0"
-            android:clipToPadding="false"
-            android:padding="20dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
+            >
+
+            <EditText
+                android:id="@+id/navnIndput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Navn"
+
+                android:inputType="text"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/addButton"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/addButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
                 android:backgroundTint="@color/colorPrimary"
-                android:clickable="true"
-                android:elevation="20dp"
-                android:focusable="true"
+                android:elevation="2dp"
                 android:scaleType="center"
                 android:src="@drawable/ic_add_black_24dp"
                 android:tint="@color/white"
-
+                app:fabCustomSize="35dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 />
-        </FrameLayout>
-    </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
 
 
 
@@ -128,14 +132,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="25dp">
+        android:layout_marginTop="20dp">
 
         <TextView
             android:id="@+id/opretEtape_annuler_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
             android:text="Annullér"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp"
