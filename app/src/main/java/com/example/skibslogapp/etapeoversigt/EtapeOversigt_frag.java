@@ -49,9 +49,9 @@ import java.util.Random;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EtapeOversigt_frag extends Fragment {
+public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver {
 
-    private TextView togt_text, skib_text;
+        private TextView togt_text, skib_text;
     private Togt togt;
     private Etape newEtape = null;
     private FloatingActionButton createEtape_button;
@@ -59,6 +59,8 @@ public class EtapeOversigt_frag extends Fragment {
     private RecyclerView recyclerView;
     private List<Etape> etaper;
     private ImageButton togtInstilling;
+    private EtapeDAO etapeDAO;
+
 
     public EtapeOversigt_frag(Togt togt) {
         this.togt = togt;
@@ -73,6 +75,10 @@ public class EtapeOversigt_frag extends Fragment {
         togt_text = view.findViewById(R.id.etapeTogtText);
         skib_text = view.findViewById(R.id.skibsNavnText);
         togtInstilling = view.findViewById(R.id.popUpMenuEtapeOversigt);
+
+
+        //Subscribing for togt Observer
+        TogtDAO.addTogtObserver(this);
 
         /**
          * When you click on this "burger" icon you get a Popup menu where you get the choice to either:
@@ -158,7 +164,7 @@ public class EtapeOversigt_frag extends Fragment {
         togt_text.setText(togt.getName());
         skib_text.setText(togt.getSkib());
 
-        EtapeDAO etapeDAO = new EtapeDAO(getContext());
+        etapeDAO = new EtapeDAO(getContext());
         etaper = etapeDAO.getEtaper(togt);
 
         if( etaper.get(0).getStatus() == Etape.Status.NEW){
@@ -280,5 +286,15 @@ public class EtapeOversigt_frag extends Fragment {
         }
 
 
+    }
+
+
+
+    @Override
+    public void onUpdate(Togt togt) {
+        this.togt = togt;
+        etaper = etapeDAO.getEtaper(togt);
+        listAdapter.updateEtapeList(etaper);
+        recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
     }
 }
