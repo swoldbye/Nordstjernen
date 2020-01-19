@@ -16,14 +16,14 @@
             <TextView
                 android:id="@+id/listElementBesaetning"
                 android:layout_width="160dp"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
                 android:paddingLeft="5dp"/>
 
             <ImageView
                 android:id="@+id/cancleBeseatning"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/listElementBesaetning"
+              android:layout_alignParentEnd="true"
                 android:src="@drawable/ic_cancel_black_24dp"/>
 
 

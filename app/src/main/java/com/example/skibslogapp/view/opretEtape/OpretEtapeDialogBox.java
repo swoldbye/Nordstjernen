@@ -39,15 +39,19 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     private String skipper = "";
     private String startDestination = "";
     private Button annulerEtape, startEtape;
-
+    private Etape newEtape;
 
     public OpretEtapeDialogBox(Togt togt, Etape etape) {
         this.togt = togt;
        this.etape = etape;
+       etape.setStatus(Etape.Status.FINISHED);
+       newEtape = new Etape();
+       //Setting the etape to active.
+       newEtape.setStatus(Etape.Status.ACTIVE);
        skipper = etape.getSkipper();
        startDestination= etape.getSlutDestination();
        beseatningsList = etape.getBesaetning();
-       System.out.println("BesætningsListe" +beseatningsList.size());
+       System.out.println("BesætningsListe" + beseatningsList.size());
     }
 
     @NonNull
@@ -58,28 +62,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.opret_etape_dialog_box,null);
 
-        builder.setView(view)
-               /* .setNegativeButton("Anuller", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .setPositiveButton("Start Etape", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String skipper = editSkipper.getText().toString();
-                        String startDest = editStartDest.getText().toString();
-                        EtapeDAO etapeDAO = new EtapeDAO(getContext());
-                        etape.setBesaetning(beseatningsList);
-                        etape.setSkipper(skipper);
-                        etape.setStartDestination(startDest);
-                        etapeDAO.addEtape(togt,etape);
-
-
-
-                    }
-                })*/;
+        builder.setView(view);
 
 
         annulerEtape = view.findViewById(R.id.opretEtape_annuler_button);
@@ -87,9 +70,6 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
 
         startEtape = view.findViewById(R.id.opretEtape_start_button);
         startEtape.setOnClickListener(this);
-
-
-
 
         editSkipper = view.findViewById(R.id.inputSkipper);
         editStartDest = view.findViewById(R.id.inputStartDest);
@@ -132,10 +112,13 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
             String skipper = editSkipper.getText().toString();
             String startDest = editStartDest.getText().toString();
             EtapeDAO etapeDAO = new EtapeDAO(getContext());
-            etape.setBesaetning(beseatningsList);
-            etape.setSkipper(skipper);
-            etape.setStartDestination(startDest);
-            etapeDAO.addEtape(togt,etape);
+            newEtape.setBesaetning(beseatningsList);
+            newEtape.setSkipper(skipper);
+            newEtape.setStartDestination(startDest);
+            //Update the previus etape to status  FINISHED
+            etapeDAO.updateEtape(etape);
+            //Adding the new etape to database - NB: The new etape is beeing active in the constructor OpretEtapeDialogBox
+            etapeDAO.addEtape(togt,newEtape);
 
             getFragmentManager().beginTransaction()
                     .remove(this)
@@ -143,33 +126,42 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
 
         }
 
-
-        if (navn.length() <= 0) {
-            navnIndput.setError("Der skal indtastes et navn til togtet!");
-            return;
+        if(v  == addButton) {
+            if (navn.length() <= 0) {
+                navnIndput.setError("Der skal indtastes et navn til togtet!");
+                return;
+            }else{
+                beseatningsList.add(navn);
+                System.out.println(navnIndput.getText().toString());
+                navnIndput.setText("");
+                adapter.notifyDataSetChanged();
+                clearFocusOnDone(v);
+            }
         }
-
-        beseatningsList.add(navn);
-        System.out.println(navnIndput.getText().toString());
-        navnIndput.setText("");
-        adapter.notifyDataSetChanged();
-        clearFocusOnDone(v);
     }
 
-    private void clearFocusOnDone(View v) {
 
+    /**
+     * Makes the keyboard dissapere
+     * @param v
+     */
+    private void clearFocusOnDone(View v) {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
-
+    /**
+     * Show the previus Skipper in the new Etape
+     */
     private void showSkipper(){
         if(skipper.length()>0){
             editSkipper.setText(skipper);
         }
     }
 
-
+    /**
+     * Show the previus slutDestination as the Start destination in the new Etape
+     */
     private void showSlutDestination(){
 
         if(startDestination != null && startDestination.length()>0){
