@@ -90,6 +90,8 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         showSkipper();
         showSlutDestination();
 
+        scrollTobuttom();
+
         return builder.create();
 
     }
@@ -119,7 +121,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
             etapeDAO.updateEtape(etape);
             //Adding the new etape to database - NB: The new etape is beeing active in the constructor OpretEtapeDialogBox
             etapeDAO.addEtape(togt,newEtape);
-
+            scrollTobuttom();
             getFragmentManager().beginTransaction()
                     .remove(this)
                     .commit();
@@ -135,6 +137,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
                 System.out.println(navnIndput.getText().toString());
                 navnIndput.setText("");
                 adapter.notifyDataSetChanged();
+                besaetning.smoothScrollToPosition(adapter.getItemCount()-1);
                 clearFocusOnDone(v);
             }
         }
@@ -166,6 +169,12 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
 
         if(startDestination != null && startDestination.length()>0){
             editStartDest.setText(startDestination);
+        }
+    }
+
+    private void scrollTobuttom(){
+        if(adapter.getItemCount()>0){
+            besaetning.smoothScrollToPosition(adapter.getItemCount()-1);
         }
     }
 }
