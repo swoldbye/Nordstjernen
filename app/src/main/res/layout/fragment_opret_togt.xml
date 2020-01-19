@@ -47,6 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
+                    android:maxLength="40"
                     android:hint="Togtets navn"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -62,6 +63,7 @@
                     android:inputType="textPersonName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLength="40"
                     android:hint="Skipper" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,13 +71,13 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
                 android:theme="@style/TextInput"
                 android:layout_marginTop="16dp">
                 <EditText
                     android:id="@+id/startDestEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
                     android:hint="Start destination"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,6 +93,8 @@
                     android:id="@+id/skibsListe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:maxLength="40"
                     android:hint="Vælg skib"
                     android:textSize="17sp" />
             </com.google.android.material.textfield.TextInputLayout>

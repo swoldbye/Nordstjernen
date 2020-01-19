@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Togt;
@@ -24,24 +26,27 @@ import java.util.List;
  * enter the "Togt" to se the log posts of the given "Togt".
  * You can click a button on the element to erase the "Togt" from the recycleView List and the database.
  */
-public class TogtOversigt_frag extends Fragment implements View.OnClickListener {
+public class TogtOversigt_frag extends Fragment implements View.OnClickListener, TogtDAO.TogtObserver {
+
+    private RecyclerView recyclerView;
+    private TogtListAdapter listAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_togt_oversigt, container, false);
 
         View opretTogt = view.findViewById(R.id.opretTogtBtn);
         opretTogt.setOnClickListener(this);
 
-        TogtDAO togtDAO = new TogtDAO(getContext());
-        List<Togt> togtList = togtDAO.getTogter();
-
-        RecyclerView recyclerView = view.findViewById(R.id.togtRecycView);
+        recyclerView = view.findViewById(R.id.togtRecycView);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
-        RecyclerView.Adapter adapter = new TogtListAdapter(togtList,getContext());
+        listAdapter = new TogtListAdapter();
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(listAdapter);
+
+        TogtDAO.addTogtObserver(this);
 
         return view;
     }
@@ -58,5 +63,17 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener 
             .add(R.id.fragContainer, new OpretTogt_frag())
             .addToBackStack(null)
             .commit();
+    }
+
+    @Override
+    public void onUpdate(Togt togt) {
+        listAdapter.updateTogter();
+        recyclerView.smoothScrollToPosition(listAdapter.getItemCount());
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        TogtDAO.removeTogtObserver(this);
     }
 }
