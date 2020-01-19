@@ -72,6 +72,7 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener,
         return view;
     }
 
+
     /**
      * This function changes the fragment to the "OpretTogt" fragment
      * @param v The floating button View
@@ -86,19 +87,25 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener,
             .commit();
     }
 
+
     @Override
     public void onUpdate(Togt togt) {
         listAdapter.updateTogter();
         recyclerView.smoothScrollToPosition(listAdapter.getItemCount());
 
-        getView().findViewById(R.id.togtRecycView).setVisibility(View.VISIBLE);
-        getView().findViewById(R.id.togtOversigtUdenTogter).setVisibility(View.GONE);
-
+        if( getView() != null ){
+            getView().findViewById(R.id.togtRecycView).setVisibility(View.VISIBLE);
+            getView().findViewById(R.id.togtOversigtUdenTogter).setVisibility(View.GONE);
+        }
     }
+
+
+
 
     @Override
     public void onDestroy(){
         super.onDestroy();
+        System.out.println("Destroyed TogtOversigt");
         TogtDAO.removeTogtObserver(this);
     }
 }
