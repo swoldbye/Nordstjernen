@@ -91,8 +91,8 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener,
         listAdapter.updateTogter();
         recyclerView.smoothScrollToPosition(listAdapter.getItemCount());
 
-        view.findViewById(R.id.togtRecycView).setVisibility(View.VISIBLE);
-        view.findViewById(R.id.togtOversigtUdenTogter).setVisibility(View.GONE);
+        getView().findViewById(R.id.togtRecycView).setVisibility(View.VISIBLE);
+        getView().findViewById(R.id.togtOversigtUdenTogter).setVisibility(View.GONE);
 
     }
 
