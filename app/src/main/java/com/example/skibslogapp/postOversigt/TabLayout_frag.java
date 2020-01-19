@@ -33,10 +33,13 @@ public class TabLayout_frag extends Fragment {
     TabLayout tabLayout;
     AppBarLayout appBarLayout;
     DbTranslator dbTranslator;
-    Togt togt;
+    static Togt togt;
+    static ViewPager viewPager;
+    int startPos;
 
-    public TabLayout_frag(Togt togt) {
+    public TabLayout_frag(Togt togt, int startPos) {
         this.togt = togt;
+        this.startPos = startPos;
     }
 
     @Override
@@ -61,7 +64,6 @@ public class TabLayout_frag extends Fragment {
 
 
         TabLayout tabLayout;
-        final ViewPager viewPager;
         PageAdapter pageAdapter;
 
         Log.d(TAG, "onCreateView: Started.");
@@ -80,39 +82,14 @@ public class TabLayout_frag extends Fragment {
         pageAdapter = new PageAdapter(getFragmentManager(), etapper.size(), etapper);
         viewPager.setAdapter(pageAdapter);
 
-//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                viewPager.setCurrentItem(tab.getPosition());
-//                if (tab.getPosition() == 0){
-//                    //Do something else if needed like change color etc.
-//                }else if (tab.getPosition() == 1){
-//                    //Do something else if needed
-//                }else if (tab.getPosition() == 2){
-//                    //Do something else if needed
-//                }else if (tab.getPosition() == 3){
-//                    //Do something else if needed
-//                }else if (tab.getPosition() == 4){
-//                    //Do something else if needed
-//                } // add more if statements or delete them all if we dont need them.
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
 
         //links the viewpager with the tablayout
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         //tabLayout.setTabsFromPagerAdapter(pageAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        viewPager.setCurrentItem(startPos);
 
     }
 
@@ -122,5 +99,12 @@ public class TabLayout_frag extends Fragment {
 
     public void openTabs() {
         appBarLayout.setVisibility(View.VISIBLE);
+    }
+
+    public static int getTabPos(){
+        return viewPager.getCurrentItem();
+    }
+    public static Togt getCurrentTogt(){
+        return togt;
     }
 }

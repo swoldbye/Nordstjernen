@@ -26,19 +26,19 @@ public class PostActivity extends Fragment implements View.OnClickListener {
 
     Button openButton;
     Togt togt;
+    Etape etape;
+    int startPos;
 
     TabLayout_frag tabLayout_frag;
     OpretLog_frag opretLog_frag;
     FrameLayout opretPostContainerFrame;
 
-    public PostActivity(Togt togt) {
-        this.togt = togt;
-    }
-
-    public PostActivity(Etape etape){
+    public PostActivity(Etape etape, int startPos){
         TogtDAO togtDAO = new TogtDAO(GlobalContext.get());
         Togt tempTogt = togtDAO.getTogt(etape.getTogtId());
         this.togt = tempTogt;
+        this.etape = etape;
+        this.startPos = startPos;
     }
 
     @Nullable
@@ -49,7 +49,7 @@ public class PostActivity extends Fragment implements View.OnClickListener {
         opretPostContainerFrame = view.findViewById(R.id.opretPostContainerFrame);
 
 
-        tabLayout_frag = new TabLayout_frag(togt);
+        tabLayout_frag = new TabLayout_frag(togt, startPos);
         opretLog_frag = new OpretLog_frag();
 
 

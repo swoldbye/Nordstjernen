@@ -28,11 +28,14 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
+import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Position.PositionController;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.postOversigt.TabLayout_frag;
 import com.example.skibslogapp.view.opretLog.LogNote_frag;
 import com.example.skibslogapp.view.opretLog.LogViewModel;
 
@@ -52,11 +55,13 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     private Button opretButton;
     private LogViewModel logVM;
     TextView closeButton;
+    private Etape currentEtape;
 
 
     Button openButton;
     FrameLayout buttonFrame;
     FrameLayout opretPostWrapper;
+    EtapeDAO etapeDAO;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -137,6 +142,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         }else if(v == openButton){
             buttonFrame.setVisibility(View.GONE);
             opretPostWrapper.setVisibility(View.VISIBLE);
+            etapeDAO = new EtapeDAO(getContext());
+            currentEtape = etapeDAO.getEtaper(TabLayout_frag.getCurrentTogt()).get(TabLayout_frag.getTabPos());
         }else if(v == closeButton){
             opretPostWrapper.setVisibility(View.GONE);
             buttonFrame.setVisibility(View.VISIBLE);
@@ -171,7 +178,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         logpunkt.setMandOverBord(mandOverBord);
 
         LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
-        logpunktDAO.addLogpunkt(GlobalTogt.getEtape(getContext()), logpunkt);
+        logpunktDAO.addLogpunkt(currentEtape, logpunkt);
 
         System.out.printf("Created logpunkt: %s", logpunkt.toString());
 

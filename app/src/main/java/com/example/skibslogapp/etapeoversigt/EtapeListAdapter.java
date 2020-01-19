@@ -69,6 +69,7 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
             holder.setDestination( etape.getStartDestination(), etape.getStartDate(), position==0);
         }else{
             int etapePosition = (position-1)/2;
+            holder.position = etapePosition;
             holder.setEtape(etaper.get(etapePosition), etapePosition+1);
         }
     }
@@ -83,6 +84,7 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
         private Etape etape;
         private View view;
         private boolean isEtapeCard;
+        private int position;
 
         EtapeListViewHolder(View view, boolean isEtapeCard){
             super(view);
@@ -137,7 +139,6 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
         @Override
         public void onClick(View view) {
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-
                 activity.getSupportFragmentManager()
                         .beginTransaction()
                         .setCustomAnimations(
@@ -145,7 +146,7 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
                                 R.anim.exit_right_to_left,
                                 R.anim.enter_left_to_right,
                                 R.anim.exit_left_to_right)
-                        .replace(R.id.fragContainer, new PostActivity(getEtape()))
+                        .replace(R.id.fragContainer, new PostActivity(getEtape(), position))
                         .addToBackStack(null)
                         .commit();
 
