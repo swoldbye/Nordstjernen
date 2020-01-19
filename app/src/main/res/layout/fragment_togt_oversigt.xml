@@ -61,6 +61,8 @@
                 android:textSize="30sp"
                 android:elevation="10dp"/>
 
+            <include layout="@layout/togt_oversigt_uden_togt"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/togtRecycView"
                 android:layout_width="match_parent"
