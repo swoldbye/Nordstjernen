@@ -4,30 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".postOversigt.PostActivity"
-    android:paddingTop="?attr/actionBarSize">
+    android:animateLayoutChanges="true">
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="100">
+        android:weightSum="100"
+        android:animateLayoutChanges="true"
+        app:layout_constraintBottom_toBottomOf="parent">
+
 
         <FrameLayout
-            android:id="@+id/postOversigtContainerFrame"
+            android:id="@+id/tabOversigtContainerFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="95">
-        </FrameLayout>
+            android:layout_weight="70"
+            app:layout_constraintTop_toTopOf="parent"></FrameLayout>
 
         <FrameLayout
             android:id="@+id/opretPostContainerFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5" />
-    </LinearLayout>
+            android:layout_weight="30"
+            android:animateLayoutChanges="true"
+            android:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabOversigtContainerFrame"
+            app:layout_constraintVertical_bias="1.0" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

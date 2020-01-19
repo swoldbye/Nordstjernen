@@ -9,12 +9,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.model.Etape;
+import com.example.skibslogapp.postOversigt.PostActivity;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -68,6 +70,7 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
             holder.setDestination( etape.getStartDestination(), etape.getStartDate(), position==0);
         }else{
             int etapePosition = (position-1)/2;
+            holder.position = etapePosition;
             holder.setEtape(etaper.get(etapePosition), etapePosition+1);
         }
     }
@@ -78,15 +81,20 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
     }
 
 
-    class EtapeListViewHolder extends RecyclerView.ViewHolder{
+    class EtapeListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private Etape etape;
         private View view;
         private boolean isEtapeCard;
+        private int position;
 
-        EtapeListViewHolder(View view, boolean isEtapeCard) {
+        EtapeListViewHolder(View view, boolean isEtapeCard){
             super(view);
             this.view = view;
             this.isEtapeCard = isEtapeCard;
+            //this.etape = etaper.
+            if(isEtapeCard){
+                view.setOnClickListener(this);
+            }
         }
 
 
@@ -134,6 +142,27 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
 
             ((TextView) view.findViewById(R.id.etape_destination_text)).setText(destination == null ? "-" : destination);
             ((TextView) view.findViewById(R.id.etape_dato_text)).setText(dateString);
+        }
+
+
+        @Override
+        public void onClick(View view) {
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                activity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.enter_right_to_left,
+                                R.anim.exit_right_to_left,
+                                R.anim.enter_left_to_right,
+                                R.anim.exit_left_to_right)
+                        .replace(R.id.fragContainer, new PostActivity(getEtape(), position))
+                        .addToBackStack(null)
+                        .commit();
+
+        }
+
+        private Etape getEtape(){
+            return etape;
         }
     }
 }

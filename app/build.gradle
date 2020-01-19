@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
-
     defaultConfig {
         applicationId "com.example.skibslogapp"
         minSdkVersion 22
@@ -40,4 +39,5 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.1.1"
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
     implementation 'com.google.android.gms:play-services-location:15.0.1'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
 }

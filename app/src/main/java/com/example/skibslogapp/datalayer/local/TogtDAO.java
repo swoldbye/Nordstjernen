@@ -46,6 +46,7 @@ public class TogtDAO {
 
         long id = database.insert("togter", null, row);
         togt.setId(id);
+        togtUpdated(id);
     }
 
 

@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Togt;
@@ -25,7 +27,10 @@ import java.util.List;
  * enter the "Togt" to se the log posts of the given "Togt".
  * You can click a button on the element to erase the "Togt" from the recycleView List and the database.
  */
-public class TogtOversigt_frag extends Fragment implements View.OnClickListener {
+public class TogtOversigt_frag extends Fragment implements View.OnClickListener, TogtDAO.TogtObserver {
+
+    private RecyclerView recyclerView;
+    private TogtListAdapter listAdapter;
 
     private List<Togt> togtList;
     private TogtDAO togtDAO;
@@ -33,6 +38,7 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_togt_oversigt, container, false);
 
         togtDAO = new TogtDAO(getActivity());
@@ -41,26 +47,26 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener 
         View opretTogt = view.findViewById(R.id.opretTogtBtn);
         opretTogt.setOnClickListener(this);
 
-        TogtDAO togtDAO = new TogtDAO(getContext());
-        List<Togt> togtList = togtDAO.getTogter();
-
         ingenTogtText = view.findViewById(R.id.ingenTogtText);
+        ingenTogtText.setText("Der er ingen oprettede togter.\n " +
+                "Hvis der skal oprettes et togt tryk på 'Opret Togt'");
+
+        recyclerView = view.findViewById(R.id.togtRecycView);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+        listAdapter = new TogtListAdapter();
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(listAdapter);
+
+        TogtDAO.addTogtObserver(this);
 
         if (togtList.size() == 0){
-            ingenTogtText.setText("Der er ingen oprettede togter.\n " +
-                    "Hvis der skal oprettes et togt tryk på 'Opret Togt'");
+
             view.findViewById(R.id.togtRecycView).setVisibility(View.GONE);
             view.findViewById(R.id.togtOversigtUdenTogter).setVisibility(View.VISIBLE);
         }else{
             view.findViewById(R.id.togtOversigtUdenTogter).setVisibility(View.GONE);
             view.findViewById(R.id.togtRecycView).setVisibility(View.VISIBLE);
-            RecyclerView recyclerView = view.findViewById(R.id.togtRecycView);
-            recyclerView.setHasFixedSize(true);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
-            RecyclerView.Adapter adapter = new TogtListAdapter(togtList,getContext());
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setAdapter(adapter);
-            recyclerView.smoothScrollToPosition(adapter.getItemCount()-1);
         }
 
         return view;
@@ -72,22 +78,27 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener 
      */
     @Override
     public void onClick(View v) {
-        OpretTogt_frag opretTogt_frag = new OpretTogt_frag();
-        changeFragment(opretTogt_frag);
+        getActivity().getSupportFragmentManager()
+            .beginTransaction()
+            .setCustomAnimations(R.anim.slide_upslow2, R.anim.slide_upslow, R.anim.slide_downslow2, R.anim.slide_downslow)
+            .add(R.id.fragContainer, new OpretTogt_frag())
+            .addToBackStack(null)
+            .commit();
     }
 
-    /**
-     * Helper function for the onClick() function.
-     *
-     * @param fragment The fragment that will be changed to.
-     */
-    private void changeFragment(Fragment fragment){
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragContainer,fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+    @Override
+    public void onUpdate(Togt togt) {
+        listAdapter.updateTogter();
+        recyclerView.smoothScrollToPosition(listAdapter.getItemCount());
+
+        view.findViewById(R.id.togtRecycView).setVisibility(View.VISIBLE);
+        view.findViewById(R.id.togtOversigtUdenTogter).setVisibility(View.GONE);
+
     }
 
-
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        TogtDAO.removeTogtObserver(this);
+    }
 }
