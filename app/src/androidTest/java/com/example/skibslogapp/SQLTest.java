@@ -18,6 +18,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SQLTest {
@@ -242,7 +244,60 @@ public class SQLTest {
     }
 
 
+    @Test
+    public void besaetningConversionTest(){
+        setupTestData();
 
+        // From list to String
+        ArrayList<String> besaetning = new ArrayList<>(Arrays.asList("Andreas","Jacob","Claes","Kristian","Simon","Malte"));
+        String resultString;
+        resultString = etapeDAO.besaetningToString(besaetning);
+        assertEquals(resultString, "Andreas;Jacob;Claes;Kristian;Simon;Malte");
+
+        // From string to list
+        String besaetningString = "Andreas;Jacob;Claes;Kristian;Simon;Malte";
+        List<String> resultList;
+        resultList = etapeDAO.besaetningToList(besaetningString);
+
+        assertEquals( resultList.get(0), "Andreas");
+        assertEquals( resultList.get(1), "Jacob");
+        assertEquals( resultList.get(2), "Claes");
+        assertEquals( resultList.get(3), "Kristian");
+        assertEquals( resultList.get(4), "Simon");
+        assertEquals( resultList.get(5), "Malte");
+
+        // From string to list
+        besaetningString = "";
+        resultList = etapeDAO.besaetningToList(besaetningString);
+
+        assertEquals( resultList.size(), 0);
+    }
+
+
+    @Test
+    public void besaetningSaveTest(){
+        setupTestData();
+
+        // Add initial members
+        etape.addBesaetningsMedlem("Andreas", "Jacob");
+        etapeDAO.updateEtape(etape);
+
+        // Load from database
+        Etape loadedEtape = etapeDAO.getEtaper(togt).get(0);
+        assertEquals( loadedEtape.getBesaetning().get(0), "Andreas");
+        assertEquals( loadedEtape.getBesaetning().get(1), "Jacob");
+
+        // Adjust members
+        loadedEtape.removeBesaetningsMedlem("Andreas");
+        loadedEtape.addBesaetningsMedlem("Simon");
+        etapeDAO.updateEtape(loadedEtape);
+
+        // Reload from database
+        loadedEtape = etapeDAO.getEtaper(togt).get(0);
+        assertEquals( loadedEtape.getBesaetning().get(0), "Jacob");
+        assertEquals( loadedEtape.getBesaetning().get(1), "Simon");
+
+    }
 
     @Test
     public void updateLogpunktTest(){
