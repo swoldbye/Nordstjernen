@@ -77,7 +77,7 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
         if( firstEtape.getStatus() != Etape.Status.NEW ){
             Calendar cal = Calendar.getInstance();
             cal.setTime(firstEtape.getStartDate());
-            holder.date.setText(String.format(Locale.US, "%02d/%02d", cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH) ));
+            holder.date.setText(String.format(Locale.US, "%02d/%02d", cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH)+1 ));
             holder.year.setText(String.format(Locale.US, "%d", cal.get(Calendar.YEAR)));
         }else{
             holder.date.setText("Ikke påbegyndt");
