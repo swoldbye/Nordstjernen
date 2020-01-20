@@ -108,7 +108,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public void updateData(List<Logpunkt> newLogs){
         mTempLogs = newLogs;
-        notifyItemRangeRemoved(0, mTempLogs.size() - 1);
+        //notifyItemRangeRemoved(0, mTempLogs.size() - 1);
+        notifyItemInserted(mTempLogs.size()-1);
         //notifyItemInserted(mTempLogs.size() - 1);
     }
 }
