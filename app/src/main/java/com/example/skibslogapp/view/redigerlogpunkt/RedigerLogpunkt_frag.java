@@ -118,7 +118,7 @@ public class RedigerLogpunkt_frag extends Fragment {
     }
 
     private void updatetopthing() {
-        ((TextView) vv.findViewById(R.id.test_text)).setText(logpunkt.toString());
+       // ((TextView) vv.findViewById(R.id.test_text)).setText(logpunkt.toString());
     }
 
     private void openFragmentDialog(int fragID, Fragment frag) {
