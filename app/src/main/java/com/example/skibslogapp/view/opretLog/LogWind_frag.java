@@ -1,12 +1,11 @@
 package com.example.skibslogapp.view.opretLog;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,6 +34,10 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
         vindØstBtn = view.findViewById(R.id.østButton);
         vindSydBtn = view.findViewById(R.id.sydButton);
         vindVestBtn = view.findViewById(R.id.vestButton);
+        vindNordBtn.setOnClickListener(this);
+        vindØstBtn.setOnClickListener(this);
+        vindSydBtn.setOnClickListener(this);
+        vindVestBtn.setOnClickListener(this);
         vindretning_delete = view.findViewById(R.id.vindretning_delete);
         vindretning_delete.setOnClickListener(this);
         vindretning_delete.setVisibility(View.INVISIBLE);
@@ -44,31 +47,40 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
 
         //Vindhastighed
         vindHastighedEditTxt = view.findViewById(R.id.vindhastighed_edittext);
-        vindHastighedEditTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        vindHastighedEditTxt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(vindHastighedEditTxt.getText().length() != 0)
-                    logVM.setWindSpeed(Integer.parseInt(vindHastighedEditTxt.getText().toString()));
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                logVM.setWindSpeed(vindHastighedEditTxt.getText().length() > 0 ?
+                        Integer.parseInt(vindHastighedEditTxt.getText().toString()) : -1);
             }
         });
-
-        //On click Listeners:
-        vindNordBtn.setOnClickListener(this);
-        vindØstBtn.setOnClickListener(this);
-        vindSydBtn.setOnClickListener(this);
-        vindVestBtn.setOnClickListener(this);
+        updateViewInfo();
 
         return view;
     }
 
+    private void updateViewInfo() {
+        vindretning_input.setText(logVM.getWindDirection());
+        vindretning_delete.setVisibility(vindretning_input.getText() != null && vindretning_input.getText().length() > 0 ? View.VISIBLE : View.INVISIBLE);
+        vindHastighedEditTxt.setText(logVM.getWindSpeed() >= 0 ? Integer.toString(logVM.getWindSpeed()) : "");
+    }
+
     @Override
     public void onClick(View v) {
-        // Vindretning
         if(v == vindNordBtn) vindDirectionLogic("N", "S");
         else if(v == vindØstBtn) vindDirectionLogic("Ø", "V");
         else if(v == vindSydBtn) vindDirectionLogic("S", "N");
         else if(v == vindVestBtn) vindDirectionLogic("V", "Ø");
-
         else if (v == vindretning_delete) {
             logVM.setWindDirection("");
             vindretning_input.setText(logVM.getWindDirection());
@@ -82,7 +94,6 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
                 case 0:
                     logVM.setWindDirection(btnDirection); //Input first direction
                     vindretning_input.setText(logVM.getWindDirection());
-                    vindretning_delete.setVisibility(View.VISIBLE); //Show button to user for reset
                     break;
 
                 case 1:
@@ -114,5 +125,6 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
                     break;
             }
         }
+        vindretning_delete.setVisibility(View.VISIBLE);
     }
 }
