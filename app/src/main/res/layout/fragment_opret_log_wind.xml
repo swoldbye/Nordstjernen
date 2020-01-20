@@ -105,6 +105,7 @@
             android:imeOptions="actionDone"
             android:inputType="time"
             android:maxLength="4"
+
             android:paddingHorizontal="0dp"
             android:textColor="@color/textColor"
             android:textColorHint="@color/textColor"

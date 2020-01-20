@@ -2,140 +2,167 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:gravity="center_horizontal"
-        android:text="Opret Etape"
-        android:layout_margin="20dp"
+        android:text="Ny Etape"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"/>
 
-    <EditText
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/opretetape_skipper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:theme="@style/TextInput"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:hint="Skipper"
-        android:inputType="text"
-        android:textColor="@color/colorPrimary"
-        android:id="@+id/inputSkipper"/>
+        app:errorEnabled="true">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Skipper"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorPrimary"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/opretetape_startdest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="20dp"
-        android:hint="Start Destination"
-        android:inputType="text"
-        android:textColor="@color/colorPrimary"
-        android:id="@+id/inputStartDest"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Besætning"
-        android:textStyle="bold"
-        android:textSize="20dp"
-
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="5dp"
-        android:paddingLeft="5dp"/>
-
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/besaetningList"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="5dp"
-        >
-
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
+        android:theme="@style/TextInput"
+        app:errorEnabled="true">
 
         <EditText
-            android:id="@+id/navnIndput"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="Navn"
-            android:inputType="text"
-            android:textColor="@color/colorPrimary" />
+            android:hint="Start Destination"
+            android:inputType="textPersonName"
+            android:textColor="@color/colorPrimary"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-        <FrameLayout
-            android:layout_width="111dp"
-            android:layout_height="108dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="50dp"
-            android:layout_weight="0"
 
-            android:clipToPadding="false"
-            android:padding="20dp">
+    <!-- BESAETNING -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Besætning"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <View style="@style/Divider"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="@color/colorPrimaryDark"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/besaetningList"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            >
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/navnIndput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/TextInput"
+                app:errorEnabled="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <EditText
+                    android:id="@+id/navnIndputEdit"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Navn"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/colorPrimary" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/addButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:backgroundTint="@color/colorPrimary"
-                android:clickable="true"
-                android:elevation="20dp"
-                android:focusable="true"
+                android:elevation="2dp"
                 android:scaleType="center"
                 android:src="@drawable/ic_add_black_24dp"
                 android:tint="@color/white"
-
+                app:fabCustomSize="35dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 />
-        </FrameLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <LinearLayout
+
+
+
+    <!-- Button Container -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-        <Button
+        android:layout_marginTop="20dp">
+
+        <TextView
             android:id="@+id/opretEtape_annuler_button"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:layout_marginRight="10dp"
-            android:text="annuler"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:backgroundTint="@color/grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:text="Annullér"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="17sp"
+            app:layout_constraintTop_toTopOf="@id/opretEtape_start_button"
+            app:layout_constraintBottom_toBottomOf="@id/opretEtape_start_button"
+            app:layout_constraintStart_toStartOf="parent"
             />
+
         <Button
             android:id="@+id/opretEtape_start_button"
-            android:layout_width="150dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="10dp"
-            android:text="Start Etape"
-            android:textColor="@color/white"
-            android:textSize="20sp"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Start"
             android:textStyle="bold"
-
             android:backgroundTint="@color/colorPrimaryDark"
-            />
-    </LinearLayout>
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -42,38 +43,39 @@
                     />
             </androidx.cardview.widget.CardView>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativeLayoutInEtapeCard"
+                android:orientation="vertical"
+                android:paddingBottom="9dp"
+                android:paddingTop="9dp">
 
-            <TextView
-                android:id="@+id/etapeDate"
-                android:layout_width="282dp"
-                android:layout_height="69dp"
-                android:gravity="center"
-                android:hint="01/01 - 01/12"
-                android:textSize="25sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                <TextView
+                    android:id="@+id/skipperTextEtapeKort"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="Skipper: navn"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:layout_alignParentTop="true"/>
 
-            <Button
-                android:id="@+id/startStopEtapeBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary"
-                android:gravity="center"
-                android:hint="Start"
-                android:padding="10dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="25sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.98"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.466" />
+                <TextView
+                    android:id="@+id/besaetningTextEtapeKort"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="Besaetning: tal"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:layout_alignParentBottom="true" />
+
+            </RelativeLayout>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

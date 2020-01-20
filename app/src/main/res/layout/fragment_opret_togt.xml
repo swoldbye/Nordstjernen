@@ -1,107 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:elevation="20dp"
+    android:clickable="true"
     tools:context=".view.oprettogt.OpretTogt_frag">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <FrameLayout
-            android:layout_width="105dp"
-            android:layout_height="105dp"
-            android:padding="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:outlineProvider="none"
-            android:elevation="1dp"
-            android:clipToPadding="false"
-            >
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/opretBtn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/colorPrimary"
-                android:clickable="true"
-                android:elevation="20dp"
-                android:focusable="true"
-                app:rippleColor="@android:color/darker_gray" />
+        <LinearLayout
+            android:id="@+id/oprettogt_inputcontainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="50dp"
+            android:paddingLeft="50dp"
+            android:paddingTop="50dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".MainActivity">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:elevation="20dp"
-                android:gravity="center"
-                android:text="Opret"
-                android:textColor="@color/offWhite"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-        </FrameLayout>
+                android:id="@+id/opretTogtOverskrift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Opret Togt"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintStart_toStartOf="parent">
 
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="50dp"
-                tools:context=".MainActivity">
-
-                <TextView
-                    android:id="@+id/opretTogtOverskrift"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Opret Togt"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/skibsListe"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.49" />
-
+                android:theme="@style/TextInput"
+                android:layout_marginTop="25dp"
+                android:id="@+id/togtNavn">
                 <EditText
-                    android:id="@+id/togtNavn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:hint="Togtets navn"/>
+                    android:inputType="textPersonName"
+                    android:maxLength="40"
+                    android:hint="Togtets navn"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
 
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/TextInput"
+                android:layout_marginTop="16dp"
+                android:id="@+id/skipperEdit">
                 <EditText
-                    android:id="@+id/skipperEdit"
+
+                    android:inputType="textPersonName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:maxLength="40"
                     android:hint="Skipper" />
+            </com.google.android.material.textfield.TextInputLayout>
 
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/TextInput"
+                android:layout_marginTop="16dp"
+                android:id="@+id/startDestEdit">
                 <EditText
-                    android:id="@+id/startDestEdit"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:hint="Start destination" />
+                    android:inputType="textPersonName"
+                    android:hint="Start destination"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/TextInput"
+                android:layout_marginTop="16dp"
+                android:paddingLeft="2dp">
 
                 <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
                     android:id="@+id/skibsListe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:hint="Vælg skib" />
+                    android:inputType="textPersonName"
+                    android:maxLength="40"
+                    android:hint="Vælg skib"
+                    android:textSize="17sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-            </LinearLayout>
 
-        </ScrollView>
+            <!-- Button Container -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="50dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/oprettogt_annuller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Annullér"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="17sp"
+                    app:layout_constraintTop_toTopOf="@id/oprettogt_opretbutotn"
+                    app:layout_constraintBottom_toBottomOf="@id/oprettogt_opretbutotn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <Button
+                    android:id="@+id/oprettogt_opretbutotn"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="Opret"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 </FrameLayout>
