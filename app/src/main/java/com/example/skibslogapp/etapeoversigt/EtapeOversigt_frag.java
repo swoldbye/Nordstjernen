@@ -159,11 +159,11 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
         List<Etape> etaper = etapeDAO.getEtaper(togt);
 
         if( etaper.get(0).getStatus() == Etape.Status.NEW){
-            view.findViewById(R.id.etapeoversigt_opret_button).setVisibility(View.GONE);
+            view.findViewById(R.id.etapeoversigt_opret_container).setVisibility(View.GONE);
             view.findViewById(R.id.etape_recyclerview).setVisibility(View.GONE);
             view.findViewById(R.id.etapeoversigt_start).setVisibility(View.VISIBLE);
         }else{
-            view.findViewById(R.id.etapeoversigt_opret_button).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.etapeoversigt_opret_container).setVisibility(View.VISIBLE);
             view.findViewById(R.id.etape_recyclerview).setVisibility(View.VISIBLE);
             view.findViewById(R.id.etapeoversigt_start).setVisibility(View.GONE);
         }
