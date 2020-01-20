@@ -31,7 +31,7 @@ public class PositionController {
 
 
     /*
-    Method describes what the request that we make.
+    Method describes what the request that we generateEtape.
      */
     public void startMeassureKoordinat() {
         prepRequestLocationUpdates();

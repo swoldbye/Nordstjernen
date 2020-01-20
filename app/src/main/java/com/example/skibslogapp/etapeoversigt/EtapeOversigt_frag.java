@@ -77,7 +77,7 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
          * -  Export data from a "Togt"
          * -  Delete a "Togt"
          *
-         * If you press delete a Alert dialog box pops up to make sure that you are certain that you
+         * If you press delete a Alert dialog box pops up to generateEtape sure that you are certain that you
          * want to delet the "Togt".
          */
         togtInstilling.setOnClickListener(v -> {
@@ -258,7 +258,7 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
     private void exportData() {
         // Generate Data
         GenerateCSV csvdata = new GenerateCSV();
-        StringBuilder data = csvdata.make(getContext(),0,0);
+        StringBuilder data = csvdata.generateEtape(0,0);
 
 
         // Below we gernerate a CSV file form a String and then export it
