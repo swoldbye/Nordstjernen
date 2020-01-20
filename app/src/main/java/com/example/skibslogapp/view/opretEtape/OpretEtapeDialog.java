@@ -24,6 +24,13 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Date;
 
 
+/**
+ *  Class displaying a Dialog, which lets you edit the information of a given Etape object.
+ *  The Etape is NOT updated in the database.
+ *
+ *  When the editing has finished succesfully (the user press the START button), the
+ *  class calls its 'onFinishCallback' (an update to the database may be implemented here).
+ */
 public class OpretEtapeDialog extends AppCompatDialogFragment implements View.OnClickListener {
 
     private TextInputLayout skipperInput, startDestInput, navnInput;
@@ -36,13 +43,12 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
     private RecyclerView.Adapter adapter;
 
     private OpretEtapeCallback onFinishCallback = null;
-    private OpretEtapeCallback onCancelCallback = null;
     private Etape etape;
+
 
     public OpretEtapeDialog(Etape etape) {
         this.etape = etape;
     }
-
 
     @NonNull
     @Override
@@ -51,8 +57,6 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.opret_etape_dialog_box,null);
-
-        etape = new Etape();
 
         builder.setView(view);
 
@@ -94,7 +98,6 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
         navnInput.setError(null);
 
         if (v == annullerEtape) {
-            if( onCancelCallback != null ) onCancelCallback.run(this, etape);
             getFragmentManager().beginTransaction()
                     .remove(this)
                     .commit();
@@ -142,16 +145,15 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
                 navnInputEdit.setText("");
                 adapter.notifyDataSetChanged();
                 recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
-                clearFocusOnDone(v);
+                hideKeyboard(v);
             }
         }
     }
 
+    
     /**
-     * Makes the keyboard disappear
-     * @param v
-     */
-    private void clearFocusOnDone(View v) {
+     * Makes the keyboard disappear */
+    private void hideKeyboard(View v) {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
@@ -160,7 +162,7 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
      * Show the previous Skipper in the new Etape
      */
     private void showSkipper(){
-        if(etape.getSkipper().length() > 0){
+        if(etape.getSkipper() != null && etape.getSkipper().length() > 0){
             skipperInput.getEditText().setText( etape.getSkipper() );
         }
     }
@@ -184,18 +186,21 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
         }
     }
 
+    
+    // Callback ----------------------------------------------------------------------------------
 
-    // Callbacks for cancel and start buttons
+    /** 
+     * Interface defining the callback method, which may be run by the
+     * OpretEtapeDialog.*/
     public interface OpretEtapeCallback{
         void run(OpretEtapeDialog dialog, Etape etape);
     }
 
+    /** 
+     *  Set the callback, which should run when the creation has
+     *  finished successfully (START button pressed). */
     public void onCreationFinished(OpretEtapeCallback onFinishCallback){
         this.onFinishCallback = onFinishCallback;
-    }
-
-    public void onCreationCancelled(OpretEtapeCallback onCancelCallback){
-        this.onCancelCallback = onCancelCallback;
     }
 }
 

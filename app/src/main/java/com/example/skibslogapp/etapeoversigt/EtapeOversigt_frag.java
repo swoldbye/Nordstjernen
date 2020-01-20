@@ -38,7 +38,6 @@ import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -160,11 +159,11 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
         List<Etape> etaper = etapeDAO.getEtaper(togt);
 
         if( etaper.get(0).getStatus() == Etape.Status.NEW){
-            view.findViewById(R.id.etapeOpretButton).setVisibility(View.GONE);
+            view.findViewById(R.id.etapeoversigt_opret_button).setVisibility(View.GONE);
             view.findViewById(R.id.etape_recyclerview).setVisibility(View.GONE);
             view.findViewById(R.id.etapeoversigt_start).setVisibility(View.VISIBLE);
         }else{
-            view.findViewById(R.id.etapeOpretButton).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.etapeoversigt_opret_button).setVisibility(View.VISIBLE);
             view.findViewById(R.id.etape_recyclerview).setVisibility(View.VISIBLE);
             view.findViewById(R.id.etapeoversigt_start).setVisibility(View.GONE);
         }
@@ -183,31 +182,45 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
         scrollToButtom();
 
         // Opret Etape Button
-        view.findViewById(R.id.etapeOpretButton).setOnClickListener((View v) -> this.createEtape());
+        view.findViewById(R.id.etapeoversigt_opret_button).setOnClickListener((View v) -> this.createEtapePressed());
 
         return view;
     }
 
 
+    /**
+     * The use pressed the 'Start Togt'-button. We open an OpretEtapeDialog with the
+     * first Etape (initial Togt information), so the user may edit it.
+     */
     private void startTogt() {
+        // Load First Etape (was created when creating the Togt)
         Etape firstEtape = new EtapeDAO(GlobalContext.get()).getEtaper(togt).get(0);
 
+        // Open dialog
         OpretEtapeDialog dialog = new OpretEtapeDialog(firstEtape);
         dialog.onCreationFinished( (cbDialog, etape) -> {
+
+            // Update the Etape in DB
             EtapeDAO etapeDAO = new EtapeDAO(GlobalContext.get());
             etapeDAO.updateEtape(etape);
 
-            getView().findViewById(R.id.etapeOpretButton).setVisibility(View.VISIBLE);
+            // Adjust visibile views (hide start button, show ny etape)
+            getView().findViewById(R.id.etapeoversigt_opret_container).setVisibility(View.VISIBLE);
             getView().findViewById(R.id.etape_recyclerview).setVisibility(View.VISIBLE);
             getView().findViewById(R.id.etapeoversigt_start).setVisibility(View.GONE);
 
+            // Update Etape Oversigt list
             listAdapter.updateEtapeList(etapeDAO.getEtaper(togt));
         });
         dialog.show(getFragmentManager(),"Dialog box");
     }
 
 
-    private void createEtape() {
+    /**
+     * The user has pressed the Ny Etape button, so we open a OpretEtapeDialog
+     * for the user to enter the information in.
+     */
+    private void createEtapePressed() {
 
         // Load Previous Etape
         List<Etape> currentEtaper = new EtapeDAO(getContext()).getEtaper(togt);
@@ -232,13 +245,13 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
             etapeDAO.addEtape(togt, createdEtape);
             etapeDAO.updateEtape(previousEtape);
 
-            // Update List
+            // Update Etape Oversigt list
             List<Etape> etaper = etapeDAO.getEtaper(togt);
             listAdapter.updateEtapeList(etaper);
             scrollToButtom();
         });
+        // Show dialog
         dialog.show(getFragmentManager(),"Dialog box");
-        // Start Dialog
     }
 
 
