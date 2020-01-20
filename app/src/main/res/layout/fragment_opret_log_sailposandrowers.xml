@@ -38,11 +38,9 @@
             <Space style="@style/EvenSpace" />
 
             <com.example.skibslogapp.view.utility.KingButton
-                android:id="@+id/ha"
+                android:id="@+id/bi"
                 style="@style/DefaultButton"
                 android:text="bi" />
-
-            <Space style="@style/EvenSpace" />
 
             <com.example.skibslogapp.view.utility.KingButton
                 android:id="@+id/fo"
@@ -52,9 +50,11 @@
             <Space style="@style/EvenSpace" />
 
             <com.example.skibslogapp.view.utility.KingButton
-                android:id="@+id/bi"
+                android:id="@+id/ha"
                 style="@style/DefaultButton"
                 android:text="ha" />
+
+            <Space style="@style/EvenSpace" />
 
             <Space style="@style/EvenSpace" />
 

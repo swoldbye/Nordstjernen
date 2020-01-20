@@ -108,7 +108,7 @@ public class RedigerLogpunkt_frag extends Fragment {
         currentSpeed.setText(logpunkt.getStroemhastighed() >= 0 ? String.valueOf(logpunkt.getStroemhastighed()) : "-");
         String sailsOrRowersString = logpunkt.getSejlstillingString() != null && !logpunkt.getSejlstillingString().equals("") ?
                 logpunkt.getSejlstillingString() : "";
-        sailsOrRowersString.concat(logpunkt.getRoere() >= 0 ? Integer.toString(logpunkt.getRoere()) : "");
+        sailsOrRowersString = sailsOrRowersString.concat(logpunkt.getRoere() >= 0 ? Integer.toString(logpunkt.getRoere()) : "");
         sailsOrRowers.setText(sailsOrRowersString.length() != 0 ? sailsOrRowersString : "-");
         sails.setText(logpunkt.getSejloeringString() != null && !logpunkt.getSejloeringString().equals("") ? logpunkt.getSejloeringString() : "-");
         course.setText(logpunkt.getKursString() != null && !logpunkt.getKursString().equals("") ? logpunkt.getKursString() : "-");
