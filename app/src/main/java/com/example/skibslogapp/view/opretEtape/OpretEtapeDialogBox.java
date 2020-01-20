@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +22,7 @@ import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +30,10 @@ import java.util.List;
 
 public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View.OnClickListener {
 
-    private EditText editSkipper, editStartDest, navnInput;
+    private TextInputLayout skipperInput, startDestInput, navnInput;
+    private EditText navnInputEdit;
     private Togt togt;
+    private Etape etape;
     private View addButton;
     private Etape previousEtape;
     private String skipper = "";
@@ -60,6 +64,8 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.opret_etape_dialog_box,null);
 
+        etape = new Etape();
+
         builder.setView(view);
 
         annullerEtape = view.findViewById(R.id.opretEtape_annuler_button);
@@ -68,9 +74,11 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         startEtape = view.findViewById(R.id.opretEtape_start_button);
         startEtape.setOnClickListener(this);
 
-        editSkipper = view.findViewById(R.id.inputSkipper);
-        editStartDest = view.findViewById(R.id.inputStartDest);
+        skipperInput = view.findViewById(R.id.opretetape_skipper);
+        startDestInput = view.findViewById(R.id.opretetape_startdest);
+
         navnInput = view.findViewById(R.id.navnIndput);
+        navnInputEdit = view.findViewById(R.id.navnIndputEdit);
 
         addButton = view.findViewById(R.id.addButton);
         addButton.setOnClickListener(this);
@@ -89,14 +97,14 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         scrollTobuttom();
 
         return builder.create();
-
     }
-
-
-
 
     @Override
     public void onClick(View v) {
+        skipperInput.setError(null);
+        startDestInput.setError(null);
+        navnInput.setError(null);
+
         if (v == annullerEtape) {
             getFragmentManager().beginTransaction()
                     .remove(this)
@@ -104,45 +112,52 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         }
 
         if (v == startEtape) {
-            String skipper = editSkipper.getText().toString();
-            String startDest = editStartDest.getText().toString();
+            String skipper = skipperInput.getEditText().getText().toString();
+            String startDest = startDestInput.getEditText().getText().toString();
+            int besaetning = beseatningsList.size();
 
-            /*
-            Ensure that we have a slutdestination for the former previousEtape
-             */
             if (startDest.length() <= 0) {
-                editStartDest.setError("Der skal indtastes en start destinationt!");
+                startDestInput.setError("Der skal indtastes en start destinationt!");
                 return;
             }
-                EtapeDAO etapeDAO = new EtapeDAO(getContext());
 
-                // Create new Etape
-                Etape newEtape = new Etape();
-                newEtape.setBesaetning(beseatningsList);
-                newEtape.setSkipper(skipper);
-                newEtape.setStartDestination(startDest);
-                etapeDAO.addEtape(togt, newEtape);
+            if ( skipper.length() <= 0){
+                skipperInput.setError("Der skal indtastes en skipper!");
+                return;
+            }
 
-                // Update previous Etape
-                previousEtape.setStatus(Etape.Status.FINISHED);
-                previousEtape.setSlutDestination(startDest);
-                etapeDAO.updateEtape(previousEtape);
+            if (besaetning <= 0){
+                navnInput.setError("Der skal tilføjes mindst et besætningsmedlem!");
+                return;
+            }
 
-                scrollTobuttom();
-                getFragmentManager().beginTransaction()
-                        .remove(this)
-                        .commit();
+            EtapeDAO etapeDAO = new EtapeDAO(getContext());
+
+            // Create new Etape
+            Etape newEtape = new Etape();
+            newEtape.setBesaetning(beseatningsList);
+            newEtape.setSkipper(skipper);
+            newEtape.setStartDestination(startDest);
+            etapeDAO.addEtape(togt, newEtape);
+
+            // Update previous Etape
+            previousEtape.setStatus(Etape.Status.FINISHED);
+            previousEtape.setSlutDestination(startDest);
+            etapeDAO.updateEtape(previousEtape);
+
+            scrollTobuttom();
+            getFragmentManager().beginTransaction()
+                    .remove(this)
+                    .commit();
         }
 
-
         if (v == addButton) {
-            String navn = navnInput.getText().toString();
+            String navn = navnInput.getEditText().getText().toString();
             if (navn.length() <= 0) {
                 navnInput.setError("Der skal indtastes et navn på et besætningsmedlem!");
             } else {
                 beseatningsList.add(navn);
-                System.out.println(navnInput.getText().toString());
-                navnInput.setText("");
+                navnInputEdit.setText("");
                 adapter.notifyDataSetChanged();
                 recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
                 clearFocusOnDone(v);
@@ -151,7 +166,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     }
 
     /**
-     * Makes the keyboard dissapere
+     * Makes the keyboard disappear
      * @param v
      */
     private void clearFocusOnDone(View v) {
@@ -160,23 +175,27 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     }
 
     /**
-     * Show the previus Skipper in the new Etape
+     * Show the previous Skipper in the new Etape
      */
     private void showSkipper(){
         if(skipper.length() > 0){
-            editSkipper.setText(skipper);
+            skipperInput.getEditText().setText(skipper);
         }
     }
 
     /**
-     * Show the previus slutDestination as the Start destination in the new Etape
+     * Show the previous slutDestination as the Start destination in the new Etape
      */
     private void showSlutDestination(){
         if(startDestination != null && startDestination.length()>0){
-            editStartDest.setText(startDestination);
+            startDestInput.getEditText().setText(startDestination);
         }
     }
 
+    /**
+     * When the "besætnings" recycleview is shown the last added item which is the lowest in
+     * list. The list is therefore scrolled way down.
+     */
     private void scrollTobuttom(){
         if(adapter.getItemCount()>0){
             recyclerView.smoothScrollToPosition(adapter.getItemCount()-1);

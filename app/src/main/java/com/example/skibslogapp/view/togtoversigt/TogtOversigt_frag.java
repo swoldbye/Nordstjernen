@@ -49,7 +49,7 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener,
 
         ingenTogtText = view.findViewById(R.id.ingenTogtText);
         ingenTogtText.setText("Der er ingen oprettede togter.\n " +
-                "Hvis der skal oprettes et togt tryk på 'Opret Togt'");
+                "Hvis der skal oprettes et togt tryk på 'Opret Togt'.");
 
         recyclerView = view.findViewById(R.id.togtRecycView);
         recyclerView.setHasFixedSize(true);
