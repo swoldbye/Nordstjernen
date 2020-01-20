@@ -17,7 +17,7 @@
             style="@style/SmallTitle"
             android:layout_width="127dp"
             android:layout_marginBottom="5dp"
-            android:text="Strømning" />
+            android:text="Strøm" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

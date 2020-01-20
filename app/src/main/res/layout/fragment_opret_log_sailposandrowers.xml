@@ -63,6 +63,7 @@
 
 
     <!-- ANTALROERE =====================================-->
+
     <EditText
         android:id="@+id/antalRoereEditText"
         android:layout_width="match_parent"
