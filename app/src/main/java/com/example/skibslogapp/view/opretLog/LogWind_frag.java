@@ -16,10 +16,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.view.utility.MoveButtons;
 
 public class LogWind_frag extends Fragment implements View.OnClickListener {
     private Button vindNordBtn, vindØstBtn, vindSydBtn, vindVestBtn, vindretning_delete;
-    private TextView vindretning_input;
+    private TextView vindretning_input , vindretning, vindretningNew;
     private EditText vindHastighedEditTxt;
     private LogViewModel logVM;
 
@@ -30,6 +31,8 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
 
         //Vind Retning
+        vindretningNew = view.findViewById(R.id.vindretning_newtext);
+        vindretning = view.findViewById(R.id.vindretning_text);
         vindNordBtn = view.findViewById(R.id.nordButton);
         vindØstBtn = view.findViewById(R.id.østButton);
         vindSydBtn = view.findViewById(R.id.sydButton);
@@ -77,6 +80,13 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        /*if(!vindretning.getText().equals("")) {
+            vindretningNew.setText(vindretning.getText());
+            vindretning.setText("");
+        }*/
+        MoveButtons.setText(vindretning,vindretningNew);
+
+
         if(v == vindNordBtn) vindDirectionLogic("N", "S");
         else if(v == vindØstBtn) vindDirectionLogic("Ø", "V");
         else if(v == vindSydBtn) vindDirectionLogic("S", "N");
@@ -85,6 +95,8 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
             logVM.setWindDirection("");
             vindretning_input.setText(logVM.getWindDirection());
             vindretning_delete.setVisibility(View.INVISIBLE);
+            MoveButtons.revertText(vindretning,vindretningNew);
+
         }
     }
 
