@@ -42,6 +42,7 @@ public class RedigerLogpunkt_frag extends Fragment {
                         note;
     private Logpunkt logpunkt;
     private LogViewModel logVM;
+    private View vv; //TODO DELETE THIS AND USAGES - TESTING ONLY
 
     public RedigerLogpunkt_frag(Logpunkt logpunkt){
         this.logpunkt = logpunkt;
@@ -50,7 +51,8 @@ public class RedigerLogpunkt_frag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rediger_logpunkt, container, false);
-        ((TextView) view.findViewById(R.id.test_text)).setText(logpunkt.toString());
+        vv = view;
+        updatetopthing();
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
         logVM.reset();
 
@@ -91,7 +93,6 @@ public class RedigerLogpunkt_frag extends Fragment {
         noteConta.setOnClickListener(v -> openFragmentDialog(R.id.fragment_opretLog_note, new LogNote_frag()));
 
         updateInformation();
-
         return view;
     }
 
@@ -112,6 +113,12 @@ public class RedigerLogpunkt_frag extends Fragment {
         sails.setText(logpunkt.getSejloeringString() != null && !logpunkt.getSejloeringString().equals("") ? logpunkt.getSejloeringString() : "-");
         course.setText(logpunkt.getKursString() != null && !logpunkt.getKursString().equals("") ? logpunkt.getKursString() : "-");
         note.setText(logpunkt.getNote() != null && !logpunkt.getNote().equals("") ? logpunkt.getNote() : "-");
+
+        updatetopthing();
+    }
+
+    private void updatetopthing() {
+        ((TextView) vv.findViewById(R.id.test_text)).setText(logpunkt.toString());
     }
 
     private void openFragmentDialog(int fragID, Fragment frag) {
@@ -119,7 +126,6 @@ public class RedigerLogpunkt_frag extends Fragment {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
 
         EditDialogFragment edf = EditDialogFragment.newInstance(frag);
-
         edf.show(ft, "edf");
     }
 
@@ -156,7 +162,8 @@ public class RedigerLogpunkt_frag extends Fragment {
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             System.out.println("onCreateView initiated");
-            return inflater.inflate(R.layout.fragment_rediger_logpunkt_dialogfragment, container);
+            View view = inflater.inflate(R.layout.fragment_rediger_logpunkt_dialogfragment, container);
+            return view;
         }
 
         @Override
@@ -191,23 +198,18 @@ public class RedigerLogpunkt_frag extends Fragment {
                 frag.cancel();
             }
         }
-        /**
-         * Ikke kalde dismiss på Dialog men DialogFragment
-         */
 
-        private boolean cancelEdit() {
+        private void cancelEdit() {
             getDialog().cancel();
-            return false;
         }
 
-        private boolean saveEdit() {
+        private void saveEdit() {
             RedigerLogpunkt_frag frag = (RedigerLogpunkt_frag) getParentFragment();
+            dismiss();
             if(frag != null){
                 System.out.println("Parent found, save information");
                 frag.save();
             }
-            dismiss();
-            return false;
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.example.skibslogapp.view.opretLog;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,11 +46,23 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
 
         //Strømningshastighed
         waterCurrentSpeed = view.findViewById(R.id.strømhastighed_edittext);
-        waterCurrentSpeed.setOnFocusChangeListener((v, hasFocus) -> {
-            if(waterCurrentSpeed.getText().length() != 0)
-                logVM.setWaterCurrentSpeed(Integer.parseInt(waterCurrentSpeed.getText().toString()));
-        });
+        waterCurrentSpeed.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                logVM.setWaterCurrentSpeed(waterCurrentSpeed.getText().length() > 0 ?
+                        Integer.parseInt(waterCurrentSpeed.getText().toString()) : -1);
+            }
+        });
         updateViewInfo();
 
         return view;
@@ -57,15 +71,15 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
     private void updateViewInfo() {
         waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
         currentResetBtn.setVisibility(waterCurrentDirection.getText() != null && waterCurrentDirection.getText().length() != 0 ? View.VISIBLE : View.INVISIBLE);
-        waterCurrentSpeed.setText(Integer.toString(logVM.getWaterCurrentSpeed()));
+        waterCurrentSpeed.setText(logVM.getWaterCurrentSpeed() >= 0 ? Integer.toString(logVM.getWaterCurrentSpeed()) : "");
     }
 
     @Override
     public void onClick(View v) {
-        if(v == currentNorthBtn) strømDirectionLogic( "N", "S");
-        else if(v == currentEastBtn) strømDirectionLogic( "Ø", "V");
-        else if(v == currentSouthBtn) strømDirectionLogic( "S", "N");
-        else if(v == currentWestBtn) strømDirectionLogic("V", "Ø");
+        if(v == currentNorthBtn) waterCurrentLogic( "N", "S");
+        else if(v == currentEastBtn) waterCurrentLogic( "Ø", "V");
+        else if(v == currentSouthBtn) waterCurrentLogic( "S", "N");
+        else if(v == currentWestBtn) waterCurrentLogic("V", "Ø");
         else if (v == currentResetBtn) {
             logVM.setWaterCurrentDirection("");
             waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
@@ -73,20 +87,7 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
         }
     }
 
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//
-//    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        logVM.setWaterCurrentSpeed(Integer.parseInt(waterCurrentSpeed.getText().toString()));
-
-    }
-
-    private void strømDirectionLogic(String btnDirection, String counterDirection) {
+    private void waterCurrentLogic(String btnDirection, String counterDirection) {
         if(!logVM.getWaterCurrentDirection().contains(counterDirection)) {
             switch(logVM.getWaterCurrentDirection().length()) {
                 case 0:
