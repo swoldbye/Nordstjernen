@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * @Author Claes
+ * @author Claes
  * This class creates a lit of Log points as strings coorispoinding to one etape.
  * Based on what is in the SQL DB
  */

@@ -77,6 +77,7 @@ public class LogpunktDAO {
         logpunkt.setEtapeId(etape.getId());
         logpunkt.setTogtId(etape.getTogtId());
 
+        database.close();
         logpunktUpdated(logpunkt);
     }
 
@@ -193,7 +194,7 @@ public class LogpunktDAO {
             row.put( "hals", logpunkt.getHals() );
 
         database.update("logpunkter", row, "id="+logpunkt.getId(), null );
-
+        database.close();
 
         logpunktUpdated(logpunkt);
     }
@@ -220,6 +221,7 @@ public class LogpunktDAO {
         Cursor cursor = database.rawQuery("SELECT * FROM logpunkter WHERE id="+logpunkt.getId()+";", null);
         int rowCount = cursor.getCount();
         cursor.close();
+        database.close();
         return rowCount > 0;
     }
 }

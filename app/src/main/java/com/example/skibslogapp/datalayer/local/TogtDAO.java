@@ -47,6 +47,8 @@ public class TogtDAO {
         long id = database.insert("togter", null, row);
         togt.setId(id);
         togtUpdated(id);
+
+        database.close();
     }
 
 
@@ -81,6 +83,7 @@ public class TogtDAO {
         }
         cursor.close();
 
+        database.close();
         return togter;
     }
 
@@ -104,6 +107,8 @@ public class TogtDAO {
 
         SQLiteDatabase database = connector.getReadableDatabase();
         database.delete("togter", "id="+togt.getId(), null );
+
+        database.close();
     }
 
 
@@ -122,6 +127,7 @@ public class TogtDAO {
         }
 
         cursor.close();
+        database.close();
         return togt;
     }
 
@@ -166,6 +172,7 @@ public class TogtDAO {
         Cursor cursor = database.rawQuery("SELECT * FROM togter WHERE id="+togt.getId()+";", null);
         int rowCount = cursor.getCount();
         cursor.close();
+        database.close();
         return rowCount > 0;
     }
 
