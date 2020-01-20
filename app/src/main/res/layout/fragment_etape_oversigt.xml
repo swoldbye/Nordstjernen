@@ -27,7 +27,7 @@
                 android:id="@+id/etapeoversigt_opret_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:tint="@color/colorPrimaryDark"
+                android:backgroundTint="@color/colorPrimaryDark"
                 android:clickable="true"
                 android:elevation="20dp"
                 android:focusable="true"
