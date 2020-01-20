@@ -69,6 +69,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         //Activate logging of coordinates. This is placed in onCreate to ensure that the logging will start at
         //The first time the logging is activated.
         testCoordinates = new PositionController(getActivity().getApplicationContext(), this);
+        //For testing
+        //testCoordinates = null;
     }
 
     @Override
@@ -212,4 +214,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         System.out.println("Stopping measure koordinates");
         testCoordinates.removeLocationUpdates();
     }
+
+
 }

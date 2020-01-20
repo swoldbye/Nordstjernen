@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "591530138853",
+    "firebase_url": "https://skibslogapp.firebaseio.com",
+    "project_id": "skibslogapp",
+    "storage_bucket": "skibslogapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591530138853:android:f099fa3f93eaeb2144480c",
+        "android_client_info": {
+          "package_name": "com.example.skibslogapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "591530138853-dnjkq8treb67hcbfav6sucvscjus6f5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS5HcSIgCBEb1OzaWWwjsv_OUYw0eAUHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "591530138853-dnjkq8treb67hcbfav6sucvscjus6f5i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
