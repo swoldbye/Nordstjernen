@@ -76,6 +76,7 @@ public class TabLayout_frag extends Fragment implements TogtDAO.TogtObserver {
         System.out.println("Size of first = " + etapper.size());
 
         tabLayout = view.findViewById(R.id.tabLayout);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         viewPager = view.findViewById(R.id.viewPager);
 
 //        for (int i = 0; i < days; i++){

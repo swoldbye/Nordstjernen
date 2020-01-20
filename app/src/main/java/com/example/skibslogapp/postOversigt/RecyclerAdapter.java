@@ -100,7 +100,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
 
-    SimpleDateFormat localDateFormat = new SimpleDateFormat("HH mm");
+    SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
