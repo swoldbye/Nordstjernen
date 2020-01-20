@@ -33,6 +33,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     private TextInputLayout skipperInput, startDestInput;
     private EditText navnInput;
     private Togt togt;
+    private Etape etape;
     private View addButton;
     private Etape previousEtape;
     private String skipper = "";
@@ -62,6 +63,8 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.opret_etape_dialog_box,null);
+
+        etape = new Etape();
 
         builder.setView(view);
 
@@ -110,6 +113,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         if (v == startEtape) {
             String skipper = skipperInput.getEditText().getText().toString();
             String startDest = startDestInput.getEditText().getText().toString();
+            int besaetning = beseatningsList.size();
 
             if (startDest.length() <= 0) {
                 startDestInput.setError("Der skal indtastes en start destinationt!");
@@ -118,6 +122,11 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
 
             if ( skipper.length() <= 0){
                 skipperInput.setError("Der skal indtastes en skipper!");
+                return;
+            }
+
+            if (besaetning <= 0){
+                navnInput.setError("Der skal tilføjes mindst et besætningsmedlem!");
                 return;
             }
 
@@ -141,7 +150,6 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
                     .commit();
         }
 
-
         if (v == addButton) {
             String navn = navnInput.getText().toString();
             if (navn.length() <= 0) {
@@ -158,7 +166,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     }
 
     /**
-     * Makes the keyboard dissapere
+     * Makes the keyboard disappear
      * @param v
      */
     private void clearFocusOnDone(View v) {
@@ -167,7 +175,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     }
 
     /**
-     * Show the previus Skipper in the new Etape
+     * Show the previous Skipper in the new Etape
      */
     private void showSkipper(){
         if(skipper.length() > 0){
@@ -176,7 +184,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
     }
 
     /**
-     * Show the previus slutDestination as the Start destination in the new Etape
+     * Show the previous slutDestination as the Start destination in the new Etape
      */
     private void showSlutDestination(){
         if(startDestination != null && startDestination.length()>0){
@@ -184,6 +192,10 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         }
     }
 
+    /**
+     * When the "besætnings" recycleview is shown the last added item which is the lowest in
+     * list. The list is therefore scrolled way down.
+     */
     private void scrollTobuttom(){
         if(adapter.getItemCount()>0){
             recyclerView.smoothScrollToPosition(adapter.getItemCount()-1);
