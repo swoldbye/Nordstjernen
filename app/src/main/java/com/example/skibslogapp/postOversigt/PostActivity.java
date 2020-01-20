@@ -84,4 +84,17 @@ public class PostActivity extends Fragment implements View.OnClickListener {
         tabLayout_frag.openTabs();
         openButton.setText("open");
     }
+
+
+    /*
+    We have to destroy the two fragments in order to coordinate maesuring
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .remove(opretLog_frag)
+                .remove(tabLayout_frag)
+                .commit();
+    }
 }
