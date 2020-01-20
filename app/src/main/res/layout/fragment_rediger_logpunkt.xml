@@ -16,18 +16,17 @@
             android:padding="15dp"
             android:text="Redigér Logpunkt"
             android:elevation="10dp"
+            android:background="@color/white"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <View style="@style/RedigerLogDevider" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/editLogTimeContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="10dp"
+            android:paddingTop="30dp"
             android:paddingBottom="10dp">
 
             <TextView
