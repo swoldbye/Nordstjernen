@@ -31,7 +31,6 @@ public class PostActivity extends Fragment implements View.OnClickListener {
 
     TabLayout_frag tabLayout_frag;
     OpretLog_frag opretLog_frag;
-    FrameLayout opretPostContainerFrame;
 
     public PostActivity(Etape etape, int startPos){
         TogtDAO togtDAO = new TogtDAO(GlobalContext.get());
@@ -44,8 +43,6 @@ public class PostActivity extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_post_container, container, false);
-
-        opretPostContainerFrame = view.findViewById(R.id.opretPostContainerFrame);
 
 
         tabLayout_frag = new TabLayout_frag(togt, startPos);
@@ -79,14 +76,15 @@ public class PostActivity extends Fragment implements View.OnClickListener {
         OpretLog_frag fragment = new OpretLog_frag();
 
         getActivity().getSupportFragmentManager().beginTransaction()
-            .add(R.id.opretPostContainerFrame, new OpretLog_frag())
+            .setCustomAnimations(R.anim.slide_upslow2, R.anim.slide_upslow, R.anim.slide_downslow2, R.anim.slide_downslow)
+            .add(R.id.opretPostContainerFrame, fragment)
             .addToBackStack(null)
             .commit();
 
-        fragment.onClosed(() -> {
-
-        });
+        tabLayout_frag.toggleMinimize(true);
+        fragment.onClosed(() -> tabLayout_frag.toggleMinimize(false));
     }
+/*
 
     private void expandPost() {
         opretPostContainerFrame.setVisibility(View.VISIBLE);
@@ -99,6 +97,7 @@ public class PostActivity extends Fragment implements View.OnClickListener {
         tabLayout_frag.openTabs();
         openButton.setText("open");
     }
+*/
 
 
     /*
@@ -108,7 +107,6 @@ public class PostActivity extends Fragment implements View.OnClickListener {
     public void onDestroy() {
         super.onDestroy();
         getActivity().getSupportFragmentManager().beginTransaction()
-                .remove(opretLog_frag)
                 .remove(tabLayout_frag)
                 .commit();
     }

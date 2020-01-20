@@ -1,6 +1,7 @@
 package com.example.skibslogapp.postOversigt;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class PostOversigt extends Fragment {
 
         postRecyclerView = view.findViewById(R.id.postRecyclerView);
         postRecyclerView.setHasFixedSize(true);
+        //postRecyclerView.setNestedScrollingEnabled(false);
         mLayoutManager = new LinearLayoutManager(this.getContext());
         mAdapter = new RecyclerAdapter(logs);
 
@@ -96,6 +98,14 @@ public class PostOversigt extends Fragment {
     public RecyclerView.Adapter getAdapter(){
         //return mAdapter;
         return postRecyclerView.getAdapter();
+    }
+
+    public void toggleMinimize(boolean toggle){
+        mAdapter.toggleFillerCard(toggle);
+        new Handler().postDelayed( () -> postRecyclerView.smoothScrollToPosition(mAdapter.getItemCount()-1), 20);
+        /*if( toggle ){
+            postRecyclerView.smoothScrollToPosition(mAdapter.getItemCount()-1);
+        }*/
     }
 
 }

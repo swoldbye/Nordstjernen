@@ -37,7 +37,6 @@ import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.postOversigt.RecyclerAdapter;
 import com.example.skibslogapp.postOversigt.TabLayout_frag;
-import com.example.skibslogapp.view.opretEtape.OpretEtapeDialogBox;
 import com.example.skibslogapp.view.opretLog.LogNote_frag;
 import com.example.skibslogapp.view.opretLog.LogViewModel;
 
@@ -60,7 +59,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     private Etape currentEtape;
 
 
-    FrameLayout opretPostWrapper;
+    //FrameLayout opretPostWrapper;
     EtapeDAO etapeDAO;
 
     @Override
@@ -95,7 +94,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
 
         closeButton = view.findViewById(R.id.closeButton);
+/*
         opretPostWrapper = view.findViewById(R.id.opret_post_wrapper);
+*/
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
         logVM.reset();
 
@@ -139,7 +140,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         if (v == opretButton || v == mob) {
             createLogpunkt(v == mob);
         }else if(v == closeButton){
-            opretPostWrapper.setVisibility(View.GONE);
             getActivity().getSupportFragmentManager().popBackStack();
         }
     }
@@ -177,7 +177,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         System.out.printf("Created logpunkt: %s", logpunkt.toString());
 
         getActivity().getSupportFragmentManager().popBackStack();
-        opretPostWrapper.setVisibility(View.GONE);
     }
 
     private void toggleMOBPosition() {
@@ -217,10 +216,18 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         this.onClosedCallback = onClosedCallback;
     }
 
-    private void close(){
-        getActivity().getSupportFragmentManager().popBackStack();
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
         if( onClosedCallback != null ){
             onClosedCallback.run();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+
+        super.onDestroy();
     }
 }

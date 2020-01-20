@@ -98,6 +98,13 @@ public class TabLayout_frag extends Fragment implements TogtDAO.TogtObserver {
 
     }
 
+    public void toggleMinimize(boolean toggle){
+        PostOversigt currentPage = (PostOversigt) pageAdapter.getFragment(viewPager.getCurrentItem());
+        currentPage.toggleMinimize(toggle);
+        appBarLayout.setVisibility( toggle ? View.GONE : View.VISIBLE);
+    }
+
+
     public void closeTabs() {
         appBarLayout.setVisibility(View.GONE);
     }
@@ -109,15 +116,21 @@ public class TabLayout_frag extends Fragment implements TogtDAO.TogtObserver {
     public static int getTabPos(){
         return viewPager.getCurrentItem();
     }
+
     public static Togt getCurrentTogt(){
         return togt;
     }
+
+
+
 
 
     @Override
     public void onUpdate(Togt togt2) {
         DbTranslator dbTranslator = new DbTranslator(getContext());
         this.togt = togt2;
+
+
 
         etapper = dbTranslator.getList(togt2);
 //        System.out.println("Size of new array is: " + etapper.size());

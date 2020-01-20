@@ -107,6 +107,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
         return "E-" + (position + 1);
     }
 
+
     public void updateList(List<List<Logpunkt>> newEtapper, int position, FragmentActivity FA){
         this.etapper = newEtapper;
 
@@ -128,4 +129,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
         //this.notifyDataSetChanged();
         //postOversigt.updatemAdapter(etapper.get(position));
     }
+
+
+
 }

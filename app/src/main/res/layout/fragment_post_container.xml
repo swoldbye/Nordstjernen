@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true">
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,44 +20,33 @@
             android:id="@+id/tabOversigtContainerFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="70"
+            android:animateLayoutChanges="true"
             app:layout_constraintTop_toTopOf="parent"/>
-
 
         <Button
             android:id="@+id/logpunktoversigt_opret"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/colorPrimary"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/colorPrimary"
             android:text="Opret Logpunkt"
-            android:textStyle="bold"
             android:textColor="@color/white"
-            android:textSize="25dp"
+            android:textSize="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
-<!--
-        <FrameLayout
-            android:id="@+id/Button_Frame"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:animateLayoutChanges="true">
 
-
-
-
-            </Button>
-
-        </FrameLayout>-->
 
         <FrameLayout
             android:id="@+id/opretPostContainerFrame"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="30"
-            android:animateLayoutChanges="true"
+            android:layout_height="match_parent"
             android:elevation="10dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
+        <!-- The elevation is only to place it "above" the button -->
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

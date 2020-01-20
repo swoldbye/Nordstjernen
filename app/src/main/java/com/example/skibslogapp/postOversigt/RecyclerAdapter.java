@@ -17,7 +17,7 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Logpunkt> mTempLogs;
-    private static boolean fillerCardEnabled = false;
+    private boolean fillerCardEnabled = false;
 
     public static class NoteViewHolder extends RecyclerView.ViewHolder {
 
@@ -59,8 +59,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         mTempLogs = tempLogs;
     }
 
-    public static void toggleFillerCard(boolean toggle){
+    void toggleFillerCard(boolean toggle){
+        if(!toggle){
+            notifyItemRemoved(getItemCount()-1);
+        }
         fillerCardEnabled = toggle;
+        if(toggle){
+            notifyItemInserted(getItemCount()-1);
+        }
     }
 
     @Override
