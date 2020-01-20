@@ -14,4 +14,6 @@
     <color name="insideCardSeparator">#9CB0C0</color>
     <color name="red">#C7421B</color>
     <color name="greyDark">#999999</color>
+    <color name="MOB">#FFFFFF</color>
+    <color name="MOBButton">#C60000</color>
 </resources>

@@ -68,7 +68,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="bottom|start"
-                        android:backgroundTint="@color/red"
+                        android:backgroundTint="@color/MOBButton"
                         android:clickable="true"
                         android:elevation="20dp"
                         android:focusable="true"
@@ -80,7 +80,7 @@
                         android:elevation="20dp"
                         android:gravity="center"
                         android:text="MOB"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/MOB"
                         android:textSize="22sp"
                         android:textStyle="bold" />
                 </FrameLayout>
