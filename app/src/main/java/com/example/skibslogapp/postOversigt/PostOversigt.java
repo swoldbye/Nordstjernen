@@ -26,7 +26,8 @@ public class PostOversigt extends Fragment {
     List<Logpunkt> logs;
     int position;
 
-    private RecyclerView.Adapter mAdapter;
+    RecyclerAdapter mAdapter;
+
     private RecyclerView.LayoutManager mLayoutManager;
 
 
@@ -82,5 +83,19 @@ public class PostOversigt extends Fragment {
 //        fragment.setArguments(args);
 //        return fragment;
 //    }
+
+
+    public void updateAdapter(List<Logpunkt> logs2){
+        //this.logs = logs2;
+        mAdapter.updateData(logs2);
+        //mAdapter.notifyDataSetChanged();
+        //mAdapter.notifyDataSetChanged();
+    }
+
+    public RecyclerView.Adapter getAdapter(){
+        //return mAdapter;
+        return postRecyclerView.getAdapter();
+    }
+
 }
 

@@ -99,8 +99,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+
+
     @Override
     public int getItemCount() {
         return mTempLogs.size();
+    }
+
+    public void updateData(List<Logpunkt> newLogs){
+        mTempLogs = newLogs;
+        notifyItemRangeRemoved(0, mTempLogs.size() - 1);
+        //notifyItemInserted(mTempLogs.size() - 1);
     }
 }

@@ -149,7 +149,6 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
                         .replace(R.id.fragContainer, new PostActivity(getEtape(), position))
                         .addToBackStack(null)
                         .commit();
-
         }
 
         private Etape getEtape(){
