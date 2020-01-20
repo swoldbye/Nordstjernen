@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:text="Redigér Logpunkt"
-            android:elevation="1dp"
+            android:elevation="10dp"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp"
