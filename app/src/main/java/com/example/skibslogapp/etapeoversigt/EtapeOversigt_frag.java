@@ -1,7 +1,6 @@
 package com.example.skibslogapp.etapeoversigt;
 
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,17 +18,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.skibslogapp.GlobalContext;
-import com.example.skibslogapp.view.opretEtape.OpretEtapeDialogBox;
+import com.example.skibslogapp.view.opretEtape.OpretEtapeDialog;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.global.GenerateCSV;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
@@ -37,24 +34,20 @@ import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver {
 
-        private TextView togt_text, skib_text;
+    private TextView togt_text, skib_text;
     private Togt togt;
-    private Etape newEtape = null;
-    private FloatingActionButton createEtape_button;
     private EtapeListAdapter listAdapter;
     private RecyclerView recyclerView;
     private List<Etape> etaper;
@@ -190,7 +183,7 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
         //Auto scroll to buttom
         scrollToButtom();
         // Opret Etape Button
-        view.findViewById(R.id.etapeOpretButton).setOnClickListener((View v) -> this.openDialog());
+        view.findViewById(R.id.etapeOpretButton).setOnClickListener((View v) -> this.createEtape());
         return view;
     }
 
@@ -210,60 +203,45 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
 
 
     private void createEtape() {
-
-
-
-        EtapeDAO etapeDAO = new EtapeDAO(getContext());
+        // Create
+        int numberOfEtape = new EtapeDAO(getContext()).getEtaper(togt).size();
+        Etape previousEtape = new EtapeDAO(getContext()).getEtaper(togt).get(numberOfEtape-1);
 
         Etape newEtape = new Etape();
-        newEtape.setStatus(Etape.Status.ACTIVE);
-        Random random = new Random();
-        String[] destinationer = {"København", "Nyborg", "Roskilde", "Kattinge", "Ejby", "Køge", "Odense", "Aalborg", "Stege", "Kalvehave", "Jylling", "Helsingør"};
-        newEtape.setStartDestination( destinationer[random.nextInt(destinationer.length) ]);
-        newEtape.setSkipper("Troels");
-        etapeDAO.addEtape(togt, newEtape);
+        newEtape.setBesaetning( new ArrayList<>(previousEtape.getBesaetning()));
+        newEtape.setSkipper(previousEtape.getSkipper());
 
-        // TODO: Change this when we when we have merged Togt
-        if( etaper.size() > 0 ){
-            Etape previousEtape = etaper.get(etaper.size()-1);
-            previousEtape.setSlutDestination( newEtape.getStartDestination() );
-            previousEtape.setEndDate( newEtape.getStartDate() );
+        // Create Dialog box
+        OpretEtapeDialog dialog = new OpretEtapeDialog(newEtape);
+        dialog.onCreationFinished( (cbDialog, createdEtape) -> {
+
+            // Update Previous Etape
             previousEtape.setStatus(Etape.Status.FINISHED);
+            previousEtape.setSlutDestination(createdEtape.getStartDestination());
+
+            // Update Database
+            EtapeDAO etapeDAO = new EtapeDAO(GlobalContext.get());
+            etapeDAO.addEtape(togt, createdEtape);
             etapeDAO.updateEtape(previousEtape);
-        }
 
-        etaper.add(newEtape);
-        listAdapter.updateEtapeList(etaper);
-        recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
-    }
+            // Update List
+            etaper = etapeDAO.getEtaper(togt);
+            listAdapter.updateEtapeList(etaper);
+            scrollToButtom();
+        });
 
-    private void openDialog() {
-        int numberOfEtape = new EtapeDAO(getContext()).getEtaper(togt).size();
-        newEtape = new EtapeDAO(getContext()).getEtaper(togt).get(numberOfEtape-1);
-
-        OpretEtapeDialogBox dialogBox = new OpretEtapeDialogBox(togt,newEtape);
-        dialogBox.show(getFragmentManager(),"Dialog box");
+        // Start Dialog
+        dialog.show(getFragmentManager(),"Dialog box");
     }
 
 
-    private List<String> getTestListe(){
-        List<String> testListe = new ArrayList<>();
-        testListe.add("Troels");
-        testListe.add("Per");
-        testListe.add("Knud");
-
-        return testListe;
-    }
-
-    public void exportData() {
-        //generate data
+    private void exportData() {
+        // Generate Data
         GenerateCSV csvdata = new GenerateCSV();
         StringBuilder data = csvdata.make(getContext(),0,0);
 
-        /**
-         * @author Claes
-         * below we gernerate a CSV file form a String and then export it
-         */
+
+        // Below we gernerate a CSV file form a String and then export it
         try {
             Context context = getActivity();
             //saving the file into device
@@ -294,17 +272,13 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
     @Override
     public void onUpdate(Togt togt) {
         this.togt = togt;
-        etaper = etapeDAO.getEtaper(togt);
-        listAdapter.updateEtapeList(etaper);
-        scrollToButtom();
+
 
     }
 
     private void scrollToButtom(){
         if(listAdapter.getItemCount()>0){
             recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
-
-
         }
     }
 }
