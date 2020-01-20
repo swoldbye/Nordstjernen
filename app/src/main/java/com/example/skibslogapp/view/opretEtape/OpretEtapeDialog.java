@@ -21,6 +21,8 @@ import com.example.skibslogapp.R;
 import com.example.skibslogapp.model.Etape;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Date;
+
 
 public class OpretEtapeDialog extends AppCompatDialogFragment implements View.OnClickListener {
 
@@ -112,6 +114,7 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
             // Set information to given Etape
             etape.setSkipper(skipper);
             etape.setStartDestination(startDest);
+            etape.setStartDate(new Date(System.currentTimeMillis()));
             etape.setStatus(Etape.Status.ACTIVE);
 
             getFragmentManager().beginTransaction()

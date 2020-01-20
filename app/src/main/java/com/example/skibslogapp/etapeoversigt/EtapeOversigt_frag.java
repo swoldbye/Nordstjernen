@@ -50,7 +50,6 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
     private Togt togt;
     private EtapeListAdapter listAdapter;
     private RecyclerView recyclerView;
-    private List<Etape> etaper;
     private ImageButton togtInstilling;
     private EtapeDAO etapeDAO;
 
@@ -158,7 +157,7 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
         skib_text.setText(togt.getSkib());
 
         etapeDAO = new EtapeDAO(getContext());
-        etaper = etapeDAO.getEtaper(togt);
+        List<Etape> etaper = etapeDAO.getEtaper(togt);
 
         if( etaper.get(0).getStatus() == Etape.Status.NEW){
             view.findViewById(R.id.etapeOpretButton).setVisibility(View.GONE);
@@ -182,31 +181,39 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
 
         //Auto scroll to buttom
         scrollToButtom();
+
         // Opret Etape Button
         view.findViewById(R.id.etapeOpretButton).setOnClickListener((View v) -> this.createEtape());
+
         return view;
     }
 
 
     private void startTogt() {
-        getView().findViewById(R.id.etapeOpretButton).setVisibility(View.VISIBLE);
-        getView().findViewById(R.id.etape_recyclerview).setVisibility(View.VISIBLE);
-        getView().findViewById(R.id.etapeoversigt_start).setVisibility(View.GONE);
+        Etape firstEtape = new EtapeDAO(GlobalContext.get()).getEtaper(togt).get(0);
 
-        Etape firstEtape = etaper.get(0);
-        firstEtape.setStatus(Etape.Status.ACTIVE);
-        firstEtape.setStartDate(new Date(System.currentTimeMillis()) );
-        listAdapter.updateEtapeList(etaper);
+        OpretEtapeDialog dialog = new OpretEtapeDialog(firstEtape);
+        dialog.onCreationFinished( (cbDialog, etape) -> {
+            EtapeDAO etapeDAO = new EtapeDAO(GlobalContext.get());
+            etapeDAO.updateEtape(etape);
 
-        new EtapeDAO(getContext()).updateEtape(etaper.get(0));
+            getView().findViewById(R.id.etapeOpretButton).setVisibility(View.VISIBLE);
+            getView().findViewById(R.id.etape_recyclerview).setVisibility(View.VISIBLE);
+            getView().findViewById(R.id.etapeoversigt_start).setVisibility(View.GONE);
+
+            listAdapter.updateEtapeList(etapeDAO.getEtaper(togt));
+        });
+        dialog.show(getFragmentManager(),"Dialog box");
     }
 
 
     private void createEtape() {
-        // Create
-        int numberOfEtape = new EtapeDAO(getContext()).getEtaper(togt).size();
-        Etape previousEtape = new EtapeDAO(getContext()).getEtaper(togt).get(numberOfEtape-1);
 
+        // Load Previous Etape
+        List<Etape> currentEtaper = new EtapeDAO(getContext()).getEtaper(togt);
+        Etape previousEtape = currentEtaper.get(currentEtaper.size()-1);
+
+        // Copy information to new Etape
         Etape newEtape = new Etape();
         newEtape.setBesaetning( new ArrayList<>(previousEtape.getBesaetning()));
         newEtape.setSkipper(previousEtape.getSkipper());
@@ -218,6 +225,7 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
             // Update Previous Etape
             previousEtape.setStatus(Etape.Status.FINISHED);
             previousEtape.setSlutDestination(createdEtape.getStartDestination());
+            previousEtape.setEndDate( createdEtape.getStartDate() );
 
             // Update Database
             EtapeDAO etapeDAO = new EtapeDAO(GlobalContext.get());
@@ -225,13 +233,12 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
             etapeDAO.updateEtape(previousEtape);
 
             // Update List
-            etaper = etapeDAO.getEtaper(togt);
+            List<Etape> etaper = etapeDAO.getEtaper(togt);
             listAdapter.updateEtapeList(etaper);
             scrollToButtom();
         });
-
-        // Start Dialog
         dialog.show(getFragmentManager(),"Dialog box");
+        // Start Dialog
     }
 
 
