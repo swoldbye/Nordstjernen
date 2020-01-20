@@ -85,19 +85,17 @@ public class Etape {
 
 
     /**
-     * If Date is null, the date will automatically be set
-     * to the current date.
+     * Copies the given date object, and sets it as the end date.
      */
     public void setEndDate(Date date){
-        endDate = date;
+        endDate = new Date(date.getTime());
     }
 
     /**
-     * If Date is null, the date will automatically be set
-     * to the current date.
+     * Copies the given date object, and sets it as the start date.
      */
     public void setStartDate(Date date){
-        startDate = date;
+        startDate = new Date(date.getTime());
     }
 
 
