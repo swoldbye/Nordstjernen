@@ -41,9 +41,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/TextInput"
-                android:layout_marginTop="25dp">
+                android:layout_marginTop="25dp"
+                android:id="@+id/togtNavn">
                 <EditText
-                    android:id="@+id/togtNavn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
@@ -57,9 +57,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/TextInput"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:id="@+id/skipperEdit">
                 <EditText
-                    android:id="@+id/skipperEdit"
+
                     android:inputType="textPersonName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -72,9 +73,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/TextInput"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:id="@+id/startDestEdit">
                 <EditText
-                    android:id="@+id/startDestEdit"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
