@@ -1,8 +1,6 @@
 package com.example.skibslogapp;
 
 import android.content.Context;
-import android.util.Log;
-
 
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
@@ -10,7 +8,6 @@ import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.model.Togt;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

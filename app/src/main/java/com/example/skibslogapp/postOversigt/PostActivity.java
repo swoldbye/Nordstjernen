@@ -23,7 +23,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class PostActivity extends Fragment implements View.OnClickListener {
 
-
+    private Button opretButton;
     Button openButton;
     Togt togt;
     Etape etape;
@@ -35,8 +35,7 @@ public class PostActivity extends Fragment implements View.OnClickListener {
 
     public PostActivity(Etape etape, int startPos){
         TogtDAO togtDAO = new TogtDAO(GlobalContext.get());
-        Togt tempTogt = togtDAO.getTogt(etape.getTogtId());
-        this.togt = tempTogt;
+        this.togt = togtDAO.getTogt(etape.getTogtId());
         this.etape = etape;
         this.startPos = startPos;
     }
@@ -53,16 +52,20 @@ public class PostActivity extends Fragment implements View.OnClickListener {
         opretLog_frag = new OpretLog_frag();
 
 
+        opretButton = view.findViewById(R.id.logpunktoversigt_opret);
+        opretButton.setOnClickListener( v -> openOpretLogpunkt() );
+
+
         getActivity().getSupportFragmentManager().beginTransaction()
                 .add(R.id.tabOversigtContainerFrame, tabLayout_frag)
                 .commit();
+/*
 
         getActivity().getSupportFragmentManager().beginTransaction()
                 .add(R.id.opretPostContainerFrame, opretLog_frag)
-                .commit();
+                .commit();*/
 
         //opretPostContainerFrame.setVisibility(View.GONE);
-
 
         return view;
     }
@@ -72,9 +75,21 @@ public class PostActivity extends Fragment implements View.OnClickListener {
 
     }
 
+    private void openOpretLogpunkt(){
+        OpretLog_frag fragment = new OpretLog_frag();
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+            .add(R.id.opretPostContainerFrame, new OpretLog_frag())
+            .addToBackStack(null)
+            .commit();
+
+        fragment.onClosed(() -> {
+
+        });
+    }
+
     private void expandPost() {
         opretPostContainerFrame.setVisibility(View.VISIBLE);
-
         tabLayout_frag.closeTabs();
         openButton.setText("close");
     }

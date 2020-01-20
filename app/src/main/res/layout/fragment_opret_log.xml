@@ -14,32 +14,10 @@
         android:orientation="vertical">
 
 
-        <FrameLayout
-            android:id="@+id/Button_Frame"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:animateLayoutChanges="true">
-
-            <Button
-                android:id="@+id/Open_Button"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:background="@color/colorPrimary"
-                android:text="Opret Log"
-                android:textColor="@color/white"
-                android:textSize="20dp">
-
-
-            </Button>
-
-        </FrameLayout>
-
-
         <androidx.cardview.widget.CardView
             android:id="@+id/opret_post_wrapper"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="450dp"
             android:animateLayoutChanges="true"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp"
