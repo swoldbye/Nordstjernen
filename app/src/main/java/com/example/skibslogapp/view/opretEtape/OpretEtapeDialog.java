@@ -26,8 +26,8 @@ import java.util.Date;
 
 public class OpretEtapeDialog extends AppCompatDialogFragment implements View.OnClickListener {
 
-    private TextInputLayout skipperInput, startDestInput;
-    private EditText navnInput;
+    private TextInputLayout skipperInput, startDestInput, navnInput;
+    private EditText navnInputEdit;
     private View addButton;
     private TextView annullerEtape;
     private Button startEtape;
@@ -52,6 +52,8 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.opret_etape_dialog_box,null);
 
+        etape = new Etape();
+
         builder.setView(view);
 
         annullerEtape = view.findViewById(R.id.opretEtape_annuler_button);
@@ -64,6 +66,7 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
         startDestInput = view.findViewById(R.id.opretetape_startdest);
 
         navnInput = view.findViewById(R.id.navnIndput);
+        navnInputEdit = view.findViewById(R.id.navnIndputEdit);
 
         addButton = view.findViewById(R.id.addButton);
         addButton.setOnClickListener(this);
@@ -100,6 +103,7 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
         if (v == startEtape) {
             String skipper = skipperInput.getEditText().getText().toString();
             String startDest = startDestInput.getEditText().getText().toString();
+            int besaetning = etape.getBesaetning().size();
 
             if (startDest.length() <= 0) {
                 startDestInput.setError("Der skal indtastes en start destinationt!");
@@ -108,6 +112,11 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
 
             if ( skipper.length() <= 0){
                 skipperInput.setError("Der skal indtastes en skipper!");
+                return;
+            }
+
+            if (besaetning <= 0){
+                navnInput.setError("Der skal tilføjes mindst et besætningsmedlem!");
                 return;
             }
 
@@ -124,15 +133,13 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
             if( onFinishCallback != null ) onFinishCallback.run(this, etape);
         }
 
-
         if (v == addButton) {
-            String navn = navnInput.getText().toString();
+            String navn = navnInput.getEditText().getText().toString();
             if (navn.length() <= 0) {
                 navnInput.setError("Der skal indtastes et navn på et besætningsmedlem!");
             } else {
                 etape.addBesaetningsMedlem(navn);
-                System.out.println(navnInput.getText().toString());
-                navnInput.setText("");
+                navnInputEdit.setText("");
                 adapter.notifyDataSetChanged();
                 recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
                 clearFocusOnDone(v);
@@ -141,7 +148,7 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
     }
 
     /**
-     * Makes the keyboard dissapere
+     * Makes the keyboard disappear
      * @param v
      */
     private void clearFocusOnDone(View v) {
@@ -150,7 +157,7 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
     }
 
     /**
-     * Show the previus Skipper in the new Etape
+     * Show the previous Skipper in the new Etape
      */
     private void showSkipper(){
         if(etape.getSkipper().length() > 0){
@@ -159,7 +166,7 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
     }
 
     /**
-     * Show the previus slutDestination as the Start destination in the new Etape
+     * Show the previous slutDestination as the Start destination in the new Etape
      */
     private void showStartDestination(){
         if(etape.getStartDestination() != null && etape.getStartDestination().length()>0){
@@ -167,6 +174,10 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
         }
     }
 
+    /**
+     * When the "besætnings" recycleview is shown the last added item which is the lowest in
+     * list. The list is therefore scrolled way down.
+     */
     private void scrollTobuttom(){
         if(adapter.getItemCount()>0){
             recyclerView.smoothScrollToPosition(adapter.getItemCount()-1);
