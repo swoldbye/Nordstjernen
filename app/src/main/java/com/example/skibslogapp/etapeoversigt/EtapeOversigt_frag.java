@@ -36,17 +36,15 @@ import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.GenericSignatureFormatError;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver {
+public class EtapeOversigt_frag extends Fragment {
 
     private TextView togt_text, skib_text;
     private Togt togt;
@@ -71,9 +69,6 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
         togtInstilling = view.findViewById(R.id.popUpMenuEtapeOversigt);
 
 
-        //Subscribing for togt Observer
-        TogtDAO.addTogtObserver(this);
-
         /**
          * When you click on this "burger" icon you get a Popup menu where you get the choice to either:
          *
@@ -91,7 +86,7 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
                 switch (item.getItemId()){
 
                     case R.id.exportTogt:
-                        exportData();
+                        exportTogt();
                         Toast.makeText(getActivity(),"Togt exportet",Toast.LENGTH_SHORT).show();
 
                         return true;
@@ -258,23 +253,24 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
     }
 
 
-    private void exportData() {
-        // Generate Data
-        String data = new GenerateCSV().generateTogt(togt);
+    /**
+     * Create CSV file and run a "share" function, in order to, for example,
+     * upload to Google Drive or send via GMail.
+     */
+    private void exportTogt() {
+        // Convert Togt CSV string
+        String csvString = new GenerateCSV().generateTogt(togt);
 
-
-        // Below we gernerate a CSV file form a String and then export it
         try {
-            Context context = getActivity();
-            //saving the file into device
+            Context context = GlobalContext.get();
 
+            // Save CSV String to local file
             String fileName = togt.getName().replace(" ", "") + ".csv";
             FileOutputStream out = context.openFileOutput(fileName, Context.MODE_PRIVATE);
-            //out.write('\ufeff'); //this was intended for allowing utf-8 in the csv file.
-            out.write(data.getBytes());
+            out.write(csvString.getBytes());
             out.close();
 
-            //exporting
+            // Send File (mail, drive etc.)
             File filelocation = new File(context.getFilesDir(), fileName);
             Uri path = FileProvider.getUriForFile(context, "com.example.exportcsv.fileprovider", filelocation);
             Intent fileIntent = new Intent(Intent.ACTION_SEND);
@@ -283,20 +279,11 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
             fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             fileIntent.putExtra(Intent.EXTRA_STREAM, path);
             startActivity(Intent.createChooser(fileIntent, "Send mail"));
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
-
-    @Override
-    public void onUpdate(Togt togt) {
-        this.togt = togt;
-
-
-    }
 
     private void scrollToButtom(){
         if(listAdapter.getItemCount()>0){

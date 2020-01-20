@@ -1,14 +1,9 @@
 package com.example.skibslogapp.datalayer.global;
 
-import android.content.Context;
-
 import com.example.skibslogapp.GlobalContext;
-import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
-import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Logpunkt;
-import com.example.skibslogapp.model.Togt;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,25 +12,17 @@ import java.util.Locale;
 
 /**
  * @author Claes
- * This class creates a lit of Log points as strings coorispoinding to one etape.
+ * This class creates a list of Logpunkt converted to LogpunktString (string version)
+ * from a given Etape
  * Based on what is in the SQL DB
  */
-public class DbEtapeStringify {
+class DbEtapeStringify {
 
-    public ArrayList<LogPunktStringDTO> convert(Etape etape){
-         // a list with one string pr. log point, ready to be put into a .csv file
-        ArrayList<LogPunktStringDTO> stringifiedPunkter = new ArrayList<>();
+    ArrayList<LogpunktString> convert(Etape etape){
 
-     /*   //TODO: generateEtape sure an error is trown to the user, in case the databse is empthy saying nothing to export
-        //Getting the togter in the DB
-        TogtDAO togter = new TogtDAO(Contex);
-        List<Togt> dbTogter = togter.getTogter();
+        ArrayList<LogpunktString> stringifiedPunkter = new ArrayList<>();
 
-        //Getting the Etaper in the DB
-        EtapeDAO dao = new EtapeDAO(Contex);
-        List<Etape> etappen = dao.getEtaper(dbTogter.get(Togt));
-*/
-        //Getting the Logs
+        // Loading Logpunkter from database
         List<Logpunkt> logpunkter = new LogpunktDAO(GlobalContext.get()).getLogpunkter(etape);
 
         //=============================================================
@@ -47,7 +34,7 @@ public class DbEtapeStringify {
         The below also converts all the DB data to Strings.
          */
         for( Logpunkt logpunkt : logpunkter ){
-            LogPunktStringDTO logpunktString = new LogPunktStringDTO();
+            LogpunktString logpunktString = new LogpunktString();
 
             logpunktString.setEtapeID(String.valueOf(etape.getId()));
 
@@ -69,6 +56,10 @@ public class DbEtapeStringify {
                 logpunktString.setRoere(rore);
             }
 
+            if(logpunkt.getVindretning() != null){
+                logpunktString.setVindretning(logpunkt.getVindretning());
+            }
+
             if(logpunkt.getVindhastighed() != -1){
                 String vindHast = String.valueOf(logpunkt.getVindhastighed());
                 logpunktString.setVindhastighed(vindHast);
@@ -79,9 +70,12 @@ public class DbEtapeStringify {
                 logpunktString.setStroemRetning(StromRet);
             }
 
-            if(logpunkt.getKurs() != -1){
-                String Kurs = String.valueOf(logpunkt.getKurs());
-                logpunktString.setVindhastighed(Kurs);
+            if(logpunkt.getStroemhastighed() > -1){
+                logpunktString.setStroemHastighed( String.valueOf(logpunkt.getStroemhastighed()) );
+            }
+
+            if(logpunkt.getKurs() > -1){
+                logpunktString.setKurs(String.valueOf(logpunkt.getKurs()));
             }
 
             if(logpunkt.getNote() != null){
@@ -94,19 +88,16 @@ public class DbEtapeStringify {
 
             if(logpunkt.getPosition() != null){
                 logpunktString.setBredeGrad(logpunkt.getPosition().getBreddegradString());
+                logpunktString.setHoejdeGrad(logpunkt.getPosition().getLaengdegradString());
             }
 
-            if(logpunkt.getPosition() != null){
-                logpunktString.setBredeGrad(logpunkt.getPosition().getLaengdegradString());
+            if(logpunkt.getSejlfoering() != null){
+                logpunktString.setSejlFoering(logpunkt.getSejlfoering());
             }
-            if(logpunkt.getSejloeringString() != null){
-                String sf = logpunkt.getSejloeringString();
-                logpunktString.setSejlFoering(sf);
+            if(logpunkt.getSejlstilling() != null){
+                logpunktString.setSejlstilling(logpunkt.getSejlstilling());
             }
-            if(logpunkt.getSejlstillingString() != null){
-                String sf = logpunkt.getSejlfoering();
-                logpunktString.setSejlFoering(sf);
-            }
+
             stringifiedPunkter.add(logpunktString);
         }
 
