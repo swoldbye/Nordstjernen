@@ -31,19 +31,17 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.ListeelemViewh
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.opret_etape_dialog_box_list_element, parent, false);
 
         ListeelemViewholder vh = new ListeelemViewholder(view);
-        vh.nameElement = view.findViewById(R.id.listElementBesaetning);
-        vh.cancleBeseatning = view.findViewById(R.id.cancleBeseatning);
-        vh.cancleBeseatning.setOnClickListener(vh);
-        vh.cancleBeseatning.setBackgroundResource(android.R.drawable.list_selector_background);
+        vh.nameText = view.findViewById(R.id.besaetningslist_navn);
+        vh.removeButton = view.findViewById(R.id.besaetningslist_cancel);
+        vh.removeButton.setOnClickListener(vh);
+        vh.removeButton.setBackgroundResource(android.R.drawable.list_selector_background);
         return vh;
     }
 
 
     @Override
     public void onBindViewHolder(@NonNull ListeelemViewholder holder, int position) {
-        holder.nameElement.setText(dataSet.get(position));
-        holder.cancleBeseatning.setImageResource(android.R.drawable.ic_delete);
-
+        holder.nameText.setText(dataSet.get(position));
     }
 
 
@@ -54,8 +52,8 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.ListeelemViewh
 
 
     class ListeelemViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView nameElement;
-        ImageView cancleBeseatning;
+        TextView nameText;
+        ImageView removeButton;
 
         public ListeelemViewholder(View itemView) {
             super(itemView);
@@ -66,7 +64,7 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.ListeelemViewh
         public void onClick(View v) {
             final int position = getAdapterPosition();
 
-            if(v ==cancleBeseatning) {
+            if(v == removeButton) {
                 CrewAdapter.this.notifyItemRemoved(position);
                 dataSet.remove(position);
 

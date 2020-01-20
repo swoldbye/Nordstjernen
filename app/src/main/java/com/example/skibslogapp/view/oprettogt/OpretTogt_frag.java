@@ -22,6 +22,7 @@ import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
+import com.google.android.material.textfield.TextInputLayout;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 /**
@@ -31,7 +32,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
     private String[] skibsListe ={"Havhingsten","Skjoldungen","Helge Ask","Ottar"};
     private MaterialBetterSpinner betterSpinner;
-    private EditText togtName, skipper, startDest;
+    private TextInputLayout togtName, skipper, startDest;
     private View opretBtn;
     private View annullerText;
 
@@ -48,7 +49,6 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         annullerText = view.findViewById(R.id.oprettogt_annuller);
         annullerText.setOnClickListener(this);
 
-
         ArrayAdapter<String> dropDownShip = new ArrayAdapter<String>(this.getContext(),
                 android.R.layout.simple_dropdown_item_1line, skibsListe);
         betterSpinner = view.findViewById(R.id.skibsListe);
@@ -63,11 +63,12 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         togtName.setError(null);
         skipper.setError(null);
         startDest.setError(null);
+        betterSpinner.setError(null);
 
         String ship = betterSpinner.getText().toString();
-        String togtet = togtName.getText().toString();
-        String skipper = this.skipper.getText().toString();
-        String togtStartDest = startDest.getText().toString();
+        String togtet = togtName.getEditText().getText().toString();
+        String skipper = this.skipper.getEditText().getText().toString();
+        String togtStartDest = startDest.getEditText().getText().toString();
 
         if (view == opretBtn && togtet.length() <= 0){
             togtName.setError("Der skal indtastes et navn til togtet!");
@@ -78,13 +79,14 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         }else if (view == opretBtn && togtStartDest.length() <= 0) {
             startDest.setError("Vælg hvor togtet skal startes fra!");
 
+        }else if (view == opretBtn && ship.length() <= 0){
+            betterSpinner.setError("Vælg et skib!");
+
         }else if (view == annullerText){
             getActivity().getSupportFragmentManager().popBackStack();
 
         }else {
             if (view == opretBtn){
-
-                TogtOversigt_frag togtOversigt_frag = new TogtOversigt_frag();
 
                 // Opret Togt
                 Togt togt = new Togt(togtet);
@@ -97,7 +99,6 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
                 etape.setStartDestination(togtStartDest);
                 etape.setSkipper(skipper);
 
-
                 // Gem i DB
                 TogtDAO togtDAO = new TogtDAO(getContext());
                 togtDAO.addTogt(togt);
@@ -109,6 +110,4 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
             }
         }
     }
-
-
 }
