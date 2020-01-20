@@ -30,8 +30,8 @@ import java.util.List;
 
 public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View.OnClickListener {
 
-    private TextInputLayout skipperInput, startDestInput;
-    private EditText navnInput;
+    private TextInputLayout skipperInput, startDestInput, navnInput;
+    private EditText navnInputEdit;
     private Togt togt;
     private Etape etape;
     private View addButton;
@@ -78,6 +78,7 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         startDestInput = view.findViewById(R.id.opretetape_startdest);
 
         navnInput = view.findViewById(R.id.navnIndput);
+        navnInputEdit = view.findViewById(R.id.navnIndputEdit);
 
         addButton = view.findViewById(R.id.addButton);
         addButton.setOnClickListener(this);
@@ -151,13 +152,12 @@ public class OpretEtapeDialogBox extends AppCompatDialogFragment implements View
         }
 
         if (v == addButton) {
-            String navn = navnInput.getText().toString();
+            String navn = navnInput.getEditText().getText().toString();
             if (navn.length() <= 0) {
                 navnInput.setError("Der skal indtastes et navn på et besætningsmedlem!");
             } else {
                 beseatningsList.add(navn);
-                System.out.println(navnInput.getText().toString());
-                navnInput.setText("");
+                navnInputEdit.setText("");
                 adapter.notifyDataSetChanged();
                 recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
                 clearFocusOnDone(v);

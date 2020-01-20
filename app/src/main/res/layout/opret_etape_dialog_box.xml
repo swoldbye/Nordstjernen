@@ -90,21 +90,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="1dp"
-            android:paddingRight="1dp"
-            >
+            android:paddingRight="1dp">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/navnIndput"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Navn"
-                android:inputType="textPersonName"
-                android:textColor="@color/colorPrimary"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/addButton"
-                app:layout_constraintTop_toTopOf="parent"
+                android:theme="@style/TextInput"
+                app:errorEnabled="true"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <EditText
+                    android:id="@+id/navnIndputEdit"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Navn"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/colorPrimary" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
