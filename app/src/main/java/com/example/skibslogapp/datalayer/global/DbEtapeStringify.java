@@ -14,7 +14,6 @@ import java.util.Locale;
  * @author Claes
  * This class creates a list of Logpunkt converted to LogpunktString (string version)
  * from a given Etape
- * Based on what is in the SQL DB
  */
 class DbEtapeStringify {
 

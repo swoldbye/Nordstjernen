@@ -67,6 +67,7 @@ public class EtapeDAO {
         etape.setId(id);
         etape.setTogtId(togt.getId());
 
+        database.close();
         togtDAO.togtUpdated(etape.getTogtId());
     }
 
@@ -93,6 +94,7 @@ public class EtapeDAO {
             etaper.add(buildEtape(cursor));
         }
         cursor.close();
+        database.close();
 
         return etaper;
     }
@@ -115,6 +117,7 @@ public class EtapeDAO {
             throw new DAOException(String.format(Locale.US, "Couldn't find Etape with ID %d in the database", id));
         }
         cursor.close();
+        database.close();
 
         return etape;
     }
@@ -200,6 +203,7 @@ public class EtapeDAO {
         row.put("besaetning", besaetningToString(etape.getBesaetning()));
 
         database.update("etaper", row, "id=" + etape.getId(), null);
+        database.close();
 
         new TogtDAO(context).togtUpdated(etape.getTogtId());
     }
@@ -225,7 +229,10 @@ public class EtapeDAO {
         }
 
         // Delete Etape
-        connector.getReadableDatabase().delete("etaper", "id=" + etape.getId(), null);
+        SQLiteDatabase database = connector.getReadableDatabase();
+        database.delete("etaper", "id=" + etape.getId(), null);
+        database.close();
+
         new TogtDAO(context).togtUpdated(etape.getTogtId());
     }
 
@@ -244,6 +251,7 @@ public class EtapeDAO {
         Cursor cursor = database.rawQuery("SELECT * FROM etaper WHERE id=" + etape.getId() + ";", null);
         int rowCount = cursor.getCount();
         cursor.close();
+        database.close();
         return rowCount > 0;
     }
 
