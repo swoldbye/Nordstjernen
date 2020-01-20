@@ -1,8 +1,10 @@
 package com.example.skibslogapp.view.utility;
 
-import android.content.Context;
-import android.widget.EditText;
 import android.widget.TextView;
+
+/**
+ * Helper class to move text when adding vindretning and Strømningsretning i opret_fraq.*
+ */
 
 public class MoveButtons {
 

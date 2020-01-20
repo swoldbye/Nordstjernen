@@ -80,10 +80,7 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        /*if(!vindretning.getText().equals("")) {
-            vindretningNew.setText(vindretning.getText());
-            vindretning.setText("");
-        }*/
+
         MoveButtons.setText(vindretning,vindretningNew);
 
 
