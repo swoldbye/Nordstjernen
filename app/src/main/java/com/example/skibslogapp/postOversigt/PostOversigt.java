@@ -88,6 +88,7 @@ public class PostOversigt extends Fragment {
     public void updateAdapter(List<Logpunkt> logs2){
         //this.logs = logs2;
         mAdapter.updateData(logs2);
+        postRecyclerView.smoothScrollToPosition(logs2.size()-1);
         //mAdapter.notifyDataSetChanged();
         //mAdapter.notifyDataSetChanged();
     }

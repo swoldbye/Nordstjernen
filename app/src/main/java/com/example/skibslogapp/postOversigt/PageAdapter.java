@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -30,7 +31,8 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     Fragment fragment = null;
     List<List<Logpunkt>> etapper;
     PostOversigt postOversigt;
-    ArrayList<PostOversigt> fragmentList = new ArrayList<>();
+    //List<PostOversigt> fragmentList = new ArrayList<>();
+    private Map<Integer, Fragment> fragmentMap;
 
 
 
@@ -38,6 +40,8 @@ public class PageAdapter extends FragmentStatePagerAdapter {
         super(fragmentManager);
         this.numOfTabs = numOfTabs;
         this.etapper = etapper;
+        fragmentMap = new HashMap<Integer, Fragment>();
+        System.out.println("Count is : " + getCount());
     }
 
 
@@ -52,10 +56,9 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-
         PostOversigt postOversigt = new PostOversigt(etapper.get(position));
+        fragmentMap.put(position, postOversigt);
         return postOversigt;
-
     }
 
 
@@ -68,22 +71,28 @@ public class PageAdapter extends FragmentStatePagerAdapter {
         return etapper.size();
     }
 
-    @Override
-    public int getItemPosition(@NonNull Object object) {
-        return POSITION_UNCHANGED;
-    }
+//    @Override
+//    public int getItemPosition(@NonNull Object object) {
+//        return POSITION_UNCHANGED;
+//    }
 
-
-    @NonNull
-    @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        PostOversigt postOversigt = (PostOversigt) super.instantiateItem(container, position);
-        fragmentList.add(postOversigt);
-        return postOversigt;
-    }
+//
+//    @NonNull
+//    @Override
+//    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+//        PostOversigt postOversigt = (PostOversigt) super.instantiateItem(container, position);
+//        //fragmentList.add(postOversigt);
+//        fragmentMap.put(position, postOversigt);
+//        return postOversigt;
+//    }
 
     public Fragment getFragment (int position){
-        return fragmentList.get(position);
+        //return fragmentList.get(position);
+        Fragment returnFragment = fragmentMap.get(position);
+        if(returnFragment == null){
+            return null;
+        }
+        return returnFragment;
     }
 
     /**
@@ -109,6 +118,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
         PostOversigt existing = (PostOversigt) getFragment(position);
         RecyclerAdapter recyclerAdapter = (RecyclerAdapter) existing.getAdapter();
         recyclerAdapter.updateData(newEtapper.get(position));
+        existing.postRecyclerView.smoothScrollToPosition(etapper.get(position).size()-1);
 //        final FragmentTransaction FT = FA.getSupportFragmentManager().beginTransaction();
 //        FT.detach(existing);
 //        FT.attach(existing);
