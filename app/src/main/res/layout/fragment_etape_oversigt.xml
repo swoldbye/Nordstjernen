@@ -55,6 +55,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
+            <!-- This button is only to center the togtname-->
+            <View
+                android:id="@+id/etapeoversigt_anchorbox"
+                android:layout_width="67dp"
+                android:layout_height="55dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
@@ -69,8 +76,8 @@
                 android:textSize="30sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/skibsNavnText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/popUpMenuEtapeOversigt"
+                app:layout_constraintStart_toEndOf="@id/etapeoversigt_anchorbox"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -95,12 +102,8 @@
                 android:layout_height="55dp"
                 android:background="@color/white"
                 android:src="@drawable/ic_menu_40dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

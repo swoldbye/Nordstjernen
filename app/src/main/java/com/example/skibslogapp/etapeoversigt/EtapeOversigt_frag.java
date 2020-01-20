@@ -36,7 +36,10 @@ import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.GenericSignatureFormatError;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -257,34 +260,33 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
 
     private void exportData() {
         // Generate Data
-        GenerateCSV csvdata = new GenerateCSV();
-        StringBuilder data = csvdata.generateEtape(0,0);
+        String data = new GenerateCSV().generateTogt(togt);
 
 
         // Below we gernerate a CSV file form a String and then export it
         try {
             Context context = getActivity();
             //saving the file into device
-            FileOutputStream out = context.openFileOutput("EtapeData.csv", Context.MODE_PRIVATE);
+
+            String fileName = togt.getName().replace(" ", "") + ".csv";
+            FileOutputStream out = context.openFileOutput(fileName, Context.MODE_PRIVATE);
             //out.write('\ufeff'); //this was intended for allowing utf-8 in the csv file.
-            out.write((data.toString()).getBytes());
+            out.write(data.getBytes());
             out.close();
 
             //exporting
-            File filelocation = new File(context.getFilesDir(), "EtapeData.csv");
+            File filelocation = new File(context.getFilesDir(), fileName);
             Uri path = FileProvider.getUriForFile(context, "com.example.exportcsv.fileprovider", filelocation);
             Intent fileIntent = new Intent(Intent.ACTION_SEND);
             fileIntent.setType("text/csv");
-            fileIntent.putExtra(Intent.EXTRA_SUBJECT, "EtapeData");
+            fileIntent.putExtra(Intent.EXTRA_SUBJECT, "Data for '"+togt.getName()+"'");
             fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             fileIntent.putExtra(Intent.EXTRA_STREAM, path);
             startActivity(Intent.createChooser(fileIntent, "Send mail"));
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
 

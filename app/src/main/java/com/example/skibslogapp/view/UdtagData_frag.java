@@ -1,3 +1,4 @@
+/*
 package com.example.skibslogapp.view;
 
 import android.content.Context;
@@ -41,16 +42,21 @@ public class UdtagData_frag extends Fragment implements View.OnClickListener {
 
         }
     }
-
+*/
+/*
     public void export() {
         //generate data
         String data = new GenerateCSV().generateTogt(togt);
         StringBuilder data = csvdata.generateEtape(0,0);
 
-        /**
+        *//*
+*/
+/**
          * @author Claes
          * below we gernerate a CSV file form a String and then export it
-         */
+         *//*
+*/
+/*
         try {
             Context context = getActivity();
             //saving the file into device
@@ -74,5 +80,6 @@ public class UdtagData_frag extends Fragment implements View.OnClickListener {
         }
 
 
-    }
-}
+    }*//*
+
+}*/
