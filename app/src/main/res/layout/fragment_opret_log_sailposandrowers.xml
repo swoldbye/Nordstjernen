@@ -40,7 +40,7 @@
             <com.example.skibslogapp.view.utility.KingButton
                 android:id="@+id/bi"
                 style="@style/DefaultButton"
-                android:text="bi" />
+                android:text="ha" />
 
             <com.example.skibslogapp.view.utility.KingButton
                 android:id="@+id/fo"
@@ -52,7 +52,7 @@
             <com.example.skibslogapp.view.utility.KingButton
                 android:id="@+id/ha"
                 style="@style/DefaultButton"
-                android:text="ha" />
+                android:text="bi" />
 
             <Space style="@style/EvenSpace" />
 
