@@ -33,6 +33,8 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
         //Strøm Retning
         waterCurrentDescription = view.findViewById(R.id.stroemning_text);
         waterCurrentDescription_NewText = view.findViewById(R.id.stroemning_newtext);
+        MoveButtons.setText(waterCurrentDescription,waterCurrentDescription_NewText);
+
         currentNorthBtn = view.findViewById(R.id.nordButton_strøm);
         currentEastBtn = view.findViewById(R.id.østButton_strøm);
         currentSouthBtn = view.findViewById(R.id.sydButton_strøm);

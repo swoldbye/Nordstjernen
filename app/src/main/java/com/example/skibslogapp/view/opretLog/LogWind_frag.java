@@ -33,6 +33,8 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
         //Vind Retning
         vindretningNew = view.findViewById(R.id.vindretning_newtext);
         vindretning = view.findViewById(R.id.vindretning_text);
+        MoveButtons.setText(vindretning,vindretningNew);
+
         vindNordBtn = view.findViewById(R.id.nordButton);
         vindØstBtn = view.findViewById(R.id.østButton);
         vindSydBtn = view.findViewById(R.id.sydButton);
