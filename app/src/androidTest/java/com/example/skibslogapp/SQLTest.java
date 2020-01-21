@@ -120,8 +120,9 @@ public class SQLTest {
         assertNull( observer.getTogt()  );
 
         // Saving togter
-        togtDAO.addTogt(togt);
         assertNull( observer.getTogt()  );
+        togtDAO.addTogt(togt);
+        assertEquals(observer.getTogt(), togt);
 
         // Testing adds
         assertNull( observer.getTogt()  );
