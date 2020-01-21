@@ -33,7 +33,9 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
         //Vind Retning
         vindretningNew = view.findViewById(R.id.vindretning_newtext);
         vindretning = view.findViewById(R.id.vindretning_text);
-//        SwapViewsTextHelper.setText(vindretning,vindretningNew);
+        vindretning_input = view.findViewById(R.id.vindretning_input);
+        if(vindretning_input.getText() != null && !vindretning_input.getText().toString().equals(""))
+            SwapViewsTextHelper.setText(vindretning,vindretningNew);
 
         vindNordBtn = view.findViewById(R.id.nordButton);
         vindØstBtn = view.findViewById(R.id.østButton);
@@ -47,8 +49,6 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
         vindretning_delete.setOnClickListener(this);
         vindretning_delete.setVisibility(View.INVISIBLE);
 
-        vindretning_input = view.findViewById(R.id.vindretning_input);
-        vindretning_input.setText("");
 
         //Vindhastighed
         vindHastighedEditTxt = view.findViewById(R.id.vindhastighed_edittext);

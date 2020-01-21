@@ -48,6 +48,10 @@ public class LogCourse_frag extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (kursEditText.getText().length() > 0 && Integer.parseInt(kursEditText.getText().toString()) > 360) {
+                    kursEditText.setText("360");
+                    kursEditText.setSelection(kursEditText.getText().length());
+                }
                 logVM.setCourse(kursEditText.getText().length() > 0 ?
                         Integer.parseInt(kursEditText.getText().toString()): -1);
             }

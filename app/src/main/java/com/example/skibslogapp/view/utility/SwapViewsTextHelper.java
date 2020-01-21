@@ -10,15 +10,15 @@ public class SwapViewsTextHelper {
 
     public static void setText(TextView oldText, TextView newText){
         if(!oldText.getText().equals("")) {
-            newText.setText(oldText.getText().toString().contains(":") ? oldText.getText() : oldText.getText()+":");
+            newText.setText(oldText.getText().toString().contains(":") ? oldText.getText() : oldText.getText() + ":");
             oldText.setText("");
         }
     }
 
     public static void revertText(TextView oleText, TextView newText){
-        CharSequence stringTorevert = newText.getText().subSequence(0,newText.getText().length()-1);
+        CharSequence stringToRevert = newText.getText().subSequence(0,newText.getText().length()-1);
 
-        oleText.setText(stringTorevert);
+        oleText.setText(stringToRevert);
         newText.setText("");
     }
 }

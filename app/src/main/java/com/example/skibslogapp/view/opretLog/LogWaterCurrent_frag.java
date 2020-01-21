@@ -33,7 +33,9 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
         //Strøm Retning
         waterCurrentDescription = view.findViewById(R.id.stroemning_text);
         waterCurrentDescription_NewText = view.findViewById(R.id.stroemning_newtext);
-//        SwapViewsTextHelper.setText(waterCurrentDescription,waterCurrentDescription_NewText);
+        waterCurrentDirection = view.findViewById(R.id.strøm_input);
+        if(waterCurrentDirection.getText() != null && !waterCurrentDirection.getText().toString().equals(""))
+            SwapViewsTextHelper.setText(waterCurrentDescription,waterCurrentDescription_NewText);
 
         currentNorthBtn = view.findViewById(R.id.nordButton_strøm);
         currentEastBtn = view.findViewById(R.id.østButton_strøm);
@@ -46,8 +48,6 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
         currentResetBtn = view.findViewById(R.id.strøm_delete);
         currentResetBtn.setOnClickListener(this);
         currentResetBtn.setVisibility(View.INVISIBLE);
-        waterCurrentDirection = view.findViewById(R.id.strøm_input);
-        waterCurrentDirection.setText("");
 
         //Strømningshastighed
         waterCurrentSpeed = view.findViewById(R.id.strømhastighed_edittext);

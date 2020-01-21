@@ -97,7 +97,6 @@
                             android:orientation="vertical"
                             tools:context=".MainActivity">
 
-
                             <!-- TID =====================================-->
                             <fragment
                                 android:id="@+id/fragment_opretLog_time"
@@ -108,7 +107,7 @@
 
                             <View style="@style/Divider" />
 
-                            <!-- VINDRETNING =====================================-->
+                            <!-- VIND ============================================-->
                             <fragment
                                 android:id="@+id/fragment_opretLog_wind"
                                 android:name="com.example.skibslogapp.view.opretLog.LogWind_frag"
@@ -116,11 +115,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
 
-
-                            <!-- VINDHASTIGHED =====================================-->
-
                             <View style="@style/Divider" />
 
+                            <!-- STRØM ============================================-->
                             <fragment
                                 android:id="@+id/fragment_opretLog_waterCurrent"
                                 android:name="com.example.skibslogapp.view.opretLog.LogWaterCurrent_frag"
@@ -128,102 +125,17 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
 
-
                             <View style="@style/Divider" />
 
-
-                            <!--                    &lt;!&ndash; Unit &ndash;&gt;-->
-                            <!--                    <TextView-->
-                            <!--                        android:layout_width="wrap_content"-->
-                            <!--                        android:layout_height="wrap_content"-->
-                            <!--                        android:layout_marginRight="8dp"-->
-                            <!--                        android:text="knob"-->
-                            <!--                        android:textColor="@color/textColor"-->
-                            <!--                        android:textSize="22sp"-->
-                            <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                            <!--                        app:layout_constraintEnd_toEndOf="@+id/strømhastighed_edittext"-->
-                            <!--                        app:layout_constraintTop_toTopOf="parent" />-->
-                            <View style="@style/Divider" />
-
-                            <!-- Sejlstilling =====================================-->
-                            <!--                <LinearLayout-->
-                            <!--                    android:layout_width="match_parent"-->
-                            <!--                    android:layout_height="wrap_content"-->
-                            <!--                    android:layout_marginTop="5dp"-->
-                            <!--                    android:layout_marginBottom="10dp"-->
-                            <!--                    android:gravity="center_horizontal"-->
-                            <!--                    android:orientation="vertical">-->
-
-                            <!--                    <TextView-->
-                            <!--                        style="@style/SmallTitle"-->
-                            <!--                        android:text="Sejlstilling" />-->
-
-                            <!--                    <LinearLayout-->
-                            <!--                        android:layout_width="match_parent"-->
-                            <!--                        android:layout_height="wrap_content"-->
-                            <!--                        android:orientation="horizontal">-->
-
-                            <!--                        <Space style="@style/EvenSpace" />-->
-
-                            <!--                        <Button-->
-                            <!--                            android:id="@+id/læ"-->
-                            <!--                            style="@style/DefaultButton"-->
-                            <!--                            android:text="læ"-->
-                            <!--                            android:textColor="#000000" />-->
-
-                            <!--                        <Space style="@style/EvenSpace" />-->
-
-                            <!--                        <Button-->
-                            <!--                            android:id="@+id/ag"-->
-                            <!--                            style="@style/DefaultButton"-->
-                            <!--                            android:text="ag" />-->
-
-                            <!--                        <Space style="@style/EvenSpace" />-->
-
-                            <!--                        <Button-->
-                            <!--                            android:id="@+id/ha"-->
-                            <!--                            style="@style/DefaultButton"-->
-                            <!--                            android:text="bi" />-->
-
-                            <!--                        <Space style="@style/EvenSpace" />-->
-
-                            <!--                        <Button-->
-                            <!--                            android:id="@+id/fo"-->
-                            <!--                            style="@style/DefaultButton"-->
-                            <!--                            android:text="fo" />-->
-
-                            <!--                        <Space style="@style/EvenSpace" />-->
-
-                            <!--                        <Button-->
-                            <!--                            android:id="@+id/bi"-->
-                            <!--                            style="@style/DefaultButton"-->
-                            <!--                            android:text="ha" />-->
-
-                            <!--                        <Space style="@style/EvenSpace" />-->
-
-                            <!--                    </LinearLayout>-->
-                            <!--                </LinearLayout>-->
-
-
-                            <!--                &lt;!&ndash; ANTALROERE =====================================&ndash;&gt;-->
-                            <!--                <EditText-->
-                            <!--                    android:id="@+id/antalRoereEditText"-->
-                            <!--                    android:layout_width="match_parent"-->
-                            <!--                    android:layout_height="wrap_content"-->
-                            <!--                    android:layout_marginStart="80dp"-->
-                            <!--                    android:layout_marginEnd="80dp"-->
-                            <!--                    android:digits="0123456789"-->
-                            <!--                    android:ems="10"-->
-                            <!--                    android:hint="Antal Roere"-->
-                            <!--                    android:imeOptions="actionNext"-->
-                            <!--                    android:inputType="numberSigned"-->
-                            <!--                    android:textColor="@color/textColor"-->
-                            <!--                    android:textColorHint="@color/textColor"-->
-                            <!--                    android:textSize="22sp" />-->
-
+                            <!-- SEJSTILLING ============================================-->
+                            <fragment
+                                android:id="@+id/fragment_opretLog_sailsAndRowers"
+                                android:name="com.example.skibslogapp.view.opretLog.LogSailPosAndRowers_frag"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"/>
 
                             <View style="@style/Divider" />
-
 
                             <!-- SEJLFØRING =====================================-->
                             <fragment
@@ -235,6 +147,7 @@
 
                             <View style="@style/Divider" />
 
+                            <!-- KURS =====================================-->
                             <fragment
                                 android:id="@+id/fragment_opretLog_course"
                                 android:name="com.example.skibslogapp.view.opretLog.LogCourse_frag"
@@ -242,23 +155,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
 
-
-                            <!-- Kurs  =====================================-->
-
-                            <!-- Unit -->
-                            <!--                    <TextView-->
-                            <!--                        android:layout_width="wrap_content"-->
-                            <!--                        android:layout_height="wrap_content"-->
-                            <!--                        android:layout_marginRight="8dp"-->
-                            <!--                        android:text="°"-->
-                            <!--                        android:textColor="@color/textColor"-->
-                            <!--                        android:textSize="30sp"-->
-                            <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                            <!--                        app:layout_constraintEnd_toEndOf="@+id/kursEditText"-->
-                            <!--                        app:layout_constraintTop_toTopOf="parent" />-->
-
                             <View style="@style/Divider" />
-
 
                             <!-- NOTE ======================================-->
                             <fragment
