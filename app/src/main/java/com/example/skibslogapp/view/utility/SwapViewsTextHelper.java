@@ -6,12 +6,12 @@ import android.widget.TextView;
  * Helper class to move text when adding vindretning and Strømningsretning i opret_fraq.*
  */
 
-public class MoveButtons {
+public class SwapViewsTextHelper {
 
-    public static void setText(TextView oleText, TextView newText){
-        if(!oleText.getText().equals("")) {
-            newText.setText(oleText.getText()+":");
-            oleText.setText("");
+    public static void setText(TextView oldText, TextView newText){
+        if(!oldText.getText().equals("")) {
+            newText.setText(oldText.getText().toString().contains(":") ? oldText.getText() : oldText.getText()+":");
+            oldText.setText("");
         }
     }
 
@@ -21,6 +21,4 @@ public class MoveButtons {
         oleText.setText(stringTorevert);
         newText.setText("");
     }
-
-
 }

@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.skibslogapp.R;
-import com.example.skibslogapp.view.utility.MoveButtons;
+import com.example.skibslogapp.view.utility.SwapViewsTextHelper;
 
 public class LogWind_frag extends Fragment implements View.OnClickListener {
     private Button vindNordBtn, vindØstBtn, vindSydBtn, vindVestBtn, vindretning_delete;
@@ -33,7 +33,7 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
         //Vind Retning
         vindretningNew = view.findViewById(R.id.vindretning_newtext);
         vindretning = view.findViewById(R.id.vindretning_text);
-        MoveButtons.setText(vindretning,vindretningNew);
+//        SwapViewsTextHelper.setText(vindretning,vindretningNew);
 
         vindNordBtn = view.findViewById(R.id.nordButton);
         vindØstBtn = view.findViewById(R.id.østButton);
@@ -83,7 +83,7 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        MoveButtons.setText(vindretning,vindretningNew);
+        SwapViewsTextHelper.setText(vindretning,vindretningNew);
 
 
         if(v == vindNordBtn) vindDirectionLogic("N", "S");
@@ -94,7 +94,7 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
             logVM.setWindDirection("");
             vindretning_input.setText(logVM.getWindDirection());
             vindretning_delete.setVisibility(View.INVISIBLE);
-            MoveButtons.revertText(vindretning,vindretningNew);
+            SwapViewsTextHelper.revertText(vindretning,vindretningNew);
 
         }
     }

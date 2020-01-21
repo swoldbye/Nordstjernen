@@ -28,7 +28,7 @@
                 android:layout_marginStart="80dp"
                 android:layout_marginEnd="80dp"
                 android:ems="10"
-                android:hint="Styrekurs"
+                android:hint="Styrekurs (grader)"
                 android:imeOptions="actionDone"
                 android:inputType="time"
                 android:maxLength="3"
