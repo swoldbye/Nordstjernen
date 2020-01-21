@@ -117,7 +117,7 @@ public class LogViewModel extends ViewModel {
         this.windSpeed = logpunkt.getVindhastighed();
         this.waterCurrentDirection = logpunkt.getStroemRetning();
         this.waterCurrentSpeed = logpunkt.getStroemhastighed();
-        this.sailPosition = logpunkt.getSejlstillingString();
+        this.sailPosition = logpunkt.getSejlstilling();
         this.currRowers = logpunkt.getRoere();
         this.sails = logpunkt.getSejlfoering();
         this.course = logpunkt.getKurs();

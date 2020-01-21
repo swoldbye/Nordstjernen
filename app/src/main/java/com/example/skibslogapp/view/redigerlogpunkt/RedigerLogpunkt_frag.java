@@ -97,7 +97,7 @@ public class RedigerLogpunkt_frag extends Fragment {
     }
 
     private void updateInformation() {
-        time.setText(logpunkt.getTimeString() != null && !logpunkt.getTimeString().equals("") ? logpunkt.getTimeString() : "-");
+        /*time.setText(logpunkt.getTimeString() != null && !logpunkt.getTimeString().equals("") ? logpunkt.getTimeString() : "-");
         latitude.setText(logpunkt.getPosition() != null && !logpunkt.getPosition().getBreddegradString().equals("") ?
                 logpunkt.getPosition().getBreddegradString() : "-");
         longitude.setText(logpunkt.getPosition() != null && !logpunkt.getPosition().getLaengdegradString().equals("") ?
@@ -106,14 +106,14 @@ public class RedigerLogpunkt_frag extends Fragment {
         windSpeed.setText(logpunkt.getVindhastighed() >= 0 ? String.valueOf(logpunkt.getVindhastighed()) : "-");
         currentDirection.setText(logpunkt.getStroemRetning() != null && !logpunkt.getStroemRetning().equals("") ? logpunkt.getStroemRetning() : "-");
         currentSpeed.setText(logpunkt.getStroemhastighed() >= 0 ? String.valueOf(logpunkt.getStroemhastighed()) : "-");
-        String sailsOrRowersString = logpunkt.getSejlstillingString() != null && !logpunkt.getSejlstillingString().equals("") ?
+        String sailsOrRowersString = logpunkt.getSejlstilling() != null && !logpunkt.getSejlstilling().equals("") ?
                 logpunkt.getSejlstillingString() : "";
         sailsOrRowersString = sailsOrRowersString.concat(logpunkt.getRoere() >= 0 ? Integer.toString(logpunkt.getRoere()) : "");
         sailsOrRowers.setText(sailsOrRowersString.length() != 0 ? sailsOrRowersString : "-");
-        sails.setText(logpunkt.getSejloeringString() != null && !logpunkt.getSejloeringString().equals("") ? logpunkt.getSejloeringString() : "-");
+        sails.setText(logpunkt.getSejloeringString() != null && !logpunkt.getSejlfoering().equals("") ? logpunkt.getSejloeringString() : "-");
         course.setText(logpunkt.getKursString() != null && !logpunkt.getKursString().equals("") ? logpunkt.getKursString() : "-");
         note.setText(logpunkt.getNote() != null && !logpunkt.getNote().equals("") ? logpunkt.getNote() : "-");
-
+*/
         updatetopthing();
     }
 
