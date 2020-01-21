@@ -53,7 +53,7 @@ public class GenerateCSV {
                 "," + logpunkt.getBredeGrad()+
                 "," + logpunkt.getHoejdeGrad()+
                 "," + logpunkt.getMandOverBord()+
-                "," + logpunkt.getNote()+
+                "," + "\"" +logpunkt.getNote()+ "\"" +
                 "," + logpunkt.getKurs()+
                 "," + logpunkt.getVindretning()+
                 "," + logpunkt.getVindhastighed() +
