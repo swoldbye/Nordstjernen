@@ -35,7 +35,6 @@ import com.google.android.material.navigation.NavigationView;
  *  This class contains the main activity and its functionalities:
  *
  *  - Toolbar
- *  - Left menu
  *
  *  MainActivity has a fragment container beneath the toolbar that shifts between fragments.
  */
@@ -65,8 +64,6 @@ public class Main_akt extends AppCompatActivity {
 
         hideToolbar();
     }
-
-
 
     /**
      * If this method is set to a certain menu, then 3 points can be pressed in the upper right
