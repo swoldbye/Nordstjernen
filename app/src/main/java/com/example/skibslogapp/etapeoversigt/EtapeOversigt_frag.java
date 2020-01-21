@@ -37,13 +37,14 @@ import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver {
+public class EtapeOversigt_frag extends Fragment {
 
     private TextView togt_text, skib_text;
     private Togt togt;
@@ -68,16 +69,13 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
         togtInstilling = view.findViewById(R.id.popUpMenuEtapeOversigt);
 
 
-        //Subscribing for togt Observer
-        TogtDAO.addTogtObserver(this);
-
         /**
          * When you click on this "burger" icon you get a Popup menu where you get the choice to either:
          *
          * -  Export data from a "Togt"
          * -  Delete a "Togt"
          *
-         * If you press delete a Alert dialog box pops up to make sure that you are certain that you
+         * If you press delete a Alert dialog box pops up to generateEtape sure that you are certain that you
          * want to delet the "Togt".
          */
         togtInstilling.setOnClickListener(v -> {
@@ -88,9 +86,7 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
                 switch (item.getItemId()){
 
                     case R.id.exportTogt:
-                        exportData();
-                        Toast.makeText(getActivity(),"Togt exportet",Toast.LENGTH_SHORT).show();
-
+                        exportTogt();
                         return true;
 
                     case R.id.deleteTogt:
@@ -255,46 +251,38 @@ public class EtapeOversigt_frag extends Fragment implements TogtDAO.TogtObserver
     }
 
 
-    private void exportData() {
-        // Generate Data
-        GenerateCSV csvdata = new GenerateCSV();
-        StringBuilder data = csvdata.make(getContext(),0,0);
+    /**
+     * Create CSV file and run a "share" function, in order to, for example,
+     * upload to Google Drive or send via GMail.
+     */
+    private void exportTogt() {
+        // Convert Togt CSV string
+        String csvString = new GenerateCSV().generateTogt(togt);
 
-
-        // Below we gernerate a CSV file form a String and then export it
         try {
-            Context context = getActivity();
-            //saving the file into device
-            FileOutputStream out = context.openFileOutput("EtapeData.csv", Context.MODE_PRIVATE);
-            //out.write('\ufeff'); //this was intended for allowing utf-8 in the csv file.
-            out.write((data.toString()).getBytes());
+            Context context = GlobalContext.get();
+
+            // Save CSV String to local file
+            String fileName = togt.getName().replace(" ", "") + ".csv";
+            FileOutputStream out = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+            out.write(csvString.getBytes());
             out.close();
 
-            //exporting
-            File filelocation = new File(context.getFilesDir(), "EtapeData.csv");
+            // Send File (mail, drive etc.)
+            File filelocation = new File(context.getFilesDir(), fileName);
             Uri path = FileProvider.getUriForFile(context, "com.example.exportcsv.fileprovider", filelocation);
             Intent fileIntent = new Intent(Intent.ACTION_SEND);
             fileIntent.setType("text/csv");
-            fileIntent.putExtra(Intent.EXTRA_SUBJECT, "EtapeData");
+            fileIntent.putExtra(Intent.EXTRA_SUBJECT, "Data for '"+togt.getName()+"'");
             fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             fileIntent.putExtra(Intent.EXTRA_STREAM, path);
-            startActivity(Intent.createChooser(fileIntent, "Send mail"));
 
-        } catch (Exception e) {
+            startActivity(Intent.createChooser(fileIntent, "Send mail"));
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
-
-
-    @Override
-    public void onUpdate(Togt togt) {
-        this.togt = togt;
-
-
-    }
 
     private void scrollToButtom(){
         if(listAdapter.getItemCount()>0){

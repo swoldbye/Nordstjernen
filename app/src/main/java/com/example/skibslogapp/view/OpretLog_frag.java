@@ -75,7 +75,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (grantResults[0] == PERMISSION_GRANTED) {
+        if( grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED ){
             testCoordinates.startMeassureKoordinat();
             Toast.makeText(getActivity(), "Lokation er aktiveret", Toast.LENGTH_LONG).show();
         } else {
