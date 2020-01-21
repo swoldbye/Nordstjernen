@@ -102,10 +102,10 @@ public class PostOversigt extends Fragment {
 
     public void toggleMinimize(boolean toggle){
         mAdapter.toggleFillerCard(toggle);
-        new Handler().postDelayed( () -> postRecyclerView.smoothScrollToPosition(mAdapter.getItemCount()-1), 20);
-        /*if( toggle ){
-            postRecyclerView.smoothScrollToPosition(mAdapter.getItemCount()-1);
-        }*/
+        final int itemCount = mAdapter.getItemCount();
+        if (itemCount > 0) {
+            new Handler().postDelayed(() -> postRecyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1), 20);
+        }
     }
 
 }
