@@ -310,8 +310,9 @@ public class Logpunkt {
         this.setStroemhastighed( logVM.getWaterCurrentSpeed() );
         this.setSejlstilling( logVM.getSailPosition() );
         this.setRoere(logVM.getCurrRowers());
-        this.setSejlfoering( logVM.getSails().equals("") ?
-                logVM.getSails().concat(logVM.getOrientation()) : logVM.getSails().concat("-" + logVM.getOrientation() ));
+        this.setSejlfoering(logVM.getSails().equals("") || logVM.getOrientation().equals("") ?
+                logVM.getSails()+logVM.getOrientation() :
+                logVM.getSails() + "-" + logVM.getOrientation());
         this.setKurs(logVM.getCourse());
         this.setNote( logVM.getNoteTxt() );
     }
