@@ -15,8 +15,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.skibslogapp.R;
 
-import org.w3c.dom.Text;
-
 public class LogNote_frag extends Fragment {
     private EditText noteEditText;
     private textFieldEntered listener;
