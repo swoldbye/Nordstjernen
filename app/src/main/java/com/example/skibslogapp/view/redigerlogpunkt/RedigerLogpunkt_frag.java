@@ -54,7 +54,7 @@ public class RedigerLogpunkt_frag extends Fragment {
         vv = view;
         updatetopthing();
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
-        logVM.reset();
+        logVM.resetValues();
 
         logVM.prepareEditableCopy(logpunkt);
 
@@ -118,7 +118,7 @@ public class RedigerLogpunkt_frag extends Fragment {
     }
 
     private void updatetopthing() {
-        ((TextView) vv.findViewById(R.id.test_text)).setText(logpunkt.toString());
+       // ((TextView) vv.findViewById(R.id.test_text)).setText(logpunkt.toString());
     }
 
     private void openFragmentDialog(int fragID, Fragment frag) {

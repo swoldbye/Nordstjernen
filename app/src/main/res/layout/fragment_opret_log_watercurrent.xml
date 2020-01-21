@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,35 +13,64 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/stroemning_text"
-            style="@style/SmallTitle"
-            android:layout_width="127dp"
-            android:layout_marginBottom="5dp"
-            android:text="Strømning" />
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp">
+            >
+
+
+            <TextView
+                android:id="@+id/stroemning_newtext"
+                style="@style/SmallTitle"
+                android:layout_width="152dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/stroemning_text"
+                style="@style/SmallTitle"
+                android:layout_width="81dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="164dp"
+                android:layout_marginBottom="8dp"
+                android:text="Strøm"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/strøm_input"
                 android:layout_width="75sp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="PLA"
                 android:textAlignment="center"
                 android:textColor="@color/textColor"
                 android:textSize="25sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.619"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.833" />
 
             <Button
                 android:id="@+id/strøm_delete"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
+                android:layout_width="42dp"
+                android:layout_height="49dp"
                 android:backgroundTint="#FFFFFF"
                 android:text="X"
                 android:textColor="#2D2F31"
@@ -49,12 +79,13 @@
                 app:layout_constraintStart_toEndOf="@+id/strøm_input"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            >
 
             <Space style="@style/EvenSpace" />
 
@@ -95,38 +126,42 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp">
 
-    <EditText
-        android:id="@+id/strømhastighed_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
-        android:digits="0123456789"
-        android:ems="10"
-        android:hint="Hastighed"
-        android:imeOptions="actionDone"
-        android:inputType="time"
-        android:maxLength="4"
-        android:paddingHorizontal="0dp"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/textColor"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/opretetape_skipper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:theme="@style/OpretLogTextInput"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/strømhastighed_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:digits="0123456789"
+                android:ems="10"
+                android:hint="Hastighed  Knob"
+                android:imeOptions="actionDone"
+                android:inputType="time"
+                android:maxLength="4"
+                android:paddingHorizontal="0dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <!-- Unit -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:text="knob"
-        android:textColor="@color/textColor"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/strømhastighed_edittext"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>

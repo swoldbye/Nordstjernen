@@ -73,7 +73,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
-        logVM.reset();
+        logVM.resetValues();
 
         //Opret Post
         opretButton = (Button) view.findViewById(R.id.opretButton);
