@@ -16,10 +16,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.view.utility.MoveButtons;
 
 public class LogWaterCurrent_frag extends Fragment implements View.OnClickListener {
     private Button currentNorthBtn, currentEastBtn, currentSouthBtn, currentWestBtn, currentResetBtn;
-    private TextView waterCurrentDirection;
+    private TextView waterCurrentDirection , waterCurrentDescription_NewText, waterCurrentDescription;
     private EditText waterCurrentSpeed;
     private LogViewModel logVM;
 
@@ -30,6 +31,10 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
 
         //Strøm Retning
+        waterCurrentDescription = view.findViewById(R.id.stroemning_text);
+        waterCurrentDescription_NewText = view.findViewById(R.id.stroemning_newtext);
+        MoveButtons.setText(waterCurrentDescription,waterCurrentDescription_NewText);
+
         currentNorthBtn = view.findViewById(R.id.nordButton_strøm);
         currentEastBtn = view.findViewById(R.id.østButton_strøm);
         currentSouthBtn = view.findViewById(R.id.sydButton_strøm);
@@ -76,6 +81,7 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        MoveButtons.setText(waterCurrentDescription,waterCurrentDescription_NewText);
         if(v == currentNorthBtn) waterCurrentLogic( "N", "S");
         else if(v == currentEastBtn) waterCurrentLogic( "Ø", "V");
         else if(v == currentSouthBtn) waterCurrentLogic( "S", "N");
@@ -84,6 +90,7 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
             logVM.setWaterCurrentDirection("");
             waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
             currentResetBtn.setVisibility(View.INVISIBLE);
+            MoveButtons.revertText(waterCurrentDescription,waterCurrentDescription_NewText);
         }
     }
 

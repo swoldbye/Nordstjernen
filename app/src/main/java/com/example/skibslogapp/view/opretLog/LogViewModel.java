@@ -17,17 +17,17 @@ public class LogViewModel extends ViewModel {
             course;
 
     public LogViewModel() {
-        reset();
+        resetValues();
     }
 
-    public void reset() {
+    public void resetValues() {
         time = "";
         windDirection = "";
         windSpeed = -1;
         waterCurrentDirection = "";
         waterCurrentSpeed = -1;
         sailPosition = "";
-        currRowers = 0;
+        currRowers = -1;
         sails = "";
         orientation = "";
         course = -1;

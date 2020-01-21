@@ -40,7 +40,7 @@
             <com.example.skibslogapp.view.utility.KingButton
                 android:id="@+id/bi"
                 style="@style/DefaultButton"
-                android:text="bi" />
+                android:text="ha" />
 
             <com.example.skibslogapp.view.utility.KingButton
                 android:id="@+id/fo"
@@ -52,7 +52,7 @@
             <com.example.skibslogapp.view.utility.KingButton
                 android:id="@+id/ha"
                 style="@style/DefaultButton"
-                android:text="ha" />
+                android:text="bi" />
 
             <Space style="@style/EvenSpace" />
 
@@ -63,19 +63,25 @@
 
 
     <!-- ANTALROERE =====================================-->
-    <EditText
-        android:id="@+id/antalRoereEditText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/opretetape_skipper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
-        android:digits="0123456789"
-        android:ems="10"
-        android:hint="Antal Roere"
-        android:imeOptions="actionDone"
-        android:inputType="time"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/textColor"
-        android:textSize="22sp" />
-
+        android:layout_height="match_parent"
+        android:theme="@style/OpretLogTextInput"
+        >
+        <EditText
+            android:id="@+id/antalRoereEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
+            android:digits="0123456789"
+            android:ems="10"
+            android:hint="Antal Roere"
+            android:imeOptions="actionDone"
+            android:inputType="time"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
+            android:textSize="22sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>

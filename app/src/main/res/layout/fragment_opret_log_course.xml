@@ -10,35 +10,37 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp">
 
-        <EditText
-            android:id="@+id/kursEditText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/opretetape_skipper"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginEnd="80dp"
-            android:ems="10"
-            android:hint="Styrekurs"
-            android:imeOptions="actionDone"
-            android:inputType="time"
-            android:maxLength="3"
-            android:textColor="@color/textColor"
-            android:textColorHint="@color/textColor"
-            android:textSize="22sp"
+            android:layout_height="match_parent"
+            android:theme="@style/OpretLogTextInput"
+            app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/kursEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:ems="10"
+                android:hint="Styrekurs"
+                android:imeOptions="actionDone"
+                android:inputType="time"
+                android:maxLength="3"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Unit -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:text="°"
-            android:textColor="@color/textColor"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/kursEditText"
-            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
