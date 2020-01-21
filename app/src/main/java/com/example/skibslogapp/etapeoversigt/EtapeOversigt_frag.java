@@ -87,8 +87,6 @@ public class EtapeOversigt_frag extends Fragment {
 
                     case R.id.exportTogt:
                         exportTogt();
-                        Toast.makeText(getActivity(),"Togt exportet",Toast.LENGTH_SHORT).show();
-
                         return true;
 
                     case R.id.deleteTogt:
@@ -278,6 +276,7 @@ public class EtapeOversigt_frag extends Fragment {
             fileIntent.putExtra(Intent.EXTRA_SUBJECT, "Data for '"+togt.getName()+"'");
             fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             fileIntent.putExtra(Intent.EXTRA_STREAM, path);
+
             startActivity(Intent.createChooser(fileIntent, "Send mail"));
         } catch (IOException e) {
             e.printStackTrace();
