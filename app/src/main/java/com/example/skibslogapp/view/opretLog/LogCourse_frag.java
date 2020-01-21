@@ -1,15 +1,13 @@
 package com.example.skibslogapp.view.opretLog;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,8 +17,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.skibslogapp.R;
 
 public class LogCourse_frag extends Fragment {
-    EditText kursEditText;
-    LogViewModel logVM;
+    private EditText kursEditText;
+    private LogViewModel logVM;
 
     @Nullable
     @Override
@@ -30,30 +28,53 @@ public class LogCourse_frag extends Fragment {
 
         kursEditText = view.findViewById(R.id.kursEditText);
         kursEditText.setOnFocusChangeListener((v, hasFocus) -> controlCourseInput());
-
         kursEditText.setOnEditorActionListener((v, actionId, event) -> {
             if(actionId == EditorInfo.IME_ACTION_DONE) {
                 controlCourseInput();
-                v.clearFocus();
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
             return true;
         });
 
+        kursEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (kursEditText.getText().length() > 0 && Integer.parseInt(kursEditText.getText().toString()) > 360) {
+                    kursEditText.setText("360");
+                    kursEditText.setSelection(kursEditText.getText().length());
+                }
+                logVM.setCourse(kursEditText.getText().length() > 0 ?
+                        Integer.parseInt(kursEditText.getText().toString()): -1);
+            }
+        });
+
+        updateViewInfo();
+
         return view;
+    }
+
+    private void updateViewInfo() {
+        kursEditText.setText(logVM.getCourse() >= 0 ? Integer.toString(logVM.getCourse()) : "");
+        controlCourseInput();
     }
 
     private void controlCourseInput() {
         String s = kursEditText.getText().toString();
         if(s.equals("") || Integer.parseInt(s) > 360) {
-            logVM.setCourse(-1);
             kursEditText.setText("");
         }
         else  {
             if(s.length() == 1) s = "00".concat(s);
             else if(s.length() == 2) s = "0".concat(s);
-            logVM.setCourse(Integer.parseInt(s));
             kursEditText.setText(s);
         }
     }

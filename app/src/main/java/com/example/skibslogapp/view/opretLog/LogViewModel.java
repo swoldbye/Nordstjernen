@@ -2,6 +2,8 @@ package com.example.skibslogapp.view.opretLog;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.skibslogapp.model.Logpunkt;
+
 public class LogViewModel extends ViewModel {
     private String time,
             windDirection,
@@ -15,17 +17,17 @@ public class LogViewModel extends ViewModel {
             course;
 
     public LogViewModel() {
-        reset();
+        resetValues();
     }
 
-    public void reset() {
+    public void resetValues() {
         time = "";
         windDirection = "";
         windSpeed = -1;
         waterCurrentDirection = "";
         waterCurrentSpeed = -1;
         sailPosition = "";
-        currRowers = 0;
+        currRowers = -1;
         sails = "";
         orientation = "";
         course = -1;
@@ -107,5 +109,20 @@ public class LogViewModel extends ViewModel {
     }
     public void setNoteTxt(String noteTxt) {
         this.noteTxt = noteTxt;
+    }
+
+    public void prepareEditableCopy(Logpunkt logpunkt) {
+        //Does not take time or position, as that information is not editable.
+        this.windDirection = logpunkt.getVindretning();
+        this.windSpeed = logpunkt.getVindhastighed();
+        this.waterCurrentDirection = logpunkt.getStroemRetning();
+        this.waterCurrentSpeed = logpunkt.getStroemhastighed();
+        this.sailPosition = logpunkt.getSejlstilling();
+        this.currRowers = logpunkt.getRoere();
+        this.sails = logpunkt.getSejlfoering();
+        this.course = logpunkt.getKurs();
+        this.noteTxt = logpunkt.getNote();
+
+
     }
 }

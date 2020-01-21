@@ -1,6 +1,5 @@
 package com.example.skibslogapp.view;
 
-
 import android.Manifest;
 import android.content.Context;
 import android.os.Bundle;
@@ -64,6 +63,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
+        logVM.resetValues();
         super.onCreate(savedInstanceState);
         //Activate logging of coordinates. This is placed in onCreate to ensure that the logging will start at
         //The first time the logging is activated.
@@ -94,11 +95,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
 
         closeButton = view.findViewById(R.id.closeButton);
-/*
-        opretPostWrapper = view.findViewById(R.id.opret_post_wrapper);
-*/
-        logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
-        logVM.reset();
+
+//        opretPostWrapper = view.findViewById(R.id.opret_post_wrapper);
 
         //Opret Post
         opretButton = (Button) view.findViewById(R.id.opretButton);
@@ -157,17 +155,18 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         calendar.set(Calendar.MINUTE, Integer.parseInt(timeStr.substring(3, 5)));
 
         // Create Logpunkt from time in calendar
-        Logpunkt logpunkt = new Logpunkt(new Date(calendar.getTimeInMillis()));
-        logpunkt.setVindretning(logVM.getWindDirection());
-        logpunkt.setVindhastighed(logVM.getWindSpeed());
-        logpunkt.setStroemRetning(logVM.getWaterCurrentDirection());
-        logpunkt.setStroemhastighed(logVM.getWaterCurrentSpeed());
-        logpunkt.setSejlstilling(logVM.getSailPosition());
-        logpunkt.setRoere(logVM.getCurrRowers());
-        logpunkt.setSejlfoering(logVM.getSails().equals("") ?
-                logVM.getSails().concat(logVM.getOrientation()) : logVM.getSails().concat("-" + logVM.getOrientation()));
-        logpunkt.setKurs(logVM.getCourse());
-        logpunkt.setNote(logVM.getNoteTxt());
+        Logpunkt logpunkt = new Logpunkt( new Date(calendar.getTimeInMillis()) );
+        logpunkt.setInformation(logVM);
+//        logpunkt.setVindretning( logVM.getWindDirection() );
+//        logpunkt.setVindhastighed( logVM.getWindSpeed() );
+//        logpunkt.setStroemRetning( logVM.getWaterCurrentDirection() );
+//        logpunkt.setStroemhastighed( logVM.getWaterCurrentSpeed() );
+//        logpunkt.setSejlstilling( logVM.getSailPosition() );
+//        logpunkt.setRoere(logVM.getCurrRowers());
+//        logpunkt.setSejlfoering( logVM.getSails().equals("") ?
+//                logVM.getSails().concat(logVM.getOrientation()) : logVM.getSails().concat("-" + logVM.getOrientation() ));
+//        logpunkt.setKurs(logVM.getCourse());
+//        logpunkt.setNote( logVM.getNoteTxt() );
         logpunkt.setPosition(testCoordinates.getKoordinates());
         logpunkt.setMandOverBord(mandOverBord);
 

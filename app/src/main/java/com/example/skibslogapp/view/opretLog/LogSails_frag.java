@@ -44,35 +44,59 @@ public class LogSails_frag extends Fragment implements View.OnClickListener {
         starboard.setOnClickListener(this);
         port.createRelation(starboard);
 
+        updateViewInfo();
+
         return view;
     }
 
+    private void updateViewInfo() {
+        String sailString = logVM.getSails().toLowerCase()+logVM.getOrientation();
+        if(sailString.contains("f")) {
+            fBtn.kingSelected();
+        }
+        else if(sailString.contains("ø")) {
+            øBtn.kingSelected();
+        }
 
+        if(sailString.contains("n1")) {
+            n1Btn.kingSelected();
+        }
+        else if(sailString.contains("n2")) {
+            n2Btn.kingSelected();
+        }
+        else if(sailString.contains("n3")) {
+            n3Btn.kingSelected();
+        }
+
+        if(sailString.contains("bb")) {
+            port.kingSelected();
+        }
+        else if(sailString.contains("sb")) {
+            starboard.kingSelected();
+        }
+    }
 
     @Override
     public void onClick(View v) {
+        KingButton btn = (KingButton) v;
+        btn.kingSelected();
         if(v == fBtn || v == øBtn || v == n1Btn || v == n2Btn || v == n3Btn) {
-            KingButton btn = (KingButton) v;
-            String BtnTxt = btn.getText().toString();
-            if(btn == fBtn || btn == øBtn) {
-                if(logVM.getSails().contains(n1Btn.getText().toString()) || logVM.getSails().contains(n2Btn.getText().toString()) || logVM.getSails().contains(n3Btn.getText().toString())) {
-                    logVM.setSails(BtnTxt.concat("-" + logVM.getSails()));
-                } else {
-                    logVM.setSails(BtnTxt);
-                }
-            } else if(btn == n1Btn || btn == n2Btn || btn == n3Btn) {
-                if(logVM.getSails().contains(fBtn.getText().toString()) || logVM.getSails().contains(øBtn.getText().toString())) {
-                    logVM.setSails(logVM.getSails().concat("-" + BtnTxt));
-                } else {
-                    logVM.setSails(BtnTxt);
-                }
+            String userInput = "";
+            if(fBtn.isSelected() || øBtn.isSelected()) {
+                if(fBtn.isSelected()) userInput = fBtn.getText().toString();
+                else if(øBtn.isSelected()) userInput = øBtn.getText().toString();
             }
-            btn.kingSelected();
-//            logVM.setSails(btn.getText().toString());
-        } else if(v == port || v == starboard) {
-            KingButton btn = (KingButton) v;
-            btn.kingSelected();
-            logVM.setOrientation(btn.getText().toString().toLowerCase() == "bagbord" ? "bb" : "sb");
+            if(n1Btn.isSelected() || n2Btn.isSelected() || n3Btn.isSelected()) {
+                userInput += userInput.length() > 0 ? "-" : "";
+                if(n1Btn.isSelected()) userInput +=  n1Btn.getText().toString();
+                else if(n2Btn.isSelected()) userInput +=  n2Btn.getText().toString();
+                else if(n3Btn.isSelected()) userInput +=  n3Btn.getText().toString();
+            }
+            logVM.setSails(userInput);
+        }
+        if(btn == port || btn == starboard) {
+            if(btn.isSelected()) logVM.setOrientation(btn.getText().toString().toLowerCase().equals("bagbord") ? "bb" : "sb");
+            else logVM.setOrientation("");
         }
     }
 }
