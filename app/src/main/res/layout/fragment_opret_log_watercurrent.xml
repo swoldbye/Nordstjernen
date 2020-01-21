@@ -128,9 +128,9 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/opretetape_skipper"
-            android:layout_width="401dp"
-            android:layout_height="69dp"
-            android:theme="@style/TextInput"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:theme="@style/OpretLogTextInput"
             app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

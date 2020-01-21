@@ -65,9 +65,9 @@
     <!-- ANTALROERE =====================================-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/opretetape_skipper"
-        android:layout_width="401dp"
-        android:layout_height="69dp"
-        android:theme="@style/TextInput"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:theme="@style/OpretLogTextInput"
         >
         <EditText
             android:id="@+id/antalRoereEditText"
