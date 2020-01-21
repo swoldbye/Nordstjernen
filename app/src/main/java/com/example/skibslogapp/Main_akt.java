@@ -23,11 +23,15 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
+import com.example.skibslogapp.model.Logpunkt;
+import com.example.skibslogapp.model.Position.Position;
 import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.oprettogt.OpretTogt_frag;
+import com.example.skibslogapp.view.redigerlogpunkt.RedigerLogpunkt_frag;
 import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 import com.google.android.material.navigation.NavigationView;
 
@@ -57,7 +61,7 @@ public class Main_akt extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-//      Sæt Toolbar
+//      Set Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -66,7 +70,6 @@ public class Main_akt extends AppCompatActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
-
 
         configureNavigationDrawer();
 
@@ -124,7 +127,16 @@ public class Main_akt extends AppCompatActivity {
                     changeFragFromMenu(togtOversigt_frag);
 
                 } else if (itemid == R.id.nav_opret_etape) {
-
+                    //TODO Delete
+                    Logpunkt logpunkt = new Logpunkt();
+                    logpunkt.setVindretning("NNØ");
+                    logpunkt.setStroemRetning("NNØ");
+                    logpunkt.setStroemhastighed(5);
+                    logpunkt.setPosition( new Position(23.2305, -49.1293) );
+                    logpunkt.setSejlfoering("F-N3");
+                    logpunkt.setNote("Vi sejler op ad åen");
+                    logpunkt.setStroemhastighed(5);
+                    changeFragFromMenu(new RedigerLogpunkt_frag(logpunkt));
 
                 } else if (itemid == R.id.nav_etape_oversigt) {
 

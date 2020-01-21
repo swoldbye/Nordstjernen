@@ -1,6 +1,8 @@
 package com.example.skibslogapp.view.opretLog;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +16,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.view.utility.SwapViewsTextHelper;
 
 public class LogWaterCurrent_frag extends Fragment implements View.OnClickListener {
     private Button currentNorthBtn, currentEastBtn, currentSouthBtn, currentWestBtn, currentResetBtn;
-    private TextView waterCurrentDirection;
+    private TextView waterCurrentDirection , waterCurrentDescription_NewText, waterCurrentDescription;
     private EditText waterCurrentSpeed;
     private LogViewModel logVM;
 
@@ -28,6 +31,12 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
 
         //Strøm Retning
+        waterCurrentDescription = view.findViewById(R.id.stroemning_text);
+        waterCurrentDescription_NewText = view.findViewById(R.id.stroemning_newtext);
+        waterCurrentDirection = view.findViewById(R.id.strøm_input);
+        if(waterCurrentDirection.getText() != null && !waterCurrentDirection.getText().toString().equals(""))
+            SwapViewsTextHelper.setText(waterCurrentDescription,waterCurrentDescription_NewText);
+
         currentNorthBtn = view.findViewById(R.id.nordButton_strøm);
         currentEastBtn = view.findViewById(R.id.østButton_strøm);
         currentSouthBtn = view.findViewById(R.id.sydButton_strøm);
@@ -39,36 +48,53 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
         currentResetBtn = view.findViewById(R.id.strøm_delete);
         currentResetBtn.setOnClickListener(this);
         currentResetBtn.setVisibility(View.INVISIBLE);
-        waterCurrentDirection = view.findViewById(R.id.strøm_input);
-        waterCurrentDirection.setText("");
 
         //Strømningshastighed
         waterCurrentSpeed = view.findViewById(R.id.strømhastighed_edittext);
-        waterCurrentSpeed.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        waterCurrentSpeed.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(waterCurrentSpeed.getText().length() != 0)
-                    logVM.setWaterCurrentSpeed(Integer.parseInt(waterCurrentSpeed.getText().toString()));
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                logVM.setWaterCurrentSpeed(waterCurrentSpeed.getText().length() > 0 ?
+                        Integer.parseInt(waterCurrentSpeed.getText().toString()) : -1);
             }
         });
+        updateViewInfo();
 
         return view;
     }
 
+    private void updateViewInfo() {
+        waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
+        currentResetBtn.setVisibility(waterCurrentDirection.getText() != null && waterCurrentDirection.getText().length() != 0 ? View.VISIBLE : View.INVISIBLE);
+        waterCurrentSpeed.setText(logVM.getWaterCurrentSpeed() >= 0 ? Integer.toString(logVM.getWaterCurrentSpeed()) : "");
+    }
+
     @Override
     public void onClick(View v) {
-        if(v == currentNorthBtn) strømDirectionLogic( "N", "S");
-        else if(v == currentEastBtn) strømDirectionLogic( "Ø", "V");
-        else if(v == currentSouthBtn) strømDirectionLogic( "S", "N");
-        else if(v == currentWestBtn) strømDirectionLogic("V", "Ø");
+        SwapViewsTextHelper.setText(waterCurrentDescription,waterCurrentDescription_NewText);
+        if(v == currentNorthBtn) waterCurrentLogic( "N", "S");
+        else if(v == currentEastBtn) waterCurrentLogic( "Ø", "V");
+        else if(v == currentSouthBtn) waterCurrentLogic( "S", "N");
+        else if(v == currentWestBtn) waterCurrentLogic("V", "Ø");
         else if (v == currentResetBtn) {
             logVM.setWaterCurrentDirection("");
             waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
             currentResetBtn.setVisibility(View.INVISIBLE);
+            SwapViewsTextHelper.revertText(waterCurrentDescription,waterCurrentDescription_NewText);
         }
     }
 
-    private void strømDirectionLogic(String btnDirection, String counterDirection) {
+    private void waterCurrentLogic(String btnDirection, String counterDirection) {
         if(!logVM.getWaterCurrentDirection().contains(counterDirection)) {
             switch(logVM.getWaterCurrentDirection().length()) {
                 case 0:

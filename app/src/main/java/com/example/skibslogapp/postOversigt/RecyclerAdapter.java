@@ -6,10 +6,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.model.Logpunkt;
+import com.example.skibslogapp.view.redigerlogpunkt.RedigerLogpunkt_frag;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -19,35 +22,59 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private List<Logpunkt> mTempLogs;
     private boolean fillerCardEnabled = false;
 
-    public static class NoteViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tidTextView;
-        TextView vindretningTextView;
-        TextView kursTextView;
-        TextView sejlføringTextView;
-        TextView sejlstillingTextView;
-        TextView noteTextView;
+    public static class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private View view;
+        private Logpunkt logpunkt;
 
         public NoteViewHolder(@NonNull View itemView) {
             super(itemView);
-            tidTextView = itemView.findViewById(R.id.tidTextView);
-            vindretningTextView = itemView.findViewById(R.id.vindretningTextView);
-            kursTextView = itemView.findViewById(R.id.kursTextView);
-            sejlføringTextView = itemView.findViewById(R.id.sejlføringTextView);
-            sejlstillingTextView = itemView.findViewById(R.id.sejlstillingTextView);
-            noteTextView = itemView.findViewById(R.id.NoteTextView);
+            this.view = itemView;
+            itemView.setOnClickListener(this);
+        }
+
+        public void setLogpunkt(Logpunkt logpunkt, boolean mob) {
+            this.logpunkt = logpunkt;
+
+
+            SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
+
+            if( mob ){
+                ((TextView) view.findViewById(R.id.MOBTidTextView)).setText(localDateFormat.format(logpunkt.getDate()));
+            }else{
+                TextView tidTextView = itemView.findViewById(R.id.tidTextView);
+                TextView vindretningTextView = itemView.findViewById(R.id.vindretningTextView);
+                TextView kursTextView = itemView.findViewById(R.id.kursTextView);
+                TextView sejlføringTextView = itemView.findViewById(R.id.sejlføringTextView);
+                TextView sejlstillingTextView = itemView.findViewById(R.id.sejlstillingTextView);
+                TextView noteTextView = itemView.findViewById(R.id.NoteTextView);
+
+                tidTextView.setText(localDateFormat.format(logpunkt.getDate()));
+                vindretningTextView.setText(logpunkt.getVindretning());
+                kursTextView.setText(logpunkt.getKursString());
+                sejlføringTextView.setText(logpunkt.getSejlfoering());
+                sejlstillingTextView.setText(logpunkt.getSejlstilling());
+                noteTextView.setText(logpunkt.getNote());
+            }
+        }
+
+        @Override
+        public void onClick(View view) {
+            AppCompatActivity activity = (AppCompatActivity) view.getContext();
+            activity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(
+                            R.anim.enter_right_to_left,
+                            R.anim.exit_right_to_left,
+                            R.anim.enter_left_to_right,
+                            R.anim.exit_left_to_right)
+                    .replace(R.id.fragContainer, new RedigerLogpunkt_frag(logpunkt))
+                    .addToBackStack(null)
+                    .commit();
         }
     }
 
-    public static class MOBViewHolder extends RecyclerView.ViewHolder{
-
-        TextView tidTextView;
-
-        public MOBViewHolder(@NonNull View itemView){
-            super(itemView);
-            tidTextView = itemView.findViewById(R.id.MOBTidTextView);
-        }
-    }
 
     public static class FillerViewHolder extends RecyclerView.ViewHolder{
         public FillerViewHolder(@NonNull View itemView) {
@@ -89,7 +116,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         switch (viewType){
             case 1:
                 v = LayoutInflater.from(parent.getContext()).inflate(R.layout.mob_note_layout, parent, false);
-                return new MOBViewHolder(v);
+                return new NoteViewHolder(v);
             case 2:
                 v = LayoutInflater.from(parent.getContext()).inflate(R.layout.logpunktoversigt_filler_card, parent,false);
                 return new FillerViewHolder(v);
@@ -100,7 +127,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
 
-    SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
@@ -109,18 +135,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 break;
             case 1:
                 Logpunkt currentMOB = mTempLogs.get(position);
-                MOBViewHolder mobHolder = (MOBViewHolder) holder;
-                mobHolder.tidTextView.setText(localDateFormat.format(currentMOB.getDate()));
+                ((NoteViewHolder) holder).setLogpunkt(currentMOB, true);
                 break;
             default:
                 Logpunkt current = mTempLogs.get(position);
-                NoteViewHolder noteHolder = (NoteViewHolder) holder;
-                noteHolder.tidTextView.setText(localDateFormat.format(current.getDate()));
-                noteHolder.vindretningTextView.setText(current.getVindretning());
-                noteHolder.kursTextView.setText(current.getKursString());
-                noteHolder.sejlføringTextView.setText(current.getSejlfoering());
-                noteHolder.sejlstillingTextView.setText(current.getSejlstilling());
-                noteHolder.noteTextView.setText(current.getNote());
+                ((NoteViewHolder) holder).setLogpunkt(current, false);
                 break;
         }
     }

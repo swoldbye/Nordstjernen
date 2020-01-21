@@ -44,6 +44,14 @@
         <item name="android:background">@color/black</item>
     </style>
 
+    <style name="RedigerLogDevider">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_marginLeft">5dp</item>
+    <item name="android:layout_marginRight">5dp</item>
+    <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/grey</item>
+</style>
+
 
     <style name="DefaultButton">
         <item name="android:layout_width">65sp</item>
@@ -70,6 +78,17 @@
         <item name="android:textColorHint">@color/greyDark</item>
         <item name="android:textSize">20sp</item>
         <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/red</item>
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="OpretLogTextInput" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <!--HintcolorandlabelcolorinFALSEstate-->
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorHint">@color/colorPrimaryDark</item>
+        <item name="android:textSize">20sp</item>
+        <!--LabelcolorinTRUEstateandbarcolorFALSEandTRUEState-->
         <item name="colorAccent">@color/red</item>
         <item name="colorControlNormal">@color/colorPrimaryDark</item>
         <item name="colorControlActivated">@color/colorPrimaryDark</item>
