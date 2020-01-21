@@ -167,39 +167,38 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp">
 
+        <com.google.android.material.textfield.TextInputLayout
 
-        <EditText
-            android:id="@+id/vindhastighed_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginEnd="80dp"
-            android:digits="0123456789"
-            android:ems="10"
-            android:hint="Vindhastighed"
-            android:imeOptions="actionDone"
-            android:inputType="time"
-            android:maxLength="4"
-            android:paddingHorizontal="0dp"
-            android:textColor="@color/textColor"
-            android:textColorHint="@color/textColor"
-            android:textSize="22sp"
+            android:layout_width="401dp"
+            android:layout_height="69dp"
+            android:theme="@style/TextInput"
+            app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toTopOf="parent">
+            <EditText
+                android:id="@+id/vindhastighed_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:digits="0123456789"
+                android:ems="10"
+                android:hint="Vindhastighed  m/s"
+                android:imeOptions="actionDone"
+                android:inputType="time"
+                android:maxLength="4"
+                android:paddingHorizontal="0dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </com.google.android.material.textfield.TextInputLayout>
         <!-- Unit -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:text="m/s"
-            android:textColor="@color/textColor"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/vindhastighed_edittext"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
