@@ -1,6 +1,8 @@
 package com.example.skibslogapp.view.opretLog;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.skibslogapp.R;
+
+import org.w3c.dom.Text;
 
 public class LogNote_frag extends Fragment {
     private EditText noteEditText;
@@ -29,8 +33,30 @@ public class LogNote_frag extends Fragment {
                 logVM.setNoteTxt(noteEditText.getText().toString());
             });
         }
+        noteEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                logVM.setNoteTxt(noteEditText.getText().toString());
+            }
+        });
+
+        updateViewInfo();
 
         return view;
+    }
+
+    private void updateViewInfo() {
+        noteEditText.setText(logVM.getNoteTxt().length() > 0 ? logVM.getNoteTxt() : "");
     }
 
     public void setListener(textFieldEntered listener) {
