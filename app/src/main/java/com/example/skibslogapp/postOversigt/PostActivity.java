@@ -23,7 +23,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class PostActivity extends Fragment implements View.OnClickListener {
 
-
+    private Button opretButton;
     Button openButton;
     Togt togt;
     Etape etape;
@@ -31,12 +31,10 @@ public class PostActivity extends Fragment implements View.OnClickListener {
 
     TabLayout_frag tabLayout_frag;
     OpretLog_frag opretLog_frag;
-    FrameLayout opretPostContainerFrame;
 
     public PostActivity(Etape etape, int startPos){
         TogtDAO togtDAO = new TogtDAO(GlobalContext.get());
-        Togt tempTogt = togtDAO.getTogt(etape.getTogtId());
-        this.togt = tempTogt;
+        this.togt = togtDAO.getTogt(etape.getTogtId());
         this.etape = etape;
         this.startPos = startPos;
     }
@@ -46,23 +44,25 @@ public class PostActivity extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_post_container, container, false);
 
-        opretPostContainerFrame = view.findViewById(R.id.opretPostContainerFrame);
-
 
         tabLayout_frag = new TabLayout_frag(togt, startPos);
         opretLog_frag = new OpretLog_frag();
 
 
+        opretButton = view.findViewById(R.id.logpunktoversigt_opret);
+        opretButton.setOnClickListener( v -> openOpretLogpunkt() );
+
+
         getActivity().getSupportFragmentManager().beginTransaction()
                 .add(R.id.tabOversigtContainerFrame, tabLayout_frag)
                 .commit();
+/*
 
         getActivity().getSupportFragmentManager().beginTransaction()
                 .add(R.id.opretPostContainerFrame, opretLog_frag)
-                .commit();
+                .commit();*/
 
         //opretPostContainerFrame.setVisibility(View.GONE);
-
 
         return view;
     }
@@ -72,9 +72,22 @@ public class PostActivity extends Fragment implements View.OnClickListener {
 
     }
 
+    private void openOpretLogpunkt(){
+        OpretLog_frag fragment = new OpretLog_frag();
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+            .setCustomAnimations(R.anim.slide_upslow2, R.anim.slide_upslow, R.anim.slide_downslow2, R.anim.slide_downslow)
+            .add(R.id.opretPostContainerFrame, fragment)
+            .addToBackStack(null)
+            .commit();
+
+        tabLayout_frag.toggleMinimize(true);
+        fragment.onClosed(() -> tabLayout_frag.toggleMinimize(false));
+    }
+/*
+
     private void expandPost() {
         opretPostContainerFrame.setVisibility(View.VISIBLE);
-
         tabLayout_frag.closeTabs();
         openButton.setText("close");
     }
@@ -84,6 +97,7 @@ public class PostActivity extends Fragment implements View.OnClickListener {
         tabLayout_frag.openTabs();
         openButton.setText("open");
     }
+*/
 
 
     /*
@@ -93,7 +107,6 @@ public class PostActivity extends Fragment implements View.OnClickListener {
     public void onDestroy() {
         super.onDestroy();
         getActivity().getSupportFragmentManager().beginTransaction()
-                .remove(opretLog_frag)
                 .remove(tabLayout_frag)
                 .commit();
     }

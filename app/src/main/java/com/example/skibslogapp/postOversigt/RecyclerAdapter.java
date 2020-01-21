@@ -17,6 +17,7 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Logpunkt> mTempLogs;
+    private boolean fillerCardEnabled = false;
 
     public static class NoteViewHolder extends RecyclerView.ViewHolder {
 
@@ -48,12 +49,31 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+    public static class FillerViewHolder extends RecyclerView.ViewHolder{
+        public FillerViewHolder(@NonNull View itemView) {
+            super(itemView);
+        }
+    }
+
     public RecyclerAdapter(List<Logpunkt> tempLogs) {
         mTempLogs = tempLogs;
     }
 
+    void toggleFillerCard(boolean toggle){
+        if(!toggle){
+            notifyItemRemoved(getItemCount()-1);
+        }
+        fillerCardEnabled = toggle;
+        if(toggle){
+            notifyItemInserted(getItemCount()-1);
+        }
+    }
+
     @Override
     public int getItemViewType(int position) {
+        if( fillerCardEnabled && (position+1) == getItemCount()){
+            return 2; // Filler
+        }
         Logpunkt current = mTempLogs.get(position);
         if(current.getMandOverBord()){
             return 1;
@@ -65,22 +85,28 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v;
         switch (viewType){
             case 1:
-                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.mob_note_layout, parent, false);
+                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.mob_note_layout, parent, false);
                 return new MOBViewHolder(v);
+            case 2:
+                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.logpunktoversigt_filler_card, parent,false);
+                return new FillerViewHolder(v);
             default:
-                View vDef = LayoutInflater.from(parent.getContext()).inflate(R.layout.standard_note_layout, parent, false);
-                return new NoteViewHolder(vDef);
+                v = LayoutInflater.from(parent.getContext()).inflate(R.layout.standard_note_layout, parent, false);
+                return new NoteViewHolder(v);
         }
     }
 
 
-    SimpleDateFormat localDateFormat = new SimpleDateFormat("HH mm");
+    SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()){
+            case 2:
+                break;
             case 1:
                 Logpunkt currentMOB = mTempLogs.get(position);
                 MOBViewHolder mobHolder = (MOBViewHolder) holder;
@@ -99,8 +125,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+
+
     @Override
     public int getItemCount() {
-        return mTempLogs.size();
+        return mTempLogs.size() + (fillerCardEnabled ? 1 : 0) ;
+    }
+
+    public void updateData(List<Logpunkt> newLogs){
+        mTempLogs = newLogs;
+        //notifyItemRangeRemoved(0, mTempLogs.size() - 1);
+        notifyItemInserted(mTempLogs.size()-1);
+        //notifyItemInserted(mTempLogs.size() - 1);
     }
 }

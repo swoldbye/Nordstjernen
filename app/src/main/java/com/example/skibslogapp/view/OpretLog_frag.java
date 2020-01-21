@@ -35,6 +35,7 @@ import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Position.PositionController;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.postOversigt.RecyclerAdapter;
 import com.example.skibslogapp.postOversigt.TabLayout_frag;
 import com.example.skibslogapp.view.opretLog.LogNote_frag;
 import com.example.skibslogapp.view.opretLog.LogViewModel;
@@ -58,9 +59,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     private Etape currentEtape;
 
 
-    Button openButton;
-    FrameLayout buttonFrame;
-    FrameLayout opretPostWrapper;
+    //FrameLayout opretPostWrapper;
     EtapeDAO etapeDAO;
 
     @Override
@@ -69,8 +68,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         //Activate logging of coordinates. This is placed in onCreate to ensure that the logging will start at
         //The first time the logging is activated.
         testCoordinates = new PositionController(getActivity().getApplicationContext(), this);
-        //For testing
-        //testCoordinates = null;
+        etapeDAO = new EtapeDAO(getContext());
+        currentEtape = etapeDAO.getEtaper(TabLayout_frag.getCurrentTogt()).get(TabLayout_frag.getTabPos());
     }
 
     @Override
@@ -95,9 +94,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
 
         closeButton = view.findViewById(R.id.closeButton);
-        openButton = view.findViewById(R.id.Open_Button);
-        buttonFrame = view.findViewById(R.id.Button_Frame);
+/*
         opretPostWrapper = view.findViewById(R.id.opret_post_wrapper);
+*/
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
         logVM.reset();
 
@@ -114,9 +113,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         mob.setOnClickListener(this);
         opretButton.setOnClickListener(this);
         closeButton.setOnClickListener(this);
-        openButton.setOnClickListener(this);
 
-        opretPostWrapper.setVisibility(View.GONE);
+        //opretPostWrapper.setVisibility(View.GONE);
 
         return view;
     }
@@ -141,14 +139,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v == opretButton || v == mob) {
             createLogpunkt(v == mob);
-        }else if(v == openButton){
-            buttonFrame.setVisibility(View.GONE);
-            opretPostWrapper.setVisibility(View.VISIBLE);
-            etapeDAO = new EtapeDAO(getContext());
-            currentEtape = etapeDAO.getEtaper(TabLayout_frag.getCurrentTogt()).get(TabLayout_frag.getTabPos());
         }else if(v == closeButton){
-            opretPostWrapper.setVisibility(View.GONE);
-            buttonFrame.setVisibility(View.VISIBLE);
+            getActivity().getSupportFragmentManager().popBackStack();
         }
     }
 
@@ -184,9 +176,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         System.out.printf("Created logpunkt: %s", logpunkt.toString());
 
-        buttonFrame.setVisibility(View.VISIBLE);
-        opretPostWrapper.setVisibility(View.GONE);
-
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 
     private void toggleMOBPosition() {
@@ -216,4 +206,28 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     }
 
 
+    public interface OpretLogCallback{
+        void run();
+    }
+
+    private OpretLogCallback onClosedCallback = null;
+
+    public void onClosed(OpretLogCallback onClosedCallback){
+        this.onClosedCallback = onClosedCallback;
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if( onClosedCallback != null ){
+            onClosedCallback.run();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+
+        super.onDestroy();
+    }
 }

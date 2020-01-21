@@ -1,50 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:animateLayoutChanges="true"
+    android:layout_height="match_parent"
     tools:context=".view.OpretLog_frag">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        android:orientation="vertical">
-
-
-        <FrameLayout
-            android:id="@+id/Button_Frame"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:animateLayoutChanges="true">
-
-            <Button
-                android:id="@+id/Open_Button"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:background="@color/colorPrimary"
-                android:text="Opret Log"
-                android:textColor="@color/white"
-                android:textSize="20dp">
-
-
-            </Button>
-
-        </FrameLayout>
-
-
+        android:layout_height="450dp"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:elevation="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+<!--
         <androidx.cardview.widget.CardView
             android:id="@+id/opret_post_wrapper"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:animateLayoutChanges="true"
+            android:layout_height="450dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp"
             app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true">
+            app:cardUseCompatPadding="true">-->
 
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -321,8 +299,7 @@
 
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-        </androidx.cardview.widget.CardView>
+       <!-- </androidx.cardview.widget.CardView>-->
     </LinearLayout>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

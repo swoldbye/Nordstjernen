@@ -1,16 +1,25 @@
 package com.example.skibslogapp.postOversigt;
 
+import android.util.SparseArray;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.model.Logpunkt;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -21,6 +30,9 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     private int numOfTabs; // The total number of tabs
     Fragment fragment = null;
     List<List<Logpunkt>> etapper;
+    PostOversigt postOversigt;
+    //List<PostOversigt> fragmentList = new ArrayList<>();
+    private Map<Integer, Fragment> fragmentMap;
 
 
 
@@ -28,6 +40,8 @@ public class PageAdapter extends FragmentStatePagerAdapter {
         super(fragmentManager);
         this.numOfTabs = numOfTabs;
         this.etapper = etapper;
+        fragmentMap = new HashMap<Integer, Fragment>();
+        System.out.println("Count is : " + getCount());
     }
 
 
@@ -42,58 +56,12 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-
-//        for (int i = 0; i < numOfTabs; i++) {
-//            if (i == position) {
-//                fragment = PostActivity.newInstance();
-//                break;
-//            }
-//        }
-//      return fragment;
         PostOversigt postOversigt = new PostOversigt(etapper.get(position));
+        fragmentMap.put(position, postOversigt);
         return postOversigt;
-
-
-//        return PostActivity.newInstance(position);
-/*
-        switch (position) {
-            case 0:
-                return new PostActivity();
-
-            case 1:
-                return new Day2();
-
-            case 2:
-                return new Day3();
-
-            case 3:
-                return new Day4();
-
-            case 4:
-                return new Day5();
-
-            case 5:
-                return new Day6();
-
-            case 6:
-                return new Day7();
-
-            case 7:
-                return new Day8();
-
-            case 8:
-                return new Day9();
-
-            case 9:
-                return new Day10();
-
-            default:
-                return null;
-
-        }
-
- */
     }
+
+
 
     /**
      * Returns the total number of tabs in the tab layout
@@ -103,6 +71,29 @@ public class PageAdapter extends FragmentStatePagerAdapter {
         return etapper.size();
     }
 
+//    @Override
+//    public int getItemPosition(@NonNull Object object) {
+//        return POSITION_UNCHANGED;
+//    }
+
+//
+//    @NonNull
+//    @Override
+//    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+//        PostOversigt postOversigt = (PostOversigt) super.instantiateItem(container, position);
+//        //fragmentList.add(postOversigt);
+//        fragmentMap.put(position, postOversigt);
+//        return postOversigt;
+//    }
+
+    public Fragment getFragment (int position){
+        //return fragmentList.get(position);
+        Fragment returnFragment = fragmentMap.get(position);
+        if(returnFragment == null){
+            return null;
+        }
+        return returnFragment;
+    }
 
     /**
      * Set a title for each tab with a position
@@ -113,6 +104,32 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return "E-" + (position + 1);
+        return "E" + (position + 1);
     }
+
+
+    public void updateList(List<List<Logpunkt>> newEtapper, int position, FragmentActivity FA){
+        this.etapper = newEtapper;
+
+        //PostOversigt postOversigt = (PostOversigt) getFragment(position);
+        //postOversigt.updateAdapter(newEtapper.get(position));
+
+        //this.getItem(position);
+
+        PostOversigt existing = (PostOversigt) getFragment(position);
+        RecyclerAdapter recyclerAdapter = (RecyclerAdapter) existing.getAdapter();
+        recyclerAdapter.updateData(newEtapper.get(position));
+        existing.postRecyclerView.smoothScrollToPosition(etapper.get(position).size()-1);
+//        final FragmentTransaction FT = FA.getSupportFragmentManager().beginTransaction();
+//        FT.detach(existing);
+//        FT.attach(existing);
+//        FT.commit();
+//        this.notifyDataSetChanged();
+        //recyclerAdapter.notifyItemInserted(newEtapper.get(position).size() - 1);
+        //this.notifyDataSetChanged();
+        //postOversigt.updatemAdapter(etapper.get(position));
+    }
+
+
+
 }
