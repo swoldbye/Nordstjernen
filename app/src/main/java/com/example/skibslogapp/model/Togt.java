@@ -1,15 +1,11 @@
 package com.example.skibslogapp.model;
 
-import android.widget.ArrayAdapter;
-
-import java.util.ArrayList;
 import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import java.util.Locale;
 
-public class Togt {
 
-    static ArrayList togt = new ArrayList<Logpunkt>();
+public class Togt {
 
     private long id = -1;
     private String name;
@@ -61,13 +57,17 @@ public class Togt {
         this.skipper = skipper;
     }
 
-    public boolean equals(Togt togt){
-        return  id == togt.id &&
-                TextUtils.equals(name, togt.name) &&
-                TextUtils.equals(skib, togt.skib) &&
-                TextUtils.equals(skipper, togt.skipper) &&
-                TextUtils.equals(startDestination, togt.startDestination)
-                ;
+    @Override
+    public boolean equals(Object obj){
+        if( obj.getClass() == this.getClass() ){
+            Togt togt = (Togt) obj;
+            return  id == togt.id &&
+                    TextUtils.equals(name, togt.name) &&
+                    TextUtils.equals(skib, togt.skib) &&
+                    TextUtils.equals(skipper, togt.skipper) &&
+                    TextUtils.equals(startDestination, togt.startDestination);
+        }
+        return false;
     }
 
 

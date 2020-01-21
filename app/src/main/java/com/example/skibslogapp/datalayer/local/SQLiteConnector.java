@@ -39,7 +39,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SQLiteConnector extends SQLiteOpenHelper {
 
     // Increment version number if you change anything
-    private static final int VERSION = 10;
+    private static final int VERSION = 15;
 
     // Name of database
     private static final String DATABASE ="logbog.db";
@@ -94,6 +94,11 @@ public class SQLiteConnector extends SQLiteOpenHelper {
                 "togt INTEGER," +
                 "startDate INTEGER NOT NULL," +
                 "endDate INTEGER," +
+                "startDestination TEXT," +
+                "slutDestination TEXT," +
+                "skipper TEXT," +
+                "status INT," +
+                "besaetning TEXT," +
                 "PRIMARY KEY(id)," +
                 "FOREIGN KEY(togt) REFERENCES togter(id)"+
             ")"

@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
-import com.example.skibslogapp.Main_akt;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.global.GenerateCSV;
 
@@ -36,31 +35,36 @@ public class UdtagData_frag extends Fragment implements View.OnClickListener {
         if (v == sendD) {
             //it seems it does not sense the the click on this button
             System.out.println("the send data button was clicked.");
-            Toast.makeText(getActivity(), "Dataen bliver pakken til drive",
+            Toast.makeText(getActivity(), "Dataen bliver pakken til export",
                     Toast.LENGTH_LONG).show();
-            export(v);
+            export();
 
         }
     }
 
-    public void export(View view) {
+    public void export() {
         //generate data
         GenerateCSV csvdata = new GenerateCSV();
-        StringBuilder data = csvdata.make();
+        StringBuilder data = csvdata.make(getContext(),0,0);
 
+        /**
+         * @author Claes
+         * below we gernerate a CSV file form a String and then export it
+         */
         try {
             Context context = getActivity();
             //saving the file into device
-            FileOutputStream out = context.openFileOutput("data.csv", Context.MODE_PRIVATE);
+            FileOutputStream out = context.openFileOutput("EtapeData.csv", Context.MODE_PRIVATE);
+            //out.write('\ufeff'); //this was intended for allowing utf-8 in the csv file.
             out.write((data.toString()).getBytes());
             out.close();
 
             //exporting
-            File filelocation = new File(context.getFilesDir(), "data.csv");
+            File filelocation = new File(context.getFilesDir(), "EtapeData.csv");
             Uri path = FileProvider.getUriForFile(context, "com.example.exportcsv.fileprovider", filelocation);
             Intent fileIntent = new Intent(Intent.ACTION_SEND);
             fileIntent.setType("text/csv");
-            fileIntent.putExtra(Intent.EXTRA_SUBJECT, "Data");
+            fileIntent.putExtra(Intent.EXTRA_SUBJECT, "EtapeData");
             fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             fileIntent.putExtra(Intent.EXTRA_STREAM, path);
             startActivity(Intent.createChooser(fileIntent, "Send mail"));

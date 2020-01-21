@@ -1,5 +1,6 @@
 package com.example.skibslogapp;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -17,10 +19,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
@@ -29,7 +35,7 @@ import com.example.skibslogapp.model.Position.Position;
 import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.LogOversigt_frag;
 import com.example.skibslogapp.view.OpretLog_frag;
-import com.example.skibslogapp.view.OpretTogt_frag;
+import com.example.skibslogapp.view.oprettogt.OpretTogt_frag;
 import com.example.skibslogapp.view.redigerlogpunkt.RedigerLogpunkt_frag;
 import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 import com.example.skibslogapp.view.UdtagData_frag;
@@ -45,6 +51,8 @@ import com.google.android.material.navigation.NavigationView;
  */
 public class Main_akt extends AppCompatActivity {
 
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
     private DrawerLayout drawerLayout;
     private OpretLog_frag opretLog_frag;
     private TogtOversigt_frag togtOversigt_frag;
@@ -112,7 +120,6 @@ public class Main_akt extends AppCompatActivity {
                 togtOversigt_frag = new TogtOversigt_frag();
                 opretTogt_frag = new OpretTogt_frag();
                 opretLog_frag = new OpretLog_frag();
-                etapeOversigt_frag = new EtapeOversigt_frag(togt);
 
                 int itemid = menuItem.getItemId();
 
@@ -125,6 +132,7 @@ public class Main_akt extends AppCompatActivity {
                     changeFragFromMenu(togtOversigt_frag);
 
                 } else if (itemid == R.id.nav_opret_etape) {
+                    //TODO Delete
                     Logpunkt logpunkt = new Logpunkt();
                     logpunkt.setVindretning("NNØ");
                     logpunkt.setStroemRetning("NNØ");
@@ -136,7 +144,7 @@ public class Main_akt extends AppCompatActivity {
                     changeFragFromMenu(new RedigerLogpunkt_frag(logpunkt));
 
                 } else if (itemid == R.id.nav_etape_oversigt) {
-                    changeFragFromMenu(etapeOversigt_frag);
+
 
                 }else if (itemid == R.id.nav_opret_log){
                     changeFragFromMenu(opretLog_frag);
@@ -232,9 +240,5 @@ public class Main_akt extends AppCompatActivity {
     public void showToolbar() {
         this.getSupportActionBar().show();
     }
-
-
-
-
 
 }

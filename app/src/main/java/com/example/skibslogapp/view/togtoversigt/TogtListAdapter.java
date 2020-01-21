@@ -1,6 +1,5 @@
 package com.example.skibslogapp.view.togtoversigt;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,25 +9,32 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.datalayer.local.EtapeDAO;
+import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
+import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * This is a custom adapter for the RecycleView displaying the "Togts".
  */
 public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtListViewHolder> {
 
-    private List<Togt> togtArrayList;
-    private Context mContext;
+    private List<Togt> togter;
 
-    public TogtListAdapter(List<Togt> list, Context context) {
-        togtArrayList = list;
-        mContext = context;
+    TogtListAdapter() {
+        updateTogter();
+    }
+
+    void updateTogter(){
+        togter = new TogtDAO(GlobalContext.get()).getTogter();
+        notifyDataSetChanged();
     }
 
     /**
@@ -61,21 +67,22 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
     @Override
     public void onBindViewHolder(@NonNull TogtListViewHolder holder, final int position) {
 
-        Calendar dateFormat = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM");
-        String date = simpleDateFormat.format(dateFormat.getTime());
-
-        Calendar yearFormat = Calendar.getInstance();
-        SimpleDateFormat simpleYearFormat = new SimpleDateFormat("yyyy");
-        String year = simpleYearFormat.format(yearFormat.getTime());
-
-
-        Togt currTogt = togtArrayList.get(position);
+        Togt currTogt = togter.get(position);
         holder.togtName.setText(currTogt.getName());
         holder.ship.setText(currTogt.getSkib());
         holder.startDest.setText("Fra " + currTogt.getStartDestination());
-        holder.date.setText(date);
-        holder.year.setText(year);
+
+        List<Etape> etaper = new EtapeDAO(GlobalContext.get()).getEtaper(currTogt);
+        Etape firstEtape = etaper.get(0);
+        if( firstEtape.getStatus() != Etape.Status.NEW ){
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(firstEtape.getStartDate());
+            holder.date.setText(String.format(Locale.US, "%02d/%02d", cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH)+1 ));
+            holder.year.setText(String.format(Locale.US, "%d", cal.get(Calendar.YEAR)));
+        }else{
+            holder.date.setText("Ikke påbegyndt");
+            holder.year.setText("");
+        }
     }
 
     /**
@@ -84,11 +91,11 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
      */
     @Override
     public int getItemCount() {
-        return togtArrayList.size();
+        return togter.size();
     }
 
 //    /**
-//     * This function removes an item from the togtArrayList, and thus from the RecycleView.
+//     * This function removes an item from the togter, and thus from the RecycleView.
 //     * It also notifies any any registered observers that the item previously located at <code>position</code>
 //     * has been removed from the data set. The items previously located at and after
 //     * <code>position</code> may now be found at <code>oldPosition - 1</code>.
@@ -96,8 +103,8 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
 //     * @param position The position the element is in the RecycleView
 //     */
 //    public void delete(int position){
-//        Togt togt = togtArrayList.get(position);
-//        togtArrayList.remove(position);
+//        Togt togt = togter.get(position);
+//        togter.remove(position);
 //        TogtDAO togtDAO = new TogtDAO(mContext);
 //        togtDAO.deleteTogt(togt);
 //        notifyItemRemoved(position);
@@ -127,7 +134,7 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
             year = itemView.findViewById(R.id.togtoversigt_card_year);
             itemView.setOnClickListener( (View view) -> {
                 int position = getAdapterPosition();
-                Togt togt = togtArrayList.get(position);
+                Togt togt = togter.get(position);
 //                    EtapeOversigt_frag etapeOversigt_frag = new EtapeOversigt_frag(togt);
 //                    Bundle bundle = new Bundle();
 //                    bundle.putLong("ID", togt.getId());

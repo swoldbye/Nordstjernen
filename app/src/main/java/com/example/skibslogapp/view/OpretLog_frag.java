@@ -8,29 +8,40 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
+
+import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
+import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Position.PositionController;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.postOversigt.RecyclerAdapter;
+import com.example.skibslogapp.postOversigt.TabLayout_frag;
 import com.example.skibslogapp.view.opretLog.LogNote_frag;
 import com.example.skibslogapp.view.opretLog.LogViewModel;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -43,6 +54,12 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     private Button opretButton;
     private LogViewModel logVM;
+    TextView closeButton;
+    private Etape currentEtape;
+
+
+    //FrameLayout opretPostWrapper;
+    EtapeDAO etapeDAO;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,15 +67,17 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         //Activate logging of coordinates. This is placed in onCreate to ensure that the logging will start at
         //The first time the logging is activated.
         testCoordinates = new PositionController(getActivity().getApplicationContext(), this);
+        etapeDAO = new EtapeDAO(getContext());
+        currentEtape = etapeDAO.getEtaper(TabLayout_frag.getCurrentTogt()).get(TabLayout_frag.getTabPos());
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(grantResults[0] == PERMISSION_GRANTED){
+        if (grantResults[0] == PERMISSION_GRANTED) {
             testCoordinates.startMeassureKoordinat();
             Toast.makeText(getActivity(), "Lokation er aktiveret", Toast.LENGTH_LONG).show();
-        }else{
+        } else {
             Toast.makeText(getActivity(), "Lokation er ikke aktiveret", Toast.LENGTH_SHORT).show();
             // Will retur false if the user tabs "Bont ask me again/Permission denied".
             // Returns true if the user previusly rejected the message and now try to access it again. -> Indication of user confussion
@@ -72,6 +91,11 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
+
+        closeButton = view.findViewById(R.id.closeButton);
+/*
+        opretPostWrapper = view.findViewById(R.id.opret_post_wrapper);
+*/
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
         logVM.resetValues();
 
@@ -87,6 +111,9 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         mob.setOnClickListener(this);
         opretButton.setOnClickListener(this);
+        closeButton.setOnClickListener(this);
+
+        //opretPostWrapper.setVisibility(View.GONE);
 
         return view;
     }
@@ -95,7 +122,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
      * Clears the focus when clicking the "Done" or "Next" button on the keyboard
      */
     private TextView.OnEditorActionListener clearFocusOnNextClick = (v, keyCode, event) -> {
-        if(keyCode == EditorInfo.IME_ACTION_DONE || keyCode == EditorInfo.IME_ACTION_NEXT) {
+        if (keyCode == EditorInfo.IME_ACTION_DONE || keyCode == EditorInfo.IME_ACTION_NEXT) {
             clearFocusOnDone(v);
         }
         return true;
@@ -109,23 +136,19 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
-        LogOversigt_frag logOversigt_frag;
-        FragmentManager fragmentManager;
-        FragmentTransaction fragmentTransaction;
-
-
         if (v == opretButton || v == mob) {
-            createLogpunkt();
+            createLogpunkt(v == mob);
+        }else if(v == closeButton){
+            getActivity().getSupportFragmentManager().popBackStack();
         }
     }
 
-    private void createLogpunkt() {
+    private void createLogpunkt(boolean mandOverBord) {
         // Fetching time ---------------------------------------------------------------
         String timeStr = logVM.getTime();
 
         // Getting calender instance
-        Calendar calendar= Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
 
         // Setting minutes and hour
@@ -146,22 +169,20 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 //        logpunkt.setKurs(logVM.getCourse());
 //        logpunkt.setNote( logVM.getNoteTxt() );
         logpunkt.setPosition(testCoordinates.getKoordinates());
+        logpunkt.setMandOverBord(mandOverBord);
 
         LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
-        logpunktDAO.addLogpunkt(GlobalTogt.getEtape(getContext()), logpunkt);
+        logpunktDAO.addLogpunkt(currentEtape, logpunkt);
 
         System.out.printf("Created logpunkt: %s", logpunkt.toString());
 
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .remove(this)
-                .commit();
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 
     private void toggleMOBPosition() {
         FrameLayout mob_container = getView().findViewById(R.id.mob_container);
         CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(mob_container.getLayoutParams());
-        if(mobIsDown) {
+        if (mobIsDown) {
             params.gravity = Gravity.TOP;
         } else {
             params.gravity = Gravity.BOTTOM;
@@ -182,5 +203,31 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         super.onStop();
         System.out.println("Stopping measure koordinates");
         testCoordinates.removeLocationUpdates();
+    }
+
+
+    public interface OpretLogCallback{
+        void run();
+    }
+
+    private OpretLogCallback onClosedCallback = null;
+
+    public void onClosed(OpretLogCallback onClosedCallback){
+        this.onClosedCallback = onClosedCallback;
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if( onClosedCallback != null ){
+            onClosedCallback.run();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+
+        super.onDestroy();
     }
 }
