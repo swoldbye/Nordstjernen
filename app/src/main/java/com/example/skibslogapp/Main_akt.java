@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -19,14 +18,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
@@ -38,7 +33,6 @@ import com.example.skibslogapp.view.OpretLog_frag;
 import com.example.skibslogapp.view.oprettogt.OpretTogt_frag;
 import com.example.skibslogapp.view.redigerlogpunkt.RedigerLogpunkt_frag;
 import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
-import com.example.skibslogapp.view.UdtagData_frag;
 import com.google.android.material.navigation.NavigationView;
 
 /**
@@ -83,6 +77,8 @@ public class Main_akt extends AppCompatActivity {
             Fragment fragment = new TogtOversigt_frag();
             getSupportFragmentManager().beginTransaction().add(R.id.fragContainer, fragment).commit();
         }
+
+        hideToolbar();
     }
 
 
@@ -107,7 +103,6 @@ public class Main_akt extends AppCompatActivity {
      *
      */
 
-    UdtagData_frag udata = new UdtagData_frag();
     private void configureNavigationDrawer(){
         NavigationView navigationView;
         drawerLayout = findViewById(R.id.drawer);
@@ -153,11 +148,11 @@ public class Main_akt extends AppCompatActivity {
                    //changeFragFromMenu(logOversigt_frag);
 
 
-                }else if (itemid == R.id.nav_email){
+                /*}else if (itemid == R.id.nav_email){
                     //todo: Make sure you can get back from this frag fragmentTransaction.addToBackStack(null);
                     changeFragFromMenu(udata);
                     //fragmentTransaction.addToBackStack("udata");
-
+*/
                 }else {
                     //rework this________________________________
                     Toast.makeText(Main_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",

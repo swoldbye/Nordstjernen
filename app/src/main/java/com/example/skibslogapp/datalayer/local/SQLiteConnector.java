@@ -16,7 +16,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * using the new updated schema.
  *
  * TEST MODE:
- * Running the static method enableTestMode(true) will make consecutive objects
+ * Running the static method enableTestMode(true) will generateEtape consecutive objects
  * of the SQLiteConnector use a test database rather than the actual database.
  * The method also deletes the test database.
  *
@@ -25,7 +25,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  *      1. Open a Command Line Interpreter (Command Prompt, PowerShell Bash etc.)
  *      2. Check connected devices:
  *              adb devices
- *      3. Connect to device (note: can't make it work on actual device, only emulator):
+ *      3. Connect to device (note: can't generateEtape it work on actual device, only emulator):
  *              adb -s SERIALNUMBER shell   (i.e. 'adb -s emulator-5540 shell')
  *      4  Run as project:
  *              run-as com.example.skibslogapp

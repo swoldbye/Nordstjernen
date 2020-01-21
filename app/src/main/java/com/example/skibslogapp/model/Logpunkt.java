@@ -34,6 +34,7 @@ public class Logpunkt {
     private String sejlstilling = null;
     private int roere = -1;
 
+    private int hals = -1;
 
 
     public Logpunkt(Date date, String vindretning, int kurs, boolean mandOverBord, String sejlfoering, String sejlstilling, String stroem, String note){
@@ -47,7 +48,7 @@ public class Logpunkt {
     }
 
 
-    private int hals = -1;
+
 
     public Logpunkt(){
         this(null);
@@ -191,31 +192,10 @@ public class Logpunkt {
             this.position = position;
     }
 
-    public String getTimeString(){
-        if( date == null ) return "";
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return String.format(Locale.US, "%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
-    }
 
     public String getKursString(){
         if( kurs == -1 ) return "";
         return Integer.toString(kurs);
-    }
-
-    public String getSejloeringString(){
-        if( sejlfoering == null ) return "";
-        return sejlfoering;
-    }
-
-    public String getSejlstillingString(){
-        if( sejlstilling == null ) return "";
-        return sejlstilling;
-    }
-
-    public String getNoteString(){
-        if( note == null ) return "";
-        return note;
     }
 
     public int getVindhastighed() {
