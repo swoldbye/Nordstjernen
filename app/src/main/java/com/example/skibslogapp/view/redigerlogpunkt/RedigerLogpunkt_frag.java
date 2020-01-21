@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.view.opretLog.LogCourse_frag;
 import com.example.skibslogapp.view.opretLog.LogNote_frag;
@@ -27,6 +28,8 @@ import com.example.skibslogapp.view.opretLog.LogSails_frag;
 import com.example.skibslogapp.view.opretLog.LogViewModel;
 import com.example.skibslogapp.view.opretLog.LogWaterCurrent_frag;
 import com.example.skibslogapp.view.opretLog.LogWind_frag;
+
+import java.util.Calendar;
 
 public class RedigerLogpunkt_frag extends Fragment {
     private TextView    time,
@@ -97,7 +100,16 @@ public class RedigerLogpunkt_frag extends Fragment {
     }
 
     private void updateInformation() {
-        /*time.setText(logpunkt.getTimeString() != null && !logpunkt.getTimeString().equals("") ? logpunkt.getTimeString() : "-");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(logpunkt.getDate());
+        String dateString = String.format("%d/%d-%d %02d:%02d",
+                cal.get(Calendar.DAY_OF_MONTH),
+                cal.get(Calendar.MONTH)+1,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.HOUR_OF_DAY),
+                cal.get(Calendar.MINUTE)
+        );
+        time.setText(dateString);
         latitude.setText(logpunkt.getPosition() != null && !logpunkt.getPosition().getBreddegradString().equals("") ?
                 logpunkt.getPosition().getBreddegradString() : "-");
         longitude.setText(logpunkt.getPosition() != null && !logpunkt.getPosition().getLaengdegradString().equals("") ?
@@ -107,13 +119,12 @@ public class RedigerLogpunkt_frag extends Fragment {
         currentDirection.setText(logpunkt.getStroemRetning() != null && !logpunkt.getStroemRetning().equals("") ? logpunkt.getStroemRetning() : "-");
         currentSpeed.setText(logpunkt.getStroemhastighed() >= 0 ? String.valueOf(logpunkt.getStroemhastighed()) : "-");
         String sailsOrRowersString = logpunkt.getSejlstilling() != null && !logpunkt.getSejlstilling().equals("") ?
-                logpunkt.getSejlstillingString() : "";
+                logpunkt.getSejlstilling() : "";
         sailsOrRowersString = sailsOrRowersString.concat(logpunkt.getRoere() >= 0 ? Integer.toString(logpunkt.getRoere()) : "");
         sailsOrRowers.setText(sailsOrRowersString.length() != 0 ? sailsOrRowersString : "-");
-        sails.setText(logpunkt.getSejloeringString() != null && !logpunkt.getSejlfoering().equals("") ? logpunkt.getSejloeringString() : "-");
+        sails.setText(logpunkt.getSejlfoering() != null && !logpunkt.getSejlfoering().equals("") ? logpunkt.getSejlfoering() : "-");
         course.setText(logpunkt.getKursString() != null && !logpunkt.getKursString().equals("") ? logpunkt.getKursString() : "-");
         note.setText(logpunkt.getNote() != null && !logpunkt.getNote().equals("") ? logpunkt.getNote() : "-");
-*/
         updatetopthing();
     }
 
@@ -137,6 +148,8 @@ public class RedigerLogpunkt_frag extends Fragment {
     private void save() {
         logpunkt.setInformation(logVM);
         updateInformation();
+        LogpunktDAO logDAO = new LogpunktDAO(getContext());
+        logDAO.updateLogpunkt(logpunkt);
     }
 
     /**

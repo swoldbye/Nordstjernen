@@ -63,6 +63,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
+        logVM.resetValues();
         super.onCreate(savedInstanceState);
         //Activate logging of coordinates. This is placed in onCreate to ensure that the logging will start at
         //The first time the logging is activated.
@@ -93,11 +95,8 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_opret_log, container, false);
 
         closeButton = view.findViewById(R.id.closeButton);
-/*
-        opretPostWrapper = view.findViewById(R.id.opret_post_wrapper);
-*/
-        logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
-        logVM.resetValues();
+
+//        opretPostWrapper = view.findViewById(R.id.opret_post_wrapper);
 
         //Opret Post
         opretButton = (Button) view.findViewById(R.id.opretButton);

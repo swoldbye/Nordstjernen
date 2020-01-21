@@ -122,5 +122,7 @@ public class LogViewModel extends ViewModel {
         this.sails = logpunkt.getSejlfoering();
         this.course = logpunkt.getKurs();
         this.noteTxt = logpunkt.getNote();
+
+
     }
 }
