@@ -64,7 +64,7 @@ public class Logpunkt {
             this.date = new Date(time);
         else
             this.date = date;
-        this. creationDate = new Date(time);
+        this.creationDate = new Date(time);
     }
 
 
