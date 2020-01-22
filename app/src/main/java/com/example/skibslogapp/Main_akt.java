@@ -1,20 +1,12 @@
 package com.example.skibslogapp;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -23,17 +15,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.example.skibslogapp.datalayer.local.EtapeDAO;
-import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
-import com.example.skibslogapp.model.Logpunkt;
-import com.example.skibslogapp.model.Position.Position;
-import com.example.skibslogapp.model.Togt;
-import com.example.skibslogapp.view.LogOversigt_frag;
-import com.example.skibslogapp.view.OpretLog_frag;
-import com.example.skibslogapp.view.oprettogt.OpretTogt_frag;
-import com.example.skibslogapp.view.redigerlogpunkt.RedigerLogpunkt_frag;
 import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
-import com.google.android.material.navigation.NavigationView;
 
 /**
  *  This class contains the main activity and its functionalities:

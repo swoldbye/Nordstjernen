@@ -51,6 +51,26 @@ public class TogtDAO {
         database.close();
     }
 
+
+    /**
+     * Retrieves a Togt based on the ID. Not meant to be used
+     * outside of the class.
+     */
+    public Togt getTogt(long id) {
+        SQLiteDatabase database = connector.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM togter WHERE id=" + id + ";", null);
+
+        Togt togt = null;
+        while (cursor.moveToNext()) {
+            togt = new Togt(cursor.getString(1));
+            togt.setId(cursor.getInt(0));
+        }
+
+        cursor.close();
+        database.close();
+        return togt;
+    }
+
     /**
      * Loads all Togt objects from the the local database.
      *
@@ -108,49 +128,6 @@ public class TogtDAO {
         database.close();
     }
 
-    /**
-     * Retrieves a Togt based on the ID. Not meant to be used
-     * outside of the class.
-     */
-    public Togt getTogt(long id) {
-        SQLiteDatabase database = connector.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT * FROM togter WHERE id=" + id + ";", null);
-
-        Togt togt = null;
-        while (cursor.moveToNext()) {
-            togt = new Togt(cursor.getString(1));
-            togt.setId(cursor.getInt(0));
-        }
-
-        cursor.close();
-        database.close();
-        return togt;
-    }
-
-    protected void togtUpdated(long id) {
-        Togt togt = getTogt(id);
-
-        if (togt == null)
-            throw new DAOException("No Togt with ID " + id + " exists in the database");
-
-        for (TogtObserver observer : togtObservers) {
-            observer.onUpdate(togt);
-        }
-    }
-
-    /**
-     * Add an observer to be notified whenever a togt has been updated.
-     *
-     * @param observer The observer to be notified
-     */
-    public static void addTogtObserver(TogtObserver observer) {
-        togtObservers.add(observer);
-    }
-
-    public static void removeTogtObserver(TogtObserver observer) {
-        togtObservers.remove(observer);
-    }
-    // TODO: TOGT OBSERVER FUNCTIONALITY IS NOT UP TO DATE - either remove or update
 
     /**
      * Checks if the given Togt exists in the database
@@ -170,11 +147,43 @@ public class TogtDAO {
         return rowCount > 0;
     }
 
+
+    // TOGT OBSERVER ----------------------------------------------------------------------------------------------
+
     /**
-     *
+     * Add an observer to be notified whenever a togt has been updated. */
+    public static void addTogtObserver(TogtObserver observer) {
+        togtObservers.add(observer);
+    }
+
+    /**
+     * Remove the observer from being notified when a Togt is updated */
+    public static void removeTogtObserver(TogtObserver observer) {
+        togtObservers.remove(observer);
+    }
+
+    /**
+     * TogtObserver may be notified by the TogtDAO whenever a togt is updated.
+     * The Togt parameter is the togt which was updated
      */
     public interface TogtObserver {
         void onUpdate(Togt togt);
     }
+
+    /**
+     * Inform that a Togt has been updated, by notifying all TogtObservers
+     * @param id The ID of the Togt
+     */
+    void togtUpdated(long id) {
+        Togt togt = getTogt(id);
+
+        if (togt == null)
+            throw new DAOException("No Togt with ID " + id + " exists in the database");
+
+        for (TogtObserver observer : togtObservers) {
+            observer.onUpdate(togt);
+        }
+    }
+
 
 }

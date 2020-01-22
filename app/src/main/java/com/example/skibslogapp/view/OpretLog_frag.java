@@ -25,7 +25,7 @@ import android.widget.Toast;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.Etape;
-import com.example.skibslogapp.model.Position.PositionController;
+import com.example.skibslogapp.model.positionregistration.PositionController;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.postOversigt.TabLayout_frag;

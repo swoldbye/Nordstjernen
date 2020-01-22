@@ -16,6 +16,7 @@ public class DateToString {
      * @return String representation of date
      */
     public static String format(String pattern, Date date){
+        if( date == null ) return "";
         return new SimpleDateFormat(pattern, Locale.UK).format(date);
     }
 

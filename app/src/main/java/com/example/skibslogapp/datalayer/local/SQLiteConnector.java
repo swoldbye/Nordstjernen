@@ -62,12 +62,8 @@ public class SQLiteConnector extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     *
-     *
-     * @param context
-     */
-    public SQLiteConnector(Context context) {
+
+    SQLiteConnector(Context context) {
         super(context, usedName, null, VERSION);
     }
 
@@ -141,15 +137,9 @@ public class SQLiteConnector extends SQLiteOpenHelper {
     /**
      * This method runs if the version number of the current database
      * on the device doesn't match the static field version number 'VERSION'.
-     * Esentially, it recreates the database (dropping ALL entries).
-     *
-     * @param db
-     * @param newVersion
-     * @param oldVersion
-     */
+     * Esentially, it recreates the database (dropping ALL entries). */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //Todo: set this upgrade function up properly, at the momment it does not have much use.
         db.execSQL("DROP TABLE togter");
         db.execSQL("DROP TABLE etaper");
         db.execSQL("DROP TABLE logpunkter");

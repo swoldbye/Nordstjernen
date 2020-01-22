@@ -1,4 +1,4 @@
-package com.example.skibslogapp.model.Position;
+package com.example.skibslogapp.model;
 
 import androidx.annotation.NonNull;
 

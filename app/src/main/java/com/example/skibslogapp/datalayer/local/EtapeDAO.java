@@ -251,16 +251,17 @@ public class EtapeDAO {
         return rowCount > 0;
     }
 
+
     // Besaetnings conversion -------------------------------------------------
     // Methods are public for testing
 
-    public static final String BESAETNING_SEPERATOR = ";";
+    private static final String BESAETNING_SEPERATOR = ";";
 
     /**
-     *
-     * @param besaetning
-     * @return
-     */
+     * Takes a list of Strings (names) and concat them into
+     * a single string where each element is seperated with
+     * BESAETNING_SEPERATOR.
+     * */
     public String besaetningToString(List<String> besaetning) {
         StringBuilder besaetningString = new StringBuilder();
         boolean isFirst = true;
@@ -276,10 +277,9 @@ public class EtapeDAO {
     }
 
     /**
-     *
-     * @param besaetningString
-     * @return
-     */
+     * Takes a string of elements seperated by BESAETNING_SEPERATOR,
+     * and turn it into a list of seperate strings
+     * */
     public List<String> besaetningToList(String besaetningString) {
         String[] besaetningUnsorted = besaetningString.split(BESAETNING_SEPERATOR);
         List<String> besaetningSorted = new ArrayList<>();

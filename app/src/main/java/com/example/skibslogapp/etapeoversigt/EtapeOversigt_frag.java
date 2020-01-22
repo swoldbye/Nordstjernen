@@ -46,7 +46,6 @@ public class EtapeOversigt_frag extends Fragment {
     private EtapeListAdapter listAdapter;
     private RecyclerView recyclerView;
     private ImageButton togtInstilling;
-    private EtapeDAO etapeDAO;
 
     public EtapeOversigt_frag(Togt togt) {
         this.togt = togt;
@@ -55,103 +54,19 @@ public class EtapeOversigt_frag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_etape_oversigt, container, false);
         // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_etape_oversigt, container, false);
+
+        togtInstilling = view.findViewById(R.id.popUpMenuEtapeOversigt);
+        togtInstilling.setOnClickListener(v -> indstillinger() );
 
         TextView togt_text = view.findViewById(R.id.etapeTogtText);
         TextView skib_text = view.findViewById(R.id.skibsNavnText);
-        togtInstilling = view.findViewById(R.id.popUpMenuEtapeOversigt);
-
-        /**
-         * When you click on this "burger" icon you get a Popup menu where you get the choice to either:
-         *
-         * -  Export data from a "Togt"
-         * -  Delete a "Togt"
-         *
-         * If you press delete a Alert dialog box pops up to make sure that you are certain that you
-         * want to delete the "Togt".
-         *
-         * If you press Export Togt you will get the option to export the Togt data to an email or drive
-         */
-        togtInstilling.setOnClickListener(v -> {
-            PopupMenu popupMenu = new PopupMenu(getContext(), togtInstilling);
-            popupMenu.getMenuInflater().inflate(R.menu.popup_menu_etape_oversigt, popupMenu.getMenu());
-
-            popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-
-                    case R.id.exportTogt:
-                        exportTogt();
-                        return true;
-
-                    case R.id.deleteTogt:
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-                        //Custom title for the dialog box
-                        TextView dialogBoxHeadline = new TextView(getContext());
-                        dialogBoxHeadline.setText("Er du sikker på du vil slette togtet?");
-                        dialogBoxHeadline.setTextSize(20f);
-                        dialogBoxHeadline.setTypeface(null, Typeface.BOLD);
-                        dialogBoxHeadline.setPadding(60, 60, 60, 4);
-                        dialogBoxHeadline.setTextColor(getResources().getColor(R.color.colorPrimary));
-
-                        // Sets the custom title defined above
-                        builder.setCustomTitle(dialogBoxHeadline)
-                                .setCancelable(false)
-
-                                //If the the positive button as clicked the code below is run
-                                .setPositiveButton("Ja", (dialog, which) -> {
-
-                                    //Delete the "togt from the DB
-                                    TogtDAO togtDAO = new TogtDAO(GlobalContext.get());
-                                    togtDAO.deleteTogt(togt);
-
-                                    //Change to "Togt oversigten" without saving the fragment to the backstack
-                                    TogtOversigt_frag togtOversigt_frag = new TogtOversigt_frag();
-                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    fragmentTransaction.replace(R.id.fragContainer, togtOversigt_frag);
-                                    fragmentTransaction.commit();
-
-                                    Toast.makeText(getActivity(), "Togt slettet", Toast.LENGTH_SHORT).show();
-                                })
-
-                                //If the negative button is pressed the dialog box is closed and the action is shut down
-                                .setNegativeButton("Nej", (dialog, which) -> dialog.cancel());
-
-                        final AlertDialog alertDialog = builder.create();
-                        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-
-                            /**
-                             * This method sets the negative and positive button attributes
-                             */
-                            @Override
-                            public void onShow(DialogInterface dialog) {
-                                Button btnPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                                Button btnNegative = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-                                btnPositive.setTextColor(getResources().getColor(R.color.colorPrimary));
-                                btnPositive.setTextSize(20f);
-                                btnNegative.setTextColor(getResources().getColor(R.color.colorPrimary));
-                                btnNegative.setTextSize(20f);
-                            }
-                        });
-
-                        alertDialog.show();
-                        return true;
-
-                    default:
-                        return false;
-
-                }
-            });
-            popupMenu.show();
-        });
 
         togt_text.setText(togt.getName());
         skib_text.setText(togt.getSkib());
 
-        etapeDAO = new EtapeDAO(getContext());
+        EtapeDAO etapeDAO = new EtapeDAO(getContext());
         List<Etape> etaper = etapeDAO.getEtaper(togt);
 
         // If the Togt is new, meaning no Etaper is created, then the list and the create Etape button isent
@@ -250,6 +165,42 @@ public class EtapeOversigt_frag extends Fragment {
         dialog.show(getFragmentManager(), "Dialog box");
     }
 
+
+    /**
+     * This function will scroll the Etape list to the lowest Etape in the list, which is the latest created
+     * if the list is big enough so it can be scrolled
+     */
+    private void scrollToButtom() {
+        if (listAdapter.getItemCount() > 0) {
+            recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
+        }
+    }
+
+
+    /**
+     * Creates a pop-up dialog with two options: export and delete Togt */
+    private void indstillinger(){
+        PopupMenu popupMenu = new PopupMenu( getActivity(), togtInstilling);
+        popupMenu.getMenuInflater().inflate(R.menu.popup_menu_etape_oversigt, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.exportTogt:
+                    exportTogt();
+                    return true;
+
+                case R.id.deleteTogt:
+                    deleteTogt();
+                    return true;
+
+                default:
+                    return false;
+            }
+        });
+        popupMenu.show();
+    }
+
+
     /**
      * Create CSV file and run a "share" function, in order to, for example,
      * upload to Google Drive or send via GMail.
@@ -282,13 +233,52 @@ public class EtapeOversigt_frag extends Fragment {
         }
     }
 
+
     /**
-     * This function will scroll the Etape list to the lowest Etape in the list, which is the latest created
-     * if the list is big enough so it can be scrolled
-     */
-    private void scrollToButtom() {
-        if (listAdapter.getItemCount() > 0) {
-            recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
-        }
+     * Creates a confirmation pop-up prompting the user whether or not he/she wants
+     * to delete the togt. Also deletes the togt if its confirmed */
+    private void deleteTogt(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        // Design Dialog
+        TextView dialogBoxHeadline = new TextView(getContext());
+        dialogBoxHeadline.setText("Er du sikker på du vil slette togtet?");
+        dialogBoxHeadline.setTextSize(20f);
+        dialogBoxHeadline.setTypeface(null, Typeface.BOLD);
+        dialogBoxHeadline.setPadding(60, 60, 60, 4);
+        dialogBoxHeadline.setTextColor(getResources().getColor(R.color.colorPrimary));
+
+        // Seutp Builder
+        builder.setCustomTitle(dialogBoxHeadline)
+                .setCancelable(false);
+
+        // Positive button
+        builder.setPositiveButton("Ja", (dialog, which) -> {
+
+                //Delete the "togt from the DB
+                TogtDAO togtDAO = new TogtDAO(GlobalContext.get());
+                togtDAO.deleteTogt(togt);
+
+                //Change to "Togt oversigten" without saving the fragment to the backstack
+                getActivity().getSupportFragmentManager().popBackStack();
+                Toast.makeText(getActivity(), "Togt slettet", Toast.LENGTH_SHORT).show();
+        });
+
+        // Negative Button - If the negative button is pressed the dialog box is closed and the action is shut down
+        builder.setNegativeButton("Nej", (dialog, which) -> dialog.cancel());
+
+        // Create Dialog
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.setOnShowListener( (dialog) -> {
+            // Set button design
+            Button btnPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            Button btnNegative = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+            btnPositive.setTextColor(getResources().getColor(R.color.colorPrimary));
+            btnPositive.setTextSize(20f);
+            btnNegative.setTextColor(getResources().getColor(R.color.colorPrimary));
+            btnNegative.setTextSize(20f);
+        });
+
+        alertDialog.show();
     }
 }

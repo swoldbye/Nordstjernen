@@ -1,9 +1,9 @@
 package com.example.skibslogapp.model;
 
-import com.example.skibslogapp.model.Position.Position;
+import androidx.annotation.NonNull;
+
 import com.example.skibslogapp.view.opretLog.LogViewModel;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
@@ -188,7 +188,6 @@ public class Logpunkt {
         this.position = position;
     }
 
-
     public String getKursString() {
         if (kurs == -1) return "";
         return Integer.toString(kurs);
@@ -210,13 +209,10 @@ public class Logpunkt {
         this.stroemhastighed = stroemhastighed;
     }
 
-    public boolean isMandOverBord() {
-        return mandOverBord;
-    }
-
     public Position getPosition() {
         return position;
     }
+
 
     /**
      * Compares the Logpunkt with another Logpunkt, comparing
@@ -244,36 +240,18 @@ public class Logpunkt {
                         roere == otherPunkt.roere;
     }
 
+
+    @NonNull
     @Override
     public String toString() {
-
-        // Converting date to string
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        String dateString = String.format("%d/%d-%d %02d:%02d",
-                cal.get(Calendar.DAY_OF_MONTH),
-                cal.get(Calendar.MONTH) + 1,
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.HOUR_OF_DAY),
-                cal.get(Calendar.MINUTE)
-        );
-
-        cal.setTime(creationDate);
-        String creationDateString = String.format("%d/%d-%d %02d:%02d",
-                cal.get(Calendar.DAY_OF_MONTH),
-                cal.get(Calendar.MONTH) + 1,
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.HOUR_OF_DAY),
-                cal.get(Calendar.MINUTE)
-        );
 
         return String.format(
                 Locale.US,
                 "Logpunkt{ id: %d, etapeId: %d, date: %s, creationDate: %s, pos.: %s, mob: %s, kurs: %s, vind: %s, vindhast.: %d, strøm: %s, strømhast.: %d, sejls.: %s, sejlf. %s, roere: %s, note: %s }",
                 id,
                 etapeId,
-                dateString,
-                creationDateString,
+                DateToString.full(date),
+                DateToString.full(creationDate),
                 position != null ? position : "-",
                 mandOverBord ? "true" : "false",
                 kurs >= 0 ? kurs : "-",
