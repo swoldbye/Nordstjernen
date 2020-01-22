@@ -27,7 +27,6 @@ import com.google.android.material.tabs.TabLayout;
 public class PostActivity extends Fragment {
 
     private Togt togt;
-    Etape etape;
     private int startPos;
 
     private TabLayout_frag tabLayout_frag;
@@ -35,7 +34,6 @@ public class PostActivity extends Fragment {
     public PostActivity(Etape etape, int startPos){
         TogtDAO togtDAO = new TogtDAO(GlobalContext.get());
         this.togt = togtDAO.getTogt(etape.getTogtId());
-        this.etape = etape;
         this.startPos = startPos;
     }
 
@@ -43,7 +41,6 @@ public class PostActivity extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_post_container, container, false);
-
         tabLayout_frag = new TabLayout_frag(togt, startPos);
 
         Button opretButton = view.findViewById(R.id.logpunktoversigt_opret);
@@ -52,7 +49,6 @@ public class PostActivity extends Fragment {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .add(R.id.tabOversigtContainerFrame, tabLayout_frag)
                 .commit();
-
         return view;
     }
 

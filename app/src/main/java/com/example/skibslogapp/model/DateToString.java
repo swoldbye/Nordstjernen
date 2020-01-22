@@ -23,7 +23,7 @@ public class DateToString {
     /**
      * Convert Date to String in format hours:minutes */
     public static String time(Date date){
-        return format("kk:mm", date);
+        return format("HH:mm", date);
     }
 
     /**

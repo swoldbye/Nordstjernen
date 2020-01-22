@@ -1,4 +1,4 @@
-package com.example.skibslogapp;
+package com.example.skibslogapp.postOversigt;
 
 import android.content.Context;
 
@@ -13,19 +13,12 @@ import java.util.List;
 
 public class DbTranslator {
 
-    //ArrayList<List<Logpunkt>> logs2D = new ArrayList<>();
-    EtapeDAO etapeDAO;
-    LogpunktDAO logpunktDAO;
+    private EtapeDAO etapeDAO;
+    private LogpunktDAO logpunktDAO;
 
     public DbTranslator(Context context) {
         etapeDAO = new EtapeDAO(context);
         logpunktDAO = new LogpunktDAO(context);
-    }
-
-    private List<Etape> getEtapper(Togt togt) {
-        List<Etape> etapper;
-        etapper = etapeDAO.getEtaper(togt);
-        return etapper;
     }
 
     private List<Logpunkt> getLogpunkter(Etape etape) {
@@ -37,7 +30,6 @@ public class DbTranslator {
     public List<List<Logpunkt>> getList(Togt togt) {
         ArrayList<List<Logpunkt>> logs2D = new ArrayList<>();
         List<Etape> etapper = etapeDAO.getEtaper(togt);
-        System.out.println("Size of translateList = " + etapper.size());
         for (Etape e : etapper) {
             List<Logpunkt> logs = getLogpunkter(e);
             logs2D.add(logs);
