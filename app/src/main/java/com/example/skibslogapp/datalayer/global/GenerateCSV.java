@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Claes, Malte
  * Generate a CSV 'string' from a given Togt. Each row is a Logpunkt and each collumn
  * one of the data fields (date, position, note etc.).
  */

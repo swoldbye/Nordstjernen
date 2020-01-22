@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * @author Claes
  * This class creates a list of Logpunkt converted to LogpunktString (string version)
  * from a given Etape
  */
