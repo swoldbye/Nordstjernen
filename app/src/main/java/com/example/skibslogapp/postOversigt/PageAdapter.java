@@ -1,26 +1,15 @@
 package com.example.skibslogapp.postOversigt;
 
-import android.util.SparseArray;
-import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
-
-import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.model.Logpunkt;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 /**
  * TODO use FragmentStatePagerAdapter because we will be working with dynamic no. of tabs
