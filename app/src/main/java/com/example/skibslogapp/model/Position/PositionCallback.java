@@ -16,12 +16,11 @@ public class PositionCallback extends com.google.android.gms.location.LocationCa
     public void onLocationResult(LocationResult locationResult) {
         Location l = locationResult.getLastLocation();
         System.out.println("New location registered -----");
-        System.out.println("Altitude: " +l.getAltitude());
-        System.out.println("Latitude: " +l.getLatitude());
-        System.out.println("Longitude: " +l.getLongitude());
-        measuredKoordinat = new Position(l.getLatitude(),l.getLongitude());
+        System.out.println("Altitude: " + l.getAltitude());
+        System.out.println("Latitude: " + l.getLatitude());
+        System.out.println("Longitude: " + l.getLongitude());
+        measuredKoordinat = new Position(l.getLatitude(), l.getLongitude());
     }
-
 
     //Checking if the the GPS is alvalable
     @Override
@@ -29,8 +28,7 @@ public class PositionCallback extends com.google.android.gms.location.LocationCa
         super.onLocationAvailability(locationAvailability);
     }
 
-
-    public Position getKoordinates(){
+    public Position getKoordinates() {
         return measuredKoordinat;
     }
 }

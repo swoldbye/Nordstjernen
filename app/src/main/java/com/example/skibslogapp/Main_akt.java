@@ -39,21 +39,10 @@ import com.google.android.material.navigation.NavigationView;
  *  This class contains the main activity and its functionalities:
  *
  *  - Toolbar
- *  - Left menu
  *
  *  MainActivity has a fragment container beneath the toolbar that shifts between fragments.
  */
 public class Main_akt extends AppCompatActivity {
-
-    private FragmentManager fragmentManager;
-    private FragmentTransaction fragmentTransaction;
-    private DrawerLayout drawerLayout;
-    private OpretLog_frag opretLog_frag;
-    private TogtOversigt_frag togtOversigt_frag;
-    private LogOversigt_frag logOversigt_frag;
-    private OpretTogt_frag opretTogt_frag;
-    private EtapeOversigt_frag etapeOversigt_frag;
-    private Togt togt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +60,6 @@ public class Main_akt extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
-        configureNavigationDrawer();
 
         if (savedInstanceState == null) {
             Fragment fragment = new TogtOversigt_frag();
@@ -80,8 +68,6 @@ public class Main_akt extends AppCompatActivity {
 
         hideToolbar();
     }
-
-
 
     /**
      * If this method is set to a certain menu, then 3 points can be pressed in the upper right
@@ -95,91 +81,6 @@ public class Main_akt extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.empty, menu);
-        return true;
-    }
-
-    /**
-     * This function, gives functionalities to the left menu elements.
-     *
-     */
-
-    private void configureNavigationDrawer(){
-        NavigationView navigationView;
-        drawerLayout = findViewById(R.id.drawer);
-        navigationView = findViewById(R.id.leftMenu);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-                logOversigt_frag = new LogOversigt_frag();
-                togtOversigt_frag = new TogtOversigt_frag();
-                opretTogt_frag = new OpretTogt_frag();
-                opretLog_frag = new OpretLog_frag();
-
-                int itemid = menuItem.getItemId();
-
-                //Add functionalities to the menu items.
-
-                if (itemid == R.id.nav_opret_togt) {
-                    changeFragFromMenu(opretTogt_frag);
-
-                } else if (itemid == R.id.nav_togt_oversigt) {
-                    changeFragFromMenu(togtOversigt_frag);
-
-                } else if (itemid == R.id.nav_opret_etape) {
-                    //TODO Delete
-                    Logpunkt logpunkt = new Logpunkt();
-                    logpunkt.setVindretning("NNØ");
-                    logpunkt.setStroemRetning("NNØ");
-                    logpunkt.setStroemhastighed(5);
-                    logpunkt.setPosition( new Position(23.2305, -49.1293) );
-                    logpunkt.setSejlfoering("F-N3");
-                    logpunkt.setNote("Vi sejler op ad åen");
-                    logpunkt.setStroemhastighed(5);
-                    changeFragFromMenu(new RedigerLogpunkt_frag(logpunkt));
-
-                } else if (itemid == R.id.nav_etape_oversigt) {
-
-
-                }else if (itemid == R.id.nav_opret_log){
-                    changeFragFromMenu(opretLog_frag);
-
-                }else if (itemid == R.id.nav_log_oversigt){
-                   //changeFragFromMenu(logOversigt_frag);
-
-
-                /*}else if (itemid == R.id.nav_email){
-                    //todo: Make sure you can get back from this frag fragmentTransaction.addToBackStack(null);
-                    changeFragFromMenu(udata);
-                    //fragmentTransaction.addToBackStack("udata");
-*/
-                }else {
-                    //rework this________________________________
-                    Toast.makeText(Main_akt.this,"Du klikkede på noget ikke funktionelt. prøv igen",
-                            Toast.LENGTH_LONG).show();
-
-                }
-                return false;
-            }
-        });
-    }
-
-    /**
-     * This function give functionalities to the toolbar Views
-     *
-     * @param menuItem The different items in the toolbar.
-     * @return true if the function can be executed
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        int itemId = menuItem.getItemId();
-        switch (itemId) {
-
-            case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
-                return true;
-            // Indsæt flere entries, hvis der er...
-        }
         return true;
     }
 
@@ -205,21 +106,6 @@ public class Main_akt extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(event);
-    }
-
-    /**
-     * Helper function to change fragment from the left menu
-     *
-     * @param fragment The fragment you want to change to.
-     * @return true
-     */
-    public boolean changeFragFromMenu(Fragment fragment) {
-        FragmentManager fragmentManager = Main_akt.this.getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragContainer, fragment);
-        fragmentTransaction.commit();
-        drawerLayout.closeDrawers();
-        return true;
     }
 
     /**

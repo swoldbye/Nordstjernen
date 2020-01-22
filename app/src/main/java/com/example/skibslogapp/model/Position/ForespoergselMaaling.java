@@ -11,7 +11,7 @@ public class ForespoergselMaaling {
     private final static int INTERVAL_BETWEEN_MEASUREMENTS = 10000;
     private final static int UPDATE_NUM = 10000;
 
-    ForespoergselMaaling(){
+    ForespoergselMaaling() {
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         //Setting a expiration duration so that request wont be pending

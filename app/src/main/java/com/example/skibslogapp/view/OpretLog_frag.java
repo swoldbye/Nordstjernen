@@ -32,7 +32,6 @@ import com.example.skibslogapp.postOversigt.TabLayout_frag;
 import com.example.skibslogapp.view.opretLog.LogNote_frag;
 import com.example.skibslogapp.view.opretLog.LogViewModel;
 
-
 import java.util.Calendar;
 import java.util.Date;
 

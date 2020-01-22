@@ -29,7 +29,7 @@ public class LogCourse_frag extends Fragment {
         kursEditText = view.findViewById(R.id.kursEditText);
         kursEditText.setOnFocusChangeListener((v, hasFocus) -> controlCourseInput());
         kursEditText.setOnEditorActionListener((v, actionId, event) -> {
-            if(actionId == EditorInfo.IME_ACTION_DONE) {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
                 controlCourseInput();
             }
             return true;
@@ -53,7 +53,7 @@ public class LogCourse_frag extends Fragment {
                     kursEditText.setSelection(kursEditText.getText().length());
                 }
                 logVM.setCourse(kursEditText.getText().length() > 0 ?
-                        Integer.parseInt(kursEditText.getText().toString()): -1);
+                        Integer.parseInt(kursEditText.getText().toString()) : -1);
             }
         });
 
@@ -69,12 +69,11 @@ public class LogCourse_frag extends Fragment {
 
     private void controlCourseInput() {
         String s = kursEditText.getText().toString();
-        if(s.equals("") || Integer.parseInt(s) > 360) {
+        if (s.equals("") || Integer.parseInt(s) > 360) {
             kursEditText.setText("");
-        }
-        else  {
-            if(s.length() == 1) s = "00".concat(s);
-            else if(s.length() == 2) s = "0".concat(s);
+        } else {
+            if (s.length() == 1) s = "00".concat(s);
+            else if (s.length() == 2) s = "0".concat(s);
             kursEditText.setText(s);
         }
     }

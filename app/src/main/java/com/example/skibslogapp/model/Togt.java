@@ -1,9 +1,10 @@
 package com.example.skibslogapp.model;
 
 import android.text.TextUtils;
-import androidx.annotation.NonNull;
-import java.util.Locale;
 
+import androidx.annotation.NonNull;
+
+import java.util.Locale;
 
 public class Togt {
 
@@ -58,10 +59,10 @@ public class Togt {
     }
 
     @Override
-    public boolean equals(Object obj){
-        if( obj.getClass() == this.getClass() ){
+    public boolean equals(Object obj) {
+        if (obj.getClass() == this.getClass()) {
             Togt togt = (Togt) obj;
-            return  id == togt.id &&
+            return id == togt.id &&
                     TextUtils.equals(name, togt.name) &&
                     TextUtils.equals(skib, togt.skib) &&
                     TextUtils.equals(skipper, togt.skipper) &&
@@ -70,10 +71,9 @@ public class Togt {
         return false;
     }
 
-
     @Override
     @NonNull
-    public String toString(){
+    public String toString() {
         return String.format(Locale.US,
                 "Togt{ ID: %d, Navn: %s, Skib: %s, Skipper: %s, Startd.: %s }",
                 id, name, skib != null ? skib : "-", skipper != null ? skipper : "-", startDestination != null ? startDestination : "-"

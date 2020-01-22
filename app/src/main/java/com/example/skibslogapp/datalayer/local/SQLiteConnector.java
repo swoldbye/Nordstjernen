@@ -62,14 +62,21 @@ public class SQLiteConnector extends SQLiteOpenHelper {
         }
     }
 
-
+    /**
+     *
+     *
+     * @param context
+     */
     public SQLiteConnector(Context context) {
         super(context, usedName, null, VERSION);
-
     }
 
-    /** This method is called when the database is created (i.e. if it didn't exist when
-        creating the SQLiteConnector), and it defines the tables of the database */
+    /**
+     * This method is called when the database is created (i.e. if it didn't exist when
+     * creating the SQLiteConnector), and it defines the tables of the database
+     *
+     * @param db
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -135,6 +142,10 @@ public class SQLiteConnector extends SQLiteOpenHelper {
      * This method runs if the version number of the current database
      * on the device doesn't match the static field version number 'VERSION'.
      * Esentially, it recreates the database (dropping ALL entries).
+     *
+     * @param db
+     * @param newVersion
+     * @param oldVersion
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

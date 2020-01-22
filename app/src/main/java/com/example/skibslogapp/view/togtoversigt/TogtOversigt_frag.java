@@ -60,11 +60,11 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener,
 
         TogtDAO.addTogtObserver(this);
 
-        if (togtList.size() == 0){
+        if (togtList.size() == 0) {
 
             view.findViewById(R.id.togtRecycView).setVisibility(View.GONE);
             view.findViewById(R.id.togtOversigtUdenTogter).setVisibility(View.VISIBLE);
-        }else{
+        } else {
             view.findViewById(R.id.togtOversigtUdenTogter).setVisibility(View.GONE);
             view.findViewById(R.id.togtRecycView).setVisibility(View.VISIBLE);
         }
@@ -72,19 +72,19 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener,
         return view;
     }
 
-
     /**
      * This function changes the fragment to the "OpretTogt" fragment
+     *
      * @param v The floating button View
      */
     @Override
     public void onClick(View v) {
         getActivity().getSupportFragmentManager()
-            .beginTransaction()
-            .setCustomAnimations(R.anim.slide_upslow2, R.anim.slide_upslow, R.anim.slide_downslow2, R.anim.slide_downslow)
-            .add(R.id.fragContainer, new OpretTogt_frag())
-            .addToBackStack(null)
-            .commit();
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_upslow2, R.anim.slide_upslow, R.anim.slide_downslow2, R.anim.slide_downslow)
+                .add(R.id.fragContainer, new OpretTogt_frag())
+                .addToBackStack(null)
+                .commit();
     }
 
 
@@ -93,17 +93,15 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener,
         listAdapter.updateTogter();
         recyclerView.smoothScrollToPosition(listAdapter.getItemCount());
 
-        if( getView() != null ){
+        if (getView() != null) {
             getView().findViewById(R.id.togtRecycView).setVisibility(View.VISIBLE);
             getView().findViewById(R.id.togtOversigtUdenTogter).setVisibility(View.GONE);
         }
     }
 
 
-
-
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
         System.out.println("Destroyed TogtOversigt");
         TogtDAO.removeTogtObserver(this);

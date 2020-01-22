@@ -20,7 +20,7 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.ListeelemViewh
     private Context context;
 
 
-   public CrewAdapter(List<String> dataSet, Context context){
+    public CrewAdapter(List<String> dataSet, Context context) {
         this.dataSet = dataSet;
         this.context = context;
     }
@@ -64,12 +64,11 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.ListeelemViewh
         public void onClick(View v) {
             final int position = getAdapterPosition();
 
-            if(v == removeButton) {
+            if (v == removeButton) {
                 CrewAdapter.this.notifyItemRemoved(position);
                 dataSet.remove(position);
 
             }
         }
     }
-
 }

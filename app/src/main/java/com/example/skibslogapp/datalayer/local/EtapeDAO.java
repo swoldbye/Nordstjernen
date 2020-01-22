@@ -71,7 +71,6 @@ public class EtapeDAO {
         togtDAO.togtUpdated(etape.getTogtId());
     }
 
-
     /**
      * Loads all Etape objects from the database for the given Togt.
      *
@@ -122,7 +121,6 @@ public class EtapeDAO {
         return etape;
     }
 
-
     /**
      * Build an Etape object from a cursor, which contains points to an Etape
      * row from the database.
@@ -165,7 +163,6 @@ public class EtapeDAO {
             // Converting integer value to boolean value
             etape.setStatus(cursor.getInt(column));
         }
-
         etape.setBesaetning(besaetningToList(cursor.getString(cursor.getColumnIndex("besaetning"))));
 
         return etape;
@@ -236,7 +233,6 @@ public class EtapeDAO {
         new TogtDAO(context).togtUpdated(etape.getTogtId());
     }
 
-
     /**
      * Checks if the given Etape exists in the database
      * based on the etape ID.
@@ -255,25 +251,35 @@ public class EtapeDAO {
         return rowCount > 0;
     }
 
-
     // Besaetnings conversion -------------------------------------------------
     // Methods are public for testing
 
     public static final String BESAETNING_SEPERATOR = ";";
 
+    /**
+     *
+     * @param besaetning
+     * @return
+     */
     public String besaetningToString(List<String> besaetning) {
         StringBuilder besaetningString = new StringBuilder();
         boolean isFirst = true;
         for (String navn : besaetning) {
-            if (isFirst)
+            if (isFirst){
                 isFirst = false;
-            else
+            } else{
                 besaetningString.append(BESAETNING_SEPERATOR);
+            }
             besaetningString.append(navn);
         }
         return besaetningString.toString();
     }
 
+    /**
+     *
+     * @param besaetningString
+     * @return
+     */
     public List<String> besaetningToList(String besaetningString) {
         String[] besaetningUnsorted = besaetningString.split(BESAETNING_SEPERATOR);
         List<String> besaetningSorted = new ArrayList<>();
@@ -285,6 +291,4 @@ public class EtapeDAO {
         }
         return besaetningSorted;
     }
-
-
 }

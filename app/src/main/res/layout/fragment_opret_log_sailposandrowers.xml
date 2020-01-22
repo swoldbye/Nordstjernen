@@ -42,6 +42,8 @@
                 style="@style/DefaultButton"
                 android:text="ha" />
 
+            <Space style="@style/EvenSpace" />
+
             <com.example.skibslogapp.view.utility.KingButton
                 android:id="@+id/fo"
                 style="@style/DefaultButton"

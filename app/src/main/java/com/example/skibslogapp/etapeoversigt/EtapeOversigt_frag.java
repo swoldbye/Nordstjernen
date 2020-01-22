@@ -1,6 +1,5 @@
 package com.example.skibslogapp.etapeoversigt;
 
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -41,18 +40,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class EtapeOversigt_frag extends Fragment {
 
-    private TextView togt_text, skib_text;
     private Togt togt;
     private EtapeListAdapter listAdapter;
     private RecyclerView recyclerView;
     private ImageButton togtInstilling;
     private EtapeDAO etapeDAO;
-
 
     public EtapeOversigt_frag(Togt togt) {
         this.togt = togt;
@@ -64,10 +58,9 @@ public class EtapeOversigt_frag extends Fragment {
         View view = inflater.inflate(R.layout.fragment_etape_oversigt, container, false);
         // Inflate the layout for this fragment
 
-        togt_text = view.findViewById(R.id.etapeTogtText);
-        skib_text = view.findViewById(R.id.skibsNavnText);
+        TextView togt_text = view.findViewById(R.id.etapeTogtText);
+        TextView skib_text = view.findViewById(R.id.skibsNavnText);
         togtInstilling = view.findViewById(R.id.popUpMenuEtapeOversigt);
-
 
         /**
          * When you click on this "burger" icon you get a Popup menu where you get the choice to either:
@@ -75,15 +68,17 @@ public class EtapeOversigt_frag extends Fragment {
          * -  Export data from a "Togt"
          * -  Delete a "Togt"
          *
-         * If you press delete a Alert dialog box pops up to generateEtape sure that you are certain that you
-         * want to delet the "Togt".
+         * If you press delete a Alert dialog box pops up to make sure that you are certain that you
+         * want to delete the "Togt".
+         *
+         * If you press Export Togt you will get the option to export the Togt data to an email or drive
          */
         togtInstilling.setOnClickListener(v -> {
-            PopupMenu popupMenu = new PopupMenu(getContext(),togtInstilling);
-            popupMenu.getMenuInflater().inflate(R.menu.popup_menu_etape_oversigt,popupMenu.getMenu());
+            PopupMenu popupMenu = new PopupMenu(getContext(), togtInstilling);
+            popupMenu.getMenuInflater().inflate(R.menu.popup_menu_etape_oversigt, popupMenu.getMenu());
 
             popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
 
                     case R.id.exportTogt:
                         exportTogt();
@@ -98,11 +93,14 @@ public class EtapeOversigt_frag extends Fragment {
                         dialogBoxHeadline.setText("Er du sikker på du vil slette togtet?");
                         dialogBoxHeadline.setTextSize(20f);
                         dialogBoxHeadline.setTypeface(null, Typeface.BOLD);
-                        dialogBoxHeadline.setPadding(60,60,60,4);
+                        dialogBoxHeadline.setPadding(60, 60, 60, 4);
                         dialogBoxHeadline.setTextColor(getResources().getColor(R.color.colorPrimary));
 
+                        // Sets the custom title defined above
                         builder.setCustomTitle(dialogBoxHeadline)
                                 .setCancelable(false)
+
+                                //If the the positive button as clicked the code below is run
                                 .setPositiveButton("Ja", (dialog, which) -> {
 
                                     //Delete the "togt from the DB
@@ -113,11 +111,13 @@ public class EtapeOversigt_frag extends Fragment {
                                     TogtOversigt_frag togtOversigt_frag = new TogtOversigt_frag();
                                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    fragmentTransaction.replace(R.id.fragContainer,togtOversigt_frag);
+                                    fragmentTransaction.replace(R.id.fragContainer, togtOversigt_frag);
                                     fragmentTransaction.commit();
 
-                                    Toast.makeText(getActivity(),"Togt slettet",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Togt slettet", Toast.LENGTH_SHORT).show();
                                 })
+
+                                //If the negative button is pressed the dialog box is closed and the action is shut down
                                 .setNegativeButton("Nej", (dialog, which) -> dialog.cancel());
 
                         final AlertDialog alertDialog = builder.create();
@@ -154,11 +154,13 @@ public class EtapeOversigt_frag extends Fragment {
         etapeDAO = new EtapeDAO(getContext());
         List<Etape> etaper = etapeDAO.getEtaper(togt);
 
-        if( etaper.get(0).getStatus() == Etape.Status.NEW){
+        // If the Togt is new, meaning no Etaper is created, then the list and the create Etape button isent
+        // visible, and the "Start Togt" fragment is visible. Otherwise the opposite is true.
+        if (etaper.get(0).getStatus() == Etape.Status.NEW) {
             view.findViewById(R.id.etapeoversigt_opret_container).setVisibility(View.GONE);
             view.findViewById(R.id.etape_recyclerview).setVisibility(View.GONE);
             view.findViewById(R.id.etapeoversigt_start).setVisibility(View.VISIBLE);
-        }else{
+        } else {
             view.findViewById(R.id.etapeoversigt_opret_container).setVisibility(View.VISIBLE);
             view.findViewById(R.id.etape_recyclerview).setVisibility(View.VISIBLE);
             view.findViewById(R.id.etapeoversigt_start).setVisibility(View.GONE);
@@ -183,7 +185,6 @@ public class EtapeOversigt_frag extends Fragment {
         return view;
     }
 
-
     /**
      * The use pressed the 'Start Togt'-button. We open an OpretEtapeDialog with the
      * first Etape (initial Togt information), so the user may edit it.
@@ -194,7 +195,7 @@ public class EtapeOversigt_frag extends Fragment {
 
         // Open dialog
         OpretEtapeDialog dialog = new OpretEtapeDialog(firstEtape);
-        dialog.onCreationFinished( (cbDialog, etape) -> {
+        dialog.onCreationFinished((cbDialog, etape) -> {
 
             // Update the Etape in DB
             EtapeDAO etapeDAO = new EtapeDAO(GlobalContext.get());
@@ -208,9 +209,8 @@ public class EtapeOversigt_frag extends Fragment {
             // Update Etape Oversigt list
             listAdapter.updateEtapeList(etapeDAO.getEtaper(togt));
         });
-        dialog.show(getFragmentManager(),"Dialog box");
+        dialog.show(getFragmentManager(), "Dialog box");
     }
-
 
     /**
      * The user has pressed the Ny Etape button, so we open a OpretEtapeDialog
@@ -220,21 +220,21 @@ public class EtapeOversigt_frag extends Fragment {
 
         // Load Previous Etape
         List<Etape> currentEtaper = new EtapeDAO(getContext()).getEtaper(togt);
-        Etape previousEtape = currentEtaper.get(currentEtaper.size()-1);
+        Etape previousEtape = currentEtaper.get(currentEtaper.size() - 1);
 
         // Copy information to new Etape
         Etape newEtape = new Etape();
-        newEtape.setBesaetning( new ArrayList<>(previousEtape.getBesaetning()));
+        newEtape.setBesaetning(new ArrayList<>(previousEtape.getBesaetning()));
         newEtape.setSkipper(previousEtape.getSkipper());
 
         // Create Dialog box
         OpretEtapeDialog dialog = new OpretEtapeDialog(newEtape);
-        dialog.onCreationFinished( (cbDialog, createdEtape) -> {
+        dialog.onCreationFinished((cbDialog, createdEtape) -> {
 
             // Update Previous Etape
             previousEtape.setStatus(Etape.Status.FINISHED);
             previousEtape.setSlutDestination(createdEtape.getStartDestination());
-            previousEtape.setEndDate( createdEtape.getStartDate() );
+            previousEtape.setEndDate(createdEtape.getStartDate());
 
             // Update Database
             EtapeDAO etapeDAO = new EtapeDAO(GlobalContext.get());
@@ -247,9 +247,8 @@ public class EtapeOversigt_frag extends Fragment {
             scrollToButtom();
         });
         // Show dialog
-        dialog.show(getFragmentManager(),"Dialog box");
+        dialog.show(getFragmentManager(), "Dialog box");
     }
-
 
     /**
      * Create CSV file and run a "share" function, in order to, for example,
@@ -273,7 +272,7 @@ public class EtapeOversigt_frag extends Fragment {
             Uri path = FileProvider.getUriForFile(context, "com.example.exportcsv.fileprovider", filelocation);
             Intent fileIntent = new Intent(Intent.ACTION_SEND);
             fileIntent.setType("text/csv");
-            fileIntent.putExtra(Intent.EXTRA_SUBJECT, "Data for '"+togt.getName()+"'");
+            fileIntent.putExtra(Intent.EXTRA_SUBJECT, "Data for '" + togt.getName() + "'");
             fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             fileIntent.putExtra(Intent.EXTRA_STREAM, path);
 
@@ -283,9 +282,12 @@ public class EtapeOversigt_frag extends Fragment {
         }
     }
 
-
-    private void scrollToButtom(){
-        if(listAdapter.getItemCount()>0){
+    /**
+     * This function will scroll the Etape list to the lowest Etape in the list, which is the latest created
+     * if the list is big enough so it can be scrolled
+     */
+    private void scrollToButtom() {
+        if (listAdapter.getItemCount() > 0) {
             recyclerView.smoothScrollToPosition(listAdapter.getItemCount() - 1);
         }
     }
