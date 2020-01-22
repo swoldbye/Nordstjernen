@@ -131,11 +131,15 @@ public class TabLayout_frag extends Fragment implements TogtDAO.TogtObserver {
         DbTranslator dbTranslator = new DbTranslator(getContext());
         this.togt = togt2;
 
-
-
         etapper = dbTranslator.getList(togt2);
 //        System.out.println("Size of new array is: " + etapper.size());
 //        //pageAdapter.notifyDataSetChanged();
         pageAdapter.updateList(etapper, viewPager.getCurrentItem(), getActivity());
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        TogtDAO.removeTogtObserver(this);
     }
 }

@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
@@ -49,7 +50,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         annullerText = view.findViewById(R.id.oprettogt_annuller);
         annullerText.setOnClickListener(this);
 
-        ArrayAdapter<String> dropDownShip = new ArrayAdapter<String>(this.getContext(),
+        ArrayAdapter<String> dropDownShip = new ArrayAdapter<>(GlobalContext.get(),
                 android.R.layout.simple_dropdown_item_1line, skibsListe);
         betterSpinner = view.findViewById(R.id.skibsListe);
         betterSpinner.setAdapter(dropDownShip);
