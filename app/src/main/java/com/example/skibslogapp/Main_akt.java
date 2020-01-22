@@ -32,7 +32,7 @@ public class Main_akt extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-//      Set Toolbar
+        // Set Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -41,7 +41,6 @@ public class Main_akt extends AppCompatActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_white_18dp);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
-
 
         if (savedInstanceState == null) {
             Fragment fragment = new TogtOversigt_frag();

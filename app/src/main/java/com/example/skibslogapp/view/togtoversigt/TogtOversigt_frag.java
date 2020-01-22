@@ -32,22 +32,19 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener,
     private RecyclerView recyclerView;
     private TogtListAdapter listAdapter;
 
-    private List<Togt> togtList;
-    private TogtDAO togtDAO;
-    private TextView ingenTogtText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_togt_oversigt, container, false);
 
-        togtDAO = new TogtDAO(getActivity());
-        togtList = togtDAO.getTogter();
+        TogtDAO togtDAO = new TogtDAO(getActivity());
+        List<Togt> togtList = togtDAO.getTogter();
 
         View opretTogt = view.findViewById(R.id.opretTogtBtn);
         opretTogt.setOnClickListener(this);
 
-        ingenTogtText = view.findViewById(R.id.ingenTogtText);
+        TextView ingenTogtText = view.findViewById(R.id.ingenTogtText);
         ingenTogtText.setText("Der er ingen oprettede togter.\n " +
                 "Hvis der skal oprettes et togt tryk på 'Opret Togt'.");
 

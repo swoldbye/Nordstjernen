@@ -94,6 +94,7 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
         return togter.size();
     }
 
+
     /**
      * The ViewHolder design pattern can be applied when using a custom adapter.
      * <p>
@@ -105,21 +106,22 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
      * A ViewHolder holds the reference to the id of the view resource and calls to the resource
      * will not be required. Thus performance of the application increases.
      */
-    public class TogtListViewHolder extends RecyclerView.ViewHolder {
+    class TogtListViewHolder extends RecyclerView.ViewHolder {
 
         TextView togtName, ship, startDest, date, year;
 
-        public TogtListViewHolder(@NonNull View itemView) {
+        TogtListViewHolder(@NonNull View itemView) {
             super(itemView);
             togtName = itemView.findViewById(R.id.togtoversigt_card_name);
             ship = itemView.findViewById(R.id.togtoversigt_card_shipname);
             startDest = itemView.findViewById(R.id.togtoversigt_card_startdestination);
             date = itemView.findViewById(R.id.togtoversigt_card_date);
             year = itemView.findViewById(R.id.togtoversigt_card_year);
+
+            // On Click: Open Etapeoversigt Fragment
             itemView.setOnClickListener((View view) -> {
                 int position = getAdapterPosition();
                 Togt togt = togter.get(position);
-
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 activity.getSupportFragmentManager()
                         .beginTransaction()

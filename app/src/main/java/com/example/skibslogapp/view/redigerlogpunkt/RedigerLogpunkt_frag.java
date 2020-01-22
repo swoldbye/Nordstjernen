@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
+import com.example.skibslogapp.model.DateToString;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.view.opretLog.LogCourse_frag;
 import com.example.skibslogapp.view.opretLog.LogNote_frag;
@@ -45,7 +46,6 @@ public class RedigerLogpunkt_frag extends Fragment {
                         note;
     private Logpunkt logpunkt;
     private LogViewModel logVM;
-    private View vv; //TODO DELETE THIS AND USAGES - TESTING ONLY
 
     public RedigerLogpunkt_frag(Logpunkt logpunkt){
         this.logpunkt = logpunkt;
@@ -54,8 +54,6 @@ public class RedigerLogpunkt_frag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rediger_logpunkt, container, false);
-        vv = view;
-        updatetopthing();
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
         logVM.resetValues();
 
@@ -88,28 +86,20 @@ public class RedigerLogpunkt_frag extends Fragment {
         courseConta = view.findViewById(R.id.editLogCourseContainer);
         noteConta = view.findViewById(R.id.editLogNoteContainer);
 
-        windConta.setOnClickListener(v -> openFragmentDialog(R.id.fragment_opretLog_wind, new LogWind_frag()));
-        waterConta.setOnClickListener(v -> openFragmentDialog(R.id.fragment_opretLog_waterCurrent, new LogWaterCurrent_frag()));
-        sailsOrRowersConta.setOnClickListener(v -> openFragmentDialog(R.id.fragment_opretLog_sailsAndRowers, new LogSailPosAndRowers_frag()));
-        sailsConta.setOnClickListener(v -> openFragmentDialog(R.id.fragment_opretLog_sails, new LogSails_frag()));
-        courseConta.setOnClickListener(v -> openFragmentDialog(R.id.fragment_opretLog_course, new LogCourse_frag()));
-        noteConta.setOnClickListener(v -> openFragmentDialog(R.id.fragment_opretLog_note, new LogNote_frag()));
+        windConta.setOnClickListener(v -> openFragmentDialog(new LogWind_frag()));
+        waterConta.setOnClickListener(v -> openFragmentDialog(new LogWaterCurrent_frag()));
+        sailsOrRowersConta.setOnClickListener(v -> openFragmentDialog(new LogSailPosAndRowers_frag()));
+        sailsConta.setOnClickListener(v -> openFragmentDialog(new LogSails_frag()));
+        courseConta.setOnClickListener(v -> openFragmentDialog(new LogCourse_frag()));
+        noteConta.setOnClickListener(v -> openFragmentDialog(new LogNote_frag()));
 
         updateInformation();
         return view;
     }
 
     private void updateInformation() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(logpunkt.getDate());
-        String dateString = String.format("%d/%d-%d %02d:%02d",
-                cal.get(Calendar.DAY_OF_MONTH),
-                cal.get(Calendar.MONTH)+1,
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.HOUR_OF_DAY),
-                cal.get(Calendar.MINUTE)
-        );
-        time.setText(dateString);
+
+        time.setText(DateToString.full(logpunkt.getDate()));
         latitude.setText(logpunkt.getPosition() != null && !logpunkt.getPosition().getBreddegradString().equals("") ?
                 logpunkt.getPosition().getBreddegradString() : "-");
         longitude.setText(logpunkt.getPosition() != null && !logpunkt.getPosition().getLaengdegradString().equals("") ?
@@ -125,23 +115,15 @@ public class RedigerLogpunkt_frag extends Fragment {
         sails.setText(logpunkt.getSejlfoering() != null && !logpunkt.getSejlfoering().equals("") ? logpunkt.getSejlfoering() : "-");
         course.setText(logpunkt.getKursString() != null && !logpunkt.getKursString().equals("") ? logpunkt.getKursString() : "-");
         note.setText(logpunkt.getNote() != null && !logpunkt.getNote().equals("") ? logpunkt.getNote() : "-");
-        updatetopthing();
     }
 
-    private void updatetopthing() {
-       // ((TextView) vv.findViewById(R.id.test_text)).setText(logpunkt.toString());
-    }
-
-    private void openFragmentDialog(int fragID, Fragment frag) {
-        System.out.println("prik");
+    private void openFragmentDialog(Fragment frag) {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-
         EditDialogFragment edf = EditDialogFragment.newInstance(frag);
         edf.show(ft, "edf");
     }
 
     private void cancel() {
-        System.out.println("Cancel called");
         logVM.prepareEditableCopy(logpunkt); //Resets all the information
         updateInformation();
     }

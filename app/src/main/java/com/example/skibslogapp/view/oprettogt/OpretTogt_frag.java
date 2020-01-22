@@ -1,28 +1,21 @@
 package com.example.skibslogapp.view.oprettogt;
 
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
-import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
-import com.example.skibslogapp.view.togtoversigt.TogtOversigt_frag;
 import com.google.android.material.textfield.TextInputLayout;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
@@ -60,7 +53,6 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-
         togtName.setError(null);
         skipper.setError(null);
         startDest.setError(null);
@@ -71,24 +63,24 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         String skipper = this.skipper.getEditText().getText().toString();
         String togtStartDest = startDest.getEditText().getText().toString();
 
-        if (view == opretBtn && togtet.length() <= 0){
-            togtName.setError("Der skal indtastes et navn til togtet!");
-
-        }else if (view == opretBtn && skipper.length() <= 0){
-            this.skipper.setError("Der skal intastes et navn på skipperen!");
-
-        }else if (view == opretBtn && togtStartDest.length() <= 0) {
-            startDest.setError("Vælg hvor togtet skal startes fra!");
-
-        }else if (view == opretBtn && ship.length() <= 0){
-            betterSpinner.setError("Vælg et skib!");
-
-        }else if (view == annullerText){
+        if (view == annullerText) {
             getActivity().getSupportFragmentManager().popBackStack();
 
-        }else {
-            if (view == opretBtn){
+        }else if(view == opretBtn){
 
+            if ( togtet.length() <= 0){
+                togtName.setError("Der skal indtastes et navn til togtet!");
+
+            }else if (skipper.length() <= 0){
+                this.skipper.setError("Der skal intastes et navn på skipperen!");
+
+            }else if (togtStartDest.length() <= 0) {
+                startDest.setError("Vælg hvor togtet skal startes fra!");
+
+            }else if (ship.length() <= 0){
+                betterSpinner.setError("Vælg et skib!");
+
+            }else {
                 // Opret Togt
                 Togt togt = new Togt(togtet);
                 togt.setSkib(ship);
