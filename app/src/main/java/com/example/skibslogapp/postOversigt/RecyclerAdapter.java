@@ -50,7 +50,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
                 //Set time
-                tidTextView.setText(localDateFormat.format(logpunkt.getDate()));
+                tidTextView.setText(DateToString.time(logpunkt.getDate()));
 
                 //Set vind
                 String vindHastighed = Integer.toString(logpunkt.getVindhastighed());
@@ -79,7 +79,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
 
                 //Set føring
-                sejlføringTextView.setText(logpunkt.getSejlfoering());
+                sejlfoeringTextView.setText(logpunkt.getSejlfoering());
 
                 //Set stilling
                 if(logpunkt.getRoere() != -1){
