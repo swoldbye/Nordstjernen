@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.model.DateToString;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.view.redigerlogpunkt.RedigerLogpunkt_frag;
 
@@ -22,31 +23,27 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private List<Logpunkt> mTempLogs;
     private boolean fillerCardEnabled = false;
 
-
     public static class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private View view;
         private Logpunkt logpunkt;
 
-        public NoteViewHolder(@NonNull View itemView) {
+        NoteViewHolder(@NonNull View itemView) {
             super(itemView);
             this.view = itemView;
             itemView.setOnClickListener(this);
         }
 
-        public void setLogpunkt(Logpunkt logpunkt, boolean mob) {
+        void setLogpunkt(Logpunkt logpunkt, boolean mob) {
             this.logpunkt = logpunkt;
 
-
-            SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
-
             if( mob ){
-                ((TextView) view.findViewById(R.id.MOBTidTextView)).setText(localDateFormat.format(logpunkt.getDate()));
+                ((TextView) view.findViewById(R.id.MOBTidTextView)).setText(DateToString.time(logpunkt.getDate()));
             }else{
                 TextView tidTextView = itemView.findViewById(R.id.tidTextView);
                 TextView vindTextView = itemView.findViewById(R.id.vindretningTextView);
                 TextView kursTextView = itemView.findViewById(R.id.kursTextView);
-                TextView sejlføringTextView = itemView.findViewById(R.id.sejlføringTextView);
+                TextView sejlfoeringTextView = itemView.findViewById(R.id.sejlføringTextView);
                 TextView sejlstillingTextView = itemView.findViewById(R.id.sejlstillingTextView);
                 TextView stroemTextView = itemView.findViewById(R.id.stroemTextView);
                 TextView noteTextView = itemView.findViewById(R.id.NoteTextView);
@@ -121,16 +118,25 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
 
+    /**
+     * View Holder to simply fill the bottom of the list, when the
+     * OpretLog needs to be shown. Used to "minimize" the list. */
     public static class FillerViewHolder extends RecyclerView.ViewHolder{
-        public FillerViewHolder(@NonNull View itemView) {
+        FillerViewHolder(@NonNull View itemView) {
             super(itemView);
         }
     }
 
-    public RecyclerAdapter(List<Logpunkt> tempLogs) {
+
+    RecyclerAdapter(List<Logpunkt> tempLogs) {
         mTempLogs = tempLogs;
     }
 
+    /**
+     * Toggle the Filler Card in the bottom of the list, which fills
+     * the bottom of the list, esentially "minimizing" it.
+     * @param toggle True: "Show" filler card (minimize list), False: "Hide" filler card (maximize list)
+     */
     void toggleFillerCard(boolean toggle){
         if(!toggle){
             notifyItemRemoved(getItemCount()-1);
@@ -196,10 +202,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return mTempLogs.size() + (fillerCardEnabled ? 1 : 0) ;
     }
 
-    public void updateData(List<Logpunkt> newLogs){
+    void updateData(List<Logpunkt> newLogs){
         mTempLogs = newLogs;
-        //notifyItemRangeRemoved(0, mTempLogs.size() - 1);
         notifyItemInserted(mTempLogs.size()-1);
-        //notifyItemInserted(mTempLogs.size() - 1);
     }
 }

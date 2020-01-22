@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:paddingLeft="50dp"
-    android:paddingRight="50dp"
     android:paddingTop="20dp"
+    android:paddingRight="50dp"
     android:paddingBottom="20dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
         android:gravity="center_horizontal"
         android:text="Ny Etape"
         android:textColor="@color/colorPrimary"
-        android:textStyle="bold"/>
-
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/opretetape_skipper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/TextInput"
         android:layout_marginTop="20dp"
+        android:theme="@style/TextInput"
         app:errorEnabled="true">
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Skipper"
             android:inputType="textPersonName"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary" />
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/opretetape_startdest"
@@ -47,17 +46,15 @@
             android:layout_height="wrap_content"
             android:hint="Start Destination"
             android:inputType="textPersonName"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary" />
     </com.google.android.material.textfield.TextInputLayout>
-
-
 
     <!-- BESAETNING -->
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:orientation="vertical"
         android:paddingLeft="3dp"
         android:paddingRight="3dp">
 
@@ -65,15 +62,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Besætning"
-            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="20dp"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:textStyle="bold" />
 
-        <View style="@style/Divider"
+        <View
+            style="@style/Divider"
+            android:layout_alignParentBottom="true"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="5dp"
-            android:layout_alignParentBottom="true"
-            android:backgroundTint="@color/colorPrimaryDark"/>
+            android:backgroundTint="@color/colorPrimaryDark" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/besaetningList"
@@ -81,10 +79,9 @@
             android:layout_height="100dp"
             android:layout_marginBottom="5dp"
             android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            >
-        </androidx.recyclerview.widget.RecyclerView>
+            android:paddingRight="5dp">
 
+        </androidx.recyclerview.widget.RecyclerView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -113,7 +110,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/addButton"
                 android:layout_width="35dp"
@@ -124,15 +120,11 @@
                 android:src="@drawable/ic_add_black_24dp"
                 android:tint="@color/white"
                 app:fabCustomSize="35dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-
-
-
 
     <!-- Button Container -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -148,21 +140,20 @@
             android:text="Annullér"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="17sp"
-            app:layout_constraintTop_toTopOf="@id/opretEtape_start_button"
             app:layout_constraintBottom_toBottomOf="@id/opretEtape_start_button"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="@id/opretEtape_start_button" />
 
         <Button
             android:id="@+id/opretEtape_start_button"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:text="Start"
-            android:textStyle="bold"
             android:backgroundTint="@color/colorPrimaryDark"
+            android:text="Start"
             android:textColor="@color/white"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

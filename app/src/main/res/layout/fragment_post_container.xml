@@ -3,40 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         android:orientation="vertical"
         android:weightSum="100"
-        android:animateLayoutChanges="true"
         app:layout_constraintBottom_toBottomOf="parent">
-
 
         <FrameLayout
             android:id="@+id/tabOversigtContainerFrame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/logpunktoversigt_opret"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
             android:backgroundTint="@color/colorPrimary"
             android:text="Opret Logpunkt"
             android:textColor="@color/white"
             android:textSize="20dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
+            app:layout_constraintStart_toStartOf="parent" />
 
         <FrameLayout
             android:id="@+id/opretPostContainerFrame"
@@ -46,9 +43,5 @@
             app:layout_constraintTop_toTopOf="parent" />
         <!-- The elevation is only to place it "above" the button -->
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

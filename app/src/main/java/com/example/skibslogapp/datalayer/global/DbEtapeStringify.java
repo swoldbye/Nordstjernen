@@ -11,13 +11,12 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * @author Claes
  * This class creates a list of Logpunkt converted to LogpunktString (string version)
  * from a given Etape
  */
 class DbEtapeStringify {
 
-    ArrayList<LogpunktString> convert(Etape etape){
+    ArrayList<LogpunktString> convert(Etape etape) {
 
         ArrayList<LogpunktString> stringifiedPunkter = new ArrayList<>();
 
@@ -32,17 +31,17 @@ class DbEtapeStringify {
 
         The below also converts all the DB data to Strings.
          */
-        for( Logpunkt logpunkt : logpunkter ){
+        for (Logpunkt logpunkt : logpunkter) {
             LogpunktString logpunktString = new LogpunktString();
 
             logpunktString.setEtapeID(String.valueOf(etape.getId()));
 
-            if(logpunkt.getDate() != null){
+            if (logpunkt.getDate() != null) {
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(logpunkt.getDate());
-                String dateString = String.format(Locale.UK,"%d/%d-%d %02d:%02d",
+                String dateString = String.format(Locale.UK, "%d/%d-%d %02d:%02d",
                         cal.get(Calendar.DAY_OF_MONTH),
-                        cal.get(Calendar.MONTH)+1,
+                        cal.get(Calendar.MONTH) + 1,
                         cal.get(Calendar.YEAR),
                         cal.get(Calendar.HOUR_OF_DAY),
                         cal.get(Calendar.MINUTE)
@@ -50,34 +49,34 @@ class DbEtapeStringify {
                 logpunktString.setDato(dateString);
             }
 
-            if(logpunkt.getRoere() != -1){
+            if (logpunkt.getRoere() != -1) {
                 String rore = String.valueOf(logpunkt.getRoere());
                 logpunktString.setRoere(rore);
             }
 
-            if(logpunkt.getVindretning() != null){
+            if (logpunkt.getVindretning() != null) {
                 logpunktString.setVindretning(logpunkt.getVindretning());
             }
 
-            if(logpunkt.getVindhastighed() != -1){
+            if (logpunkt.getVindhastighed() != -1) {
                 String vindHast = String.valueOf(logpunkt.getVindhastighed());
                 logpunktString.setVindhastighed(vindHast);
             }
 
-            if(logpunkt.getStroemRetning() != null){
+            if (logpunkt.getStroemRetning() != null) {
                 String StromRet = logpunkt.getStroemRetning();
                 logpunktString.setStroemRetning(StromRet);
             }
 
-            if(logpunkt.getStroemhastighed() > -1){
-                logpunktString.setStroemHastighed( String.valueOf(logpunkt.getStroemhastighed()) );
+            if (logpunkt.getStroemhastighed() > -1) {
+                logpunktString.setStroemHastighed(String.valueOf(logpunkt.getStroemhastighed()));
             }
 
-            if(logpunkt.getKurs() > -1){
+            if (logpunkt.getKurs() > -1) {
                 logpunktString.setKurs(String.valueOf(logpunkt.getKurs()));
             }
 
-            if(logpunkt.getNote() != null){
+            if (logpunkt.getNote() != null) {
                 String note = logpunkt.getNote();
                 logpunktString.setNote(note);
             }
@@ -85,15 +84,15 @@ class DbEtapeStringify {
             String MOB = String.valueOf(logpunkt.getMandOverBord());
             logpunktString.setMandOverBord(MOB);
 
-            if(logpunkt.getPosition() != null){
+            if (logpunkt.getPosition() != null) {
                 logpunktString.setBredeGrad(logpunkt.getPosition().getBreddegradString());
                 logpunktString.setHoejdeGrad(logpunkt.getPosition().getLaengdegradString());
             }
 
-            if(logpunkt.getSejlfoering() != null){
+            if (logpunkt.getSejlfoering() != null) {
                 logpunktString.setSejlFoering(logpunkt.getSejlfoering());
             }
-            if(logpunkt.getSejlstilling() != null){
+            if (logpunkt.getSejlstilling() != null) {
                 logpunktString.setSejlstilling(logpunkt.getSejlstilling());
             }
 

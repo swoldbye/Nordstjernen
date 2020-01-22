@@ -1,6 +1,5 @@
 package com.example.skibslogapp.view.opretEtape;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +14,12 @@ import com.example.skibslogapp.R;
 
 import java.util.List;
 
+
 public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.ListeelemViewholder> {
     private List<String> dataSet;
-    private Context context;
 
-
-   public CrewAdapter(List<String> dataSet, Context context){
+    CrewAdapter(List<String> dataSet) {
         this.dataSet = dataSet;
-        this.context = context;
     }
 
     @NonNull
@@ -55,21 +52,15 @@ public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.ListeelemViewh
         TextView nameText;
         ImageView removeButton;
 
-        public ListeelemViewholder(View itemView) {
+        ListeelemViewholder(View itemView) {
             super(itemView);
         }
-
 
         @Override
         public void onClick(View v) {
             final int position = getAdapterPosition();
-
-            if(v == removeButton) {
-                CrewAdapter.this.notifyItemRemoved(position);
-                dataSet.remove(position);
-
-            }
+            CrewAdapter.this.notifyItemRemoved(position);
+            dataSet.remove(position);
         }
     }
-
 }

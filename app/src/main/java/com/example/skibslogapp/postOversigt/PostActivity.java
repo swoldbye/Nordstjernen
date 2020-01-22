@@ -21,21 +21,19 @@ import com.example.skibslogapp.model.Togt;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.google.android.material.tabs.TabLayout;
 
-public class PostActivity extends Fragment implements View.OnClickListener {
+/**
+ * This class is a the fragment that contains the tab layout and the create Logpunkt button
+ */
+public class PostActivity extends Fragment {
 
-    private Button opretButton;
-    Button openButton;
-    Togt togt;
-    Etape etape;
-    int startPos;
+    private Togt togt;
+    private int startPos;
 
-    TabLayout_frag tabLayout_frag;
-    OpretLog_frag opretLog_frag;
+    private TabLayout_frag tabLayout_frag;
 
     public PostActivity(Etape etape, int startPos){
         TogtDAO togtDAO = new TogtDAO(GlobalContext.get());
         this.togt = togtDAO.getTogt(etape.getTogtId());
-        this.etape = etape;
         this.startPos = startPos;
     }
 
@@ -43,35 +41,20 @@ public class PostActivity extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_post_container, container, false);
-
-
         tabLayout_frag = new TabLayout_frag(togt, startPos);
-        opretLog_frag = new OpretLog_frag();
 
-
-        opretButton = view.findViewById(R.id.logpunktoversigt_opret);
-        opretButton.setOnClickListener( v -> openOpretLogpunkt() );
-
+        Button opretButton = view.findViewById(R.id.logpunktoversigt_opret);
+        opretButton.setOnClickListener(v -> openOpretLogpunkt() );
 
         getActivity().getSupportFragmentManager().beginTransaction()
                 .add(R.id.tabOversigtContainerFrame, tabLayout_frag)
                 .commit();
-/*
-
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .add(R.id.opretPostContainerFrame, opretLog_frag)
-                .commit();*/
-
-        //opretPostContainerFrame.setVisibility(View.GONE);
-
         return view;
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
+    /**
+     *
+     */
     private void openOpretLogpunkt(){
         OpretLog_frag fragment = new OpretLog_frag();
 
@@ -84,24 +67,9 @@ public class PostActivity extends Fragment implements View.OnClickListener {
         tabLayout_frag.toggleMinimize(true);
         fragment.onClosed(() -> tabLayout_frag.toggleMinimize(false));
     }
-/*
-
-    private void expandPost() {
-        opretPostContainerFrame.setVisibility(View.VISIBLE);
-        tabLayout_frag.closeTabs();
-        openButton.setText("close");
-    }
-
-    private void closePost() {
-        opretPostContainerFrame.setVisibility(View.GONE);
-        tabLayout_frag.openTabs();
-        openButton.setText("open");
-    }
-*/
-
 
     /*
-    We have to destroy the two fragments in order to coordinate maesuring
+    We have to destroy the two fragments in order to coordinate measuring
      */
     @Override
     public void onDestroy() {

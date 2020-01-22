@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Claes, Malte
  * Generate a CSV 'string' from a given Togt. Each row is a Logpunkt and each collumn
  * one of the data fields (date, position, note etc.).
  */
 public class GenerateCSV {
 
     /**
-     * Generate a CSV String from a given Togt object */
-    public String generateTogt(Togt togt){
+     * Generate a CSV String from a given Togt object
+     */
+    public String generateTogt(Togt togt) {
         StringBuilder data = new StringBuilder();
 
         // "Enable" UETF-8, so we can use æ, ø, å
@@ -31,8 +31,8 @@ public class GenerateCSV {
 
         // Add Etaper
         List<Etape> etaper = new EtapeDAO(GlobalContext.get()).getEtaper(togt);
-        for( Etape etape : etaper ){
-            data.append( generateEtape(etape) );
+        for (Etape etape : etaper) {
+            data.append(generateEtape(etape));
         }
         return data.toString();
     }
@@ -41,27 +41,27 @@ public class GenerateCSV {
      * Generates rows of Logpunkt objects from the given Etape.
      * Each row are comma seperated values.
      */
-    private String generateEtape(Etape etape){
+    private String generateEtape(Etape etape) {
 
         String str = "";
 
         List<LogpunktString> logpunktStrings = new DbEtapeStringify().convert(etape);
-        for( LogpunktString logpunkt : logpunktStrings ){
+        for (LogpunktString logpunkt : logpunktStrings) {
             str +=
-                logpunkt.getEtapeID()+
-                "," + logpunkt.getDato()+
-                "," + logpunkt.getBredeGrad()+
-                "," + logpunkt.getHoejdeGrad()+
-                "," + logpunkt.getMandOverBord()+
-                "," + logpunkt.getNote().replace("\n", " ") +
-                "," + logpunkt.getKurs()+
-                "," + logpunkt.getVindretning()+
-                "," + logpunkt.getVindhastighed() +
-                "," + logpunkt.getStroemRetning() +
-                "," + logpunkt.getStroemHastighed() +
-                "," + logpunkt.getSejlFoering()+
-                "," + logpunkt.getSejlstilling()+
-                "," + logpunkt.getRoere();
+                    logpunkt.getEtapeID() +
+                            "," + logpunkt.getDato() +
+                            "," + logpunkt.getBredeGrad() +
+                            "," + logpunkt.getHoejdeGrad() +
+                            "," + logpunkt.getMandOverBord() +
+                            "," + logpunkt.getNote().replace("\n", " ") +
+                            "," + logpunkt.getKurs() +
+                            "," + logpunkt.getVindretning() +
+                            "," + logpunkt.getVindhastighed() +
+                            "," + logpunkt.getStroemRetning() +
+                            "," + logpunkt.getStroemHastighed() +
+                            "," + logpunkt.getSejlFoering() +
+                            "," + logpunkt.getSejlstilling() +
+                            "," + logpunkt.getRoere();
             str += "\n";
         }
         return str;

@@ -1,5 +1,11 @@
 package com.example.skibslogapp.datalayer.global;
 
+/**
+ * A model class that is used in
+ * {@link DbEtapeStringify}
+ * and
+ * {@link GenerateCSV}
+ */
 class LogpunktString {
 
     private static final String MISSING_DATA_MSG = "";
@@ -8,8 +14,8 @@ class LogpunktString {
     private String Dato = MISSING_DATA_MSG;
     private String Roere = MISSING_DATA_MSG;
     private String vindretning = MISSING_DATA_MSG;
-    private String vindhastighed= MISSING_DATA_MSG;
-    private String StroemRetning= MISSING_DATA_MSG;
+    private String vindhastighed = MISSING_DATA_MSG;
+    private String StroemRetning = MISSING_DATA_MSG;
     private String Kurs = MISSING_DATA_MSG;
     private String Note = MISSING_DATA_MSG;
     private String MandOverBord = MISSING_DATA_MSG;
@@ -123,7 +129,6 @@ class LogpunktString {
         Sejlstilling = sejlstilling;
     }
 
-    
     String getStroemHastighed() {
         return stroemHastighed;
     }
@@ -131,5 +136,4 @@ class LogpunktString {
     void setStroemHastighed(String stroemHastighed) {
         this.stroemHastighed = stroemHastighed;
     }
-
 }
