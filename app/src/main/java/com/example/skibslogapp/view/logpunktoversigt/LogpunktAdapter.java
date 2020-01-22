@@ -87,7 +87,7 @@ public class LogpunktAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 //Set føring
                 sejlfoeringTextView.setText(logpunkt.getSejlfoering());
 
-                //Set stilling
+                //Set stilling and Roere
                 if(logpunkt.getRoere() != -1){
                     sejlstillingTextView.setText(Integer.toString(logpunkt.getRoere()));
                 }else{
