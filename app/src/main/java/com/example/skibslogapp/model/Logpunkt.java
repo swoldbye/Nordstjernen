@@ -2,7 +2,8 @@ package com.example.skibslogapp.model;
 
 import androidx.annotation.NonNull;
 
-import com.example.skibslogapp.view.opretLog.LogViewModel;
+import com.example.skibslogapp.utility.DateToString;
+import com.example.skibslogapp.view.opretlogpunkt.LogViewModel;
 
 import java.util.Date;
 import java.util.Locale;

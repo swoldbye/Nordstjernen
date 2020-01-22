@@ -33,7 +33,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_opret_togt, container, false);
+        View view = inflater.inflate(R.layout.oprettogt_frag, container, false);
 
         togtName = view.findViewById(R.id.togtNavn);
         skipper = view.findViewById(R.id.skipperEdit);

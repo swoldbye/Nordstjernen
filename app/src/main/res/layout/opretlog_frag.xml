@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.opretlogpunkt.OpretLog_frag">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="475dp"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:elevation="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!--Mand over bord ==========================-->
+                <FrameLayout
+                    android:id="@+id/mob_container"
+                    android:layout_width="105dp"
+                    android:layout_height="105dp"
+                    android:layout_gravity="start|bottom"
+                    android:clipToPadding="false"
+                    android:elevation="1dp"
+                    android:outlineProvider="none"
+                    android:padding="15dp">
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/mob_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="bottom|start"
+                        android:backgroundTint="@color/MOBButton"
+                        android:clickable="true"
+                        android:elevation="20dp"
+                        android:focusable="true"
+                        app:rippleColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:elevation="20dp"
+                        android:gravity="center"
+                        android:text="MOB"
+                        android:textColor="@color/MOB"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+                </FrameLayout>
+
+                <!-- SCROLL VIEW =================================================   -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/closeButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="v"
+                        android:textSize="22dp"/>
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#FFFFFF"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            tools:context=".MainActivity">
+
+                            <!-- TID =====================================-->
+                            <fragment
+                                android:id="@+id/fragment_opretLog_time"
+                                android:name="com.example.skibslogapp.view.opretlogpunkt.LogTime_frag"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <View style="@style/Divider" />
+
+                            <!-- VIND ============================================-->
+                            <fragment
+                                android:id="@+id/fragment_opretLog_wind"
+                                android:name="com.example.skibslogapp.view.opretlogpunkt.LogWind_frag"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <View style="@style/Divider" />
+
+                            <!-- STRØM ============================================-->
+                            <fragment
+                                android:id="@+id/fragment_opretLog_waterCurrent"
+                                android:name="com.example.skibslogapp.view.opretlogpunkt.LogWaterCurrent_frag"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <View style="@style/Divider" />
+
+                            <!-- SEJSTILLING ============================================-->
+                            <fragment
+                                android:id="@+id/fragment_opretLog_sailsAndRowers"
+                                android:name="com.example.skibslogapp.view.opretlogpunkt.LogSailPosAndRowers_frag"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"/>
+
+                            <View style="@style/Divider" />
+
+                            <!-- SEJLFØRING =====================================-->
+                            <fragment
+                                android:id="@+id/fragment_opretLog_sails"
+                                android:name="com.example.skibslogapp.view.opretlogpunkt.LogSails_frag"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <View style="@style/Divider" />
+
+                            <!-- KURS =====================================-->
+                            <fragment
+                                android:id="@+id/fragment_opretLog_course"
+                                android:name="com.example.skibslogapp.view.opretlogpunkt.LogCourse_frag"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <View style="@style/Divider" />
+
+                            <!-- NOTE ======================================-->
+                            <fragment
+                                android:id="@+id/fragment_opretLog_note"
+                                android:name="com.example.skibslogapp.view.opretlogpunkt.LogNote_frag"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <!-- OPRET BUTTON =====================================-->
+                            <Button
+                                android:id="@+id/opretButton"
+                                android:layout_width="150dp"
+                                android:layout_height="60dp"
+                                android:layout_marginTop="25dp"
+                                android:layout_marginBottom="25dp"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:text="Opret"
+                                android:textAllCaps="true"
+                                android:textColor="#FFFFFF"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="60dp"
+                                android:layout_marginEnd="131dp"
+                                android:layout_marginRight="131dp"
+                                android:textAlignment="center" />
+
+                        </LinearLayout>
+                    </ScrollView>
+                </LinearLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

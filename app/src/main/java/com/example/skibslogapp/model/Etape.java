@@ -2,9 +2,10 @@ package com.example.skibslogapp.model;
 
 import androidx.annotation.NonNull;
 
+import com.example.skibslogapp.utility.DateToString;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;

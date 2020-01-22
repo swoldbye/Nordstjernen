@@ -13,7 +13,7 @@ import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
-import com.example.skibslogapp.etapeoversigt.EtapeOversigt_frag;
+import com.example.skibslogapp.view.etapeoversigt.EtapeOversigt_frag;
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Togt;
 
@@ -51,7 +51,7 @@ public class TogtListAdapter extends RecyclerView.Adapter<TogtListAdapter.TogtLi
     @NonNull
     @Override
     public TogtListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.togt_list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.togtoversigt_card, parent, false);
         TogtListViewHolder viewHolder = new TogtListViewHolder(view);
         return viewHolder;
     }

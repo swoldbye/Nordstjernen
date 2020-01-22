@@ -20,17 +20,15 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
-import com.example.skibslogapp.model.DateToString;
+import com.example.skibslogapp.utility.DateToString;
 import com.example.skibslogapp.model.Logpunkt;
-import com.example.skibslogapp.view.opretLog.LogCourse_frag;
-import com.example.skibslogapp.view.opretLog.LogNote_frag;
-import com.example.skibslogapp.view.opretLog.LogSailPosAndRowers_frag;
-import com.example.skibslogapp.view.opretLog.LogSails_frag;
-import com.example.skibslogapp.view.opretLog.LogViewModel;
-import com.example.skibslogapp.view.opretLog.LogWaterCurrent_frag;
-import com.example.skibslogapp.view.opretLog.LogWind_frag;
-
-import java.util.Calendar;
+import com.example.skibslogapp.view.opretlogpunkt.LogCourse_frag;
+import com.example.skibslogapp.view.opretlogpunkt.LogNote_frag;
+import com.example.skibslogapp.view.opretlogpunkt.LogSailPosAndRowers_frag;
+import com.example.skibslogapp.view.opretlogpunkt.LogSails_frag;
+import com.example.skibslogapp.view.opretlogpunkt.LogViewModel;
+import com.example.skibslogapp.view.opretlogpunkt.LogWaterCurrent_frag;
+import com.example.skibslogapp.view.opretlogpunkt.LogWind_frag;
 
 public class RedigerLogpunkt_frag extends Fragment {
     private TextView    time,
@@ -53,7 +51,7 @@ public class RedigerLogpunkt_frag extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_rediger_logpunkt, container, false);
+        View view = inflater.inflate(R.layout.redigerlogpunkt_frag, container, false);
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
         logVM.resetValues();
 
@@ -157,7 +155,7 @@ public class RedigerLogpunkt_frag extends Fragment {
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             System.out.println("onCreateView initiated");
-            View view = inflater.inflate(R.layout.fragment_rediger_logpunkt_dialogfragment, container);
+            View view = inflater.inflate(R.layout.redigerlogpunkt_dialog, container);
             return view;
         }
 

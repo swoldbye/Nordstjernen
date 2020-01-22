@@ -8,7 +8,7 @@ import android.content.pm.PackageManager;
 import androidx.core.app.ActivityCompat;
 
 import com.example.skibslogapp.model.Position;
-import com.example.skibslogapp.view.OpretLog_frag;
+import com.example.skibslogapp.view.opretlogpunkt.OpretLog_frag;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
