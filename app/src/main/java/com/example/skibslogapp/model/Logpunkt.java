@@ -1,10 +1,13 @@
 package com.example.skibslogapp.model;
 
-import com.example.skibslogapp.model.Position.Position;
+import androidx.annotation.NonNull;
 
-import java.util.Calendar;
+import com.example.skibslogapp.utility.DateToString;
+import com.example.skibslogapp.view.logpunktinput.LogViewModel;
+
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class Logpunkt {
 
@@ -22,9 +25,9 @@ public class Logpunkt {
     private boolean mandOverBord = false;
 
     private String vindretning = null;
-    private int vindhastighed = 0;
+    private int vindhastighed = -1;
     private String stroemRetning = null;
-    private int stroemhastighed = 0;
+    private int stroemhastighed = -1;
     private int kurs = -1;
     private String note = null;
 
@@ -32,28 +35,35 @@ public class Logpunkt {
     private String sejlstilling = null;
     private int roere = -1;
 
-
-
-
     private int hals = -1;
 
-    public Logpunkt(){
+    public Logpunkt(Date date, String vindretning, int kurs, boolean mandOverBord, String sejlfoering, String sejlstilling, String stroem, String note) {
+        this.date = date;
+        this.vindretning = vindretning;
+        this.kurs = kurs;
+        this.mandOverBord = mandOverBord;
+        this.sejlfoering = sejlfoering;
+        this.sejlstilling = sejlstilling;
+        this.note = note;
+    }
+
+    public Logpunkt() {
         this(null);
     }
 
-
-    /** If date is null, it sets it to current time */
-    public Logpunkt(Date date ){
+    /**
+     * If date is null, it sets it to current time
+     */
+    public Logpunkt(Date date) {
         /* Time is saved in variable to secure accurate equality between
             log date and creation date */
         long time = System.currentTimeMillis();
-        if( date == null )
+        if (date == null)
             this.date = new Date(time);
         else
             this.date = date;
-        this. creationDate = new Date(time);
+        this.creationDate = new Date(time);
     }
-
 
     public long getId() {
         return id;
@@ -102,7 +112,6 @@ public class Logpunkt {
     public void setNote(String note) {
         this.note = note;
     }
-
 
     public String getSejlfoering() {
         return sejlfoering;
@@ -157,13 +166,14 @@ public class Logpunkt {
      * Sets the creation date of the logpunkt.
      * Note: The creation date is automatically set to the curret time
      * when creating a new logpunkt.
+     *
      * @param date
      */
-    public void setCreationDate(Date date){
+    public void setCreationDate(Date date) {
         creationDate = date;
     }
 
-    public Date getCreationDate(Date date){
+    public Date getCreationDate(Date date) {
         return creationDate;
     }
 
@@ -176,34 +186,12 @@ public class Logpunkt {
     }
 
     public void setPosition(Position position) {
-            this.position = position;
+        this.position = position;
     }
 
-    public String getTimeString(){
-        if( date == null ) return "";
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        return String.format(Locale.US, "%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
-    }
-
-    public String getKursString(){
-        if( kurs == -1 ) return "";
+    public String getKursString() {
+        if (kurs == -1) return "";
         return Integer.toString(kurs);
-    }
-
-    public String getSejloeringString(){
-        if( sejlfoering == null ) return "";
-        return sejlfoering;
-    }
-
-    public String getSejlstillingString(){
-        if( sejlstilling == null ) return "";
-        return sejlstilling;
-    }
-
-    public String getNoteString(){
-        if( note == null ) return "";
-        return note;
     }
 
     public int getVindhastighed() {
@@ -222,14 +210,10 @@ public class Logpunkt {
         this.stroemhastighed = stroemhastighed;
     }
 
-    public boolean isMandOverBord() {
-        return mandOverBord;
-    }
-
-
     public Position getPosition() {
         return position;
     }
+
 
     /**
      * Compares the Logpunkt with another Logpunkt, comparing
@@ -237,59 +221,41 @@ public class Logpunkt {
      *
      * @param otherPunkt Logpunkt to compare with
      */
-    public boolean equals( Logpunkt otherPunkt ){
+    public boolean equals(Logpunkt otherPunkt) {
         /* .equals is not used on strings here, because the
-        *   strings may be null. It's not optimal, and may in
-        *   special cases cause problems.*/
+         *   strings may be null. It's not optimal, and may in
+         *   special cases cause problems.*/
         return
-            id == otherPunkt.id     &&
-            kurs == otherPunkt.kurs &&
-            hals == otherPunkt.hals &&
-            sejlfoering == otherPunkt.sejlfoering &&
-            sejlstilling == otherPunkt.sejlstilling &&
-            vindretning == otherPunkt.vindretning &&
-            vindhastighed == otherPunkt.vindhastighed &&
-            stroemRetning == otherPunkt.stroemRetning &&
-            stroemhastighed == otherPunkt.stroemhastighed &&
-            mandOverBord == otherPunkt.mandOverBord &&
-            date.equals(otherPunkt.date) &&
-            creationDate.equals(otherPunkt.creationDate) &&
-            roere == otherPunkt.roere;
+                id == otherPunkt.id &&
+                        kurs == otherPunkt.kurs &&
+                        hals == otherPunkt.hals &&
+                        Objects.equals(sejlfoering, otherPunkt.sejlfoering) &&
+                        Objects.equals(sejlstilling, otherPunkt.sejlstilling) &&
+                        Objects.equals(vindretning, otherPunkt.vindretning) &&
+                        vindhastighed == otherPunkt.vindhastighed &&
+                        Objects.equals(stroemRetning, otherPunkt.stroemRetning) &&
+                        stroemhastighed == otherPunkt.stroemhastighed &&
+                        mandOverBord == otherPunkt.mandOverBord &&
+                        date.equals(otherPunkt.date) &&
+                        creationDate.equals(otherPunkt.creationDate) &&
+                        roere == otherPunkt.roere;
     }
 
+
+    @NonNull
     @Override
-    public String toString(){
-
-        // Converting date to string
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        String dateString = String.format("%d/%d-%d %02d:%02d",
-                cal.get(Calendar.DAY_OF_MONTH),
-                cal.get(Calendar.MONTH)+1,
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.HOUR_OF_DAY),
-                cal.get(Calendar.MINUTE)
-        );
-
-        cal.setTime(creationDate);
-        String creationDateString = String.format("%d/%d-%d %02d:%02d",
-                cal.get(Calendar.DAY_OF_MONTH),
-                cal.get(Calendar.MONTH)+1,
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.HOUR_OF_DAY),
-                cal.get(Calendar.MINUTE)
-        );
+    public String toString() {
 
         return String.format(
                 Locale.US,
-            "Logpunkt{ id: %d, etapeId: %d, date: %s, creationDate: %s, pos.: %s, mob: %s, kurs: %s, vind: %s, vindhast.: %d, strøm: %s, strømhast.: %d, sejls.: %s, sejlf. %s, roere: %s, note: %s }",
+                "Logpunkt{ id: %d, etapeId: %d, date: %s, creationDate: %s, pos.: %s, mob: %s, kurs: %s, vind: %s, vindhast.: %d, strøm: %s, strømhast.: %d, sejls.: %s, sejlf. %s, roere: %s, note: %s }",
                 id,
                 etapeId,
-                dateString,
-                creationDateString,
+                DateToString.full(date),
+                DateToString.full(creationDate),
                 position != null ? position : "-",
                 mandOverBord ? "true" : "false",
-                kurs >=0 ? kurs : "-",
+                kurs >= 0 ? kurs : "-",
                 vindretning != null ? vindretning : "-",
                 vindhastighed,
                 stroemRetning != null ? stroemRetning : "-",
@@ -299,5 +265,19 @@ public class Logpunkt {
                 roere >= 0 ? roere : "-",
                 note != null ? note : "-"
         );
+    }
+
+    public void setInformation(LogViewModel logVM) {
+        this.setVindretning(logVM.getWindDirection());
+        this.setVindhastighed(logVM.getWindSpeed());
+        this.setStroemRetning(logVM.getWaterCurrentDirection());
+        this.setStroemhastighed(logVM.getWaterCurrentSpeed());
+        this.setSejlstilling(logVM.getSailPosition());
+        this.setRoere(logVM.getCurrRowers());
+        this.setSejlfoering(logVM.getSails().equals("") || logVM.getOrientation().equals("") ?
+                logVM.getSails() + logVM.getOrientation() :
+                logVM.getSails() + "-" + logVM.getOrientation());
+        this.setKurs(logVM.getCourse());
+        this.setNote(logVM.getNoteTxt());
     }
 }

@@ -4,15 +4,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.model.Togt;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class EtapeDAO {
@@ -31,35 +33,43 @@ public class EtapeDAO {
      * it, and saved to the 'id' field.
      * The Etape will be connected to the given Togt, such that following calls
      * getEtaper(...) will include the Etape in the returned list.
-     *
+     * <p>
      * The Togt must already be saved to the database using the {@link TogtDAO#addTogt(Togt)} method.
      *
-     * @param togt The Togt to add the Etape to
+     * @param togt  The Togt to add the Etape to
      * @param etape The Etape to add to the
      */
-    public void addEtape( Togt togt, Etape etape ){
-
+    public void addEtape(Togt togt, Etape etape) {
         TogtDAO togtDAO = new TogtDAO(context);
 
-        if( !togtDAO.togtExists(togt) )
-            throw new DAOException("Togt with ID "+togt.getId()+" doesn't exist in database");
+        if (!togtDAO.togtExists(togt))
+            throw new DAOException("Togt with ID " + togt.getId() + " doesn't exist in database");
 
         SQLiteDatabase database = connector.getWritableDatabase();
 
         ContentValues row = new ContentValues();
         row.put("togt", togt.getId());
-        if( etape.getStartDate() != null )
-            row.put( "startDate", etape.getStartDate().getTime() );
-        if( etape.getEndDate() != null )
-            row.put( "endDate", etape.getEndDate().getTime() );
+        if (etape.getStartDate() != null)
+            row.put("startDate", etape.getStartDate().getTime());
+        if (etape.getEndDate() != null)
+            row.put("endDate", etape.getEndDate().getTime());
+        if (etape.getStartDestination() != null)
+            row.put("startDestination", etape.getStartDestination());
+        if (etape.getSlutDestination() != null)
+            row.put("slutDestination", etape.getSlutDestination());
+        if (etape.getSkipper() != null)
+            row.put("skipper", etape.getSkipper());
+        row.put("status", etape.getStatus());
+        row.put("besaetning", besaetningToString(etape.getBesaetning()));
+
 
         long id = database.insert("etaper", "endDate", row);
         etape.setId(id);
         etape.setTogtId(togt.getId());
 
+        database.close();
         togtDAO.togtUpdated(etape.getTogtId());
     }
-
 
     /**
      * Loads all Etape objects from the database for the given Togt.
@@ -67,42 +77,95 @@ public class EtapeDAO {
      * @param togt The Togt to fetch the Logpunkter for
      * @return A list of Etape objects. The list is empty if none exists for the given Togt
      */
-    public List<Etape> getEtaper(Togt togt ){
+    public List<Etape> getEtaper(Togt togt) {
 
         // Check if Togt exists
-        if( !new TogtDAO(context).togtExists(togt) )
-            throw new DAOException("Togt with ID "+togt.getId() + " doesn't exist in the database");
+        if (!new TogtDAO(context).togtExists(togt))
+            throw new DAOException("Togt with ID " + togt.getId() + " doesn't exist in the database");
 
         SQLiteDatabase database = connector.getReadableDatabase();
         LinkedList<Etape> etaper = new LinkedList<>();
 
         // Create cursor for database rows
-        Cursor cursor = database.rawQuery("SELECT * FROM etaper WHERE togt="+togt.getId()+";",null);
+        Cursor cursor = database.rawQuery("SELECT * FROM etaper WHERE togt=" + togt.getId() + ";", null);
         // Load data from each row
-        while( cursor.moveToNext() ){
-
-            int column = -1;
-
-            long id = cursor.getInt( cursor.getColumnIndex("id"));
-            long togtId = cursor.getInt( cursor.getColumnIndex("togt"));
-
-            Date startDate = null;
-            column = cursor.getColumnIndex("startDate");
-            if( !cursor.isNull(column) ){
-                startDate = new Date(cursor.getLong(column));
-            }
-
-            Date endDate = null;
-            column = cursor.getColumnIndex("endDate");
-            if( !cursor.isNull(column) ){
-                endDate = new Date(cursor.getLong(column));
-            }
-
-            etaper.add( new Etape(id, togtId, startDate, endDate) );
+        while (cursor.moveToNext()) {
+            etaper.add(buildEtape(cursor));
         }
         cursor.close();
+        database.close();
 
         return etaper;
+    }
+
+    /**
+     * Loads the Etape with the given Etape ID from the database.
+     *
+     * @param id ID of the Etape in the database (larger than 1)
+     * @return New Etape object with information from database
+     * @throws DAOException If the Etape with the given ID doesn't exist in the database
+     */
+    public Etape getEtape(long id) {
+        SQLiteDatabase database = connector.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM etaper WHERE id=" + id + ";", null);
+
+        Etape etape = null;
+        if (cursor.moveToNext()) {
+            etape = buildEtape(cursor);
+        } else {
+            throw new DAOException(String.format(Locale.US, "Couldn't find Etape with ID %d in the database", id));
+        }
+        cursor.close();
+        database.close();
+
+        return etape;
+    }
+
+    /**
+     * Build an Etape object from a cursor, which contains points to an Etape
+     * row from the database.
+     */
+    private Etape buildEtape(Cursor cursor) {
+
+        Etape etape = new Etape();
+        etape.setId(cursor.getInt(cursor.getColumnIndex("id")));
+        etape.setTogtId(cursor.getInt(cursor.getColumnIndex("togt")));
+
+        int column;
+
+        column = cursor.getColumnIndex("startDate");
+        if (!cursor.isNull(column)) {
+            etape.setStartDate(new Date(cursor.getLong(column)));
+        }
+
+        column = cursor.getColumnIndex("endDate");
+        if (!cursor.isNull(column)) {
+            etape.setEndDate(new Date(cursor.getLong(column)));
+        }
+
+        column = cursor.getColumnIndex("startDestination");
+        if (!cursor.isNull(column)) {
+            etape.setStartDestination(cursor.getString(column));
+        }
+
+        column = cursor.getColumnIndex("slutDestination");
+        if (!cursor.isNull(column)) {
+            etape.setSlutDestination(cursor.getString(column));
+        }
+
+        column = cursor.getColumnIndex("skipper");
+        if (!cursor.isNull(column)) {
+            etape.setSkipper(cursor.getString(column));
+        }
+
+        column = cursor.getColumnIndex("status");
+        if (!cursor.isNull(column)) {
+            // Converting integer value to boolean value
+            etape.setStatus(cursor.getInt(column));
+        }
+        etape.setBesaetning(besaetningToList(cursor.getString(cursor.getColumnIndex("besaetning"))));
+
+        return etape;
     }
 
     /**
@@ -113,21 +176,31 @@ public class EtapeDAO {
      *
      * @param etape Etape to update
      */
-    public void updateEtape( Etape etape ){
+    public void updateEtape(Etape etape) {
 
-        if( !etapeExists(etape) )
-            throw new DAOException("Etape with ID "+etape.getId()+" doesn't exist in database");
+        if (!etapeExists(etape))
+            throw new DAOException("Etape with ID " + etape.getId() + " doesn't exist in database");
 
         // Create cursor for database rows
         SQLiteDatabase database = connector.getReadableDatabase();
 
         ContentValues row = new ContentValues();
-        if( etape.getStartDate() != null )
-            row.put( "startDate", etape.getStartDate().getTime() );
-        if( etape.getEndDate() != null )
-            row.put( "endDate", etape.getEndDate().getTime() );
+        if (etape.getStartDate() != null)
+            row.put("startDate", etape.getStartDate().getTime());
+        if (etape.getEndDate() != null)
+            row.put("endDate", etape.getEndDate().getTime());
+        if (etape.getStartDestination() != null)
+            row.put("startDestination", etape.getStartDestination());
+        if (etape.getSlutDestination() != null)
+            row.put("slutDestination", etape.getSlutDestination());
+        if (etape.getSkipper() != null)
+            row.put("skipper", etape.getSkipper());
+        row.put("status", etape.getStatus());
 
-        database.update("etaper", row, "id="+etape.getId(), null );
+        row.put("besaetning", besaetningToString(etape.getBesaetning()));
+
+        database.update("etaper", row, "id=" + etape.getId(), null);
+        database.close();
 
         new TogtDAO(context).togtUpdated(etape.getTogtId());
     }
@@ -140,22 +213,25 @@ public class EtapeDAO {
      * @param etape Etape to delete (compares ID with ID in the database)
      * @throws DAOException if the Etape doesn't exist in the database
      */
-    public void deleteEtape(Etape etape) throws DAOException{
+    public void deleteEtape(Etape etape) throws DAOException {
 
         // Check if etape exist
-        if( !etapeExists(etape) )
+        if (!etapeExists(etape))
             throw new DAOException(String.format("Couldn't find Etape with ID %d in the database", etape.getId()));
 
         // Deletes logpunkter for the Etape
         LogpunktDAO logpunktDAO = new LogpunktDAO(context);
-        for( Logpunkt logpunkt : logpunktDAO.getLogpunkter(etape) ){
+        for (Logpunkt logpunkt : logpunktDAO.getLogpunkter(etape)) {
             logpunktDAO.deleteLogpunkt(logpunkt);
         }
 
         // Delete Etape
-        connector.getReadableDatabase().delete("etaper", "id="+etape.getId(), null);
-    }
+        SQLiteDatabase database = connector.getReadableDatabase();
+        database.delete("etaper", "id=" + etape.getId(), null);
+        database.close();
 
+        new TogtDAO(context).togtUpdated(etape.getTogtId());
+    }
 
     /**
      * Checks if the given Etape exists in the database
@@ -164,15 +240,55 @@ public class EtapeDAO {
      * @param etape The etape to check if exists in the database
      * @return True if it exists, false if not
      */
-    public boolean etapeExists(Etape etape){
-        if( etape.getId() == -1 ) return false;
+    public boolean etapeExists(Etape etape) {
+        if (etape.getId() == -1) return false;
 
         SQLiteDatabase database = connector.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT * FROM etaper WHERE id="+etape.getId()+";", null);
+        Cursor cursor = database.rawQuery("SELECT * FROM etaper WHERE id=" + etape.getId() + ";", null);
         int rowCount = cursor.getCount();
         cursor.close();
+        database.close();
         return rowCount > 0;
     }
 
 
+    // Besaetnings conversion -------------------------------------------------
+    // Methods are public for testing
+
+    private static final String BESAETNING_SEPERATOR = ";";
+
+    /**
+     * Takes a list of Strings (names) and concat them into
+     * a single string where each element is seperated with
+     * BESAETNING_SEPERATOR.
+     * */
+    public String besaetningToString(List<String> besaetning) {
+        StringBuilder besaetningString = new StringBuilder();
+        boolean isFirst = true;
+        for (String navn : besaetning) {
+            if (isFirst){
+                isFirst = false;
+            } else{
+                besaetningString.append(BESAETNING_SEPERATOR);
+            }
+            besaetningString.append(navn);
+        }
+        return besaetningString.toString();
+    }
+
+    /**
+     * Takes a string of elements seperated by BESAETNING_SEPERATOR,
+     * and turn it into a list of seperate strings
+     * */
+    public List<String> besaetningToList(String besaetningString) {
+        String[] besaetningUnsorted = besaetningString.split(BESAETNING_SEPERATOR);
+        List<String> besaetningSorted = new ArrayList<>();
+
+        for (String navn : besaetningUnsorted) {
+            if (navn.length() > 0) {
+                besaetningSorted.add(navn);
+            }
+        }
+        return besaetningSorted;
+    }
 }

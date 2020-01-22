@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30dp">
+
+    <TextView
+        android:id="@+id/besaetningslist_navn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="BESAETNINGSMEDLEM"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/besaetningslist_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_remove_circle_black_24dp"
+        android:tint="@color/greyDark" />
+
+    <View
+        style="@style/Divider"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="0dp"
+        android:backgroundTint="#EEEEEE" />
+
+</RelativeLayout>

@@ -16,7 +16,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * using the new updated schema.
  *
  * TEST MODE:
- * Running the static method enableTestMode(true) will make consecutive objects
+ * Running the static method enableTestMode(true) will generateEtape consecutive objects
  * of the SQLiteConnector use a test database rather than the actual database.
  * The method also deletes the test database.
  *
@@ -25,7 +25,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  *      1. Open a Command Line Interpreter (Command Prompt, PowerShell Bash etc.)
  *      2. Check connected devices:
  *              adb devices
- *      3. Connect to device (note: can't make it work on actual device, only emulator):
+ *      3. Connect to device (note: can't generateEtape it work on actual device, only emulator):
  *              adb -s SERIALNUMBER shell   (i.e. 'adb -s emulator-5540 shell')
  *      4  Run as project:
  *              run-as com.example.skibslogapp
@@ -39,7 +39,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SQLiteConnector extends SQLiteOpenHelper {
 
     // Increment version number if you change anything
-    private static final int VERSION = 10;
+    private static final int VERSION = 15;
 
     // Name of database
     private static final String DATABASE ="logbog.db";
@@ -63,13 +63,16 @@ public class SQLiteConnector extends SQLiteOpenHelper {
     }
 
 
-    public SQLiteConnector(Context context) {
+    SQLiteConnector(Context context) {
         super(context, usedName, null, VERSION);
-
     }
 
-    /** This method is called when the database is created (i.e. if it didn't exist when
-        creating the SQLiteConnector), and it defines the tables of the database */
+    /**
+     * This method is called when the database is created (i.e. if it didn't exist when
+     * creating the SQLiteConnector), and it defines the tables of the database
+     *
+     * @param db
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -94,6 +97,11 @@ public class SQLiteConnector extends SQLiteOpenHelper {
                 "togt INTEGER," +
                 "startDate INTEGER NOT NULL," +
                 "endDate INTEGER," +
+                "startDestination TEXT," +
+                "slutDestination TEXT," +
+                "skipper TEXT," +
+                "status INT," +
+                "besaetning TEXT," +
                 "PRIMARY KEY(id)," +
                 "FOREIGN KEY(togt) REFERENCES togter(id)"+
             ")"
@@ -129,11 +137,9 @@ public class SQLiteConnector extends SQLiteOpenHelper {
     /**
      * This method runs if the version number of the current database
      * on the device doesn't match the static field version number 'VERSION'.
-     * Esentially, it recreates the database (dropping ALL entries).
-     */
+     * Esentially, it recreates the database (dropping ALL entries). */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //Todo: set this upgrade function up properly, at the momment it does not have much use.
         db.execSQL("DROP TABLE togter");
         db.execSQL("DROP TABLE etaper");
         db.execSQL("DROP TABLE logpunkter");

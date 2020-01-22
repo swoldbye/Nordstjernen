@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/SmallTitle"
+            android:text="Sejlstilling" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space style="@style/EvenSpace" />
+
+            <com.example.skibslogapp.utility.KingButton
+                android:id="@+id/læ"
+                style="@style/DefaultButton"
+                android:text="læ"
+                android:textColor="#000000" />
+
+            <Space style="@style/EvenSpace" />
+
+            <com.example.skibslogapp.utility.KingButton
+                android:id="@+id/ag"
+                style="@style/DefaultButton"
+                android:text="ag" />
+
+            <Space style="@style/EvenSpace" />
+
+            <com.example.skibslogapp.utility.KingButton
+                android:id="@+id/bi"
+                style="@style/DefaultButton"
+                android:text="ha" />
+
+            <Space style="@style/EvenSpace" />
+
+            <com.example.skibslogapp.utility.KingButton
+                android:id="@+id/fo"
+                style="@style/DefaultButton"
+                android:text="fo" />
+
+            <Space style="@style/EvenSpace" />
+
+            <com.example.skibslogapp.utility.KingButton
+                android:id="@+id/ha"
+                style="@style/DefaultButton"
+                android:text="bi" />
+
+            <Space style="@style/EvenSpace" />
+
+            <Space style="@style/EvenSpace" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ANTALROERE =====================================-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/opretetape_skipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:theme="@style/OpretLogTextInput">
+
+        <EditText
+            android:id="@+id/antalRoereEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
+            android:digits="0123456789"
+            android:ems="10"
+            android:hint="Antal Roere"
+            android:imeOptions="actionDone"
+            android:inputType="time"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
+            android:textSize="22sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>
