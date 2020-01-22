@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,14 +64,13 @@
         </LinearLayout>
     </LinearLayout>
 
-
     <!-- ANTALROERE =====================================-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/opretetape_skipper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:theme="@style/OpretLogTextInput"
-        >
+        android:theme="@style/OpretLogTextInput">
+
         <EditText
             android:id="@+id/antalRoereEditText"
             android:layout_width="match_parent"
@@ -85,5 +85,6 @@
             android:textColor="@color/textColor"
             android:textColorHint="@color/textColor"
             android:textSize="22sp" />
+
     </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>

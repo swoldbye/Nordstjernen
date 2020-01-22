@@ -45,12 +45,12 @@
     </style>
 
     <style name="RedigerLogDevider">
-    <item name="android:layout_width">match_parent</item>
-    <item name="android:layout_marginLeft">5dp</item>
-    <item name="android:layout_marginRight">5dp</item>
-    <item name="android:layout_height">1dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/grey</item>
-</style>
+    </style>
 
 
     <style name="DefaultButton">
@@ -61,7 +61,6 @@
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
     </style>
-
 
     <style name="SmallTitle">
         <item name="android:layout_width">wrap_content</item>
