@@ -83,7 +83,7 @@
                             <!-- TID =====================================-->
                             <fragment
                                 android:id="@+id/fragment_opretLog_time"
-                                android:name="com.example.skibslogapp.view.opretlogpunkt.LogTime_frag"
+                                android:name="com.example.skibslogapp.view.logpunktinput.LogTime_frag"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
@@ -93,7 +93,7 @@
                             <!-- VIND ============================================-->
                             <fragment
                                 android:id="@+id/fragment_opretLog_wind"
-                                android:name="com.example.skibslogapp.view.opretlogpunkt.LogWind_frag"
+                                android:name="com.example.skibslogapp.view.logpunktinput.LogWind_frag"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
@@ -103,7 +103,7 @@
                             <!-- STRØM ============================================-->
                             <fragment
                                 android:id="@+id/fragment_opretLog_waterCurrent"
-                                android:name="com.example.skibslogapp.view.opretlogpunkt.LogWaterCurrent_frag"
+                                android:name="com.example.skibslogapp.view.logpunktinput.LogWaterCurrent_frag"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
@@ -113,7 +113,7 @@
                             <!-- SEJSTILLING ============================================-->
                             <fragment
                                 android:id="@+id/fragment_opretLog_sailsAndRowers"
-                                android:name="com.example.skibslogapp.view.opretlogpunkt.LogSailPosAndRowers_frag"
+                                android:name="com.example.skibslogapp.view.logpunktinput.LogSailPosAndRowers_frag"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"/>
@@ -123,7 +123,7 @@
                             <!-- SEJLFØRING =====================================-->
                             <fragment
                                 android:id="@+id/fragment_opretLog_sails"
-                                android:name="com.example.skibslogapp.view.opretlogpunkt.LogSails_frag"
+                                android:name="com.example.skibslogapp.view.logpunktinput.LogSails_frag"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
@@ -133,7 +133,7 @@
                             <!-- KURS =====================================-->
                             <fragment
                                 android:id="@+id/fragment_opretLog_course"
-                                android:name="com.example.skibslogapp.view.opretlogpunkt.LogCourse_frag"
+                                android:name="com.example.skibslogapp.view.logpunktinput.LogCourse_frag"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
@@ -143,7 +143,7 @@
                             <!-- NOTE ======================================-->
                             <fragment
                                 android:id="@+id/fragment_opretLog_note"
-                                android:name="com.example.skibslogapp.view.opretlogpunkt.LogNote_frag"
+                                android:name="com.example.skibslogapp.view.logpunktinput.LogNote_frag"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />

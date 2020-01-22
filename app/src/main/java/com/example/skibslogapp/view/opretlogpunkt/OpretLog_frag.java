@@ -25,6 +25,8 @@ import com.example.skibslogapp.model.Etape;
 import com.example.skibslogapp.model.positionregistration.PositionController;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.view.logpunktinput.LogNote_frag;
+import com.example.skibslogapp.view.logpunktinput.LogViewModel;
 import com.example.skibslogapp.view.logpunktoversigt.LogpunktTabLayout;
 
 import java.util.Calendar;

@@ -1,4 +1,4 @@
-package com.example.skibslogapp.view.opretlogpunkt;
+package com.example.skibslogapp.view.logpunktinput;
 
 import android.os.Bundle;
 import android.os.Handler;
