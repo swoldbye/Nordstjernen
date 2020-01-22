@@ -18,6 +18,9 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.utility.SwapViewsTextHelper;
 
+/**
+ * Fragment to set water direction and speed of LogViewModel with user inputs.
+ */
 public class LogWaterCurrent_frag extends Fragment implements View.OnClickListener {
     private Button currentNorthBtn, currentEastBtn, currentSouthBtn, currentWestBtn, currentResetBtn;
     private TextView waterCurrentDirection , stroemretningTxtLeft, stroemretningTxtCenter;
@@ -34,7 +37,6 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
         stroemretningTxtLeft = view.findViewById(R.id.stroemning_text_leftaligned);
         stroemretningTxtCenter = view.findViewById(R.id.stroemning_text_center);
         waterCurrentDirection = view.findViewById(R.id.strøm_input);
-
         currentNorthBtn = view.findViewById(R.id.nordButton_strøm);
         currentEastBtn = view.findViewById(R.id.østButton_strøm);
         currentSouthBtn = view.findViewById(R.id.sydButton_strøm);
@@ -71,19 +73,14 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
         return view;
     }
 
-    private void updateViewInfo() {
-        waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
-        currentResetBtn.setVisibility(waterCurrentDirection.getText() != null && waterCurrentDirection.getText().length() != 0 ? View.VISIBLE : View.INVISIBLE);
-        waterCurrentSpeed.setText(logVM.getWaterCurrentSpeed() >= 0 ? Integer.toString(logVM.getWaterCurrentSpeed()) : "");
-    }
-
     @Override
     public void onClick(View v) {
         if(v == currentNorthBtn) waterCurrentLogic( "N", "S");
         else if(v == currentEastBtn) waterCurrentLogic( "Ø", "V");
         else if(v == currentSouthBtn) waterCurrentLogic( "S", "N");
         else if(v == currentWestBtn) waterCurrentLogic("V", "Ø");
-        if (v == currentResetBtn) {
+
+        if (v == currentResetBtn) { //Resets the user input
             logVM.setWaterCurrentDirection("");
             waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
             currentResetBtn.setVisibility(View.INVISIBLE);
@@ -91,6 +88,21 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
         } else SwapViewsTextHelper.leftalignText(stroemretningTxtLeft, stroemretningTxtCenter);
     }
 
+    /**
+     * Updates the text of the view elements
+     */
+    private void updateViewInfo() {
+        waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
+        currentResetBtn.setVisibility(waterCurrentDirection.getText() != null && waterCurrentDirection.getText().length() != 0 ? View.VISIBLE : View.INVISIBLE);
+        waterCurrentSpeed.setText(logVM.getWaterCurrentSpeed() >= 0 ? Integer.toString(logVM.getWaterCurrentSpeed()) : "");
+    }
+
+    /**
+     *  Adds the direction to the user input, if possible after the rules of N/E/S/W on a compass
+     *
+     * @param btnDirection      Button pressed
+     * @param counterDirection  Not applicable if this Button is pressed
+     */
     private void waterCurrentLogic(String btnDirection, String counterDirection) {
         if(!logVM.getWaterCurrentDirection().contains(counterDirection)) {
             switch(logVM.getWaterCurrentDirection().length()) {

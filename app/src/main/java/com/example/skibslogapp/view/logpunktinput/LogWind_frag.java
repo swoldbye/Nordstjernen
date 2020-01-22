@@ -76,7 +76,8 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
         else if(v == vindOestBtn) directionLogic(vindOestBtn.getText().toString(), vindVestBtn.getText().toString());
         else if(v == vindSydBtn) directionLogic(vindSydBtn.getText().toString(), vindNordBtn.getText().toString());
         else if(v == vindVestBtn) directionLogic(vindVestBtn.getText().toString(), vindOestBtn.getText().toString());
-        if (v == vindretning_delete) { //Resets the
+
+        if (v == vindretning_delete) { //Resets the user input
             logVM.setWindDirection("");
             vindretning_input.setText(logVM.getWindDirection());
             vindretning_delete.setVisibility(View.INVISIBLE);
@@ -94,7 +95,7 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
     }
 
     /**
-     *  Adds the direction to the user input, if possible after the rules of N/E/S/W rules
+     *  Adds the direction to the user input, if possible after the rules of N/E/S/W on a compass
      *
      * @param btnDirection      Button pressed
      * @param counterDirection  Not applicable if this Button is pressed
