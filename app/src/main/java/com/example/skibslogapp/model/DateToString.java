@@ -16,9 +16,7 @@ public class DateToString {
      * @return String representation of date
      */
     public static String format(String pattern, Date date){
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        return new SimpleDateFormat(pattern, Locale.UK).format(cal);
+        return new SimpleDateFormat(pattern, Locale.UK).format(date);
     }
 
     /**
