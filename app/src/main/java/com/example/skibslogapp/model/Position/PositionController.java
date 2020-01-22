@@ -29,7 +29,6 @@ public class PositionController {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
     }
 
-
     /*
     Method describes what the request that we generateEtape.
      */
@@ -37,13 +36,12 @@ public class PositionController {
         prepRequestLocationUpdates();
     }
 
-
     // Ask for access permission
     public void prepRequestLocationUpdates() {
         System.out.println("Requesting permission to access location");
 
         // If the user already have given permission, ACCESS_FINE_PERMISSION MAKE USE OF BOTH SATTELITE ANT TELETOWERS
-        if( (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
+        if ((ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
             // Permission access start measuering
             System.out.println("User ACCESS");
             startGetCoordinates();
@@ -56,11 +54,9 @@ public class PositionController {
         }
     }
 
-
     public void removeLocationUpdates() {
         fusedLocationProviderClient.removeLocationUpdates(callback);
     }
-
 
     public void startGetCoordinates() {
         System.out.println("Starting coordinate request");
@@ -68,7 +64,6 @@ public class PositionController {
         //Uses the requestLocationUpdates because I do not want the measuring to happen in the background. I only want it to happen when the Opret_log fraq is visible
         fusedLocationProviderClient.requestLocationUpdates(forespoergsel.getLocationRequest(), callback, null);
     }
-
 
     public Position getKoordinates() {
         return callback.getKoordinates();

@@ -123,6 +123,5 @@ public class LogViewModel extends ViewModel {
         this.course = logpunkt.getKurs();
         this.noteTxt = logpunkt.getNote();
 
-
     }
 }
