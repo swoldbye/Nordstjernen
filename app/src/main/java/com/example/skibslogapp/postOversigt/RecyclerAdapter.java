@@ -44,17 +44,62 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 ((TextView) view.findViewById(R.id.MOBTidTextView)).setText(localDateFormat.format(logpunkt.getDate()));
             }else{
                 TextView tidTextView = itemView.findViewById(R.id.tidTextView);
-                TextView vindretningTextView = itemView.findViewById(R.id.vindretningTextView);
+                TextView vindTextView = itemView.findViewById(R.id.vindretningTextView);
                 TextView kursTextView = itemView.findViewById(R.id.kursTextView);
                 TextView sejlføringTextView = itemView.findViewById(R.id.sejlføringTextView);
                 TextView sejlstillingTextView = itemView.findViewById(R.id.sejlstillingTextView);
+                TextView stroemTextView = itemView.findViewById(R.id.stroemTextView);
                 TextView noteTextView = itemView.findViewById(R.id.NoteTextView);
 
+
+                //Set time
                 tidTextView.setText(localDateFormat.format(logpunkt.getDate()));
-                vindretningTextView.setText(logpunkt.getVindretning());
-                kursTextView.setText(logpunkt.getKursString());
+
+                //Set vind
+                String vindHastighed = Integer.toString(logpunkt.getVindhastighed());
+                if(!logpunkt.getVindretning().equals(null)){
+                    if(logpunkt.getVindhastighed() == -1){
+                        vindTextView.setText(logpunkt.getVindretning());
+                    }
+                    else{
+                        vindTextView.setText(logpunkt.getVindretning() + "-" + vindHastighed);
+                    }
+                }else if(logpunkt.getVindhastighed() != -1){
+                    vindTextView.setText(vindHastighed);
+                }
+
+                //Set Stroem
+                String stroemHastighed = Integer.toString(logpunkt.getStroemhastighed());
+                if(!logpunkt.getStroemRetning().equals(null)){
+                    if(logpunkt.getStroemhastighed() == -1){
+                        stroemTextView.setText(logpunkt.getStroemRetning());
+                    }
+                    else{
+                        stroemTextView.setText(logpunkt.getStroemRetning() + "-" + stroemHastighed);
+                    }
+                }else if(logpunkt.getStroemhastighed() != -1){
+                    stroemTextView.setText(stroemHastighed);
+                }
+
+                //Set føring
                 sejlføringTextView.setText(logpunkt.getSejlfoering());
-                sejlstillingTextView.setText(logpunkt.getSejlstilling());
+
+                //Set stilling
+                if(logpunkt.getRoere() != -1){
+                    sejlstillingTextView.setText(Integer.toString(logpunkt.getRoere()));
+                }else{
+                    sejlstillingTextView.setText(logpunkt.getSejlstilling());
+                }
+
+                //Set kurs
+
+                if(!logpunkt.getKursString().equals("")){
+                    kursTextView.setText(logpunkt.getKursString() + "°");
+                }else{
+                    kursTextView.setText("");
+                }
+
+                //Set note
                 noteTextView.setText(logpunkt.getNote());
             }
         }

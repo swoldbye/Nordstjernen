@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
+    android:layout_marginBottom="10dp"
     app:cardBackgroundColor="@color/lightGrey"
     app:cardCornerRadius="4dp"
     app:cardElevation="3dp"
@@ -14,7 +15,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_weight="25"
@@ -23,12 +24,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="5sp">
+
 
             <TextView
                 android:id="@+id/tidTextView"
                 android:layout_width="40sp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="left"
                 android:text="tid"
@@ -37,61 +40,91 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/vindretningTextView"
+                android:id="@+id/NoteTextView"
                 android:layout_width="40sp"
-                android:layout_height="35dp"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="vind"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:text="Here is an arbitrary note"
                 android:textColor="@color/colorPrimary"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/sejlføringTextView"
-                android:layout_width="40sp"
-                android:layout_height="35dp"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="føring"
-                android:textColor="@color/colorPrimary"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/sejlstillingTextView"
-                android:layout_width="40sp"
-                android:layout_height="35dp"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="stilling"
-                android:textColor="@color/colorPrimary"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/kursTextView"
-                android:layout_width="40sp"
-                android:layout_height="35dp"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="kurs"
-                android:textColor="@color/colorPrimary"
-                android:textSize="25sp" />
+                android:textSize="20sp"
+                android:textStyle="italic" />
 
         </LinearLayout>
+
+        <View style="@style/DividerSmall" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            android:orientation="horizontal">
+
 
             <TextView
-                android:id="@+id/NoteTextView"
+                android:id="@+id/vindretningTextView"
                 android:layout_width="40sp"
-                android:layout_height="35sp"
-                android:layout_weight="8"
-                android:text="Here is an arbitrary note"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="vind"
+                android:gravity="center"
                 android:textColor="@color/colorPrimary"
-                android:textSize="25sp"
-                android:textStyle="italic" />
+                android:textSize="19sp"></TextView>
+
+            <View style="@style/verticalDivider" />
+
+
+            <TextView
+                android:id="@+id/kursTextView"
+                android:layout_width="40sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="kurs"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp" />
+
+
+            <View style="@style/verticalDivider" />
+
+
+            <TextView
+                android:id="@+id/sejlføringTextView"
+                android:layout_width="40sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="føring"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp" />
+
+
+            <View style="@style/verticalDivider" />
+
+
+            <TextView
+                android:id="@+id/sejlstillingTextView"
+                android:layout_width="40sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="stillin"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp" />
+
+
+            <View style="@style/verticalDivider" />
+
+
+            <TextView
+                android:id="@+id/stroemTextView"
+                android:layout_width="40sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="stroem"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp" />
+
 
         </LinearLayout>
     </LinearLayout>
