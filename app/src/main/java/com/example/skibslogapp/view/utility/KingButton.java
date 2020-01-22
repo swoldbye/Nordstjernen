@@ -17,7 +17,6 @@ import java.util.ArrayList;
  */
 public class KingButton extends AppCompatButton {
     private ArrayList<KingButton> relations = new ArrayList<>();
-    int basicColor = getResources().getColor(R.color.grey);
     int standOutColor = getResources().getColor(R.color.colorPrimary);
     boolean isSelected;
 

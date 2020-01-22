@@ -14,12 +14,12 @@
         <FrameLayout
             android:layout_width="105dp"
             android:layout_height="105dp"
+            android:clipToPadding="false"
+            android:elevation="1dp"
+            android:outlineProvider="none"
             android:padding="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:outlineProvider="none"
-            android:elevation="1dp"
-            android:clipToPadding="false">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/opretTogtBtn"
@@ -49,33 +49,32 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/togtOversigtHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/togtOversigtHeader"
+                android:background="@color/white"
+                android:elevation="10dp"
+                android:padding="15dp"
                 android:text="Togter"
                 android:textAlignment="center"
-                android:textStyle="bold"
-                android:padding="15dp"
-                android:background="@color/white"
                 android:textColor="@color/colorPrimary"
                 android:textSize="30sp"
-                android:elevation="10dp"/>
+                android:textStyle="bold" />
 
-            <include layout="@layout/togt_oversigt_uden_togt"/>
+            <include layout="@layout/togt_oversigt_uden_togt" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/togtRecycView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="5dp"
+                android:background="@color/white"
+                android:clipToPadding="false"
                 android:paddingLeft="10dp"
+                android:paddingTop="5dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="100dp"
-                android:clipToPadding="false"
-                android:background="@color/white"
-                android:scrollbars="vertical"/>
+                android:scrollbars="vertical" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>

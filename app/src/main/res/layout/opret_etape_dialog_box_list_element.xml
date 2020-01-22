@@ -7,11 +7,10 @@
         android:id="@+id/besaetningslist_navn"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="BESAETNINGSMEDLEM"
         android:gravity="center"
-        android:textSize="16sp"
+        android:text="BESAETNINGSMEDLEM"
         android:textColor="@color/colorPrimaryDark"
-        />
+        android:textSize="16sp" />
 
     <ImageView
         android:id="@+id/besaetningslist_cancel"
@@ -19,11 +18,12 @@
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:src="@drawable/ic_remove_circle_black_24dp"
-        android:tint="@color/greyDark"/>
+        android:tint="@color/greyDark" />
 
-    <View style="@style/Divider"
-        android:layout_margin="0dp"
+    <View
+        style="@style/Divider"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="#EEEEEE"/>
+        android:layout_margin="0dp"
+        android:backgroundTint="#EEEEEE" />
 
 </RelativeLayout>

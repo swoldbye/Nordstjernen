@@ -3,9 +3,6 @@
     <string name="time_colon">%1$s:</string>
     <string name="udtagdata">UdtagData</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="string_now_caps">NU</string>
 
     <string name="log_time_clock_divider">:</string>

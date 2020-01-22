@@ -1,4 +1,4 @@
-package com.example.skibslogapp.model.Position;
+package com.example.skibslogapp.model.positionregistration;
 
 import android.Manifest;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 
 import androidx.core.app.ActivityCompat;
 
+import com.example.skibslogapp.model.Position;
 import com.example.skibslogapp.view.OpretLog_frag;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -29,21 +30,14 @@ public class PositionController {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
     }
 
-
     /*
     Method describes what the request that we generateEtape.
      */
     public void startMeassureKoordinat() {
-        prepRequestLocationUpdates();
-    }
-
-
-    // Ask for access permission
-    public void prepRequestLocationUpdates() {
         System.out.println("Requesting permission to access location");
 
         // If the user already have given permission, ACCESS_FINE_PERMISSION MAKE USE OF BOTH SATTELITE ANT TELETOWERS
-        if( (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
+        if ((ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
             // Permission access start measuering
             System.out.println("User ACCESS");
             startGetCoordinates();
@@ -61,14 +55,12 @@ public class PositionController {
         fusedLocationProviderClient.removeLocationUpdates(callback);
     }
 
-
     public void startGetCoordinates() {
         System.out.println("Starting coordinate request");
         isGooglePlayInstalled(mContext);
         //Uses the requestLocationUpdates because I do not want the measuring to happen in the background. I only want it to happen when the Opret_log fraq is visible
         fusedLocationProviderClient.requestLocationUpdates(forespoergsel.getLocationRequest(), callback, null);
     }
-
 
     public Position getKoordinates() {
         return callback.getKoordinates();
