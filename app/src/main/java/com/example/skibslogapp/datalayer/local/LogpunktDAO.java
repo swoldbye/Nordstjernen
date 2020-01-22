@@ -128,7 +128,7 @@ public class LogpunktDAO {
             if (!cursor.isNull(cursor.getColumnIndex("roere")))
                 logpunkt.setRoere(cursor.getInt(cursor.getColumnIndex("roere")));
 
-            if (!cursor.isNull(cursor.getColumnIndex("kurs")))
+            if( !cursor.isNull( cursor.getColumnIndex("kurs")) )
                 logpunkt.setKurs(cursor.getInt(cursor.getColumnIndex("kurs")));
 
             logpunkter.add(logpunkt);
