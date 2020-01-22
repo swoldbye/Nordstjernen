@@ -78,7 +78,7 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new CrewAdapter(etape.getBesaetning(), getContext());
+        adapter = new CrewAdapter(etape.getBesaetning());
         recyclerView.setAdapter(adapter);
 
         showSkipper();
@@ -95,12 +95,28 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
         startDestInput.setError(null);
         navnInput.setError(null);
 
+        // Add Besaetning
+        if (v == addButton) {
+            String navn = navnInput.getEditText().getText().toString();
+            if (navn.length() <= 0) {
+                navnInput.setError("Der skal indtastes et navn på et besætningsmedlem!");
+            } else {
+                etape.addBesaetningsMedlem(navn);
+                navnInputEdit.setText("");
+                adapter.notifyDataSetChanged();
+                recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
+                hideKeyboard(v);
+            }
+        }
+
+        // Cancel Creation
         if (v == annullerEtape) {
             getFragmentManager().beginTransaction()
                     .remove(this)
                     .commit();
         }
 
+        // Start Etape
         if (v == startEtape) {
             String skipper = skipperInput.getEditText().getText().toString();
             String startDest = startDestInput.getEditText().getText().toString();
@@ -132,19 +148,6 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
                     .commit();
 
             if (onFinishCallback != null) onFinishCallback.run(this, etape);
-        }
-
-        if (v == addButton) {
-            String navn = navnInput.getEditText().getText().toString();
-            if (navn.length() <= 0) {
-                navnInput.setError("Der skal indtastes et navn på et besætningsmedlem!");
-            } else {
-                etape.addBesaetningsMedlem(navn);
-                navnInputEdit.setText("");
-                adapter.notifyDataSetChanged();
-                recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
-                hideKeyboard(v);
-            }
         }
     }
 
