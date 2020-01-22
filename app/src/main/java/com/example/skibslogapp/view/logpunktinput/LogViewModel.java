@@ -1,4 +1,4 @@
-package com.example.skibslogapp.view.opretlogpunkt;
+package com.example.skibslogapp.view.logpunktinput;
 
 import androidx.lifecycle.ViewModel;
 

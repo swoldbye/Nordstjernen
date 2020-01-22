@@ -22,13 +22,13 @@ import com.example.skibslogapp.R;
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.utility.DateToString;
 import com.example.skibslogapp.model.Logpunkt;
-import com.example.skibslogapp.view.opretlogpunkt.LogCourse_frag;
-import com.example.skibslogapp.view.opretlogpunkt.LogNote_frag;
-import com.example.skibslogapp.view.opretlogpunkt.LogSailPosAndRowers_frag;
-import com.example.skibslogapp.view.opretlogpunkt.LogSails_frag;
-import com.example.skibslogapp.view.opretlogpunkt.LogViewModel;
-import com.example.skibslogapp.view.opretlogpunkt.LogWaterCurrent_frag;
-import com.example.skibslogapp.view.opretlogpunkt.LogWind_frag;
+import com.example.skibslogapp.view.logpunktinput.LogCourse_frag;
+import com.example.skibslogapp.view.logpunktinput.LogNote_frag;
+import com.example.skibslogapp.view.logpunktinput.LogSailPosAndRowers_frag;
+import com.example.skibslogapp.view.logpunktinput.LogSails_frag;
+import com.example.skibslogapp.view.logpunktinput.LogViewModel;
+import com.example.skibslogapp.view.logpunktinput.LogWaterCurrent_frag;
+import com.example.skibslogapp.view.logpunktinput.LogWind_frag;
 
 public class RedigerLogpunkt_frag extends Fragment {
     private TextView    time,
