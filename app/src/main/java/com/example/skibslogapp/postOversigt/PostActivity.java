@@ -22,7 +22,7 @@ import com.example.skibslogapp.view.OpretLog_frag;
 import com.google.android.material.tabs.TabLayout;
 
 /**
- * This class is
+ * This class is a the fragment that contains the tab layout and the create Logpunkt button
  */
 public class PostActivity extends Fragment {
 
@@ -56,6 +56,9 @@ public class PostActivity extends Fragment {
         return view;
     }
 
+    /**
+     *
+     */
     private void openOpretLogpunkt(){
         OpretLog_frag fragment = new OpretLog_frag();
 
