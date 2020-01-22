@@ -18,6 +18,10 @@ import java.util.List;
 
 public class LogpunktAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    /**
+     * A listadapter to set the views of the recyclerlist holding log-points.
+     */
+
     private List<Logpunkt> mTempLogs;
     private boolean fillerCardEnabled = false;
 
@@ -46,6 +50,10 @@ public class LogpunktAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 TextView stroemTextView = itemView.findViewById(R.id.stroemTextView);
                 TextView noteTextView = itemView.findViewById(R.id.NoteTextView);
 
+                /*
+                The following sets the card view depending on what points have been entered
+                into the log-point.
+                 */
 
                 //Set time
                 tidTextView.setText(DateToString.time(logpunkt.getDate()));
@@ -79,7 +87,7 @@ public class LogpunktAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 //Set føring
                 sejlfoeringTextView.setText(logpunkt.getSejlfoering());
 
-                //Set stilling
+                //Set stilling and Roere
                 if(logpunkt.getRoere() != -1){
                     sejlstillingTextView.setText(Integer.toString(logpunkt.getRoere()));
                 }else{
@@ -145,6 +153,16 @@ public class LogpunktAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+    /**
+     * In order to reduce the size of the list, such that the entire list is visible from the small
+     * window that is left after the "opretlogpunk" fragment comes in from the bottom.
+     *
+     * A "fillerCard" with the same size as the "opretlogpunkt" fragment is placed at the bottom of the list.
+     *
+     * Otherwise the itemView will either return a normal logpoint view or a MOB (mand over bord) view.
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         if( fillerCardEnabled && (position+1) == getItemCount()){
@@ -200,6 +218,13 @@ public class LogpunktAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return mTempLogs.size() + (fillerCardEnabled ? 1 : 0) ;
     }
 
+
+    /**
+     * Method takes a new array of logpoints that need to be updated on the list. New logpoint
+     * will be at the end of the list, therefore the adapter is notified about this.
+     *
+     * @param newLogs
+     */
     void updateData(List<Logpunkt> newLogs){
         mTempLogs = newLogs;
         notifyItemInserted(mTempLogs.size()-1);

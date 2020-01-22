@@ -49,7 +49,7 @@ public class LogpuntkOversigt_frag extends Fragment {
     }
 
     /**
-     *
+     * Method to open the opretLogpunkt fragment on the press of the "OPRET LOGPUNKT" button.
      */
     private void openOpretLogpunkt(){
         OpretLog_frag fragment = new OpretLog_frag();

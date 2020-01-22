@@ -19,6 +19,10 @@ import java.util.List;
 
 public class LogpunktList extends Fragment {
 
+    /**
+     * Class to setup the recycler-list-adapter.
+     */
+
     RecyclerView postRecyclerView;
     private List<Logpunkt> logs;
     private LogpunktAdapter mAdapter;
@@ -49,6 +53,10 @@ public class LogpunktList extends Fragment {
         return postRecyclerView.getAdapter();
     }
 
+    /**
+     * Adds a filler card into the list on the openning of opretlogpunkt fragment.
+     * @param toggle
+     */
     void toggleMinimize(boolean toggle){
         mAdapter.toggleFillerCard(toggle);
         final int itemCount = mAdapter.getItemCount();

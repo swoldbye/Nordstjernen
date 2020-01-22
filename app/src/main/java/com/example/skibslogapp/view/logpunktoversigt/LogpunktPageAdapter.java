@@ -14,6 +14,10 @@ import java.util.Map;
 
 public class LogpunktPageAdapter extends FragmentStatePagerAdapter {
 
+    /**
+     * A pagerAdapter to allow swiping in the tabLayout
+     */
+
     private List<List<Logpunkt>> etapper;
     private Map<Integer, Fragment> fragmentMap;
 
@@ -25,7 +29,7 @@ public class LogpunktPageAdapter extends FragmentStatePagerAdapter {
     }
 
     /**
-     * This decides which fragments to call from which tab
+     * An overided function with the purpose of creating a fragment for each page in the viewPager.
      *
      * @param position the position of the tab
      * @return The fragment you want to change
@@ -38,6 +42,11 @@ public class LogpunktPageAdapter extends FragmentStatePagerAdapter {
         return postOversigt;
     }
 
+    /**
+     * A function that defines how many page there should be in the viewPager, and by extention the
+     * tabLayout because the two are tied together.
+     * @return
+     */
     @Override
     public int getCount() {
         return etapper.size();
@@ -49,6 +58,13 @@ public class LogpunktPageAdapter extends FragmentStatePagerAdapter {
         return "E" + (position + 1);
     }
 
+    /**
+     * Function that is repsonible for updating the list. Gets called from LogpunkTabLayout on it's
+     * TogtObserver.
+     * @param newEtapper
+     * @param position
+     * @param FA
+     */
     void updateList(List<List<Logpunkt>> newEtapper, int position, FragmentActivity FA) {
         this.etapper = newEtapper;
 

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * TabLayout for etapper, which contains a viewPager for swiping which will make a list to be placed in each page.
  */
 public class LogpunktTabLayout extends Fragment implements TogtDAO.TogtObserver {
 
@@ -76,6 +76,12 @@ public class LogpunktTabLayout extends Fragment implements TogtDAO.TogtObserver 
 
     }
 
+
+    /**
+     * Hides or Shows the tabs at the top of the view of the TabLayout. This gets called upon the button-press
+     * of the open / close buttons for the opretlogpunkt fragment.
+     * @param toggle
+     */
     public void toggleMinimize(boolean toggle){
         LogpunktList currentPage = (LogpunktList) logpunktPageAdapter.getFragment(viewPager.getCurrentItem());
         currentPage.toggleMinimize(toggle);
@@ -92,6 +98,13 @@ public class LogpunktTabLayout extends Fragment implements TogtDAO.TogtObserver 
     }
 
 
+    /**
+     * Overided from TogtDAO.TogtObserver - which is called when the TogtObserver sees a change
+     * in the database.
+     *
+     * The function starts the process of updating the list upon the creation of a logpunkt.
+     * @param togt2
+     */
     @Override
     public void onUpdate(Togt togt2) {
         DbTranslator dbTranslator = new DbTranslator(getContext());
