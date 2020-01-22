@@ -9,31 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/editTime"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:imeOptions="actionDone"
-            android:inputType="time"
-            android:maxLength="5"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textColorHint="#757575"
-            android:textSize="40sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!--PLACEHOLDER FOR POSITION KOORDINAT===============================-->
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <NumberPicker
             android:id="@+id/logTimeHours"
             android:layout_width="70dp"
