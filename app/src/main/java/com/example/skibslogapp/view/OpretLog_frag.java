@@ -11,18 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 
-import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,18 +25,13 @@ import android.widget.Toast;
 import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.LogpunktDAO;
 import com.example.skibslogapp.model.Etape;
-import com.example.skibslogapp.model.GlobalTogt;
 import com.example.skibslogapp.model.Position.PositionController;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.R;
-import com.example.skibslogapp.postOversigt.RecyclerAdapter;
 import com.example.skibslogapp.postOversigt.TabLayout_frag;
 import com.example.skibslogapp.view.opretLog.LogNote_frag;
 import com.example.skibslogapp.view.opretLog.LogViewModel;
 
-import org.w3c.dom.Text;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
