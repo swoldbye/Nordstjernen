@@ -8,17 +8,15 @@ import android.widget.TextView;
 
 public class SwapViewsTextHelper {
 
-    public static void setText(TextView oldText, TextView newText){
-        if(!oldText.getText().equals("")) {
-            newText.setText(oldText.getText().toString().contains(":") ? oldText.getText() : oldText.getText() + ":");
-            oldText.setText("");
-        }
+    public static void centerText(TextView leftTxtView, TextView centerTxtView){
+        CharSequence stringToRevert = leftTxtView.getText().toString();
+        centerTxtView.setText(stringToRevert);
+        leftTxtView.setText("");
     }
 
-    public static void revertText(TextView oleText, TextView newText){
-        CharSequence stringToRevert = newText.getText().subSequence(0,newText.getText().length()-1);
-
-        oleText.setText(stringToRevert);
-        newText.setText("");
+    public static void leftalignText(TextView leftTxtView, TextView centerTxtView){
+        CharSequence stringToRevert = centerTxtView.getText().toString();
+        if(!stringToRevert.equals("")) leftTxtView.setText(stringToRevert);
+        centerTxtView.setText("");
     }
 }

@@ -23,7 +23,7 @@ import com.example.skibslogapp.utility.SwapViewsTextHelper;
  */
 public class LogWind_frag extends Fragment implements View.OnClickListener {
     private Button vindNordBtn, vindOestBtn, vindSydBtn, vindVestBtn, vindretning_delete;
-    private TextView vindretning_input , vindretning, vindretningNew;
+    private TextView vindretning_input , vindretningTxtCenter, vindretningTxtLeft;
     private EditText vindHastighedEditTxt;
     private LogViewModel logVM;
 
@@ -34,11 +34,9 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
 
         //Vind Retning
-        vindretningNew = view.findViewById(R.id.vindretning_newtext);
-        vindretning = view.findViewById(R.id.vindretning_text);
+        vindretningTxtLeft = view.findViewById(R.id.vindretning_text_leftaligned);
+        vindretningTxtCenter = view.findViewById(R.id.vindretning_text_centered);
         vindretning_input = view.findViewById(R.id.vindretning_input);
-        if(vindretning_input.getText() != null && !vindretning_input.getText().toString().equals(""))
-            SwapViewsTextHelper.setText(vindretning,vindretningNew);
 
         //Direction Buttons
         vindNordBtn = view.findViewById(R.id.nordButton);
@@ -74,19 +72,16 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        SwapViewsTextHelper.setText(vindretning,vindretningNew);
-
-        //Presses the Button selected
         if(v == vindNordBtn) directionLogic(vindNordBtn.getText().toString(), vindSydBtn.getText().toString());
         else if(v == vindOestBtn) directionLogic(vindOestBtn.getText().toString(), vindVestBtn.getText().toString());
         else if(v == vindSydBtn) directionLogic(vindSydBtn.getText().toString(), vindNordBtn.getText().toString());
         else if(v == vindVestBtn) directionLogic(vindVestBtn.getText().toString(), vindOestBtn.getText().toString());
-        else if (v == vindretning_delete) { //Resets the
+        if (v == vindretning_delete) { //Resets the
             logVM.setWindDirection("");
             vindretning_input.setText(logVM.getWindDirection());
             vindretning_delete.setVisibility(View.INVISIBLE);
-            SwapViewsTextHelper.revertText(vindretning,vindretningNew);
-        }
+            SwapViewsTextHelper.centerText(vindretningTxtLeft, vindretningTxtCenter);
+        } else SwapViewsTextHelper.leftalignText(vindretningTxtLeft, vindretningTxtCenter);
     }
 
     /**

@@ -34,8 +34,8 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
         waterCurrentDescription = view.findViewById(R.id.stroemning_text);
         waterCurrentDescription_NewText = view.findViewById(R.id.stroemning_newtext);
         waterCurrentDirection = view.findViewById(R.id.strøm_input);
-        if(waterCurrentDirection.getText() != null && !waterCurrentDirection.getText().toString().equals(""))
-            SwapViewsTextHelper.setText(waterCurrentDescription,waterCurrentDescription_NewText);
+//        if(waterCurrentDirection.getText() != null && !waterCurrentDirection.getText().toString().equals(""))
+//            SwapViewsTextHelper.leftalignText(waterCurrentDescription,waterCurrentDescription_NewText);
 
         currentNorthBtn = view.findViewById(R.id.nordButton_strøm);
         currentEastBtn = view.findViewById(R.id.østButton_strøm);
@@ -81,16 +81,16 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        SwapViewsTextHelper.setText(waterCurrentDescription,waterCurrentDescription_NewText);
+        SwapViewsTextHelper.leftalignText(waterCurrentDescription,waterCurrentDescription_NewText);
         if(v == currentNorthBtn) waterCurrentLogic( "N", "S");
         else if(v == currentEastBtn) waterCurrentLogic( "Ø", "V");
         else if(v == currentSouthBtn) waterCurrentLogic( "S", "N");
         else if(v == currentWestBtn) waterCurrentLogic("V", "Ø");
-        else if (v == currentResetBtn) {
+        if (v == currentResetBtn) {
             logVM.setWaterCurrentDirection("");
             waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
             currentResetBtn.setVisibility(View.INVISIBLE);
-            SwapViewsTextHelper.revertText(waterCurrentDescription,waterCurrentDescription_NewText);
+            SwapViewsTextHelper.leftalignText(waterCurrentDescription,waterCurrentDescription_NewText);
         }
     }
 
