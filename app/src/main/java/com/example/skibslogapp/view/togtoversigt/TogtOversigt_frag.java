@@ -100,8 +100,6 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener,
     }
 
 
-
-
     @Override
     public void onDestroy(){
         super.onDestroy();

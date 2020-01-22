@@ -261,19 +261,32 @@ public class EtapeDAO {
 
     public static final String BESAETNING_SEPERATOR = ";";
 
+    /**
+     * This function converts a "Besaetnings" list to
+     *
+     * @param besaetning The
+     * @return
+     */
     public String besaetningToString(List<String> besaetning) {
         StringBuilder besaetningString = new StringBuilder();
         boolean isFirst = true;
         for (String navn : besaetning) {
-            if (isFirst)
+            if (isFirst){
                 isFirst = false;
-            else
+            } else{
                 besaetningString.append(BESAETNING_SEPERATOR);
+            }
             besaetningString.append(navn);
         }
         return besaetningString.toString();
     }
 
+    /**
+     *
+     *
+     * @param besaetningString
+     * @return
+     */
     public List<String> besaetningToList(String besaetningString) {
         String[] besaetningUnsorted = besaetningString.split(BESAETNING_SEPERATOR);
         List<String> besaetningSorted = new ArrayList<>();
@@ -285,6 +298,4 @@ public class EtapeDAO {
         }
         return besaetningSorted;
     }
-
-
 }
