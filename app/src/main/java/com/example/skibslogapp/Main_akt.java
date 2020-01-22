@@ -68,9 +68,6 @@ public class Main_akt extends AppCompatActivity {
     /**
      * Code snippet taken from https://stackoverflow.com/questions/4828636/edittext-clear-focus-on-touch-outside
      * Hides the keyboard when going out of focus. Should also work for fragments
-     *
-     * @param event
-     * @return
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
