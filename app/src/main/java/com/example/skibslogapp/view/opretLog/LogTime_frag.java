@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ import java.util.Calendar;
 
 public class LogTime_frag extends Fragment implements View.OnClickListener {
     Button resetTimeButton;
+    NumberPicker hours, minutes;
     EditText editTime;
     LogViewModel logVM;
     private int timeStringLengthBefore = 0;
@@ -37,6 +39,11 @@ public class LogTime_frag extends Fragment implements View.OnClickListener {
         editTime.setOnClickListener(this);
         resetTimeButton.setOnClickListener(this);
 
+        hours = view.findViewById(R.id.logTimeHours);
+        minutes = view.findViewById(R.id.logTimeMinutes);
+        hours.setMaxValue(23);
+        minutes.setMaxValue(59);
+
         final Handler handler =new Handler();
         final Runnable r = new Runnable() {
             public void run() {
@@ -50,7 +57,7 @@ public class LogTime_frag extends Fragment implements View.OnClickListener {
         };
         handler.postDelayed(r, 0000);
 
-        editTime.setOnFocusChangeListener((v, hasFocus) -> timeControl(hasFocus));
+        editTime.setOnFocusChangeListener((v, hasFocus) -> controlFinalTimeInput());
 
         editTime.addTextChangedListener(new TextWatcher() {
             @Override
@@ -66,23 +73,49 @@ public class LogTime_frag extends Fragment implements View.OnClickListener {
             @Override
             public void afterTextChanged(Editable s) {
                 int timeStringLengthAfter = editTime.getText().toString().length();
-                if(timeStringLengthAfter > timeStringLengthBefore && timeStringLengthAfter == 2) { //Insert colon
-                    editTime.setText(getString(R.string.time_colon, editTime.getText()));
-                    editTime.setSelection(3);
+                if(timeStringLengthAfter > timeStringLengthBefore && timeStringLengthAfter > 0) { //Insert colon
+//                    editTime.setText(getString(R.string.time_colon, editTime.getText()));
+//                    editTime.setSelection(3);
+                    controlTimeInput();
                 }
+
                 timeStringLengthBefore = timeStringLengthAfter;
-
-
             }
         });
 
         return view;
     }
 
-    private void timeControl(Boolean hasFocus) {
+    private void controlTimeInput() {
+        String time = editTime.getText().toString();
+
+        switch(time.length()) {
+            case 1:
+                if(Integer.parseInt(time.substring(0,1)) > 2) {
+                    editTime.setText("0".concat(time + ":"));
+                    editTime.setSelection(3);
+                }
+                break;
+            case 2:
+                if(Integer.parseInt(time.substring(0,2)) < 60) {
+                    editTime.setText(getString(R.string.time_colon, editTime.getText()));
+                    editTime.setSelection(3);
+                } else {
+                    editTime.setText(time.substring(0,1));
+                    editTime.setSelection(1);
+                }
+                break;
+            case 5:
+                if(Integer.parseInt(time.substring(3, 5)) > 59) {
+                    editTime.setText(time.substring(0,4));
+                    editTime.setSelection(4);
+                }
+        }
+
+    }
+
+    private void controlFinalTimeInput() {
         String timeString;
-        if (hasFocus) editTime.setHint("");
-        else editTime.setHint(new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime()));
 
         String time = editTime.getText().toString();
         //Accept 3 digit input
@@ -96,9 +129,11 @@ public class LogTime_frag extends Fragment implements View.OnClickListener {
         if(time.length() == 3) {
             if (Integer.parseInt(time.substring(0,2)) < 24) {
                 timeString = time = time.concat("00");
-                logVM.setTime(timeString);
-                editTime.setText(timeString);
+            } else {
+                timeString = time = "00".concat(":" + time.substring(0,2));
             }
+            logVM.setTime(timeString);
+            editTime.setText(timeString);
         }
         if(time.length() == 4) {
             if(Integer.parseInt(time.substring(0,1)) < 10) {
