@@ -97,7 +97,7 @@
             <Space style="@style/EvenSpace" />
 
             <Button
-                android:id="@+id/østButton"
+                android:id="@+id/oestButton"
                 style="@style/DefaultButton"
                 android:text="Ø" />
 
