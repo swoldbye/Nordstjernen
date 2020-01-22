@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
+
     <TextView
         android:id="@+id/test_tex"
         android:layout_width="match_parent"
@@ -27,7 +28,6 @@
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/editLogTimeContainer"
                 android:layout_width="match_parent"
@@ -43,6 +43,7 @@
                     android:layout_marginStart="16dp"
                     android:text="Tid:"
                     android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"  />
@@ -81,6 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Position:"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +92,6 @@
                     android:id="@+id/editLogLatitude"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_marginEnd="10dp"
                     android:text="Latitude"
                     android:textSize="20sp"
@@ -105,7 +106,6 @@
                     android:id="@+id/editLogLongitude"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_marginEnd="10dp"
                     android:text="Longitude"
                     android:textSize="20sp"
@@ -117,6 +117,7 @@
                     app:layout_constraintStart_toEndOf="@+id/editLogPosition"
                     app:layout_constraintTop_toBottomOf="@+id/editLogLatitude"
                     app:layout_constraintVertical_bias="0.0" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View style="@style/RedigerLogDevider" />
@@ -137,6 +138,7 @@
                     android:layout_marginStart="10dp"
                     android:text="Vind:"
                     android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -159,7 +161,6 @@
                     android:id="@+id/editLogWindSpeedInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_marginEnd="10dp"
                     android:text="Vind Hastighed"
                     android:textSize="20sp"
@@ -170,6 +171,7 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/editLogWind"
                     app:layout_constraintTop_toBottomOf="@+id/editLogWindDirectionInfo" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View style="@style/RedigerLogDevider" />
@@ -190,6 +192,7 @@
                     android:layout_marginStart="10dp"
                     android:text="Strøm"
                     android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -212,7 +215,6 @@
                     android:id="@+id/editLogWaterCurrentSpeedInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_marginEnd="10dp"
                     android:text="Strøm Hastighed"
                     android:textSize="20sp"
@@ -223,6 +225,7 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/editLogWaterCurrent"
                     app:layout_constraintTop_toBottomOf="@+id/editLogWaterCurrentDirectionInfo" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View style="@style/RedigerLogDevider" />
@@ -243,6 +246,7 @@
                     android:layout_marginStart="10dp"
                     android:text="Sejlstilling/Roere"
                     android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -261,6 +265,7 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/editLogSailsOrRowers"
                     app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View style="@style/RedigerLogDevider" />
@@ -280,6 +285,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Sejlposition"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -295,12 +301,11 @@
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/editLogSailsPosition"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View style="@style/RedigerLogDevider" />
@@ -320,6 +325,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Styrekurs"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -338,8 +344,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/editLogCourse"
-                    app:layout_constraintTop_toTopOf="parent"
-                     />
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View style="@style/RedigerLogDevider" />
@@ -361,6 +367,7 @@
                     android:layout_marginStart="10dp"
                     android:text="Note"
                     android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -371,11 +378,13 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
+                    android:textColor="@color/colorPrimary"
                     android:text="Dette er en længere tekst, der viser a\nt \nvi k\nan \nse f\nlere l\ninie\nr i\n et\n tekst\nvi\new. \nPå\n den\nne må\nde \nkan vi hol\nde \nnoter her lige meget hvilket antal linier. Måske skrive en opskrift på pasta eller noget, ved at løbe tør for ideer"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editLogNote" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
