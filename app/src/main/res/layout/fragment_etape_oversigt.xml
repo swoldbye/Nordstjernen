@@ -61,7 +61,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <TextView
                 android:id="@+id/etapeTogtText"
                 android:layout_width="match_parent"
@@ -122,6 +121,7 @@
                 android:paddingBottom="110dp"
                 android:paddingTop="25dp"
                 android:clipToPadding="false" />
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

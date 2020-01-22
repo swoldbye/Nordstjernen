@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:elevation="20dp"
     android:clickable="true"
+    android:elevation="20dp"
     tools:context=".view.oprettogt.OpretTogt_frag">
 
     <ScrollView
@@ -19,11 +18,11 @@
             android:id="@+id/oprettogt_inputcontainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingRight="50dp"
-            android:paddingLeft="50dp"
-            android:paddingTop="50dp"
             android:gravity="center_horizontal"
             android:orientation="vertical"
+            android:paddingLeft="50dp"
+            android:paddingTop="50dp"
+            android:paddingRight="50dp"
             app:layout_constraintTop_toTopOf="parent"
             tools:context=".MainActivity">
 
@@ -34,74 +33,72 @@
                 android:text="Opret Togt"
                 android:textColor="@color/colorPrimary"
                 android:textSize="30sp"
-                android:textStyle="bold"/>
-
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/togtNavn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/TextInput"
                 android:layout_marginTop="25dp"
-                android:id="@+id/togtNavn">
+                android:theme="@style/TextInput">
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:maxLength="40"
                     android:hint="Togtets navn"
-                    />
+                    android:inputType="textPersonName"
+                    android:maxLength="40" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/skipperEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/TextInput"
                 android:layout_marginTop="16dp"
-                android:id="@+id/skipperEdit">
-                <EditText
+                android:theme="@style/TextInput">
 
-                    android:inputType="textPersonName"
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="40"
-                    android:hint="Skipper" />
+                    android:hint="Skipper"
+                    android:inputType="textPersonName"
+                    android:maxLength="40" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/startDestEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/TextInput"
                 android:layout_marginTop="16dp"
-                android:id="@+id/startDestEdit">
-                <EditText
+                android:theme="@style/TextInput">
 
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:hint="Start destination"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:hint="Start destination"
+                    android:inputType="textPersonName" />
 
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/TextInput"
                 android:layout_marginTop="16dp"
-                android:paddingLeft="2dp">
+                android:paddingLeft="2dp"
+                android:theme="@style/TextInput">
 
                 <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
                     android:id="@+id/skibsListe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Vælg skib"
                     android:inputType="textPersonName"
                     android:maxLength="40"
-                    android:hint="Vælg skib"
                     android:textSize="17sp" />
+
             </com.google.android.material.textfield.TextInputLayout>
-
-
 
             <!-- Button Container -->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -117,27 +114,22 @@
                     android:text="Annullér"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="17sp"
-                    app:layout_constraintTop_toTopOf="@id/oprettogt_opretbutotn"
                     app:layout_constraintBottom_toBottomOf="@id/oprettogt_opretbutotn"
                     app:layout_constraintStart_toStartOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="@id/oprettogt_opretbutotn" />
 
                 <Button
                     android:id="@+id/oprettogt_opretbutotn"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
-                    android:text="Opret"
-                    android:textStyle="bold"
                     android:backgroundTint="@color/colorPrimaryDark"
+                    android:text="Opret"
                     android:textColor="@color/white"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </LinearLayout>
-
     </ScrollView>
-
-
 </FrameLayout>
