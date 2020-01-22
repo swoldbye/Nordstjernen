@@ -67,6 +67,8 @@
                 android:layout_height="wrap_content"
                 android:hint="TOGTNAVN"
                 android:padding="8dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
                 android:textColorHint="@color/colorPrimary"
