@@ -12,6 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DbTranslator {
+    /**
+     * A class with the purpose of translating the database log-points into a 2D arraylist that the
+     * "LogpunktTabLayout" can use to send on to "LogpunktPageAdapter".
+     */
+
+
 
     private EtapeDAO etapeDAO;
     private LogpunktDAO logpunktDAO;
@@ -26,6 +32,8 @@ public class DbTranslator {
         logs1D = logpunktDAO.getLogpunkter(etape);
         return logs1D;
     }
+
+
 
     public List<List<Logpunkt>> getList(Togt togt) {
         ArrayList<List<Logpunkt>> logs2D = new ArrayList<>();
