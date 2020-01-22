@@ -18,8 +18,11 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.view.utility.SwapViewsTextHelper;
 
+/**
+ * Fragment to set wind direction and speed of LogViewModel with user inputs.
+ */
 public class LogWind_frag extends Fragment implements View.OnClickListener {
-    private Button vindNordBtn, vindØstBtn, vindSydBtn, vindVestBtn, vindretning_delete;
+    private Button vindNordBtn, vindOestBtn, vindSydBtn, vindVestBtn, vindretning_delete;
     private TextView vindretning_input , vindretning, vindretningNew;
     private EditText vindHastighedEditTxt;
     private LogViewModel logVM;
@@ -37,20 +40,20 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
         if(vindretning_input.getText() != null && !vindretning_input.getText().toString().equals(""))
             SwapViewsTextHelper.setText(vindretning,vindretningNew);
 
+        //Direction Buttons
         vindNordBtn = view.findViewById(R.id.nordButton);
-        vindØstBtn = view.findViewById(R.id.østButton);
+        vindOestBtn = view.findViewById(R.id.oestButton);
         vindSydBtn = view.findViewById(R.id.sydButton);
         vindVestBtn = view.findViewById(R.id.vestButton);
         vindNordBtn.setOnClickListener(this);
-        vindØstBtn.setOnClickListener(this);
+        vindOestBtn.setOnClickListener(this);
         vindSydBtn.setOnClickListener(this);
         vindVestBtn.setOnClickListener(this);
         vindretning_delete = view.findViewById(R.id.vindretning_delete);
         vindretning_delete.setOnClickListener(this);
         vindretning_delete.setVisibility(View.INVISIBLE);
 
-
-        //Vindhastighed
+        //Wind speed text input
         vindHastighedEditTxt = view.findViewById(R.id.vindhastighed_edittext);
         vindHastighedEditTxt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -69,32 +72,39 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    @Override
+    public void onClick(View v) {
+        SwapViewsTextHelper.setText(vindretning,vindretningNew);
+
+        //Presses the Button selected
+        if(v == vindNordBtn) directionLogic(vindNordBtn.getText().toString(), vindSydBtn.getText().toString());
+        else if(v == vindOestBtn) directionLogic(vindOestBtn.getText().toString(), vindVestBtn.getText().toString());
+        else if(v == vindSydBtn) directionLogic(vindSydBtn.getText().toString(), vindNordBtn.getText().toString());
+        else if(v == vindVestBtn) directionLogic(vindVestBtn.getText().toString(), vindOestBtn.getText().toString());
+        else if (v == vindretning_delete) { //Resets the
+            logVM.setWindDirection("");
+            vindretning_input.setText(logVM.getWindDirection());
+            vindretning_delete.setVisibility(View.INVISIBLE);
+            SwapViewsTextHelper.revertText(vindretning,vindretningNew);
+        }
+    }
+
+    /**
+     * Updates the text of the view elements
+     */
     private void updateViewInfo() {
         vindretning_input.setText(logVM.getWindDirection());
         vindretning_delete.setVisibility(vindretning_input.getText() != null && vindretning_input.getText().length() > 0 ? View.VISIBLE : View.INVISIBLE);
         vindHastighedEditTxt.setText(logVM.getWindSpeed() >= 0 ? Integer.toString(logVM.getWindSpeed()) : "");
     }
 
-    @Override
-    public void onClick(View v) {
-
-        SwapViewsTextHelper.setText(vindretning,vindretningNew);
-
-
-        if(v == vindNordBtn) vindDirectionLogic("N", "S");
-        else if(v == vindØstBtn) vindDirectionLogic("Ø", "V");
-        else if(v == vindSydBtn) vindDirectionLogic("S", "N");
-        else if(v == vindVestBtn) vindDirectionLogic("V", "Ø");
-        else if (v == vindretning_delete) {
-            logVM.setWindDirection("");
-            vindretning_input.setText(logVM.getWindDirection());
-            vindretning_delete.setVisibility(View.INVISIBLE);
-            SwapViewsTextHelper.revertText(vindretning,vindretningNew);
-
-        }
-    }
-
-    private void vindDirectionLogic(String btnDirection, String counterDirection) {
+    /**
+     *  Adds the direction to the user input, if possible after the rules of N/E/S/W rules
+     *
+     * @param btnDirection      Button pressed
+     * @param counterDirection  Not applicable if this Button is pressed
+     */
+    private void directionLogic(String btnDirection, String counterDirection) {
         if(!logVM.getWindDirection().contains(counterDirection)) { //Control input for going opposite ways
             switch(logVM.getWindDirection().length()) {
                 case 0:
