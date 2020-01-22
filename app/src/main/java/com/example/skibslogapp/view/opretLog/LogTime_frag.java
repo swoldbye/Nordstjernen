@@ -71,6 +71,8 @@ public class LogTime_frag extends Fragment implements View.OnClickListener {
                     editTime.setSelection(3);
                 }
                 timeStringLengthBefore = timeStringLengthAfter;
+
+
             }
         });
 
@@ -115,6 +117,8 @@ public class LogTime_frag extends Fragment implements View.OnClickListener {
                 || Integer.parseInt(time.substring(0,2)) > 23 || Integer.parseInt(time.substring(3, 5)) > 59) { //Control of numbers
             logVM.setTime(editTime.getHint().toString());
             editTime.setText("");
+        } else {
+            logVM.setTime(editTime.getText().toString());
         }
     }
 
