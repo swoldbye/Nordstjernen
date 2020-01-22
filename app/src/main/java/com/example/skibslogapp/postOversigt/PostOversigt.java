@@ -45,10 +45,8 @@ public class PostOversigt extends Fragment {
 //        Bundle arguments = getArguments();
 //        int dayNumber = arguments.getInt(ARG_PAGE);
 
-
 //        day = view.findViewById(R.id.timeOfDay);
 //        day.setText(dayNumber);
-
 
         //tempLogs.addAll(Togt.getTogter());
 
@@ -107,6 +105,5 @@ public class PostOversigt extends Fragment {
             new Handler().postDelayed(() -> postRecyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1), 20);
         }
     }
-
 }
 

@@ -23,13 +23,12 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Date;
 
-
 /**
- *  Class displaying a Dialog, which lets you edit the information of a given Etape object.
- *  The Etape is NOT updated in the database.
- *
- *  When the editing has finished succesfully (the user press the START button), the
- *  class calls its 'onFinishCallback' (an update to the database may be implemented here).
+ * Class displaying a Dialog, which lets you edit the information of a given Etape object.
+ * The Etape is NOT updated in the database.
+ * <p>
+ * When the editing has finished succesfully (the user press the START button), the
+ * class calls its 'onFinishCallback' (an update to the database may be implemented here).
  */
 public class OpretEtapeDialog extends AppCompatDialogFragment implements View.OnClickListener {
 
@@ -45,7 +44,6 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
     private OpretEtapeCallback onFinishCallback = null;
     private Etape etape;
 
-
     public OpretEtapeDialog(Etape etape) {
         this.etape = etape;
     }
@@ -56,7 +54,7 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.opret_etape_dialog_box,null);
+        View view = inflater.inflate(R.layout.opret_etape_dialog_box, null);
 
         builder.setView(view);
 
@@ -80,7 +78,7 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new CrewAdapter( etape.getBesaetning(), getContext());
+        adapter = new CrewAdapter(etape.getBesaetning(), getContext());
         recyclerView.setAdapter(adapter);
 
         showSkipper();
@@ -113,12 +111,12 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
                 return;
             }
 
-            if ( skipper.length() <= 0){
+            if (skipper.length() <= 0) {
                 skipperInput.setError("Der skal indtastes en skipper!");
                 return;
             }
 
-            if (besaetning <= 0){
+            if (besaetning <= 0) {
                 navnInput.setError("Der skal tilføjes mindst et besætningsmedlem!");
                 return;
             }
@@ -133,7 +131,7 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
                     .remove(this)
                     .commit();
 
-            if( onFinishCallback != null ) onFinishCallback.run(this, etape);
+            if (onFinishCallback != null) onFinishCallback.run(this, etape);
         }
 
         if (v == addButton) {
@@ -150,9 +148,10 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
         }
     }
 
-    
+
     /**
-     * Makes the keyboard disappear */
+     * Makes the keyboard disappear
+     */
     private void hideKeyboard(View v) {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -161,18 +160,18 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
     /**
      * Show the previous Skipper in the new Etape
      */
-    private void showSkipper(){
-        if(etape.getSkipper() != null && etape.getSkipper().length() > 0){
-            skipperInput.getEditText().setText( etape.getSkipper() );
+    private void showSkipper() {
+        if (etape.getSkipper() != null && etape.getSkipper().length() > 0) {
+            skipperInput.getEditText().setText(etape.getSkipper());
         }
     }
 
     /**
      * Show the previous slutDestination as the Start destination in the new Etape
      */
-    private void showStartDestination(){
-        if(etape.getStartDestination() != null && etape.getStartDestination().length()>0){
-            startDestInput.getEditText().setText( etape.getStartDestination() );
+    private void showStartDestination() {
+        if (etape.getStartDestination() != null && etape.getStartDestination().length() > 0) {
+            startDestInput.getEditText().setText(etape.getStartDestination());
         }
     }
 
@@ -180,26 +179,28 @@ public class OpretEtapeDialog extends AppCompatDialogFragment implements View.On
      * When the "besætnings" recycleview is shown the last added item which is the lowest in
      * list. The list is therefore scrolled way down.
      */
-    private void scrollTobuttom(){
-        if(adapter.getItemCount()>0){
-            recyclerView.smoothScrollToPosition(adapter.getItemCount()-1);
+    private void scrollTobuttom() {
+        if (adapter.getItemCount() > 0) {
+            recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
         }
     }
 
-    
+
     // Callback ----------------------------------------------------------------------------------
 
-    /** 
+    /**
      * Interface defining the callback method, which may be run by the
-     * OpretEtapeDialog.*/
-    public interface OpretEtapeCallback{
+     * OpretEtapeDialog.
+     */
+    public interface OpretEtapeCallback {
         void run(OpretEtapeDialog dialog, Etape etape);
     }
 
-    /** 
-     *  Set the callback, which should run when the creation has
-     *  finished successfully (START button pressed). */
-    public void onCreationFinished(OpretEtapeCallback onFinishCallback){
+    /**
+     * Set the callback, which should run when the creation has
+     * finished successfully (START button pressed).
+     */
+    public void onCreationFinished(OpretEtapeCallback onFinishCallback) {
         this.onFinishCallback = onFinishCallback;
     }
 }
