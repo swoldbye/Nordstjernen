@@ -11,9 +11,9 @@
         android:layout_marginBottom="10dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/opretetape_skipper"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/textInputLayout_kurs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:theme="@style/OpretLogTextInput"
             app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -22,13 +22,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
-                android:id="@+id/kursEditText"
-                android:layout_width="match_parent"
+                android:id="@+id/kurs_edittext"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:layout_marginEnd="80dp"
                 android:ems="10"
-                android:hint="Styrekurs (grader)"
+                android:hint="Styrekurs"
                 android:imeOptions="actionDone"
                 android:inputType="time"
                 android:maxLength="3"
@@ -41,6 +39,16 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Unit -->
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/TextInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="°"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textInputLayout_kurs"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

@@ -20,7 +20,7 @@ import com.example.skibslogapp.utility.SwapViewsTextHelper;
 
 public class LogWaterCurrent_frag extends Fragment implements View.OnClickListener {
     private Button currentNorthBtn, currentEastBtn, currentSouthBtn, currentWestBtn, currentResetBtn;
-    private TextView waterCurrentDirection , waterCurrentDescription_NewText, waterCurrentDescription;
+    private TextView waterCurrentDirection , stroemretningTxtLeft, stroemretningTxtCenter;
     private EditText waterCurrentSpeed;
     private LogViewModel logVM;
 
@@ -31,11 +31,9 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
 
         //Strøm Retning
-        waterCurrentDescription = view.findViewById(R.id.stroemning_text);
-        waterCurrentDescription_NewText = view.findViewById(R.id.stroemning_newtext);
+        stroemretningTxtLeft = view.findViewById(R.id.stroemning_text_leftaligned);
+        stroemretningTxtCenter = view.findViewById(R.id.stroemning_text_center);
         waterCurrentDirection = view.findViewById(R.id.strøm_input);
-//        if(waterCurrentDirection.getText() != null && !waterCurrentDirection.getText().toString().equals(""))
-//            SwapViewsTextHelper.leftalignText(waterCurrentDescription,waterCurrentDescription_NewText);
 
         currentNorthBtn = view.findViewById(R.id.nordButton_strøm);
         currentEastBtn = view.findViewById(R.id.østButton_strøm);
@@ -81,7 +79,6 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        SwapViewsTextHelper.leftalignText(waterCurrentDescription,waterCurrentDescription_NewText);
         if(v == currentNorthBtn) waterCurrentLogic( "N", "S");
         else if(v == currentEastBtn) waterCurrentLogic( "Ø", "V");
         else if(v == currentSouthBtn) waterCurrentLogic( "S", "N");
@@ -90,8 +87,8 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
             logVM.setWaterCurrentDirection("");
             waterCurrentDirection.setText(logVM.getWaterCurrentDirection());
             currentResetBtn.setVisibility(View.INVISIBLE);
-            SwapViewsTextHelper.leftalignText(waterCurrentDescription,waterCurrentDescription_NewText);
-        }
+            SwapViewsTextHelper.centerText(stroemretningTxtLeft, stroemretningTxtCenter);
+        } else SwapViewsTextHelper.leftalignText(stroemretningTxtLeft, stroemretningTxtCenter);
     }
 
     private void waterCurrentLogic(String btnDirection, String counterDirection) {

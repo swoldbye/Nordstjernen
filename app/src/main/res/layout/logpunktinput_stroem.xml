@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -24,11 +23,11 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/stroemning_newtext"
+                    android:id="@+id/stroemning_text_leftaligned"
                     style="@style/SmallTitle"
                     android:layout_width="152dp"
                     android:layout_height="34dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +35,7 @@
                     app:layout_constraintVertical_bias="1.0" />
 
                 <TextView
-                    android:id="@+id/stroemning_text"
+                    android:id="@+id/stroemning_text_center"
                     style="@style/SmallTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -53,7 +52,6 @@
                     android:layout_width="75sp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
-                    android:text="PLA"
                     android:textAlignment="center"
                     android:textColor="@color/textColor"
                     android:textSize="25sp"
@@ -124,9 +122,9 @@
         android:layout_marginTop="5dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/opretetape_skipper"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/textInputLayout_vand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:theme="@style/OpretLogTextInput"
             app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -136,17 +134,14 @@
 
             <EditText
                 android:id="@+id/strømhastighed_edittext"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:layout_marginEnd="80dp"
                 android:digits="0123456789"
                 android:ems="10"
-                android:hint="Hastighed (knob)"
+                android:hint="Hastighed"
                 android:imeOptions="actionDone"
                 android:inputType="time"
                 android:maxLength="4"
-                android:paddingHorizontal="0dp"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
                 android:textSize="22sp"
@@ -155,6 +150,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/TextInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="knob"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textInputLayout_vand"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Unit -->

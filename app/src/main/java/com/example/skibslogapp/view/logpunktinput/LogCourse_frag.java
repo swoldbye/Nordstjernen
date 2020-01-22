@@ -26,7 +26,7 @@ public class LogCourse_frag extends Fragment {
         View view = inflater.inflate(R.layout.logpunktinput_kurs, container, false);
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
 
-        kursEditText = view.findViewById(R.id.kursEditText);
+        kursEditText = view.findViewById(R.id.kurs_edittext);
         kursEditText.setOnFocusChangeListener((v, hasFocus) -> controlCourseInput());
         kursEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {

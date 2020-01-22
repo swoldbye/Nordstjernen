@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -28,7 +27,7 @@
                     style="@style/SmallTitle"
                     android:layout_width="152dp"
                     android:layout_height="34dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -125,9 +124,9 @@
         android:layout_marginTop="5dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
+            android:id="@+id/textInputLayout_vind"
             android:layout_width="wrap_content"
-            android:layout_height="51dp"
+            android:layout_height="wrap_content"
             android:theme="@style/OpretLogTextInput"
             app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -152,7 +151,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -163,7 +161,7 @@
             android:layout_marginStart="5dp"
             android:text="m/s"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/textInputLayout"
+            app:layout_constraintStart_toEndOf="@id/textInputLayout_vind"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
