@@ -14,7 +14,7 @@
         android:backgroundTint="#EEEEEE"
         android:ems="10"
         android:hint="@string/log_note_editView_text"
-        android:inputType="textMultiLine"
+        android:inputType="textMultiLine|textCapSentences"
         android:padding="10dp"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"

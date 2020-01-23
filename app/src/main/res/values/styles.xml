@@ -83,6 +83,16 @@
         <item name="android:layout_marginBottom">25dp</item>
     </style>
 
+    <style name="CancelBtn">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="SaveBtn">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="TextInput" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <!-- Hint color and label color in FALSE state -->
         <item name="android:textColor">@color/colorPrimaryDark</item>
