@@ -14,7 +14,7 @@
 
         <TextView
             style="@style/SmallTitle"
-            android:text="@string/log_wind_title" />
+            android:text="@string/log_sailsAndRowers_title" />
 
         <LinearLayout
             android:layout_width="match_parent"
