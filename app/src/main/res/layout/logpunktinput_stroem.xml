@@ -40,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="Strøm:"
+                    android:text="@string/log_current_title"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +67,7 @@
                     android:layout_height="49dp"
                     android:layout_marginEnd="10dp"
                     android:backgroundTint="#FFFFFF"
-                    android:text="X"
+                    android:text="@string/log_button_delete"
                     android:textColor="#2D2F31"
                     android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -87,28 +87,28 @@
             <Button
                 android:id="@+id/nordButton_strøm"
                 style="@style/DefaultButton"
-                android:text="N" />
+                android:text="@string/log_button_north" />
 
             <Space style="@style/EvenSpace" />
 
             <Button
                 android:id="@+id/østButton_strøm"
                 style="@style/DefaultButton"
-                android:text="Ø" />
+                android:text="@string/log_button_east" />
 
             <Space style="@style/EvenSpace" />
 
             <Button
                 android:id="@+id/sydButton_strøm"
                 style="@style/DefaultButton"
-                android:text="S" />
+                android:text="@string/log_button_south" />
 
             <Space style="@style/EvenSpace" />
 
             <Button
                 android:id="@+id/vestButton_strøm"
                 style="@style/DefaultButton"
-                android:text="V" />
+                android:text="@string/log_button_west" />
 
             <Space style="@style/EvenSpace" />
 
@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:digits="0123456789"
                 android:ems="10"
-                android:hint="Hastighed"
+                android:hint="@string/log_current_waterSpeed"
                 android:imeOptions="actionDone"
                 android:inputType="time"
                 android:maxLength="4"
@@ -157,7 +157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="knob"
+            android:text="@string/log_current_measuringUnit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/textInputLayout_vand"
             app:layout_constraintTop_toTopOf="parent" />

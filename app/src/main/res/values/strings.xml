@@ -3,19 +3,45 @@
     <string name="time_colon">%1$s:</string>
     <string name="udtagdata">UdtagData</string>
 
-    <string name="string_now_caps">NU</string>
-
+<!--    LOGPUNKT-->
     <string name="log_time_clock_divider">:</string>
-
-    <string name="log_wind_title">Vindhastighed:</string>
-    <string name="log_wind_measuringUnit">m/s</string>
-    <string name="log_wind_windSpeed">Vindhastighed</string>
-
-    <string name="log_note_editView_text">Note</string>
+    <string name="string_now_caps">NU</string>
 
     <string name="log_button_north">N</string>
     <string name="log_button_east">Ø</string>
     <string name="log_button_south">S</string>
     <string name="log_button_west">V</string>
     <string name="log_button_delete">X</string>
+
+    <string name="log_wind_title">Vindhastighed:</string>
+    <string name="log_wind_measuringUnit">m/s</string>
+    <string name="log_wind_windSpeed">Vindhastighed</string>
+
+    <string name="log_current_title">Strøm:</string>
+    <string name="log_current_measuringUnit">knob</string>
+    <string name="log_current_waterSpeed">Strømhastighed</string>
+
+    <string name="log_sailsAndRowers_title">Sejlstilling:</string>
+    <string name="log_sailsAndRowers_læBtn">læ</string>
+    <string name="log_sailsAndRowers_agBtn">ag</string>
+    <string name="log_sailsAndRowers_haBtn">ha</string>
+    <string name="log_sailsAndRowers_foBtn">fo</string>
+    <string name="log_sailsAndRowers_biBtn">bi</string>
+    <string name="log_sailsAndRowers_numberOfRowers">Antal Roere</string>
+
+    <string name="log_sail_title">Sejlføring:</string>
+    <string name="log_sail_fBtn">F</string>
+    <string name="log_sail_oeBtn">Ø</string>
+    <string name="log_sail_n1Btn">N1</string>
+    <string name="log_sail_n2Btn">N2</string>
+    <string name="log_sail_n3Btn">N3</string>
+    <string name="log_orientation_title">Hals:</string>
+    <string name="log_orientation_port">Bagbord</string>
+    <string name="log_orientation_starboard">Styrbord</string>
+
+    <string name="log_course_inputMessage">Styrekurs</string>
+    <string name="log_course_measuringUnit">°</string>
+
+    <string name="log_note_editView_text">Note</string>
+
 </resources>

@@ -14,7 +14,7 @@
 
         <TextView
             style="@style/SmallTitle"
-            android:text="Sejlstilling" />
+            android:text="@string/log_wind_title" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             <com.example.skibslogapp.utility.KingButton
                 android:id="@+id/læ"
                 style="@style/DefaultButton"
-                android:text="læ"
+                android:text="@string/log_sailsAndRowers_læBtn"
                 android:textColor="#000000" />
 
             <Space style="@style/EvenSpace" />
@@ -34,28 +34,28 @@
             <com.example.skibslogapp.utility.KingButton
                 android:id="@+id/ag"
                 style="@style/DefaultButton"
-                android:text="ag" />
+                android:text="@string/log_sailsAndRowers_agBtn" />
 
             <Space style="@style/EvenSpace" />
 
             <com.example.skibslogapp.utility.KingButton
                 android:id="@+id/bi"
                 style="@style/DefaultButton"
-                android:text="ha" />
+                android:text="@string/log_sailsAndRowers_haBtn" />
 
             <Space style="@style/EvenSpace" />
 
             <com.example.skibslogapp.utility.KingButton
                 android:id="@+id/fo"
                 style="@style/DefaultButton"
-                android:text="fo" />
+                android:text="@string/log_sailsAndRowers_foBtn" />
 
             <Space style="@style/EvenSpace" />
 
             <com.example.skibslogapp.utility.KingButton
                 android:id="@+id/ha"
                 style="@style/DefaultButton"
-                android:text="bi" />
+                android:text="@string/log_sailsAndRowers_biBtn" />
 
             <Space style="@style/EvenSpace" />
 
@@ -79,7 +79,7 @@
             android:layout_marginEnd="80dp"
             android:digits="0123456789"
             android:ems="10"
-            android:hint="Antal Roere"
+            android:hint="@string/log_sailsAndRowers_numberOfRowers"
             android:imeOptions="actionDone"
             android:inputType="time"
             android:textColor="@color/textColor"
