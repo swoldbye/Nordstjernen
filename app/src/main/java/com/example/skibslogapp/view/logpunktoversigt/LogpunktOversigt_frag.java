@@ -20,14 +20,14 @@ import com.example.skibslogapp.view.opretlogpunkt.OpretLog_frag;
 /**
  * This class is a the fragment that contains the tab layout and the create Logpunkt button
  */
-public class LogpuntkOversigt_frag extends Fragment {
+public class LogpunktOversigt_frag extends Fragment {
 
     private Togt togt;
     private int startPos;
 
-    private LogpunktTabLayout logpunktTabLayout_;
+    private LogpunktTabLayout logpunktTabLayout;
 
-    public LogpuntkOversigt_frag(Etape etape, int startPos){
+    public LogpunktOversigt_frag(Etape etape, int startPos){
         TogtDAO togtDAO = new TogtDAO(GlobalContext.get());
         this.togt = togtDAO.getTogt(etape.getTogtId());
         this.startPos = startPos;
@@ -37,13 +37,13 @@ public class LogpuntkOversigt_frag extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.logpunktoversigt_frag, container, false);
-        logpunktTabLayout_ = new LogpunktTabLayout(togt, startPos);
+        logpunktTabLayout = new LogpunktTabLayout(togt, startPos);
 
         Button opretButton = view.findViewById(R.id.logpunktoversigt_opret);
         opretButton.setOnClickListener(v -> openOpretLogpunkt() );
 
         getActivity().getSupportFragmentManager().beginTransaction()
-                .add(R.id.tabOversigtContainerFrame, logpunktTabLayout_)
+                .add(R.id.tabOversigtContainerFrame, logpunktTabLayout)
                 .commit();
         return view;
     }
@@ -60,8 +60,8 @@ public class LogpuntkOversigt_frag extends Fragment {
             .addToBackStack(null)
             .commit();
 
-        logpunktTabLayout_.toggleMinimize(true);
-        fragment.onClosed(() -> logpunktTabLayout_.toggleMinimize(false));
+        logpunktTabLayout.toggleMinimize(true);
+        fragment.onClosed(() -> logpunktTabLayout.toggleMinimize(false));
     }
 
     /*
@@ -71,7 +71,7 @@ public class LogpuntkOversigt_frag extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         getActivity().getSupportFragmentManager().beginTransaction()
-                .remove(logpunktTabLayout_)
+                .remove(logpunktTabLayout)
                 .commit();
     }
 }
