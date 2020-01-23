@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.example.skibslogapp.model.Logpunkt;
 import java.util.HashMap;
@@ -71,11 +72,12 @@ public class LogpunktPageAdapter extends FragmentStatePagerAdapter {
 
         int etapperSize = etapper.get(position).size();
         if( etapperSize > 0 ){
-            existing.postRecyclerView.smoothScrollToPosition(  - 1);
+            existing.postRecyclerView.smoothScrollToPosition(  etapperSize - 1);
         }
     }
 
     Fragment getFragment(int position) {
         return fragmentMap.get(position);
     }
+
 }

@@ -104,6 +104,8 @@ public class OpretTogt_frag extends AppCompatDialogFragment implements View.OnCl
                 Etape etape = new Etape(); // Første etape for togtet (ikke startet)
                 etape.setStartDestination(togtStartDest);
                 etape.setSkipper(skipper);
+                etape.addBesaetningsMedlem(skipper);
+
 
                 // Gem i DB
                 TogtDAO togtDAO = new TogtDAO(getContext());

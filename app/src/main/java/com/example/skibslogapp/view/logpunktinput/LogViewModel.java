@@ -5,13 +5,14 @@ import androidx.lifecycle.ViewModel;
 import com.example.skibslogapp.model.Logpunkt;
 
 public class LogViewModel extends ViewModel {
-    private String time,
-            windDirection,
+    private String windDirection,
             waterCurrentDirection,
             sailPosition,
             sails, orientation,
             noteTxt;
-    private int windSpeed,
+    private int hours,
+            minutes,
+            windSpeed,
             waterCurrentSpeed,
             currRowers,
             course;
@@ -21,7 +22,8 @@ public class LogViewModel extends ViewModel {
     }
 
     public void resetValues() {
-        time = "";
+        hours = -1;
+        minutes = -1;
         windDirection = "";
         windSpeed = -1;
         waterCurrentDirection = "";
@@ -34,11 +36,18 @@ public class LogViewModel extends ViewModel {
         noteTxt = "";
     }
 
-    public String getTime() {
-        return time;
+    public int getHours() {
+        return hours;
     }
-    public void setTime(String time) {
-        this.time = time;
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
     }
 
     public String getWindDirection() {
