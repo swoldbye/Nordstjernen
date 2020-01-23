@@ -17,6 +17,7 @@ import com.example.skibslogapp.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Fragment to set time of LogViewModel automatically or by user input. With reset button to switch between manual and automatic input.
@@ -51,12 +52,11 @@ public class LogTime_frag extends Fragment implements View.OnClickListener {
         final Runnable r = new Runnable() {
             public void run() {
                 handler.postDelayed(this, 1000);
-                String simpleDate3 = new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime());
-                if(!userInput) { //If not set by the user
-                    hoursPicker.setValue(Integer.parseInt(simpleDate3.substring(0,2)));
-                    minutesPicker.setValue(Integer.parseInt(simpleDate3.substring(3,5)));
-                    setLogVMTime(hoursPicker.getValue(), minutesPicker.getValue());
+                if(!userInput) { //If not set by the user, updates the time
+                    setCurrentTime();
+                    setTimePickers();
                 }
+                setLogVMTime(hoursPicker.getValue(), minutesPicker.getValue());
             }
         };
         handler.postDelayed(r, 0000);
@@ -64,23 +64,41 @@ public class LogTime_frag extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v == resetTimeButton){ //Reset the time to be updated automatically
+            userInput = false;
+            setCurrentTime();
+            setTimePickers();
+        }
+    }
+
     /**
-     * Sets the time of the current LogViewModel
+     * Sets the time NumberPickers after what LogVM says
+     */
+    private void setTimePickers() {
+        hoursPicker.setValue(logVM.getHours());
+        minutesPicker.setValue(logVM.getMinutes());
+    }
+
+    /**
+     * Sets the time of the current LogViewModel after what the NumberPickers do
      *
      * @param hours
      * @param minutes
      */
     private void setLogVMTime(int hours, int minutes) {
-        logVM.setTime(hours+":"+minutes);
+        logVM.setHours(hours);
+        logVM.setMinutes(minutes);
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v == resetTimeButton){ //Reset the time to be updated automatically
-            userInput = false;
-            logVM.setTime(new SimpleDateFormat("kk:mm").format(Calendar.getInstance().getTime()));
-            hoursPicker.setValue(Integer.parseInt(logVM.getTime().substring(0,2)));
-            minutesPicker.setValue(Integer.parseInt(logVM.getTime().substring(3,5)));
-        }
+    /**
+     * Sets the current time on the LogVM
+     */
+    private void setCurrentTime() {
+        Calendar cal = Calendar.getInstance();
+        Date d = cal.getTime();
+        logVM.setHours(d.getHours());
+        logVM.setMinutes(d.getMinutes());
     }
 }
