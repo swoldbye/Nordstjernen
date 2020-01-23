@@ -75,7 +75,9 @@ public class OpretTogt_frag extends AppCompatDialogFragment implements View.OnCl
         String togtStartDest = startDest.getEditText().getText().toString();
 
         if (view == annullerText) {
-            getActivity().getSupportFragmentManager().popBackStack();
+            getFragmentManager().beginTransaction()
+                    .remove(this)
+                    .commit();
 
         }else if(view == opretBtn){
 
@@ -110,7 +112,9 @@ public class OpretTogt_frag extends AppCompatDialogFragment implements View.OnCl
 
                 Toast.makeText(this.getContext(),"Togt oprettet!",Toast.LENGTH_LONG).show();
 
-                getActivity().getSupportFragmentManager().popBackStack();
+                getFragmentManager().beginTransaction()
+                        .remove(this)
+                        .commit();
             }
         }
     }

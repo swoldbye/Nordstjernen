@@ -11,9 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.R;
+import com.example.skibslogapp.datalayer.local.EtapeDAO;
 import com.example.skibslogapp.datalayer.local.TogtDAO;
 import com.example.skibslogapp.model.Togt;
+import com.example.skibslogapp.view.etapeoversigt.opretetape.OpretEtapeDialog;
 import com.example.skibslogapp.view.oprettogt.OpretTogt_frag;
 
 import java.util.List;
@@ -71,12 +74,17 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener,
      */
     @Override
     public void onClick(View v) {
+
+        // Open dialog
+        OpretTogt_frag dialog = new OpretTogt_frag();
+        dialog.show(getFragmentManager(), "Dialog box");
+/*
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_upslow2, R.anim.slide_upslow, R.anim.slide_downslow2, R.anim.slide_downslow)
                 .add(R.id.fragContainer, new OpretTogt_frag())
                 .addToBackStack(null)
-                .commit();
+                .commit();*/
     }
 
 
