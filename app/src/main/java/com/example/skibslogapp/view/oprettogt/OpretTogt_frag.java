@@ -1,7 +1,12 @@
 package com.example.skibslogapp.view.oprettogt;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -20,9 +25,9 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 /**
- * In this fragment you can create a new "Togt" and save it in the DB.
+ * In this DialogFragment you can create a new "Togt" and save it in the DB.
  */
-public class OpretTogt_frag extends Fragment implements View.OnClickListener {
+public class OpretTogt_frag extends AppCompatDialogFragment implements View.OnClickListener {
 
     private String[] skibsListe ={"Havhingsten","Skjoldungen","Helge Ask","Ottar"};
     private MaterialBetterSpinner betterSpinner;
@@ -30,10 +35,16 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
     private View opretBtn;
     private View annullerText;
 
-
+    @NonNull
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.oprettogt_frag, container, false);
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.oprettogt_frag, null);
+
+        builder.setView(view);
 
         togtName = view.findViewById(R.id.togtNavn);
         skipper = view.findViewById(R.id.skipperEdit);
@@ -48,7 +59,7 @@ public class OpretTogt_frag extends Fragment implements View.OnClickListener {
         betterSpinner = view.findViewById(R.id.skibsListe);
         betterSpinner.setAdapter(dropDownShip);
 
-        return view;
+        return builder.create();
     }
 
     @Override

@@ -54,7 +54,6 @@ public class TogtOversigt_frag extends Fragment implements View.OnClickListener,
         TogtDAO.addTogtObserver(this);
 
         if (togtList.size() == 0) {
-
             view.findViewById(R.id.togtRecycView).setVisibility(View.GONE);
             view.findViewById(R.id.togtOversigtUdenTogter).setVisibility(View.VISIBLE);
         } else {
