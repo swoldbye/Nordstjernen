@@ -231,6 +231,7 @@ public class LogpunktAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     void updateData(List<Logpunkt> newLogs){
         newLogs.sort(Logpunkt::compareTo);
         mTempLogs = newLogs;
-        notifyItemInserted(mTempLogs.size()-1);
+        notifyDataSetChanged();
+        //notifyItemInserted(getItemCount()-1);
     }
 }
