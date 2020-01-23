@@ -14,6 +14,8 @@ import com.example.skibslogapp.utility.DateToString;
 import com.example.skibslogapp.model.Logpunkt;
 import com.example.skibslogapp.view.redigerlogpunkt.RedigerLogpunkt_frag;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 public class LogpunktAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -135,6 +137,7 @@ public class LogpunktAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
     LogpunktAdapter(List<Logpunkt> tempLogs) {
+        tempLogs.sort(Logpunkt::compareTo);
         mTempLogs = tempLogs;
     }
 
@@ -226,6 +229,7 @@ public class LogpunktAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      * @param newLogs
      */
     void updateData(List<Logpunkt> newLogs){
+        newLogs.sort(Logpunkt::compareTo);
         mTempLogs = newLogs;
         notifyItemInserted(mTempLogs.size()-1);
     }
