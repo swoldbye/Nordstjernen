@@ -72,7 +72,7 @@ public class LogpunktPageAdapter extends FragmentStatePagerAdapter {
 
         int etapperSize = etapper.get(position).size();
         if( etapperSize > 0 ){
-            existing.postRecyclerView.smoothScrollToPosition(  - 1);
+            existing.postRecyclerView.smoothScrollToPosition(  etapperSize - 1);
         }
     }
 
