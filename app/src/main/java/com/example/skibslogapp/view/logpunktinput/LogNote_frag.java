@@ -15,6 +15,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.skibslogapp.R;
 
+/**
+ * Fragment to set a text note with user inputs.
+ *  */
 public class LogNote_frag extends Fragment {
     private EditText noteEditText;
     private textFieldEntered listener;
@@ -24,6 +27,7 @@ public class LogNote_frag extends Fragment {
         View view = inflater.inflate(R.layout.logpunktinput_note, container, false);
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
 
+        //Note
         noteEditText = view.findViewById(R.id.opretLogNoteTxt);
         if(listener != null) {
             noteEditText.setOnFocusChangeListener((v, hasFocus) -> {
@@ -44,7 +48,7 @@ public class LogNote_frag extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                logVM.setNoteTxt(noteEditText.getText().toString());
+                logVM.setNoteTxt(noteEditText.getText().toString()); //Saves the note on LogVM
             }
         });
 
@@ -53,14 +57,24 @@ public class LogNote_frag extends Fragment {
         return view;
     }
 
+    /**
+     * Updates the text view of the fragment
+     */
     private void updateViewInfo() {
         noteEditText.setText(logVM.getNoteTxt().length() > 0 ? logVM.getNoteTxt() : "");
     }
 
+    /**
+     * To set a listener to react if text view is entered
+     * @param listener  Fragment that contains LogNote_frag to set a listener
+     */
     public void setListener(textFieldEntered listener) {
         this.listener = listener;
     }
 
+    /**
+     * Helper interface for listener
+     */
     public interface textFieldEntered {
         void enteredTxtField();
     }
