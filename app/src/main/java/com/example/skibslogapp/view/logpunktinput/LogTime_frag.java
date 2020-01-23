@@ -27,6 +27,8 @@ public class LogTime_frag extends Fragment implements View.OnClickListener {
     private NumberPicker hoursPicker, minutesPicker;
     private LogViewModel logVM;
     private boolean userInput = false;
+    private Handler handler;
+    private Runnable r;
 
     @Nullable
     @Override
@@ -48,8 +50,8 @@ public class LogTime_frag extends Fragment implements View.OnClickListener {
         resetTimeButton.setOnClickListener(this);
 
         //Thread to automatically set the time
-        final Handler handler =new Handler();
-        final Runnable r = new Runnable() {
+         handler = new Handler();
+        r = new Runnable() {
             public void run() {
                 handler.postDelayed(this, 1000);
                 if(!userInput) { //If not set by the user, updates the time
@@ -100,5 +102,11 @@ public class LogTime_frag extends Fragment implements View.OnClickListener {
         Date d = cal.getTime();
         logVM.setHours(d.getHours());
         logVM.setMinutes(d.getMinutes());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(r);
     }
 }
