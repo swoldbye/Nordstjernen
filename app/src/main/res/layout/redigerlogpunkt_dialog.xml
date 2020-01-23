@@ -7,15 +7,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/editLogpunktTitleTxt"
+            style="@style/SmallTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Rediger"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
@@ -39,6 +41,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="54dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -51,7 +54,7 @@
             android:clickable="true"
             android:focusable="true"
             android:text="Annuller"
-            android:textColor="@color/colorPrimary"
+            style="@style/CancelBtn"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,8 +67,7 @@
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:text="Gem"
-            android:textColor="@color/white"
-            android:textStyle="bold"
+            style="@style/SaveBtn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

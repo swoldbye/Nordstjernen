@@ -33,7 +33,7 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.logpunktinput_vind, container, false);
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
 
-        //Vind Retning
+        //Vind direction title and input
         vindretningTxtLeft = view.findViewById(R.id.vindretning_text_leftaligned);
         vindretningTxtCenter = view.findViewById(R.id.vindretning_text_centered);
         vindretning_input = view.findViewById(R.id.vindretning_input);
@@ -79,10 +79,10 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
 
         if (v == vindretning_delete) { //Resets the user input
             logVM.setWindDirection("");
-            vindretning_input.setText(logVM.getWindDirection());
-            vindretning_delete.setVisibility(View.INVISIBLE);
             SwapViewsTextHelper.centerText(vindretningTxtLeft, vindretningTxtCenter);
-        } else SwapViewsTextHelper.leftalignText(vindretningTxtLeft, vindretningTxtCenter);
+            vindretning_delete.setVisibility(View.INVISIBLE);
+        }
+        updateViewInfo();
     }
 
     /**
@@ -90,7 +90,10 @@ public class LogWind_frag extends Fragment implements View.OnClickListener {
      */
     private void updateViewInfo() {
         vindretning_input.setText(logVM.getWindDirection());
-        vindretning_delete.setVisibility(vindretning_input.getText() != null && vindretning_input.getText().length() > 0 ? View.VISIBLE : View.INVISIBLE);
+        if (!vindretning_input.getText().toString().equals("")) {
+            SwapViewsTextHelper.leftalignText(vindretningTxtLeft, vindretningTxtCenter);
+            vindretning_delete.setVisibility(View.VISIBLE);
+        }
         vindHastighedEditTxt.setText(logVM.getWindSpeed() >= 0 ? Integer.toString(logVM.getWindSpeed()) : "");
     }
 

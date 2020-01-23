@@ -1,5 +1,7 @@
 package com.example.skibslogapp.model;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.skibslogapp.utility.DateToString;
@@ -9,7 +11,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-public class Logpunkt {
+public class Logpunkt implements Comparable<Logpunkt> {
 
     // Ids
     private long id = -1;
@@ -279,5 +281,10 @@ public class Logpunkt {
                 logVM.getSails() + "-" + logVM.getOrientation());
         this.setKurs(logVM.getCourse());
         this.setNote(logVM.getNoteTxt());
+    }
+
+    @Override
+    public int compareTo(Logpunkt logpunkt) {
+        return (int) (date.getTime() - logpunkt.getDate().getTime());
     }
 }

@@ -119,16 +119,13 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
      * @param mandOverBord  If called by pressing the "MOB"-button
      */
     private void createLogpunkt(boolean mandOverBord) {
-        // Fetching time ---------------------------------------------------------------
-        String timeStr = logVM.getTime();
-
         // Getting calender instance
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
 
         // Setting minutes and hour
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeStr.substring(0, 2)));
-        calendar.set(Calendar.MINUTE, Integer.parseInt(timeStr.substring(3, 5)));
+        calendar.set(Calendar.HOUR_OF_DAY, logVM.getHours());
+        calendar.set(Calendar.MINUTE, logVM.getMinutes());
 
         // Create Logpunkt from time in calendar
         Logpunkt logpunkt = new Logpunkt( new Date(calendar.getTimeInMillis()) );
