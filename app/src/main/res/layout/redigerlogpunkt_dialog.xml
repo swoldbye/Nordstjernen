@@ -15,9 +15,9 @@
         <TextView
             android:id="@+id/editLogpunktTitleTxt"
             style="@style/SmallTitle"
-            android:layout_marginTop="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Rediger"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
