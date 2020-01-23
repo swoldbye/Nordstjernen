@@ -32,8 +32,9 @@ public class LogNote_frag extends Fragment {
         if(listener != null) {
             noteEditText.setOnFocusChangeListener((v, hasFocus) -> {
                 listener.enteredTxtField();
-                logVM.setNoteTxt(noteEditText.getText().toString());
-            });
+                if(hasFocus) noteEditText.setHint("");
+                else noteEditText.setHint("Note");
+                });
         }
         noteEditText.addTextChangedListener(new TextWatcher() {
             @Override

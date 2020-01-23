@@ -100,7 +100,7 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         //Reference to implement listener
         LogNote_frag noteFrag = (LogNote_frag) getChildFragmentManager().findFragmentById(R.id.fragment_opretLog_note);
-        noteFrag.setListener(this::toggleMOBPosition);
+        if(noteFrag != null) noteFrag.setListener(this::toggleMOBPosition);
 
         return view;
     }
@@ -170,8 +170,6 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         super.onStop();
         coordinates.removeLocationUpdates(); //Stop measuring location
     }
-
-
 
     // Opret Log Callback --------------------------------------------------------------------------
     // Used to register when the OpretLog is closed
