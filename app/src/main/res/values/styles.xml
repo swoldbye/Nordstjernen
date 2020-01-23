@@ -83,6 +83,14 @@
         <item name="android:layout_marginBottom">25dp</item>
     </style>
 
+    <style name="SmallTitle2">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+
     <style name="CancelBtn">
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textSize">17sp</item>
