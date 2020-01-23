@@ -13,6 +13,9 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.utility.KingButton;
 
+/**
+ * Fragment to set the sails and orientation with user inputs.
+ *  */
 public class LogSails_frag extends Fragment implements View.OnClickListener {
     private KingButton fBtn, oeBtn, n1Btn, n2Btn, n3Btn,
             port, starboard;

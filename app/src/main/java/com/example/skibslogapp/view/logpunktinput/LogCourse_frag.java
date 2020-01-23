@@ -16,6 +16,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.skibslogapp.R;
 
+/**
+ * Fragment to set course (measured in degrees) with user inputs.
+ *  */
 public class LogCourse_frag extends Fragment {
     private EditText kursEditText;
     private LogViewModel logVM;
