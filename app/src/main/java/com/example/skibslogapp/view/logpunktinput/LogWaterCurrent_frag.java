@@ -89,7 +89,7 @@ public class LogWaterCurrent_frag extends Fragment implements View.OnClickListen
     }
 
     /**
-     * Updates the text of the view elements
+     * Updates the buttons and text of the view elements
      */
     private void updateViewInfo() {
         waterCurrentDirection.setText(logVM.getWaterCurrentDirection());

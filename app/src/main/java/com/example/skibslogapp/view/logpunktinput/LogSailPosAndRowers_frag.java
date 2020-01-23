@@ -106,7 +106,7 @@ public class LogSailPosAndRowers_frag extends Fragment implements View.OnClickLi
     }
 
     /**
-     * Updates the text of the view elements
+     * Updates the buttons and text of the view elements
      */
     private void updateViewInfo() {
         switch(logVM.getSailPosition().toLowerCase()) {
