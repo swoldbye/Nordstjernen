@@ -28,7 +28,7 @@ public class LogNote_frag extends Fragment {
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
 
         //Note
-        noteEditText = view.findViewById(R.id.opretLogNoteTxt);
+        noteEditText = view.findViewById(R.id.logpunktNote_EditText);
         if(listener != null) {
             noteEditText.setOnFocusChangeListener((v, hasFocus) -> {
                 listener.enteredTxtField();

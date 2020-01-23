@@ -12,7 +12,6 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <!--Her starter test-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +39,7 @@
                     android:layout_width="152dp"
                     android:layout_height="34dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Vindretning:"
+                    android:text="@string/log_wind_title"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +66,7 @@
                     android:layout_height="50dp"
                     android:layout_marginEnd="10dp"
                     android:backgroundTint="#FFFFFF"
-                    android:text="X"
+                    android:text="@string/log_button_delete"
                     android:textColor="#2D2F31"
                     android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -90,28 +89,28 @@
             <Button
                 android:id="@+id/nordButton"
                 style="@style/DefaultButton"
-                android:text="N" />
+                android:text="@string/log_button_north" />
 
             <Space style="@style/EvenSpace" />
 
             <Button
                 android:id="@+id/oestButton"
                 style="@style/DefaultButton"
-                android:text="Ø" />
+                android:text="@string/log_button_east" />
 
             <Space style="@style/EvenSpace" />
 
             <Button
                 android:id="@+id/sydButton"
                 style="@style/DefaultButton"
-                android:text="S" />
+                android:text="@string/log_button_south" />
 
             <Space style="@style/EvenSpace" />
 
             <Button
                 android:id="@+id/vestButton"
                 style="@style/DefaultButton"
-                android:text="V" />
+                android:text="@string/log_button_west" />
 
             <Space style="@style/EvenSpace" />
 
@@ -140,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:digits="0123456789"
                 android:ems="10"
-                android:hint="Vindhastighed"
+                android:hint="@string/log_wind_windSpeed"
                 android:imeOptions="actionDone"
                 android:inputType="time"
                 android:maxLength="4"
@@ -159,7 +158,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:text="m/s"
+            android:text="@string/log_wind_measuringUnit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/textInputLayout_vind"
             app:layout_constraintTop_toTopOf="parent" />

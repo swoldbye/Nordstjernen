@@ -7,4 +7,15 @@
 
     <string name="log_time_clock_divider">:</string>
 
+    <string name="log_wind_title">Vindhastighed:</string>
+    <string name="log_wind_measuringUnit">m/s</string>
+    <string name="log_wind_windSpeed">Vindhastighed</string>
+
+    <string name="log_note_editView_text">Note</string>
+
+    <string name="log_button_north">N</string>
+    <string name="log_button_east">Ø</string>
+    <string name="log_button_south">S</string>
+    <string name="log_button_west">V</string>
+    <string name="log_button_delete">X</string>
 </resources>
