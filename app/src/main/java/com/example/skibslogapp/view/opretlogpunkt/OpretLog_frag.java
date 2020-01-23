@@ -34,16 +34,18 @@ import java.util.Date;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
+/**
+ * Fragment to collect information of held fragments (from .../logpunktinput/) and save it to the database
+ */
 public class OpretLog_frag extends Fragment implements View.OnClickListener {
     private boolean mobIsDown = true; //Starts with the "Mand Over Bord" btn in the button of the page.
     private View mob;
-    private PositionController testCoordinates;
+    private PositionController coordinates;
 
     private Button opretButton;
     private LogViewModel logVM;
     private TextView closeButton;
     private Etape currentEtape;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,19 +55,21 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
 
         //Activate logging of coordinates. This is placed in onCreate to ensure that the logging will start at
         //The first time the logging is activated.
-        testCoordinates = new PositionController(getActivity().getApplicationContext(), this);
+        coordinates = new PositionController(getActivity().getApplicationContext(), this);
 
         // Load etape of the current TabLayout
         EtapeDAO etapeDAO = new EtapeDAO(getContext());
         currentEtape = etapeDAO.getEtaper(LogpunktTabLayout.getCurrentTogt()).get(LogpunktTabLayout.getTabPos());
     }
 
-
+    /**
+     * Starts measuring the position of the user, if permission is granted
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if( grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED ){
-            testCoordinates.startMeassureKoordinat();
+            coordinates.startMeassureKoordinat();
             Toast.makeText(getActivity(), "Lokation er aktiveret", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getActivity(), "Lokation er ikke aktiveret", Toast.LENGTH_SHORT).show();
@@ -81,21 +85,22 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.opretlog_frag, container, false);
-        closeButton = view.findViewById(R.id.closeButton);
 
-        //Opret Post
+        //Close Button
+        closeButton = view.findViewById(R.id.closeButton);
+        closeButton.setOnClickListener(this);
+
+        //"Man over board"-Floating Button
+        mob = view.findViewById(R.id.mob_button);
+        mob.setOnClickListener(this);
+
+        //Create Post
         opretButton = view.findViewById(R.id.opretButton);
+        opretButton.setOnClickListener(this);
 
         //Reference to implement listener
         LogNote_frag noteFrag = (LogNote_frag) getChildFragmentManager().findFragmentById(R.id.fragment_opretLog_note);
         noteFrag.setListener(this::toggleMOBPosition);
-
-        //Mand over bord
-        mob = view.findViewById(R.id.mob_button);
-
-        mob.setOnClickListener(this);
-        opretButton.setOnClickListener(this);
-        closeButton.setOnClickListener(this);
 
         return view;
     }
@@ -104,11 +109,15 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v == opretButton || v == mob) {
             createLogpunkt(v == mob);
-        }else if(v == closeButton){
+        } else if(v == closeButton){
             getActivity().getSupportFragmentManager().popBackStack();
         }
     }
 
+    /**
+     * Sets the information from LogVM and gathered information on logpunkt and saves it to the database
+     * @param mandOverBord  If called by pressing the "MOB"-button
+     */
     private void createLogpunkt(boolean mandOverBord) {
         // Fetching time ---------------------------------------------------------------
         String timeStr = logVM.getTime();
@@ -124,17 +133,20 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
         // Create Logpunkt from time in calendar
         Logpunkt logpunkt = new Logpunkt( new Date(calendar.getTimeInMillis()) );
         logpunkt.setInformation(logVM);
-        logpunkt.setPosition(testCoordinates.getKoordinates());
+        logpunkt.setPosition(coordinates.getKoordinates());
         logpunkt.setMandOverBord(mandOverBord);
 
+        //Save to database
         LogpunktDAO logpunktDAO = new LogpunktDAO(getContext());
         logpunktDAO.addLogpunkt(currentEtape, logpunkt);
-
-        System.out.printf("Created logpunkt: %s", logpunkt.toString());
 
         getActivity().getSupportFragmentManager().popBackStack();
     }
 
+    /**
+     * Toggles if the MOB-Floating Button is in the top or the bottom of the page
+     * Needed to see when writing a note and possible other cases
+     */
     private void toggleMOBPosition() {
         FrameLayout mob_container = getView().findViewById(R.id.mob_container);
         CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(mob_container.getLayoutParams());
@@ -150,20 +162,19 @@ public class OpretLog_frag extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
-        testCoordinates.startMeassureKoordinat();
+        coordinates.startMeassureKoordinat(); //Start measuring location
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        testCoordinates.removeLocationUpdates();
+        coordinates.removeLocationUpdates(); //Stop measuring location
     }
 
 
 
     // Opret Log Callback --------------------------------------------------------------------------
     // Used to register when the OpretLog is closed
-
     public interface OpretLogCallback{
         void run();
     }
