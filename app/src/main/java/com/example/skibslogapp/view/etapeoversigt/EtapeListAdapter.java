@@ -16,7 +16,7 @@ import com.example.skibslogapp.GlobalContext;
 import com.example.skibslogapp.R;
 import com.example.skibslogapp.utility.DateToString;
 import com.example.skibslogapp.model.Etape;
-import com.example.skibslogapp.view.logpunktoversigt.LogpuntkOversigt_frag;
+import com.example.skibslogapp.view.logpunktoversigt.LogpunktOversigt_frag;
 
 import java.util.Date;
 import java.util.List;
@@ -159,7 +159,7 @@ public class EtapeListAdapter extends RecyclerView.Adapter<EtapeListAdapter.Etap
                         R.anim.exit_right_to_left,
                         R.anim.enter_left_to_right,
                         R.anim.exit_left_to_right)
-                .replace(R.id.fragContainer, new LogpuntkOversigt_frag(etape, position))
+                .replace(R.id.fragContainer, new LogpunktOversigt_frag(etape, position))
                 .addToBackStack(null)
                 .commit();
         }
