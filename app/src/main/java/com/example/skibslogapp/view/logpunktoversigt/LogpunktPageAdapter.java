@@ -61,9 +61,6 @@ public class LogpunktPageAdapter extends FragmentStatePagerAdapter {
     /**
      * Function that is repsonible for updating the list. Gets called from LogpunkTabLayout on it's
      * TogtObserver.
-     * @param newEtapper
-     * @param position
-     * @param FA
      */
     void updateList(List<List<Logpunkt>> newEtapper, int position, FragmentActivity FA) {
         this.etapper = newEtapper;
@@ -71,7 +68,11 @@ public class LogpunktPageAdapter extends FragmentStatePagerAdapter {
         LogpunktList existing = (LogpunktList) getFragment(position);
         LogpunktAdapter logpunktAdapter = (LogpunktAdapter) existing.getAdapter();
         logpunktAdapter.updateData(newEtapper.get(position));
-        existing.postRecyclerView.smoothScrollToPosition(etapper.get(position).size() - 1);
+
+        int etapperSize = etapper.get(position).size();
+        if( etapperSize > 0 ){
+            existing.postRecyclerView.smoothScrollToPosition(  - 1);
+        }
     }
 
     Fragment getFragment(int position) {
