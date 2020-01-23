@@ -30,6 +30,9 @@ import com.example.skibslogapp.view.logpunktinput.LogViewModel;
 import com.example.skibslogapp.view.logpunktinput.LogWaterCurrent_frag;
 import com.example.skibslogapp.view.logpunktinput.LogWind_frag;
 
+/**
+ * Fragment to edit information of a selected 'logpunkt'
+ */
 public class RedigerLogpunkt_frag extends Fragment {
     private TextView    time,
                         latitude,
@@ -57,6 +60,7 @@ public class RedigerLogpunkt_frag extends Fragment {
 
         logVM.prepareEditableCopy(logpunkt);
 
+        //TextView
         time = view.findViewById(R.id.editLogTimeInfo);
         latitude = view.findViewById(R.id.editLogLatitude);
         longitude = view.findViewById(R.id.editLogLongitude);
@@ -69,6 +73,7 @@ public class RedigerLogpunkt_frag extends Fragment {
         course = view.findViewById(R.id.editLogCourseInfo);
         note = view.findViewById(R.id.editLogNoteInfo);
 
+        //Containers of textviews
         ConstraintLayout
                 windConta,
                 waterConta,
@@ -91,12 +96,14 @@ public class RedigerLogpunkt_frag extends Fragment {
         courseConta.setOnClickListener(v -> openFragmentDialog(new LogCourse_frag()));
         noteConta.setOnClickListener(v -> openFragmentDialog(new LogNote_frag()));
 
-        updateInformation();
+        updatePageInformation();
         return view;
     }
 
-    private void updateInformation() {
-
+    /**
+     * Updates the information of the "rediger logpunkt"-page
+     */
+    private void updatePageInformation() {
         time.setText(DateToString.full(logpunkt.getDate()));
         latitude.setText(logpunkt.getPosition() != null && !logpunkt.getPosition().getBreddegradString().equals("") ?
                 logpunkt.getPosition().getBreddegradString() : "-");
@@ -115,19 +122,31 @@ public class RedigerLogpunkt_frag extends Fragment {
         note.setText(logpunkt.getNote() != null && !logpunkt.getNote().equals("") ? logpunkt.getNote() : "-");
     }
 
+    /**
+     * DialogFragment to open so user can edit a chosen information
+     *
+     * @param frag  Fragment from logpunktinput folder to edit selected information
+     */
     private void openFragmentDialog(Fragment frag) {
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         EditDialogFragment edf = EditDialogFragment.newInstance(frag);
         edf.show(ft, "edf");
     }
 
+    /**
+     * If chosen not to update the current information input
+     */
     private void cancel() {
         logVM.prepareEditableCopy(logpunkt); //Resets all the information
-        updateInformation();
+        updatePageInformation();
     }
+
+    /**
+     * If chosen to update the current information input
+     */
     private void save() {
         logpunkt.setInformation(logVM);
-        updateInformation();
+        updatePageInformation();
         LogpunktDAO logDAO = new LogpunktDAO(getContext());
         logDAO.updateLogpunkt(logpunkt);
     }
@@ -137,12 +156,11 @@ public class RedigerLogpunkt_frag extends Fragment {
      */
     public static class EditDialogFragment extends DialogFragment {
         private Fragment frag;
-
         private EditDialogFragment(Fragment frag) {
             this.frag = frag;
         }
 
-        public static EditDialogFragment newInstance(Fragment frag) {
+        private static EditDialogFragment newInstance(Fragment frag) {
             System.out.println("newInstance initiated");
             Bundle args = new Bundle();
             EditDialogFragment fragment = new EditDialogFragment(frag);
@@ -155,14 +173,14 @@ public class RedigerLogpunkt_frag extends Fragment {
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             System.out.println("onCreateView initiated");
-            View view = inflater.inflate(R.layout.redigerlogpunkt_dialog, container);
-            return view;
+            return inflater.inflate(R.layout.redigerlogpunkt_dialog, container);
         }
 
         @Override
         public void onStart() {
             super.onStart();
 
+            //Set text views and button information
             TextView cancelTxt = getView().findViewById(R.id.editLogpunktDialogCancel);
             cancelTxt.setOnClickListener(v -> cancelEdit());
             Button saveBtn = getView().findViewById(R.id.editLogpunktDialogSave);
@@ -176,7 +194,6 @@ public class RedigerLogpunkt_frag extends Fragment {
 
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-            System.out.println("onViewCreated initiated");
             FragmentManager fragmentManager = getChildFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.editLogpunktFragContainer, frag);
@@ -187,20 +204,24 @@ public class RedigerLogpunkt_frag extends Fragment {
         public void onCancel(@NonNull DialogInterface dialog) {
             RedigerLogpunkt_frag frag = (RedigerLogpunkt_frag) getParentFragment();
             if(frag != null){
-                System.out.println("Parent found, cancel information");
                 frag.cancel();
             }
         }
 
+        /**
+         * Cancels dialog
+         */
         private void cancelEdit() {
             getDialog().cancel();
         }
 
+        /**
+         * Call to save information
+         */
         private void saveEdit() {
             RedigerLogpunkt_frag frag = (RedigerLogpunkt_frag) getParentFragment();
             dismiss();
             if(frag != null){
-                System.out.println("Parent found, save information");
                 frag.save();
             }
         }
