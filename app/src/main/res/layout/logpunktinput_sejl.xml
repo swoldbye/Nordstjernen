@@ -14,7 +14,7 @@
 
         <TextView
             style="@style/SmallTitle"
-            android:text="Sejlføring" />
+            android:text="@string/log_sail_title" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,35 +26,35 @@
             <com.example.skibslogapp.utility.KingButton
                 android:id="@+id/fButton"
                 style="@style/DefaultButton"
-                android:text="F" />
+                android:text="@string/log_sail_fBtn" />
 
             <Space style="@style/EvenSpace" />
 
             <com.example.skibslogapp.utility.KingButton
                 android:id="@+id/øButton"
                 style="@style/DefaultButton"
-                android:text="Ø" />
+                android:text="@string/log_sail_oeBtn" />
 
             <Space style="@style/EvenSpace" />
 
             <com.example.skibslogapp.utility.KingButton
                 android:id="@+id/n1Button"
                 style="@style/DefaultButton"
-                android:text="N1" />
+                android:text="@string/log_sail_n1Btn" />
 
             <Space style="@style/EvenSpace" />
 
             <com.example.skibslogapp.utility.KingButton
                 android:id="@+id/n2Button"
                 style="@style/DefaultButton"
-                android:text="N2" />
+                android:text="@string/log_sail_n2Btn" />
 
             <Space style="@style/EvenSpace" />
 
             <com.example.skibslogapp.utility.KingButton
                 android:id="@+id/n3Button"
                 style="@style/DefaultButton"
-                android:text="N3" />
+                android:text="@string/log_sail_n3Btn" />
 
             <Space style="@style/EvenSpace" />
 
@@ -74,7 +74,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:letterSpacing="0"
-            android:text="Hals" />
+            android:text="@string/log_orientation_title" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,8 +88,8 @@
                 android:id="@+id/hals_bagbord_btn"
                 style="@style/DefaultButton"
                 android:layout_width="140dp"
-                android:text="Bagbord"
-                android:textSize="20dp" />
+                android:text="@string/log_orientation_port"
+                android:textSize="20sp" />
 
             <Space
                 style="@style/EvenSpace"
@@ -99,8 +99,8 @@
                 android:id="@+id/hals_styrbord_btn"
                 style="@style/DefaultButton"
                 android:layout_width="140dp"
-                android:text="Styrbord"
-                android:textSize="20dp" />
+                android:text="@string/log_orientation_starboard"
+                android:textSize="20sp" />
 
             <Space style="@style/EvenSpace" />
 

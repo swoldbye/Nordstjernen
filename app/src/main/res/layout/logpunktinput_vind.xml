@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -13,7 +12,6 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <!--Her starter test-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,24 +22,24 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/vindretning_newtext"
+                    android:id="@+id/vindretning_text_leftaligned"
                     style="@style/SmallTitle"
-                    android:layout_width="152dp"
-                    android:layout_height="34dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1.0" />
 
                 <TextView
-                    android:id="@+id/vindretning_text"
+                    android:id="@+id/vindretning_text_centered"
                     style="@style/SmallTitle"
-                    android:layout_width="152dp"
-                    android:layout_height="34dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Vindretning:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/log_wind_title"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -53,14 +51,13 @@
                     android:layout_width="75sp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
-                    android:text="PLA"
                     android:textAlignment="center"
                     android:textColor="@color/textColor"
                     android:textSize="25sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/vindretning_delete"
                     app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="@+id/vindretning_newtext"
+                    app:layout_constraintStart_toStartOf="@+id/vindretning_text_leftaligned"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
@@ -69,7 +66,7 @@
                     android:layout_height="50dp"
                     android:layout_marginEnd="10dp"
                     android:backgroundTint="#FFFFFF"
-                    android:text="X"
+                    android:text="@string/log_button_delete"
                     android:textColor="#2D2F31"
                     android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -92,28 +89,28 @@
             <Button
                 android:id="@+id/nordButton"
                 style="@style/DefaultButton"
-                android:text="N" />
+                android:text="@string/log_button_north" />
 
             <Space style="@style/EvenSpace" />
 
             <Button
                 android:id="@+id/oestButton"
                 style="@style/DefaultButton"
-                android:text="Ø" />
+                android:text="@string/log_button_east" />
 
             <Space style="@style/EvenSpace" />
 
             <Button
                 android:id="@+id/sydButton"
                 style="@style/DefaultButton"
-                android:text="S" />
+                android:text="@string/log_button_south" />
 
             <Space style="@style/EvenSpace" />
 
             <Button
                 android:id="@+id/vestButton"
                 style="@style/DefaultButton"
-                android:text="V" />
+                android:text="@string/log_button_west" />
 
             <Space style="@style/EvenSpace" />
 
@@ -126,9 +123,9 @@
         android:layout_marginTop="5dp">
 
         <com.google.android.material.textfield.TextInputLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/textInputLayout_vind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:theme="@style/OpretLogTextInput"
             app:errorEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -138,17 +135,14 @@
 
             <EditText
                 android:id="@+id/vindhastighed_edittext"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
-                android:layout_marginEnd="80dp"
                 android:digits="0123456789"
                 android:ems="10"
-                android:hint="Vindhastighed  (m/s)"
+                android:hint="@string/log_wind_windSpeed"
                 android:imeOptions="actionDone"
                 android:inputType="time"
                 android:maxLength="4"
-                android:paddingHorizontal="0dp"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
                 android:textSize="22sp"
@@ -157,7 +151,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </com.google.android.material.textfield.TextInputLayout>
-        <!-- Unit -->
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/TextInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/log_wind_measuringUnit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textInputLayout_vind"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
