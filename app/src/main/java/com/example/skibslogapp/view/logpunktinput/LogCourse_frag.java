@@ -16,6 +16,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.skibslogapp.R;
 
+/**
+ * Fragment to set course (measured in degrees) with user inputs.
+ *  */
 public class LogCourse_frag extends Fragment {
     private EditText kursEditText;
     private LogViewModel logVM;
@@ -26,7 +29,8 @@ public class LogCourse_frag extends Fragment {
         View view = inflater.inflate(R.layout.logpunktinput_kurs, container, false);
         logVM = ViewModelProviders.of(getActivity()).get(LogViewModel.class);
 
-        kursEditText = view.findViewById(R.id.kursEditText);
+        //Course
+        kursEditText = view.findViewById(R.id.kurs_edittext);
         kursEditText.setOnFocusChangeListener((v, hasFocus) -> controlCourseInput());
         kursEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -62,11 +66,17 @@ public class LogCourse_frag extends Fragment {
         return view;
     }
 
+    /**
+     * Updates the text view of the fragment
+     */
     private void updateViewInfo() {
         kursEditText.setText(logVM.getCourse() >= 0 ? Integer.toString(logVM.getCourse()) : "");
         controlCourseInput();
     }
 
+    /**
+     * Checks that the value is lower than 360 and if sets to a 3-digit number if lower than 100
+     */
     private void controlCourseInput() {
         String s = kursEditText.getText().toString();
         if (s.equals("") || Integer.parseInt(s) > 360) {
