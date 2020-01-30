@@ -24,8 +24,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="5sp">
+            android:layout_marginBottom="5sp"
+            android:orientation="horizontal">
 
 
             <TextView
@@ -59,72 +59,148 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-
-            <TextView
-                android:id="@+id/vindretningTextView"
+            <LinearLayout
                 android:layout_width="40sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="vind"
-                android:gravity="center"
-                android:textColor="@color/colorPrimary"
-                android:textSize="19sp"></TextView>
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="vind">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/vindretningTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="vind"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="19sp"></TextView>
+
+            </LinearLayout>
 
             <View style="@style/verticalDivider" />
 
-
-            <TextView
-                android:id="@+id/kursTextView"
+            <LinearLayout
                 android:layout_width="40sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="kurs"
-                android:textColor="@color/colorPrimary"
-                android:textSize="19sp" />
+                android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="kurs">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/kursTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="kurs"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="19sp" />
+
+            </LinearLayout>
 
             <View style="@style/verticalDivider" />
 
-
-            <TextView
-                android:id="@+id/sejlføringTextView"
+            <LinearLayout
                 android:layout_width="40sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="føring"
-                android:textColor="@color/colorPrimary"
-                android:textSize="19sp" />
+                android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="føring">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/sejlføringTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="føring"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="19sp" />
+
+            </LinearLayout>
 
             <View style="@style/verticalDivider" />
 
-
-            <TextView
-                android:id="@+id/sejlstillingTextView"
+            <LinearLayout
                 android:layout_width="40sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="stillin"
-                android:textColor="@color/colorPrimary"
-                android:textSize="19sp" />
+                android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="stilling">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/sejlstillingTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="stillin"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="19sp" />
+
+            </LinearLayout>
 
             <View style="@style/verticalDivider" />
 
-
-            <TextView
-                android:id="@+id/stroemTextView"
+            <LinearLayout
                 android:layout_width="40sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:text="stroem"
-                android:textColor="@color/colorPrimary"
-                android:textSize="19sp" />
+                android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="strøm">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/stroemTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="stroem"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="19sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
